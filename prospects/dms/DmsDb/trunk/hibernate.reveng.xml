@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="public" match-name="app_user"/>
+  <table-filter match-schema="public" match-name="complainant"/>
+  <table-filter match-schema="public" match-name="complaint"/>
+  <table-filter match-schema="public" match-name="complaint_history"/>
+  <table-filter match-schema="public" match-name="complaint_priority"/>
+  <table-filter match-schema="public" match-name="complaint_status"/>
+  <table-filter match-schema="public" match-name="complaint_type"/>
+  <table-filter match-schema="public" match-name="department"/>
+  <table-filter match-schema="public" match-name="employee"/>
+  <table-filter match-schema="public" match-name="role"/>
+  <table-filter match-schema="public" match-name="user_role"/>
+  <table-filter match-schema="public" match-name="ward"/>
+</hibernate-reverse-engineering>

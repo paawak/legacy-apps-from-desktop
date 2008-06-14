@@ -53,7 +53,7 @@ public class PureHibernateCallTest {
     @Test
     public void insert() {
         ComplaintStatus status = new ComplaintStatus();
-        status.setStatus("SSSS");
+        status.setStatus("yyyy");
         session.save(status);
     }
 

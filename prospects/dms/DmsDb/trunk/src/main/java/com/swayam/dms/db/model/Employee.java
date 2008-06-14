@@ -1,10 +1,11 @@
 package com.swayam.dms.db.model;
 
-// Generated May 12, 2008 1:40:30 AM by Hibernate Tools 3.2.1.GA
+// Generated Jun 14, 2008 12:40:06 PM by Hibernate Tools 3.2.1.GA
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,54 +31,58 @@ public class Employee implements java.io.Serializable {
 
     private int employeeId;
     private Department department;
+    private String address;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
-    private Date joinDate;
-    private String address;
     private String city;
     private int pinCode;
     private String emailId;
     private String homePhone;
     private String handPhone;
-    private Set<Complaint> complaintsForLoggedBy = new HashSet<Complaint>(0);
+    private Date dateOfBirth;
+    private Date joinDate;
+    private String password;
     private Set<ComplaintHistory> complaintHistories = new HashSet<ComplaintHistory>(
             0);
     private Set<Complaint> complaintsForAssignedTo = new HashSet<Complaint>(0);
+    private Set<Complaint> complaintsForLoggedBy = new HashSet<Complaint>(0);
 
     public Employee() {
     }
 
     public Employee(int employeeId, Department department, String address,
-            String city, int pinCode) {
+            String city, int pinCode, String password) {
         this.employeeId = employeeId;
         this.department = department;
         this.address = address;
         this.city = city;
         this.pinCode = pinCode;
+        this.password = password;
     }
 
-    public Employee(int employeeId, Department department, String firstName,
-            String lastName, Date dateOfBirth, Date joinDate, String address,
-            String city, int pinCode, String emailId, String homePhone,
-            String handPhone, Set<Complaint> complaintsForLoggedBy,
+    public Employee(int employeeId, Department department, String address,
+            String firstName, String lastName, String city, int pinCode,
+            String emailId, String homePhone, String handPhone,
+            Date dateOfBirth, Date joinDate, String password,
             Set<ComplaintHistory> complaintHistories,
-            Set<Complaint> complaintsForAssignedTo) {
+            Set<Complaint> complaintsForAssignedTo,
+            Set<Complaint> complaintsForLoggedBy) {
         this.employeeId = employeeId;
         this.department = department;
+        this.address = address;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.joinDate = joinDate;
-        this.address = address;
         this.city = city;
         this.pinCode = pinCode;
         this.emailId = emailId;
         this.homePhone = homePhone;
         this.handPhone = handPhone;
-        this.complaintsForLoggedBy = complaintsForLoggedBy;
+        this.dateOfBirth = dateOfBirth;
+        this.joinDate = joinDate;
+        this.password = password;
         this.complaintHistories = complaintHistories;
         this.complaintsForAssignedTo = complaintsForAssignedTo;
+        this.complaintsForLoggedBy = complaintsForLoggedBy;
     }
 
     @Id
@@ -102,6 +107,15 @@ public class Employee implements java.io.Serializable {
         this.department = department;
     }
 
+    @Column(name = "address", nullable = false)
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Column(name = "first_name", length = 20)
     public String getFirstName() {
         return this.firstName;
@@ -118,35 +132,6 @@ public class Employee implements java.io.Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_of_birth", length = 4)
-    public Date getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "join_date", length = 4)
-    public Date getJoinDate() {
-        return this.joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
-    @Column(name = "address", nullable = false)
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @Column(name = "city", nullable = false, length = 20)
@@ -194,13 +179,33 @@ public class Employee implements java.io.Serializable {
         this.handPhone = handPhone;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employeeByLoggedBy")
-    public Set<Complaint> getComplaintsForLoggedBy() {
-        return this.complaintsForLoggedBy;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_of_birth", length = 4)
+    public Date getDateOfBirth() {
+        return this.dateOfBirth;
     }
 
-    public void setComplaintsForLoggedBy(Set<Complaint> complaintsForLoggedBy) {
-        this.complaintsForLoggedBy = complaintsForLoggedBy;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "join_date", length = 4)
+    public Date getJoinDate() {
+        return this.joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    @Column(name = "password", nullable = false, length = 20)
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
@@ -220,6 +225,15 @@ public class Employee implements java.io.Serializable {
     public void setComplaintsForAssignedTo(
             Set<Complaint> complaintsForAssignedTo) {
         this.complaintsForAssignedTo = complaintsForAssignedTo;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employeeByLoggedBy")
+    public Set<Complaint> getComplaintsForLoggedBy() {
+        return this.complaintsForLoggedBy;
+    }
+
+    public void setComplaintsForLoggedBy(Set<Complaint> complaintsForLoggedBy) {
+        this.complaintsForLoggedBy = complaintsForLoggedBy;
     }
 
 }

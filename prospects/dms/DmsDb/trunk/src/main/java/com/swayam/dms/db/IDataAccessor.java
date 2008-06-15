@@ -28,4 +28,6 @@ public interface IDataAccessor {
 
     <K> List<K> query(String hql, String entityKey, Class<K> entityClass);
 
+    Object querySingle(String hql);
+
 }

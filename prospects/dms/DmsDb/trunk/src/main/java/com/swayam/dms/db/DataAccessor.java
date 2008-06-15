@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -61,6 +62,25 @@ public class DataAccessor implements IDataAccessor {
         };
 
         return (List<K>) hibernateTemplate.execute(callback);
+
+    }
+
+    public Object querySingle(final String hql) {
+
+        HibernateCallback callback = new HibernateCallback() {
+
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+
+                Query sqlQuery = session.createQuery(hql);
+
+                return sqlQuery.uniqueResult();
+
+            }
+
+        };
+
+        return hibernateTemplate.execute(callback);
 
     }
 

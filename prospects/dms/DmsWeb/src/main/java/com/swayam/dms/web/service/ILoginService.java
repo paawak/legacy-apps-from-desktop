@@ -15,10 +15,14 @@
 
 package com.swayam.dms.web.service;
 
+import com.swayam.dms.db.model.Employee;
+
 /**
- *  
+ * 
  * @author paawak
  */
-public interface LoginService {
+public interface ILoginService {
+
+    Employee doLogin(int empId, String password);
 
 }

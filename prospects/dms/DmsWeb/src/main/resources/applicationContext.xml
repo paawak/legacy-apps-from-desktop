@@ -7,7 +7,7 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:jdbc.properties</value>
+				<value>classpath:/hibernate/jdbc.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -34,7 +34,7 @@
 		<property name="configurationClass"
 			value="org.hibernate.cfg.AnnotationConfiguration" />
 		<property name="configLocation"
-			value="classpath:hibernate.cfg.xml" />
+			value="classpath:/hibernate/hibernate.cfg.xml" />
 	</bean>
 
 	<bean id="hibernateTemplate"
@@ -53,5 +53,10 @@
 		class="com.swayam.dms.db.dao.ComplaintDao">
 		<constructor-arg ref ="dataAccessor" />
 	</bean>
+	
+	<bean id="loginService"
+        class="com.swayam.dms.web.service.impl.LoginService">
+        <constructor-arg ref ="dataAccessor" />
+    </bean>
 
 </beans>

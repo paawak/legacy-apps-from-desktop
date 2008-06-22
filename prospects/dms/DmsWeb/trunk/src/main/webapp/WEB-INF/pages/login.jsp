@@ -5,6 +5,7 @@
   <body>
     <h1>Hello - Spring Application</h1>
     <p>Greetings.</p>
+    <p><fmt:message key='login.heading'/></p>
   </body>
 </html>
 

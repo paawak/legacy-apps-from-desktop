@@ -167,7 +167,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
                 <version>1.0-beta-1</version>
@@ -191,7 +191,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <!-- Runs before integration tests and jetty:run-war -->
+                         Runs before integration tests and jetty:run-war 
                         <id>test</id>
                         <phase>test</phase>
                         <goals>
@@ -207,7 +207,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
+            --><plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.9</version>
@@ -732,7 +732,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
+                    <!--<plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <version>1.1</version>
                         <configuration>
@@ -741,9 +741,9 @@
                                     <classpath refid="maven.test.classpath"/>
                                 </taskdef>
                                 <mkdir dir="target/webtest-data"/>
-                                <!-- Delete old results file if it exists -->
+                                 Delete old results file if it exists 
                                 <delete file="target/webtest-data/web-tests-result.xml"/>
-                                <!-- This is so the default will be used if no test case is specified -->
+                                 This is so the default will be used if no test case is specified 
                                 <property name="test" value="run-all-tests"/>
                                 <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
                                 <ant antfile="src/test/resources/web-tests.xml" target="${test}">
@@ -767,8 +767,8 @@
                                 <groupId>com.canoo.webtest</groupId>
                                 <artifactId>webtest</artifactId>
                                 <version>${webtest.version}</version>
-                                <!-- groovy-all doesn't have a pom in central repo -->
-                                <!-- exclude groovy to prevent trying to fetch pom -->
+                                 groovy-all doesn't have a pom in central repo 
+                                 exclude groovy to prevent trying to fetch pom 
                                 <exclusions>
                                     <exclusion>
                                         <groupId>groovy</groupId>
@@ -778,7 +778,7 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                </plugins>
+                --></plugins>
             </build>
         </profile>
 

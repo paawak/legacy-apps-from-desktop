@@ -25,12 +25,12 @@ import org.springframework.web.servlet.mvc.Controller;
  * 
  * @author paawak
  */
-public class HelloController implements Controller {
+public class LoginController implements Controller {
 
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        return new ModelAndView("hello");
+        return new ModelAndView("login");
 
     }
 

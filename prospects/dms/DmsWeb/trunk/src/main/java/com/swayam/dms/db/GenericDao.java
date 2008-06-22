@@ -1,4 +1,4 @@
-package com.swayam.dms.web.dao;
+package com.swayam.dms.db;
 
 import java.io.Serializable;
 import java.util.List;

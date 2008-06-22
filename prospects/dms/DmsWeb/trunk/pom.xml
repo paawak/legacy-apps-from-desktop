@@ -131,7 +131,7 @@
                     <useFullNames>false</useFullNames>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
                 <version>2.1</version>
@@ -140,8 +140,6 @@
                         <component>
                             <name>hbm2ddl</name>
                             <implementation>annotationconfiguration</implementation>
-                            <!-- Use 'jpaconfiguration' if you're using JPA. -->
-                            <!--<implementation>jpaconfiguration</implementation>-->
                         </component>
                     </components>
                     <componentProperties>
@@ -167,7 +165,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
                 <version>1.0-beta-1</version>
@@ -866,7 +864,7 @@
                 <jdbc.artifactId>postgresql</jdbc.artifactId>
                 <jdbc.version>8.1-407.jdbc3</jdbc.version>
                 <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:postgresql://localhost/DmsWeb]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:postgresql://localhost/dms]]></jdbc.url>
                 <jdbc.username>postgres</jdbc.username>
                 <jdbc.password>postgres</jdbc.password>
             </properties>
@@ -931,16 +929,16 @@
         <cargo.wait>false</cargo.wait>
                 
         <!-- Database settings -->
-        <dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
-        <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
-        <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
-        <jdbc.groupId>mysql</jdbc.groupId>
-        <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
-        <jdbc.version>5.0.5</jdbc.version>
-        <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-        <jdbc.url><![CDATA[jdbc:mysql://localhost/DmsWeb?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
-        <jdbc.username>root</jdbc.username>
-        <jdbc.password></jdbc.password>
+        <!--<dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
+        <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>-->
+        <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
+        <jdbc.groupId>postgresql</jdbc.groupId>
+        <jdbc.artifactId>postgresql</jdbc.artifactId>
+        <jdbc.version>8.1-407.jdbc3</jdbc.version>
+        <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+        <jdbc.url><![CDATA[jdbc:postgresql://localhost/dms]]></jdbc.url>
+        <jdbc.username>postgres</jdbc.username>
+        <jdbc.password>postgres</jdbc.password>
     
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.6.0</aspectj.version>

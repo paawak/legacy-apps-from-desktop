@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.swayam.dms.web.dao.GenericDao;
+
+import com.swayam.dms.db.GenericDao;
 import com.swayam.dms.web.service.GenericManager;
 
 /**

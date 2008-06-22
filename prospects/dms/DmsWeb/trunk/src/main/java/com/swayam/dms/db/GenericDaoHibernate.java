@@ -1,8 +1,9 @@
-package com.swayam.dms.web.dao.hibernate;
+package com.swayam.dms.db;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.swayam.dms.web.dao.GenericDao;
+
+
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 

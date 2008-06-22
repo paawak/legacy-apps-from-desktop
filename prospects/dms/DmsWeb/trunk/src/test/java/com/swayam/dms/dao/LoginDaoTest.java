@@ -13,7 +13,7 @@
  * issued to any third party.
  */
 
-package com.swayam.dms.web.service.impl;
+package com.swayam.dms.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -31,7 +31,7 @@ import com.swayam.dms.db.model.Employee;
  * 
  * @author paawak
  */
-public class LoginServiceTest {
+public class LoginDaoTest {
 
     private ILoginDao loginDao;
 
@@ -48,7 +48,7 @@ public class LoginServiceTest {
     @Test
     public void testDoLogin_correct() {
         // java.naming.factory.initial=org.apache.xbean.spring.jndi.SpringInitialContextFactory
-        Employee emp = loginDao.doLogin(1, "pass");
+        Employee emp = loginDao.doLogin(1, "password");
         assertNotNull(emp);
         assertEquals(1, emp.getEmployeeId());
     }

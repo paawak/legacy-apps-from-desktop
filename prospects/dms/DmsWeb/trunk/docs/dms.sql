@@ -2,33 +2,54 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2008-05-11 16:31:08 IST
+-- Started on 2008-06-22 14:53:59 IST
 
-
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
 
 --
--- TOC entry 1288 (class 1259 OID 25823)
+-- TOC entry 1662 (class 0 OID 0)
 -- Dependencies: 4
--- Name: complainant; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'Standard public schema';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 1285 (class 1259 OID 26765)
+-- Dependencies: 4
+-- Name: complainant; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE complainant (
     complainant_id integer NOT NULL,
-    first_name character varying(30) NOT NULL,
-    last_name character varying(30) NOT NULL,
-    address text NOT NULL,
+    address character varying(255) NOT NULL,
     city character varying(20) NOT NULL,
-    pin_code integer NOT NULL,
     email_id character varying(20),
+    first_name character varying(30) NOT NULL,
+    hand_phone character varying(10),
     home_phone character varying(10),
-    hand_phone character varying(10)
+    last_name character varying(30) NOT NULL,
+    pin_code integer NOT NULL
 );
 
 
+ALTER TABLE public.complainant OWNER TO postgres;
+
 --
--- TOC entry 1287 (class 1259 OID 25821)
--- Dependencies: 1288 4
--- Name: complainant_complainant_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1294 (class 1259 OID 26862)
+-- Dependencies: 4
+-- Name: complainant_complainant_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE complainant_complainant_id_seq
@@ -39,80 +60,53 @@ CREATE SEQUENCE complainant_complainant_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1672 (class 0 OID 0)
--- Dependencies: 1287
--- Name: complainant_complainant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE complainant_complainant_id_seq OWNED BY complainant.complainant_id;
-
+ALTER TABLE public.complainant_complainant_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1300 (class 1259 OID 25869)
+-- TOC entry 1286 (class 1259 OID 26769)
 -- Dependencies: 4
--- Name: complaint; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: complaint; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE complaint (
     complaint_id integer NOT NULL,
+    details character varying(255),
     raised_date date NOT NULL,
     resolved_date date,
-    logged_by bigint NOT NULL,
-    complainant_id bigint NOT NULL,
-    complaint_type_id bigint NOT NULL,
-    short_description text NOT NULL,
-    details text NOT NULL,
-    complaint_status_id integer NOT NULL,
+    assigned_to integer,
+    ward_id integer NOT NULL,
+    complainant_id integer NOT NULL,
     complaint_priority_id integer NOT NULL,
-    assigned_to bigint,
-    ward_id integer,
-    department_id integer
+    logged_by integer NOT NULL,
+    department_id integer NOT NULL,
+    complaint_status_id integer NOT NULL,
+    complaint_type_id integer NOT NULL
 );
 
 
---
--- TOC entry 1299 (class 1259 OID 25867)
--- Dependencies: 4 1300
--- Name: complaint_complaint_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE complaint_complaint_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
+ALTER TABLE public.complaint OWNER TO postgres;
 
 --
--- TOC entry 1673 (class 0 OID 0)
--- Dependencies: 1299
--- Name: complaint_complaint_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE complaint_complaint_id_seq OWNED BY complaint.complaint_id;
-
-
---
--- TOC entry 1301 (class 1259 OID 25895)
+-- TOC entry 1287 (class 1259 OID 26773)
 -- Dependencies: 4
--- Name: complaint_history; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: complaint_history; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE complaint_history (
-    complaint_id bigint NOT NULL,
+    changed_at timestamp without time zone NOT NULL,
     changed_by bigint NOT NULL,
-    old_state text NOT NULL,
-    new_state text NOT NULL,
-    changed_at timestamp without time zone
+    complaint_id bigint NOT NULL,
+    new_state character varying(255) NOT NULL,
+    old_state character varying(255) NOT NULL
 );
 
 
+ALTER TABLE public.complaint_history OWNER TO postgres;
+
 --
--- TOC entry 1294 (class 1259 OID 25848)
+-- TOC entry 1288 (class 1259 OID 26780)
 -- Dependencies: 4
--- Name: complaint_priority; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: complaint_priority; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE complaint_priority (
@@ -121,10 +115,12 @@ CREATE TABLE complaint_priority (
 );
 
 
+ALTER TABLE public.complaint_priority OWNER TO postgres;
+
 --
--- TOC entry 1293 (class 1259 OID 25846)
--- Dependencies: 4 1294
--- Name: complaint_priority_complaint_priority_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1295 (class 1259 OID 26864)
+-- Dependencies: 4
+-- Name: complaint_priority_complaint_priority_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE complaint_priority_complaint_priority_id_seq
@@ -135,19 +131,12 @@ CREATE SEQUENCE complaint_priority_complaint_priority_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1674 (class 0 OID 0)
--- Dependencies: 1293
--- Name: complaint_priority_complaint_priority_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE complaint_priority_complaint_priority_id_seq OWNED BY complaint_priority.complaint_priority_id;
-
+ALTER TABLE public.complaint_priority_complaint_priority_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1292 (class 1259 OID 25841)
+-- TOC entry 1289 (class 1259 OID 26784)
 -- Dependencies: 4
--- Name: complaint_status; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: complaint_status; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE complaint_status (
@@ -156,10 +145,12 @@ CREATE TABLE complaint_status (
 );
 
 
+ALTER TABLE public.complaint_status OWNER TO postgres;
+
 --
--- TOC entry 1291 (class 1259 OID 25839)
--- Dependencies: 4 1292
--- Name: complaint_status_complaint_status_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1296 (class 1259 OID 26866)
+-- Dependencies: 4
+-- Name: complaint_status_complaint_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE complaint_status_complaint_status_id_seq
@@ -170,32 +161,27 @@ CREATE SEQUENCE complaint_status_complaint_status_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1675 (class 0 OID 0)
--- Dependencies: 1291
--- Name: complaint_status_complaint_status_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE complaint_status_complaint_status_id_seq OWNED BY complaint_status.complaint_status_id;
-
+ALTER TABLE public.complaint_status_complaint_status_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1290 (class 1259 OID 25831)
+-- TOC entry 1290 (class 1259 OID 26788)
 -- Dependencies: 4
--- Name: complaint_type; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: complaint_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE complaint_type (
     complaint_type_id integer NOT NULL,
-    short_description text NOT NULL,
-    details text NOT NULL
+    details character varying(255) NOT NULL,
+    short_description character varying(255) NOT NULL
 );
 
 
+ALTER TABLE public.complaint_type OWNER TO postgres;
+
 --
--- TOC entry 1289 (class 1259 OID 25829)
--- Dependencies: 1290 4
--- Name: complaint_type_complaint_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1297 (class 1259 OID 26868)
+-- Dependencies: 4
+-- Name: complaint_type_complaint_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE complaint_type_complaint_type_id_seq
@@ -206,19 +192,12 @@ CREATE SEQUENCE complaint_type_complaint_type_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1676 (class 0 OID 0)
--- Dependencies: 1289
--- Name: complaint_type_complaint_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE complaint_type_complaint_type_id_seq OWNED BY complaint_type.complaint_type_id;
-
+ALTER TABLE public.complaint_type_complaint_type_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1298 (class 1259 OID 25862)
+-- TOC entry 1291 (class 1259 OID 26795)
 -- Dependencies: 4
--- Name: department; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: department; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE department (
@@ -228,10 +207,12 @@ CREATE TABLE department (
 );
 
 
+ALTER TABLE public.department OWNER TO postgres;
+
 --
--- TOC entry 1297 (class 1259 OID 25860)
--- Dependencies: 4 1298
--- Name: department_department_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1298 (class 1259 OID 26870)
+-- Dependencies: 4
+-- Name: department_department_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE department_department_id_seq
@@ -242,41 +223,37 @@ CREATE SEQUENCE department_department_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1677 (class 0 OID 0)
--- Dependencies: 1297
--- Name: department_department_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE department_department_id_seq OWNED BY department.department_id;
-
+ALTER TABLE public.department_department_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1303 (class 1259 OID 25902)
+-- TOC entry 1292 (class 1259 OID 26799)
 -- Dependencies: 4
--- Name: employee; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE employee (
     employee_id integer NOT NULL,
-    department_id bigint NOT NULL,
-    first_name character varying(20),
-    last_name character varying(20),
-    date_of_birth date,
-    join_date date,
-    address text NOT NULL,
+    address character varying(255) NOT NULL,
     city character varying(20) NOT NULL,
-    pin_code integer NOT NULL,
+    date_of_birth date,
     email_id character varying(20),
+    first_name character varying(20),
+    hand_phone character varying(10),
     home_phone character varying(10),
-    hand_phone character varying(10)
+    join_date date,
+    last_name character varying(20),
+    "password" character varying(20) NOT NULL,
+    pin_code integer NOT NULL,
+    department_id integer NOT NULL
 );
 
 
+ALTER TABLE public.employee OWNER TO postgres;
+
 --
--- TOC entry 1302 (class 1259 OID 25900)
--- Dependencies: 1303 4
--- Name: employee_employee_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1299 (class 1259 OID 26872)
+-- Dependencies: 4
+-- Name: employee_employee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE employee_employee_id_seq
@@ -287,19 +264,28 @@ CREATE SEQUENCE employee_employee_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1678 (class 0 OID 0)
--- Dependencies: 1302
--- Name: employee_employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE employee_employee_id_seq OWNED BY employee.employee_id;
-
+ALTER TABLE public.employee_employee_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1296 (class 1259 OID 25855)
+-- TOC entry 1284 (class 1259 OID 26163)
 -- Dependencies: 4
--- Name: ward; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO postgres;
+
+--
+-- TOC entry 1293 (class 1259 OID 26803)
+-- Dependencies: 4
+-- Name: ward; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE ward (
@@ -308,10 +294,12 @@ CREATE TABLE ward (
 );
 
 
+ALTER TABLE public.ward OWNER TO postgres;
+
 --
--- TOC entry 1295 (class 1259 OID 25853)
--- Dependencies: 4 1296
--- Name: ward_ward_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 1300 (class 1259 OID 26874)
+-- Dependencies: 4
+-- Name: ward_ward_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE ward_ward_id_seq
@@ -322,111 +310,42 @@ CREATE SEQUENCE ward_ward_id_seq
     CACHE 1;
 
 
---
--- TOC entry 1679 (class 0 OID 0)
--- Dependencies: 1295
--- Name: ward_ward_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE ward_ward_id_seq OWNED BY ward.ward_id;
-
+ALTER TABLE public.ward_ward_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1634 (class 2604 OID 25825)
--- Dependencies: 1288 1287 1288
--- Name: complainant_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE complainant ALTER COLUMN complainant_id SET DEFAULT nextval('complainant_complainant_id_seq'::regclass);
-
-
---
--- TOC entry 1640 (class 2604 OID 25871)
--- Dependencies: 1299 1300 1300
--- Name: complaint_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE complaint ALTER COLUMN complaint_id SET DEFAULT nextval('complaint_complaint_id_seq'::regclass);
-
-
---
--- TOC entry 1637 (class 2604 OID 25850)
--- Dependencies: 1293 1294 1294
--- Name: complaint_priority_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE complaint_priority ALTER COLUMN complaint_priority_id SET DEFAULT nextval('complaint_priority_complaint_priority_id_seq'::regclass);
-
-
---
--- TOC entry 1636 (class 2604 OID 25843)
--- Dependencies: 1292 1291 1292
--- Name: complaint_status_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE complaint_status ALTER COLUMN complaint_status_id SET DEFAULT nextval('complaint_status_complaint_status_id_seq'::regclass);
-
-
---
--- TOC entry 1635 (class 2604 OID 25833)
--- Dependencies: 1290 1289 1290
--- Name: complaint_type_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE complaint_type ALTER COLUMN complaint_type_id SET DEFAULT nextval('complaint_type_complaint_type_id_seq'::regclass);
-
-
---
--- TOC entry 1639 (class 2604 OID 25864)
--- Dependencies: 1298 1297 1298
--- Name: department_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE department ALTER COLUMN department_id SET DEFAULT nextval('department_department_id_seq'::regclass);
-
-
---
--- TOC entry 1641 (class 2604 OID 25904)
--- Dependencies: 1303 1302 1303
--- Name: employee_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE employee ALTER COLUMN employee_id SET DEFAULT nextval('employee_employee_id_seq'::regclass);
-
-
---
--- TOC entry 1638 (class 2604 OID 25857)
--- Dependencies: 1295 1296 1296
--- Name: ward_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ward ALTER COLUMN ward_id SET DEFAULT nextval('ward_ward_id_seq'::regclass);
-
-
---
--- TOC entry 1643 (class 2606 OID 25914)
--- Dependencies: 1288 1288
--- Name: complainant_id_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1632 (class 2606 OID 26768)
+-- Dependencies: 1285 1285
+-- Name: complainant_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY complainant
-    ADD CONSTRAINT complainant_id_pk PRIMARY KEY (complainant_id);
+    ADD CONSTRAINT complainant_pkey PRIMARY KEY (complainant_id);
 
 
 --
--- TOC entry 1655 (class 2606 OID 25916)
--- Dependencies: 1300 1300
--- Name: complaint_id_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1636 (class 2606 OID 26779)
+-- Dependencies: 1287 1287 1287 1287 1287 1287
+-- Name: complaint_history_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY complaint_history
+    ADD CONSTRAINT complaint_history_pkey PRIMARY KEY (changed_at, changed_by, complaint_id, new_state, old_state);
+
+
+--
+-- TOC entry 1634 (class 2606 OID 26772)
+-- Dependencies: 1286 1286
+-- Name: complaint_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_id_pk PRIMARY KEY (complaint_id);
+    ADD CONSTRAINT complaint_pkey PRIMARY KEY (complaint_id);
 
 
 --
--- TOC entry 1649 (class 2606 OID 25852)
--- Dependencies: 1294 1294
--- Name: complaint_priority_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1638 (class 2606 OID 26783)
+-- Dependencies: 1288 1288
+-- Name: complaint_priority_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY complaint_priority
@@ -434,9 +353,9 @@ ALTER TABLE ONLY complaint_priority
 
 
 --
--- TOC entry 1647 (class 2606 OID 25845)
--- Dependencies: 1292 1292
--- Name: complaint_status_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1640 (class 2606 OID 26787)
+-- Dependencies: 1289 1289
+-- Name: complaint_status_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY complaint_status
@@ -444,9 +363,9 @@ ALTER TABLE ONLY complaint_status
 
 
 --
--- TOC entry 1645 (class 2606 OID 25838)
+-- TOC entry 1642 (class 2606 OID 26794)
 -- Dependencies: 1290 1290
--- Name: complaint_type_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: complaint_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY complaint_type
@@ -454,9 +373,9 @@ ALTER TABLE ONLY complaint_type
 
 
 --
--- TOC entry 1653 (class 2606 OID 25866)
--- Dependencies: 1298 1298
--- Name: department_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1644 (class 2606 OID 26798)
+-- Dependencies: 1291 1291
+-- Name: department_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY department
@@ -464,19 +383,19 @@ ALTER TABLE ONLY department
 
 
 --
--- TOC entry 1657 (class 2606 OID 25918)
--- Dependencies: 1303 1303
--- Name: employee_id_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1646 (class 2606 OID 26802)
+-- Dependencies: 1292 1292
+-- Name: employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
-    ADD CONSTRAINT employee_id_pk PRIMARY KEY (employee_id);
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (employee_id);
 
 
 --
--- TOC entry 1651 (class 2606 OID 25859)
--- Dependencies: 1296 1296
--- Name: ward_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- TOC entry 1648 (class 2606 OID 26806)
+-- Dependencies: 1293 1293
+-- Name: ward_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY ward
@@ -484,99 +403,119 @@ ALTER TABLE ONLY ward
 
 
 --
--- TOC entry 1662 (class 2606 OID 25919)
--- Dependencies: 1642 1300 1288
--- Name: complaint_complainant_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_complainant_fk FOREIGN KEY (complainant_id) REFERENCES complainant(complainant_id);
-
-
---
--- TOC entry 1659 (class 2606 OID 25880)
--- Dependencies: 1300 1294 1648
--- Name: complaint_complaint_priority_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_complaint_priority_id_fkey FOREIGN KEY (complaint_priority_id) REFERENCES complaint_priority(complaint_priority_id);
-
-
---
--- TOC entry 1658 (class 2606 OID 25875)
--- Dependencies: 1300 1646 1292
--- Name: complaint_complaint_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_complaint_status_id_fkey FOREIGN KEY (complaint_status_id) REFERENCES complaint_status(complaint_status_id);
-
-
---
--- TOC entry 1661 (class 2606 OID 25890)
--- Dependencies: 1652 1300 1298
--- Name: complaint_department_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_department_id_fkey FOREIGN KEY (department_id) REFERENCES department(department_id);
-
-
---
--- TOC entry 1663 (class 2606 OID 25924)
--- Dependencies: 1300 1656 1303
--- Name: complaint_employee_assigned_to_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_employee_assigned_to_fk FOREIGN KEY (assigned_to) REFERENCES employee(employee_id);
-
-
---
--- TOC entry 1664 (class 2606 OID 25929)
--- Dependencies: 1300 1303 1656
--- Name: complaint_emplyee_logged_by; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_emplyee_logged_by FOREIGN KEY (logged_by) REFERENCES employee(employee_id);
-
-
---
--- TOC entry 1665 (class 2606 OID 25934)
--- Dependencies: 1301 1300 1654
--- Name: complaint_history_complaint_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint_history
-    ADD CONSTRAINT complaint_history_complaint_fk FOREIGN KEY (complaint_id) REFERENCES complaint(complaint_id);
-
-
---
--- TOC entry 1660 (class 2606 OID 25885)
--- Dependencies: 1300 1296 1650
--- Name: complaint_ward_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY complaint
-    ADD CONSTRAINT complaint_ward_id_fkey FOREIGN KEY (ward_id) REFERENCES ward(ward_id);
-
-
---
--- TOC entry 1666 (class 2606 OID 25908)
--- Dependencies: 1303 1298 1652
--- Name: employee_department_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 1659 (class 2606 OID 26857)
+-- Dependencies: 1643 1291 1292
+-- Name: fk4722e6aee5eebdf2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY employee
-    ADD CONSTRAINT employee_department_id_fkey FOREIGN KEY (department_id) REFERENCES department(department_id);
+    ADD CONSTRAINT fk4722e6aee5eebdf2 FOREIGN KEY (department_id) REFERENCES department(department_id);
 
 
 --
--- TOC entry 1671 (class 0 OID 0)
+-- TOC entry 1657 (class 2606 OID 26847)
+-- Dependencies: 1287 1645 1292
+-- Name: fk9928ad00ca156be8; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint_history
+    ADD CONSTRAINT fk9928ad00ca156be8 FOREIGN KEY (changed_by) REFERENCES employee(employee_id);
+
+
+--
+-- TOC entry 1658 (class 2606 OID 26852)
+-- Dependencies: 1286 1287 1633
+-- Name: fk9928ad00ebdc3962; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint_history
+    ADD CONSTRAINT fk9928ad00ebdc3962 FOREIGN KEY (complaint_id) REFERENCES complaint(complaint_id);
+
+
+--
+-- TOC entry 1653 (class 2606 OID 26827)
+-- Dependencies: 1641 1290 1286
+-- Name: fkac5efcab421fe2b9; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcab421fe2b9 FOREIGN KEY (complaint_type_id) REFERENCES complaint_type(complaint_type_id);
+
+
+--
+-- TOC entry 1651 (class 2606 OID 26817)
+-- Dependencies: 1631 1286 1285
+-- Name: fkac5efcab461f7682; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcab461f7682 FOREIGN KEY (complainant_id) REFERENCES complainant(complainant_id);
+
+
+--
+-- TOC entry 1652 (class 2606 OID 26822)
+-- Dependencies: 1286 1637 1288
+-- Name: fkac5efcab66161af9; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcab66161af9 FOREIGN KEY (complaint_priority_id) REFERENCES complaint_priority(complaint_priority_id);
+
+
+--
+-- TOC entry 1649 (class 2606 OID 26807)
+-- Dependencies: 1639 1289 1286
+-- Name: fkac5efcab9d5bb3f9; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcab9d5bb3f9 FOREIGN KEY (complaint_status_id) REFERENCES complaint_status(complaint_status_id);
+
+
+--
+-- TOC entry 1655 (class 2606 OID 26837)
+-- Dependencies: 1286 1645 1292
+-- Name: fkac5efcabb0f4b4b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcabb0f4b4b2 FOREIGN KEY (assigned_to) REFERENCES employee(employee_id);
+
+
+--
+-- TOC entry 1654 (class 2606 OID 26832)
+-- Dependencies: 1645 1286 1292
+-- Name: fkac5efcabdec53e5a; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcabdec53e5a FOREIGN KEY (logged_by) REFERENCES employee(employee_id);
+
+
+--
+-- TOC entry 1650 (class 2606 OID 26812)
+-- Dependencies: 1291 1286 1643
+-- Name: fkac5efcabe5eebdf2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcabe5eebdf2 FOREIGN KEY (department_id) REFERENCES department(department_id);
+
+
+--
+-- TOC entry 1656 (class 2606 OID 26842)
+-- Dependencies: 1286 1293 1647
+-- Name: fkac5efcabe8e2efb2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY complaint
+    ADD CONSTRAINT fkac5efcabe8e2efb2 FOREIGN KEY (ward_id) REFERENCES ward(ward_id);
+
+
+--
+-- TOC entry 1663 (class 0 OID 0)
 -- Dependencies: 4
--- Name: public; Type: ACL; Schema: -; Owner: -
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
@@ -585,9 +524,8 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2008-05-11 16:31:09 IST
+-- Completed on 2008-06-22 14:53:59 IST
 
 --
 -- PostgreSQL database dump complete
 --
-

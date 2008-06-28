@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="show_sql">true</property>
+        
+        <mapping class="com.swayam.dms.web.model.User"/>
+        <mapping class="com.swayam.dms.web.model.Role"/>
+        <mapping class="com.swayam.dms.web.model.Complainant" />
+        <mapping class="com.swayam.dms.web.model.Complaint" />
+        <mapping class="com.swayam.dms.web.model.ComplaintHistory" />
+        <mapping class="com.swayam.dms.web.model.ComplaintHistoryId" />
+        <mapping class="com.swayam.dms.web.model.ComplaintPriority" />
+        <mapping class="com.swayam.dms.web.model.ComplaintStatus" />
+        <mapping class="com.swayam.dms.web.model.Complainant" />
+        <mapping class="com.swayam.dms.web.model.ComplaintType" />
+        <mapping class="com.swayam.dms.web.model.Department" />
+        <mapping class="com.swayam.dms.web.model.Ward" />
+    </session-factory>
+</hibernate-configuration>

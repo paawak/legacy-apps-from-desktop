@@ -24,13 +24,16 @@ import org.springframework.web.servlet.ModelAndView;
  * 
  * @author paawak
  */
-public class ListingsController extends BaseFormController {
+public class ComplaintListingsController extends BaseFormController {
 
     @Override
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        return new ModelAndView("listings");
+        System.out
+                .println("################################ComplaintListingsController.handleRequest()");
+
+        return new ModelAndView("complaintListings");
 
     }
 

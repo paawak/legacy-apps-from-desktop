@@ -11,5 +11,5 @@
         </c:if>
     </span>
     <span class="right">
-        &copy; <fmt:message key="copyright.year"/> <a href="<fmt:message key="company.url"/>"><fmt:message key="company.name"/></a>
+        &copy; <fmt:message key="copyright.year"/> <a href="<fmt:message key="company.url"/>" target="_blank"><fmt:message key="company.name"/></a>
     </span>

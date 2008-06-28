@@ -78,6 +78,7 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
+                /complaintListings.html=complaintListingsController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -87,7 +88,7 @@
         <property name="order" value="1"/>
     </bean>
     
-    <bean name="/listings.html" class="com.swayam.dms.web.webapp.controller.ListingsController"/>
+    <bean id="complaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController"/>
 
     <!-- View Resolver for JSPs -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

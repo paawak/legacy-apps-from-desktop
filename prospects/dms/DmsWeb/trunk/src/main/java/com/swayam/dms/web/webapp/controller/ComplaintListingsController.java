@@ -30,9 +30,6 @@ public class ComplaintListingsController extends BaseFormController {
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out
-                .println("################################ComplaintListingsController.handleRequest()");
-
         return new ModelAndView("complaintListings");
 
     }

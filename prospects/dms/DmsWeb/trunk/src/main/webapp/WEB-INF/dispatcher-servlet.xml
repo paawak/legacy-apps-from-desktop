@@ -86,6 +86,8 @@
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         <property name="order" value="1"/>
     </bean>
+    
+    <bean name="/listings.html" class="com.swayam.dms.web.webapp.controller.ListingsController"/>
 
     <!-- View Resolver for JSPs -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

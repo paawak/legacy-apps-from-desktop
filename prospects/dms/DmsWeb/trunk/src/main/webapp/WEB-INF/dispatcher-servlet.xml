@@ -94,6 +94,8 @@
     
     <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController"/>
     
+    <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController"/>
+    
     <!-- Swayam custom beans :: END  -->
 
     <!-- View Resolver for JSPs -->

@@ -30,7 +30,7 @@ import com.swayam.dms.web.model.Complainant;
 public class NewComplainantController extends BaseFormController {
 
     public NewComplainantController() {
-        setCommandName("comp");
+        setCommandName("complainant");
         setCommandClass(Complainant.class);
     }
 

@@ -99,8 +99,8 @@
             <bean class="com.swayam.dms.web.webapp.valid.ComplainantValidator"/>
         </property>
         <property name="formView" value="complainant"/>
-        <property name="successView" value="users.html"/>
-        <property name="cancelView" value="mainMenu.html"/>
+        <property name="successView" value="complaint"/>
+        <property name="cancelView" value="complaint"/>
     </bean>
     
     <!-- Swayam custom beans :: END  -->

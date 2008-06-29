@@ -10,7 +10,6 @@
         <mapping class="com.swayam.dms.web.model.Complainant" />
         <mapping class="com.swayam.dms.web.model.Complaint" />
         <mapping class="com.swayam.dms.web.model.ComplaintHistory" />
-        <mapping class="com.swayam.dms.web.model.ComplaintHistoryId" />
         <mapping class="com.swayam.dms.web.model.ComplaintPriority" />
         <mapping class="com.swayam.dms.web.model.ComplaintStatus" />
         <mapping class="com.swayam.dms.web.model.Complainant" />

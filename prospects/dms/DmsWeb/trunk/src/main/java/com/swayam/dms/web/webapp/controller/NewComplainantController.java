@@ -15,10 +15,13 @@
 
 package com.swayam.dms.web.webapp.controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.swayam.dms.web.model.Complainant;
 
 /**
  * 
@@ -26,12 +29,22 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class NewComplainantController extends BaseFormController {
 
+    public NewComplainantController() {
+        setCommandName("comp");
+        setCommandClass(Complainant.class);
+    }
+
     @Override
-    public ModelAndView handleRequest(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ModelAndView onSubmit(Object command) throws ServletException {
 
-        return new ModelAndView("complainant");
+        return new ModelAndView(new RedirectView(getSuccessView()));
+    }
 
+    @Override
+    protected Object formBackingObject(HttpServletRequest request)
+            throws ServletException {
+        Complainant complainant = new Complainant();
+        return complainant;
     }
 
 }

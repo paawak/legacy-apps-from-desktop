@@ -94,7 +94,14 @@
     
     <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController"/>
     
-    <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController"/>
+    <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
+        <property name="validator">
+            <bean class="com.swayam.dms.web.webapp.valid.ComplainantValidator"/>
+        </property>
+        <property name="formView" value="complainant"/>
+        <property name="successView" value="users.html"/>
+        <property name="cancelView" value="mainMenu.html"/>
+    </bean>
     
     <!-- Swayam custom beans :: END  -->
 

@@ -37,7 +37,7 @@
     </li>
 
     <li>
-        <appfuse:label styleClass="desc" key="user.email"/>
+        <appfuse:label styleClass="desc" key="complainant.email"/>
         <form:errors path="emailId" cssClass="fieldError"/>
         <form:input path="emailId" id="emailId" cssClass="text large" cssErrorClass="text large error"/>
     </li>

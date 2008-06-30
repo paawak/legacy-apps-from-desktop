@@ -5,8 +5,8 @@
     </Displayers>
     <Menus>
         <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu.html" roles="ROLE_ADMIN,ROLE_USER">
-            <Item name="NewComplaint" title="complainant.new.title" page="/newcomplainant.html"/>
-            <Item name="NewComplainant" title="newComplaint.title" page="/newcomplaint.html"/>
+            <Item name="NewComplainant" title="complainant.new.title" page="/newcomplainant.html"/>
+            <Item name="NewComplaint" title="newComplaint.title" page="/newcomplaint.html"/>
             <Item name="ComplaintListings" title="complaintListings.title" page="/complaintListings.html"/>
         </Menu>
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>

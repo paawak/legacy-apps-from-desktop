@@ -149,5 +149,22 @@
               </field>
       </form>
       
+      <!-- Swayam forms START -->
+      
+      <form name="complainant">
+              <field property="firstName"
+                     depends="required">
+
+                  <arg0 key="user.firstName"/>
+              </field>
+              <field property="lastName"
+                     depends="required">
+
+                  <arg0 key="user.lastName"/>
+              </field>
+      </form>
+      
+      <!-- Swayam forms END -->
+      
   </formset>
 </form-validation>

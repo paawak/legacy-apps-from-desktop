@@ -98,6 +98,11 @@
 
                   <arg0 key="user.lastName"/>
               </field>
+              <field property="address.address"
+                     depends="required">
+
+                  <arg0 key="user.address.address"/>
+              </field>
               <field property="address.city"
                      depends="required">
 
@@ -154,13 +159,17 @@
       <form name="complainant">
               <field property="firstName"
                      depends="required">
-
                   <arg0 key="user.firstName"/>
               </field>
+              
               <field property="lastName"
                      depends="required">
-
                   <arg0 key="user.lastName"/>
+              </field>
+              
+              <field property="handPhone"
+                     depends="required">
+                  <arg0 key="complainant.handPhone"/>
               </field>
               
               

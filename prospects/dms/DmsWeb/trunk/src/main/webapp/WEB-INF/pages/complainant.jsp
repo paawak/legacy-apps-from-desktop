@@ -50,7 +50,7 @@
                 <form:input path="homePhone" id="homePhone" cssClass="text medium" cssErrorClass="text medium error"/>
             </div>
             <div>
-                <appfuse:label styleClass="desc" key="user.handPhone"/>
+                <appfuse:label styleClass="desc" key="complainant.handPhone"/>
                 <form:errors path="handPhone" cssClass="fieldError"/>
                 <form:input path="handPhone" id="phoneNumber" cssClass="text medium" cssErrorClass="text medium error"/>
             </div>

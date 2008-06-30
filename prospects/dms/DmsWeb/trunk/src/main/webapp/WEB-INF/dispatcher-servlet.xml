@@ -95,6 +95,7 @@
     <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController"/>
     
     <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
+        <constructor-arg ref="complainantDao"/>
         <property name="validator">
             <bean class="com.swayam.dms.web.webapp.valid.ComplainantValidator"/>
         </property>

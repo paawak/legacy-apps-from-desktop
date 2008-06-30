@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.swayam.dms.web.dao.GenericDao;
 import com.swayam.dms.web.model.Complainant;
 
 /**
@@ -29,14 +30,23 @@ import com.swayam.dms.web.model.Complainant;
  */
 public class NewComplainantController extends BaseFormController {
 
-    public NewComplainantController() {
+    private final GenericDao<Complainant, Integer> complainantDao;
+
+    public NewComplainantController(
+            GenericDao<Complainant, Integer> complainantDao) {
+
+        this.complainantDao = complainantDao;
+
         setCommandName("complainant");
         setCommandClass(Complainant.class);
+
     }
 
     @Override
     public ModelAndView onSubmit(Object command) throws ServletException {
 
+        Complainant complainant = (Complainant) command;
+        complainantDao.save(complainant);
         return new ModelAndView(new RedirectView(getSuccessView()));
     }
 

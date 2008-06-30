@@ -43,6 +43,15 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
+    <!-- Swayam dao-s :: START  -->
+    
+    <bean id="complainantDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.Complainant"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- Swayam dao-s :: END  -->
+    
     <!-- If you want to be able to do simple CRUD for new domain objects without 
         having to cast, you don't have create a Dao interface and implementation 
         for that domain object, you simply have to do the following.  

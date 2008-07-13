@@ -24,16 +24,16 @@
             <value description="id">1</value>
             <value description="username">user</value>
             <value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
-            <value description="first_name">Tomcat</value>
-            <value description="last_name">User</value>
-            <value description="address"></value>
-            <value description="city">Denver</value>
-            <value description="country">US</value>
-            <value description="email">matt_raible@yahoo.com</value>
-            <value description="phone_number"></value>
-            <value description="postal_code">80210</value>
-            <value description="province">CO</value>
-            <value description="website">http://tomcat.apache.org</value>
+            <value description="first_name">Shanmugam</value>
+            <value description="last_name">S P</value>
+            <value description="address">R T Nagar</value>
+            <value description="city">Bangalore</value>
+            <value description="country">India</value>
+            <value description="email">shanmugam.sp@gmail.com</value>
+            <value description="phone_number">4748845425</value>
+            <value description="postal_code">560018</value>
+            <value description="province">Karnataka</value>
+            <value description="website"></value>
             <value description="password_hint"><![CDATA[The same as your username.]]></value>
             <value description="version">1</value>
             <value description="account_enabled">1</value>
@@ -45,16 +45,16 @@
             <value description="id">2</value>
             <value description="username">admin</value>
             <value description="password">d033e22ae348aeb5660fc2140aec35850c4da997</value>
-            <value description="first_name">Matt</value>
-            <value description="last_name">Raible</value>
-            <value description="address"></value>
-            <value description="city">Denver</value>
-            <value description="country">US</value>
-            <value description="email">matt@raibledesigns.com</value>
-            <value description="phone_number"></value>
-            <value description="postal_code">80210</value>
-            <value description="province">CO</value>
-            <value description="website">http://raibledesigns.com</value>
+            <value description="first_name">Palash</value>
+            <value description="last_name">Ray</value>
+            <value description="address">Bellandur</value>
+            <value description="city">Bangalore</value>
+            <value description="country">India</value>
+            <value description="email">paawak@gmail.com</value>
+            <value description="phone_number">91354764</value>
+            <value description="postal_code">560103</value>
+            <value description="province">Karnataka</value>
+            <value description="website">http://paawak.blogspot.com</value>
             <value description="password_hint"><![CDATA[The same as your username.]]></value>
             <value description="version">1</value>
             <value description="account_enabled">1</value>
@@ -90,4 +90,127 @@
             <value description="role_id">1</value>
         </row>
     </table>
+    <!-- Swayam tables -->
+    <table name="complainant">
+        <column>complainant_id</column>
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>address</column>
+        <column>city</column>
+        <column>country</column>
+        <column>postal_code</column>
+        <column>province</column>
+        <column>email_id</column>
+        <column>hand_phone</column>
+        <column>home_phone</column>
+        <row>
+            <value description="complainant_id">1</value>
+            <value description="first_name">Palash</value>
+            <value description="last_name">Ray</value>
+            <value description="address">Bellandur</value>
+            <value description="city">Bangalore</value>
+            <value description="country">India</value>
+            <value description="postal_code">560103</value>
+            <value description="province">Karnataka</value>
+            <value description="email_id">paawak@gmail.com</value>
+            <value description="hand_phone">913610009</value>
+            <value description="home_phone">256789</value>
+        </row>
+    </table>
+    <table name="complaint_status">
+        <column>complaint_status_id</column>
+        <column>status</column>
+        <row>
+            <value description="complaint_status_id">1</value>
+            <value description="status">NEW</value>
+        </row>
+        <row>
+            <value description="complaint_status_id">2</value>
+            <value description="status">OPEN</value>
+        </row>
+        <row>
+            <value description="complaint_status_id">3</value>
+            <value description="status">RESOLVED</value>
+        </row>
+        <row>
+            <value description="complaint_status_id">4</value>
+            <value description="status">CLOSED</value>
+        </row>
+    </table>
+    <table name="complaint_type">
+        <column>complaint_type_id</column>
+        <column>details</column>
+        <column>short_description</column>
+        <row>
+            <value description="complaint_type">1</value>
+            <value description="details">No water is available in our area</value>
+            <value description="short_description">No Water</value>
+        </row>
+    </table>    
+    <table name="complaint_priority">
+        <column>complaint_priority_id</column>
+        <column>priority</column>
+        <row>
+            <value description="complaint_priority_id">1</value>
+            <value description="priority">LOW</value>
+        </row>
+        <row>
+            <value description="complaint_priority_id">2</value>
+            <value description="priority">NORMAL</value>
+        </row>
+        <row>
+            <value description="complaint_priority_id">3</value>
+            <value description="priority">HIGH</value>
+        </row>
+        <row>
+            <value description="complaint_priority_id">4</value>
+            <value description="priority">CRITICAL</value>
+        </row>
+    </table>    
+    <table name="department">
+        <column>department_id</column>
+        <column>name</column>
+        <column>short_name</column>
+        <row>
+            <value description="department_id">1</value>
+            <value description="name">Sewage</value>
+            <value description="short_name">SW</value>
+        </row>
+    </table>
+    <table name="ward">
+        <column>ward_id</column>
+        <column>name</column>
+        <row>
+            <value description="ward_id">1</value>
+            <value description="name">Bellandur</value>
+        </row>
+    </table>    
+    <table name="complaint">
+        <column>complaint_id</column>
+        <column>details</column>
+        <column>raised_date</column>
+        <column>resolved_date</column>
+        <column>logged_by</column>
+        <column>complaint_priority_id</column>
+        <column>complaint_type_id</column>
+        <column>complainant_id</column>
+        <column>assigned_to</column>
+        <column>ward_id</column>
+        <column>complaint_status_id</column>
+        <column>department_id</column>
+        <row>
+            <value description="complaint_id">1</value>
+            <value description="details">No supply of drinking water in our area for the past three days</value>
+            <value description="raised_date">7-31-2007</value>
+            <value description="resolved_date">12-31-2007</value>
+            <value description="logged_by">1</value>
+            <value description="complaint_priority_id">1</value>
+            <value description="complaint_type_id">1</value>
+            <value description="complainant_id">1</value>
+            <value description="assigned_to">1</value>
+            <value description="ward_id">1</value>
+            <value description="complaint_status_id">1</value>
+            <value description="department_id">1</value>
+        </row>
+    </table>        
 </dataset>

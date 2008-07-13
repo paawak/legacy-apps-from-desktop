@@ -15,6 +15,9 @@
 
 package com.swayam.dms.web.webapp.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,7 +33,16 @@ public class ComplaintListingsController extends BaseFormController {
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        return new ModelAndView("complaintListings");
+        ModelAndView view = new ModelAndView("complaintListings");
+        List<String> strings = new ArrayList<String>();
+        strings.add("AAAAAAAA");
+        strings.add("BBBBBBB");
+        strings.add("CCCCCCCC");
+        strings.add("EEEEEEEE");
+        strings.add("FFFFFFFFF");
+        view.addObject("testStrings", strings);
+
+        return view;
 
     }
 

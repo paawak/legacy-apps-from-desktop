@@ -202,6 +202,20 @@
             <value description="complaint_id">1</value>
             <value description="details">No supply of drinking water in our area for the past three days</value>
             <value description="raised_date">7-31-2007</value>
+            <value description="resolved_date">8-31-2007</value>
+            <value description="logged_by">1</value>
+            <value description="complaint_priority_id">1</value>
+            <value description="complaint_type_id">1</value>
+            <value description="complainant_id">1</value>
+            <value description="assigned_to">1</value>
+            <value description="ward_id">1</value>
+            <value description="complaint_status_id">1</value>
+            <value description="department_id">1</value>
+        </row>
+        <row>
+            <value description="complaint_id">2</value>
+            <value description="details">Sewage not collceted</value>
+            <value description="raised_date">12-2-2007</value>
             <value description="resolved_date">12-31-2007</value>
             <value description="logged_by">1</value>
             <value description="complaint_priority_id">1</value>

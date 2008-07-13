@@ -9,12 +9,10 @@
 	href="<c:url value='/styles/${appConfig["csstheme"]}/layout-1col.css'/>" />
 </head>
 
-<spring:bind path="testStrings">
-	<c:forEach var="string" items="${testStrings}">
-		<c:out value="${string}" escapeXml="false" />
-		<br />
-	</c:forEach>
-</spring:bind>
+<c:forEach var="string" items="${testStrings}">
+	<c:out value="${string}"/>
+	<br />
+</c:forEach>
 
 <body id="login" class="body">
 <p>Content goes here...</p>

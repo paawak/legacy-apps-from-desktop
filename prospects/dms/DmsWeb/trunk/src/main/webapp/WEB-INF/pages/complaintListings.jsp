@@ -9,11 +9,11 @@
 	href="<c:url value='/styles/${appConfig["csstheme"]}/layout-1col.css'/>" />
 </head>
 
-<c:forEach var="string" items="${testStrings}">
-	<c:out value="${string}"/>
-	<br />
+<body id="login" class="body">
+
+<c:forEach var="complaint" items="${complaints}">
+    <c:out value="${complaint.details}"/>
+    <br />
 </c:forEach>
 
-<body id="login" class="body">
-<p>Content goes here...</p>
 </body>

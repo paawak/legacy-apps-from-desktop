@@ -23,15 +23,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.swayam.dms.web.dao.GenericDao;
+import com.swayam.dms.web.model.Complaint;
+
 /**
  * 
  * @author paawak
  */
 public class ComplaintListingsController extends BaseFormController {
 
+    private final GenericDao<Complaint, Integer> complaintDao;
+
+    public ComplaintListingsController(
+            GenericDao<Complaint, Integer> complaintDao) {
+        this.complaintDao = complaintDao;
+    }
+
     @Override
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+
+        List<Complaint> complaints = complaintDao.getAll();
 
         ModelAndView view = new ModelAndView("complaintListings");
         List<String> strings = new ArrayList<String>();

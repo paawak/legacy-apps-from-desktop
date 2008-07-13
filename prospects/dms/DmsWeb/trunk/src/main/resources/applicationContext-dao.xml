@@ -50,6 +50,11 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
+    <bean id="complaintDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.Complaint"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
     <!-- Swayam dao-s :: END  -->
     
     <!-- If you want to be able to do simple CRUD for new domain objects without 

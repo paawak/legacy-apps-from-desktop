@@ -90,7 +90,9 @@
     
     <!-- Swayam custom beans :: START  -->
     
-    <bean id="complaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController"/>
+    <bean id="complaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
+        <constructor-arg ref="complaintDao"/>
+    </bean>
     
     <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController"/>
     

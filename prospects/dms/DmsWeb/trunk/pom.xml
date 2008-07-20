@@ -934,6 +934,22 @@
         <cargo.wait>false</cargo.wait>
                 
         <!-- Database settings -->
+        
+        <!-- MsSql -->
+        <!--
+		<dbunit.dataTypeFactoryName>org.dbunit.ext.mssql.MsSqlDataTypeFactory</dbunit.dataTypeFactoryName>
+		<dbunit.operation.type>MSSQL_CLEAN_INSERT</dbunit.operation.type>
+		<hibernate.dialect>org.hibernate.dialect.SQLServerDialect</hibernate.dialect>
+		<jdbc.groupId>net.sourceforge.jtds</jdbc.groupId>
+		<jdbc.artifactId>jtds</jdbc.artifactId>
+		<jdbc.version>1.2</jdbc.version>
+		<jdbc.driverClassName>net.sourceforge.jtds.jdbc.Driver</jdbc.driverClassName>
+		<jdbc.url><![CDATA[jdbc:jtds:sqlserver://localhost/DmsWeb]]></jdbc.url>
+		<jdbc.username>sa</jdbc.username>
+		<jdbc.password>power123</jdbc.password>
+		-->
+         
+        <!-- Postgres -->
         <dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
         <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
         <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
@@ -944,7 +960,27 @@
         <jdbc.url><![CDATA[jdbc:postgresql://localhost/dms]]></jdbc.url>
         <jdbc.username>postgres</jdbc.username>
         <jdbc.password>postgres</jdbc.password>
-    
+         
+        <!-- MySql -->
+        <!--
+        <dbunit.dataTypeFactoryName>
+         org.dbunit.dataset.datatype.DefaultDataTypeFactory
+        </dbunit.dataTypeFactoryName>
+        <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
+        <hibernate.dialect>
+         org.hibernate.dialect.MySQL5InnoDBDialect
+        </hibernate.dialect>
+        <jdbc.groupId>mysql</jdbc.groupId>
+        <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
+        <jdbc.version>5.0.5</jdbc.version>
+        <jdbc.driverClassName>
+         com.mysql.jdbc.Driver
+        </jdbc.driverClassName>
+        <jdbc.url><![CDATA[jdbc:mysql://localhost/DmsWeb?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+        <jdbc.username>root</jdbc.username>
+        <jdbc.password></jdbc.password>
+        -->
+        
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.6.0</aspectj.version>
         <clickstream.version>1.0.2</clickstream.version>

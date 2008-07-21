@@ -94,7 +94,13 @@
         <constructor-arg ref="complaintDao"/>
     </bean>
     
-    <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController"/>
+    <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController">
+        <constructor-arg ref="complaintDao"/>
+        <property name="validator" ref="beanValidator"/>
+        <property name="formView" value="complaint"/>
+        <property name="successView" value="/complaintListings.html"/>
+        <property name="cancelView" value="/newcomplaint.html"/>
+    </bean>
     
     <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
         <constructor-arg ref="complainantDao"/>

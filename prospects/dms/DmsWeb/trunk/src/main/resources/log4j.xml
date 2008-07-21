@@ -47,9 +47,9 @@
         <level value="INFO"/>
     </logger>
   
-    <!--logger name="org.hibernate.SQL">
-        <level value="DEBUG"/>
-    </logger-->
+    <logger name="org.hibernate.SQL">
+        <level value="INFO"/>
+    </logger>
 
     <logger name="org.springframework">
         <level value="WARN"/>

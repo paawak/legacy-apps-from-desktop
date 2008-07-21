@@ -15,10 +15,14 @@
 
 package com.swayam.dms.web.webapp.controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.swayam.dms.web.dao.GenericDao;
+import com.swayam.dms.web.model.Complaint;
 
 /**
  * 
@@ -26,12 +30,29 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class NewComplaintController extends BaseFormController {
 
+    private final GenericDao<Complaint, Integer> complaintDao;
+
+    public NewComplaintController(GenericDao<Complaint, Integer> complaintDao) {
+
+        this.complaintDao = complaintDao;
+
+        setCommandName("complaint");
+        setCommandClass(Complaint.class);
+
+    }
+
     @Override
-    public ModelAndView handleRequest(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ModelAndView onSubmit(Object command) throws ServletException {
+        Complaint complaint = (Complaint) command;
+        complaintDao.save(complaint);
+        return new ModelAndView(new RedirectView(getSuccessView()));
+    }
 
-        return new ModelAndView("complaint");
-
+    @Override
+    protected Object formBackingObject(HttpServletRequest request)
+            throws ServletException {
+        Complaint complaint = new Complaint();
+        return complaint;
     }
 
 }

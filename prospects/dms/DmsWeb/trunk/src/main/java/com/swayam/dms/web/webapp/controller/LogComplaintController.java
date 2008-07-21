@@ -1,5 +1,5 @@
 /*
- * NewComplaintController.java
+ * LogComplaintController.java
  *
  * Created on Jun 28, 2008 1:15:03 PM
  *
@@ -28,11 +28,11 @@ import com.swayam.dms.web.model.Complaint;
  * 
  * @author paawak
  */
-public class NewComplaintController extends BaseFormController {
+public class LogComplaintController extends BaseFormController {
 
     private final GenericDao<Complaint, Integer> complaintDao;
 
-    public NewComplaintController(GenericDao<Complaint, Integer> complaintDao) {
+    public LogComplaintController(GenericDao<Complaint, Integer> complaintDao) {
 
         this.complaintDao = complaintDao;
 

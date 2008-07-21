@@ -94,20 +94,20 @@
         <constructor-arg ref="complaintDao"/>
     </bean>
     
-    <bean name="/newcomplaint.html" class="com.swayam.dms.web.webapp.controller.NewComplaintController">
+    <bean name="/logcomplaint.html" class="com.swayam.dms.web.webapp.controller.LogComplaintController">
         <constructor-arg ref="complaintDao"/>
         <property name="validator" ref="beanValidator"/>
-        <property name="formView" value="complaint"/>
+        <property name="formView" value="logComplaint"/>
         <property name="successView" value="/complaintListings.html"/>
-        <property name="cancelView" value="/newcomplaint.html"/>
+        <property name="cancelView" value="/logcomplaint.html"/>
     </bean>
     
     <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
         <constructor-arg ref="complainantDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="complainant"/>
-        <property name="successView" value="/newcomplaint.html"/>
-        <property name="cancelView" value="complaint"/>
+        <property name="successView" value="/logcomplaint.html"/>
+        <property name="cancelView" value="logComplaint"/>
     </bean>
     
     <!-- Swayam custom beans :: END  -->

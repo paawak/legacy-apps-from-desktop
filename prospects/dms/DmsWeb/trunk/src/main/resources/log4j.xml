@@ -17,7 +17,7 @@
         <param name="MaxFileSize" value="500KB" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="%p [%t] %c{1}.%M(%L) | %m%n"/>
+                value="%d [%t] %-5p %c - %m%n"/>
         </layout>
     </appender>
     

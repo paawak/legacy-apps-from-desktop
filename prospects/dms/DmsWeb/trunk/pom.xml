@@ -227,9 +227,14 @@
                         </scanTargetPattern>
                     </scanTargetPatterns>
                     <systemProperties>
+                        <!-- 
+                        Change this to run jetty on a different port. You can also override this by:
+                        mvn -Djetty.port=8090 jetty:run
+                        from the prompt
+                        -->
 						<systemProperty>
                             <name>jetty.port</name>
-                            <value>8090</value>
+                            <value>8080</value>
                         </systemProperty>
                     </systemProperties>
                 </configuration>

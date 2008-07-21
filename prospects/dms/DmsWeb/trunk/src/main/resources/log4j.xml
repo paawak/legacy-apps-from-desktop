@@ -10,6 +10,17 @@
         </layout>
     </appender>
     
+    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="./target/dmsweb_log_file.log" />
+        <param name="Append" value="false" />
+        <param name="MaxBackupIndex" value="1" />
+        <param name="MaxFileSize" value="500KB" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%p [%t] %c{1}.%M(%L) | %m%n"/>
+        </layout>
+    </appender>
+    
     <logger name="net.sf.ehcache">
         <level value="ERROR"/>
     </logger>
@@ -33,7 +44,7 @@
     </logger>
 
     <logger name="org.hibernate">
-        <level value="WARN"/>
+        <level value="INFO"/>
     </logger>
   
     <!--logger name="org.hibernate.SQL">
@@ -53,8 +64,9 @@
     </logger>
 
     <root>
-        <level value="WARN"/>
+        <level value="INFO"/>
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 
 </log4j:configuration>

@@ -40,7 +40,7 @@ import org.springframework.security.userdetails.UserDetails;
 public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = 3832626162173359411L;
 
-    private Long id;
+    private Integer id;
     private String username; // required
     private String password; // required
     private String confirmPassword;
@@ -77,7 +77,7 @@ public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -243,7 +243,7 @@ public class User implements Serializable, UserDetails {
         return !credentialsExpired;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

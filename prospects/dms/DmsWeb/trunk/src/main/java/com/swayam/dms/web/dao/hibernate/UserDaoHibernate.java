@@ -26,8 +26,8 @@ import com.swayam.dms.web.model.User;
  *         Noll</a> to work with the new BaseDaoHibernate implementation that
  *         uses generics.
  */
-public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
-        UserDao, UserDetailsService {
+public class UserDaoHibernate extends GenericDaoHibernate<User, Integer>
+        implements UserDao, UserDetailsService {
 
     /**
      * Constructor that sets the entity to User.class.

@@ -72,51 +72,12 @@ public class LogComplaintController extends BaseFormController {
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) {
 
-        binder.registerCustomEditor(ComplaintType.class, "complaintType",
-                new PropertyEditorSupport() {
+        Class<?>[] classes = new Class<?>[] { ComplaintType.class, Ward.class,
+                ComplaintPriority.class, Department.class, User.class };
 
-                    public void setAsText(String text) {
-
-                        if (isValueBlank(text, this)) {
-                            return;
-                        }
-
-                        Integer typeId = Integer.valueOf(text);
-
-                        if (isValueBlank(typeId, this)) {
-                            return;
-                        }
-
-                        ComplaintType type = complaintTypeDao.get(typeId);
-
-                        setValue(type);
-
-                    }
-
-                });
-
-        binder.registerCustomEditor(Ward.class, "ward",
-                new PropertyEditorSupport() {
-
-                    public void setAsText(String text) {
-
-                        if (isValueBlank(text, this)) {
-                            return;
-                        }
-
-                        Integer wardId = Integer.valueOf(text);
-
-                        if (isValueBlank(wardId, this)) {
-                            return;
-                        }
-
-                        Ward ward = wardDao.get(wardId);
-
-                        setValue(ward);
-
-                    }
-
-                });
+        for (Class<?> clazz : classes) {
+            binder.registerCustomEditor(clazz, new LogComplaintEditor(clazz));
+        }
 
         super.initBinder(request, binder);
     }
@@ -171,31 +132,85 @@ public class LogComplaintController extends BaseFormController {
         return model;
     }
 
-    private boolean isValueBlank(Object value,
-            PropertyEditorSupport propertyEditorSupport) {
+    private class LogComplaintEditor extends PropertyEditorSupport {
 
-        boolean blank = false;
+        private final Class<?> clazz;
 
-        if (value instanceof String) {
+        LogComplaintEditor(Class<?> clazz) {
+            this.clazz = clazz;
+        }
 
-            if (value.equals("")) {
-                blank = true;
+        @SuppressWarnings("unchecked")
+        @Override
+        public void setAsText(String text) {
+
+            if (isValueBlank(text, this)) {
+                return;
             }
 
-        } else if (value instanceof Integer) {
+            Integer id = Integer.valueOf(text);
 
-            if ((Integer) value == -1) {
-                blank = true;
+            if (isValueBlank(id, this)) {
+                return;
             }
+
+            Object typeForId = getDao().get(id);
+
+            setValue(typeForId);
 
         }
 
-        if (blank) {
-            propertyEditorSupport.setSource(null);
+        private boolean isValueBlank(Object value,
+                PropertyEditorSupport propertyEditorSupport) {
+
+            boolean blank = false;
+
+            if (value instanceof String) {
+
+                if (value.equals("")) {
+                    blank = true;
+                }
+
+            } else if (value instanceof Integer) {
+
+                if ((Integer) value == -1) {
+                    blank = true;
+                }
+
+            }
+
+            if (blank) {
+                propertyEditorSupport.setSource(null);
+            }
+
+            return blank;
+
         }
 
-        return blank;
+        @SuppressWarnings("unchecked")
+        private GenericDao getDao() {
 
+            GenericDao dao;
+
+            if (clazz == Ward.class) {
+                dao = wardDao;
+            } else if (clazz == ComplaintPriority.class) {
+                dao = priorityDao;
+            } else if (clazz == ComplaintType.class) {
+                dao = complaintTypeDao;
+            } else if (clazz == Department.class) {
+                dao = departmentDao;
+            } else if (clazz == User.class) {
+                dao = userDao;
+            } else {
+
+                throw new IllegalArgumentException("Dao for the class "
+                        + clazz.getName() + " not found.");
+            }
+
+            return dao;
+
+        }
     }
 
 }

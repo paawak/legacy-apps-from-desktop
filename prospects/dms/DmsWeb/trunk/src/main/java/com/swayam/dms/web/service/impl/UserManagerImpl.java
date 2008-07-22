@@ -1,35 +1,37 @@
 package com.swayam.dms.web.service.impl;
 
-import org.springframework.security.providers.dao.DaoAuthenticationProvider;
-import org.springframework.security.providers.dao.SaltSource;
+import java.util.List;
+
+import javax.jws.WebService;
+import javax.persistence.EntityExistsException;
+
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+
 import com.swayam.dms.web.dao.UserDao;
 import com.swayam.dms.web.model.User;
 import com.swayam.dms.web.service.UserExistsException;
 import com.swayam.dms.web.service.UserManager;
 import com.swayam.dms.web.service.UserService;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.dao.DataIntegrityViolationException;
-
-import javax.jws.WebService;
-import javax.persistence.EntityExistsException;
-import java.util.List;
-
 
 /**
  * Implementation of UserManager interface.
- *
+ * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @WebService(serviceName = "UserService", endpointInterface = "com.swayam.dms.web.service.UserService")
-public class UserManagerImpl extends UniversalManagerImpl implements UserManager, UserService {
+public class UserManagerImpl extends UniversalManagerImpl implements
+        UserManager, UserService {
     private UserDao dao;
     private PasswordEncoder passwordEncoder;
 
     /**
      * Set the Dao for communication with the data layer.
-     * @param dao the UserDao that communicates with the database
+     * 
+     * @param dao
+     *            the UserDao that communicates with the database
      */
     @Required
     public void setUserDao(UserDao dao) {
@@ -38,7 +40,9 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
 
     /**
      * Set the PasswordEncoder used to encrypt passwords.
-     * @param passwordEncoder the PasswordEncoder implementation
+     * 
+     * @param passwordEncoder
+     *            the PasswordEncoder implementation
      */
     @Required
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
@@ -49,7 +53,7 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
      * {@inheritDoc}
      */
     public User getUser(String userId) {
-        return dao.get(new Long(userId));
+        return dao.get(new Integer(userId));
     }
 
     /**
@@ -58,8 +62,7 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
     public List<User> getUsers(User user) {
         return dao.getUsers();
     }
-    
-    
+
     /**
      * {@inheritDoc}
      */
@@ -69,7 +72,7 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
             // if new user, lowercase userId
             user.setUsername(user.getUsername().toLowerCase());
         }
-        
+
         // Get and prepare password management-related artifacts
         boolean passwordChanged = false;
         if (passwordEncoder != null) {
@@ -79,7 +82,8 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
                 passwordChanged = true;
             } else {
                 // Existing user, check password in DB
-                String currentPassword = dao.getUserPassword(user.getUsername());
+                String currentPassword = dao
+                        .getUserPassword(user.getUsername());
                 if (currentPassword == null) {
                     passwordChanged = true;
                 } else {
@@ -91,22 +95,26 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
 
             // If password was changed (or new user), encrypt it
             if (passwordChanged) {
-                user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
+                user.setPassword(passwordEncoder.encodePassword(user
+                        .getPassword(), null));
             }
         } else {
-            log.warn("PasswordEncoder not set, skipping password encryption...");
+            log
+                    .warn("PasswordEncoder not set, skipping password encryption...");
         }
-        
+
         try {
             return dao.saveUser(user);
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             log.warn(e.getMessage());
-            throw new UserExistsException("User '" + user.getUsername() + "' already exists!");
+            throw new UserExistsException("User '" + user.getUsername()
+                    + "' already exists!");
         } catch (EntityExistsException e) { // needed for JPA
             e.printStackTrace();
             log.warn(e.getMessage());
-            throw new UserExistsException("User '" + user.getUsername() + "' already exists!");
+            throw new UserExistsException("User '" + user.getUsername()
+                    + "' already exists!");
         }
     }
 
@@ -115,16 +123,20 @@ public class UserManagerImpl extends UniversalManagerImpl implements UserManager
      */
     public void removeUser(String userId) {
         log.debug("removing user: " + userId);
-        dao.remove(new Long(userId));
+        dao.remove(new Integer(userId));
     }
 
     /**
      * {@inheritDoc}
-     * @param username the login name of the human
+     * 
+     * @param username
+     *            the login name of the human
      * @return User the populated user object
-     * @throws UsernameNotFoundException thrown when username not found
+     * @throws UsernameNotFoundException
+     *             thrown when username not found
      */
-    public User getUserByUsername(String username) throws UsernameNotFoundException {
+    public User getUserByUsername(String username)
+            throws UsernameNotFoundException {
         return (User) dao.loadUserByUsername(username);
     }
 }

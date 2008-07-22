@@ -1,26 +1,31 @@
 package com.swayam.dms.web.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.jmock.integration.junit4.JMock;
+import org.jmock.integration.junit4.JUnit4Mockery;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.AccessDeniedException;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.security.context.SecurityContextImpl;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
+
 import com.swayam.dms.web.Constants;
 import com.swayam.dms.web.dao.UserDao;
 import com.swayam.dms.web.model.Role;
 import com.swayam.dms.web.model.User;
-import org.jmock.integration.junit4.JMock;
-import org.jmock.integration.junit4.JUnit4Mockery;
-import org.jmock.Mockery;
-import org.jmock.Expectations;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.junit.runner.RunWith;
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 @RunWith(JMock.class)
 public class UserSecurityAdviceTest {
@@ -36,12 +41,12 @@ public class UserSecurityAdviceTest {
 
         SecurityContext context = new SecurityContextImpl();
         User user = new User("user");
-        user.setId(1L);
+        user.setId(1);
         user.setPassword("password");
         user.addRole(new Role(Constants.USER_ROLE));
 
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                user.getUsername(), user.getPassword(), user.getAuthorities());
         token.setDetails(user);
         context.setAuthentication(token);
         SecurityContextHolder.setContext(context);
@@ -54,18 +59,20 @@ public class UserSecurityAdviceTest {
 
     @Test
     public void testAddUserWithoutAdminRole() throws Exception {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext()
+                .getAuthentication();
         assertTrue(auth.isAuthenticated());
         UserManager userManager = makeInterceptedTarget();
         User user = new User("admin");
-        user.setId(2L);
+        user.setId(2);
 
         try {
             userManager.saveUser(user);
             fail("AccessDeniedException not thrown");
         } catch (AccessDeniedException expected) {
             assertNotNull(expected);
-            assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
+            assertEquals(expected.getMessage(),
+                    UserSecurityAdvice.ACCESS_DENIED);
         }
     }
 
@@ -73,22 +80,24 @@ public class UserSecurityAdviceTest {
     public void testAddUserAsAdmin() throws Exception {
         SecurityContext securityContext = new SecurityContextImpl();
         User user = new User("admin");
-        user.setId(2L);
+        user.setId(2);
         user.setPassword("password");
         user.addRole(new Role(Constants.ADMIN_ROLE));
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                user.getUsername(), user.getPassword(), user.getAuthorities());
         token.setDetails(user);
         securityContext.setAuthentication(token);
         SecurityContextHolder.setContext(securityContext);
 
         UserManager userManager = makeInterceptedTarget();
         final User adminUser = new User("admin");
-        adminUser.setId(2L);
+        adminUser.setId(2);
 
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(adminUser)));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(adminUser)));
+            }
+        });
 
         userManager.saveUser(adminUser);
     }
@@ -97,12 +106,14 @@ public class UserSecurityAdviceTest {
     public void testUpdateUserProfile() throws Exception {
         UserManager userManager = makeInterceptedTarget();
         final User user = new User("user");
-        user.setId(1L);
+        user.setId(1);
         user.getRoles().add(new Role(Constants.USER_ROLE));
 
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(user)));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(user)));
+            }
+        });
 
         userManager.saveUser(user);
     }
@@ -112,7 +123,7 @@ public class UserSecurityAdviceTest {
     public void testChangeToAdminRoleFromUserRole() throws Exception {
         UserManager userManager = makeInterceptedTarget();
         User user = new User("user");
-        user.setId(1L);
+        user.setId(1);
         user.getRoles().add(new Role(Constants.ADMIN_ROLE));
 
         try {
@@ -120,7 +131,8 @@ public class UserSecurityAdviceTest {
             fail("AccessDeniedException not thrown");
         } catch (AccessDeniedException expected) {
             assertNotNull(expected);
-            assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
+            assertEquals(expected.getMessage(),
+                    UserSecurityAdvice.ACCESS_DENIED);
         }
     }
 
@@ -129,7 +141,7 @@ public class UserSecurityAdviceTest {
     public void testAddAdminRoleWhenAlreadyHasUserRole() throws Exception {
         UserManager userManager = makeInterceptedTarget();
         User user = new User("user");
-        user.setId(1L);
+        user.setId(1);
         user.getRoles().add(new Role(Constants.ADMIN_ROLE));
         user.getRoles().add(new Role(Constants.USER_ROLE));
 
@@ -138,7 +150,8 @@ public class UserSecurityAdviceTest {
             fail("AccessDeniedException not thrown");
         } catch (AccessDeniedException expected) {
             assertNotNull(expected);
-            assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
+            assertEquals(expected.getMessage(),
+                    UserSecurityAdvice.ACCESS_DENIED);
         }
     }
 
@@ -147,24 +160,27 @@ public class UserSecurityAdviceTest {
     public void testAddUserRoleWhenHasAdminRole() throws Exception {
         SecurityContext securityContext = new SecurityContextImpl();
         User user1 = new User("user");
-        user1.setId(1L);
+        user1.setId(1);
         user1.setPassword("password");
         user1.addRole(new Role(Constants.ADMIN_ROLE));
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(user1.getUsername(), user1.getPassword(), user1.getAuthorities());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                user1.getUsername(), user1.getPassword(), user1
+                        .getAuthorities());
         token.setDetails(user1);
         securityContext.setAuthentication(token);
         SecurityContextHolder.setContext(securityContext);
 
         UserManager userManager = makeInterceptedTarget();
         final User user = new User("user");
-        user.setId(1L);
+        user.setId(1);
         user.getRoles().add(new Role(Constants.ADMIN_ROLE));
         user.getRoles().add(new Role(Constants.USER_ROLE));
 
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(user)));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(user)));
+            }
+        });
 
         userManager.saveUser(user);
     }
@@ -174,12 +190,14 @@ public class UserSecurityAdviceTest {
     public void testUpdateUserWithUserRole() throws Exception {
         UserManager userManager = makeInterceptedTarget();
         final User user = new User("user");
-        user.setId(1L);
+        user.setId(1);
         user.getRoles().add(new Role(Constants.USER_ROLE));
 
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(user)));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(user)));
+            }
+        });
 
         userManager.saveUser(user);
     }

@@ -15,7 +15,7 @@ import com.swayam.dms.web.model.User;
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
-public interface UserDao extends GenericDao<User, Long> {
+public interface UserDao extends GenericDao<User, Integer> {
 
     /**
      * Gets users information based on login name.

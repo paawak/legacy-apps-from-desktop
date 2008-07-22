@@ -42,8 +42,6 @@ import com.swayam.dms.web.model.Ward;
  */
 public class LogComplaintController extends BaseFormController {
 
-    private final Complaint model = new Complaint();
-
     private final GenericDao<Complaint, Integer> complaintDao;
     private final GenericDao<Ward, Integer> wardDao;
     private final GenericDao<ComplaintPriority, Integer> priorityDao;
@@ -123,13 +121,6 @@ public class LogComplaintController extends BaseFormController {
         }
 
         return super.processFormSubmission(request, response, command, errors);
-    }
-
-    @Override
-    protected Object formBackingObject(HttpServletRequest request)
-            throws ServletException {
-
-        return model;
     }
 
     private class LogComplaintEditor extends PropertyEditorSupport {

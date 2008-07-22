@@ -44,11 +44,11 @@
     </logger>
 
     <logger name="org.hibernate">
-        <level value="INFO"/>
+        <level value="WARN"/>
     </logger>
   
     <logger name="org.hibernate.SQL">
-        <level value="INFO"/>
+        <level value="WARN"/>
     </logger>
 
     <logger name="org.springframework">
@@ -60,11 +60,11 @@
     </logger>
 
     <logger name="com.swayam.dms.web.webapp.filter.StaticFilter">
-        <level value="INFO"/>
+        <level value="WARN"/>
     </logger>
 
     <root>
-        <level value="INFO"/>
+        <level value="WARN"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>

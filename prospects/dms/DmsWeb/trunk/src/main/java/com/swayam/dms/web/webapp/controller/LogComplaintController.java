@@ -15,14 +15,26 @@
 
 package com.swayam.dms.web.webapp.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.swayam.dms.web.dao.GenericDao;
+import com.swayam.dms.web.dao.UserDao;
 import com.swayam.dms.web.model.Complaint;
+import com.swayam.dms.web.model.ComplaintPriority;
+import com.swayam.dms.web.model.ComplaintType;
+import com.swayam.dms.web.model.Department;
+import com.swayam.dms.web.model.User;
+import com.swayam.dms.web.model.Ward;
 
 /**
  * 
@@ -30,15 +42,139 @@ import com.swayam.dms.web.model.Complaint;
  */
 public class LogComplaintController extends BaseFormController {
 
-    private final GenericDao<Complaint, Integer> complaintDao;
+    private final Complaint model = new Complaint();
 
-    public LogComplaintController(GenericDao<Complaint, Integer> complaintDao) {
+    private final GenericDao<Complaint, Integer> complaintDao;
+    private final GenericDao<Ward, Integer> wardDao;
+    private final GenericDao<ComplaintPriority, Integer> priorityDao;
+    private final GenericDao<ComplaintType, Integer> complaintTypeDao;
+    private final GenericDao<Department, Integer> departmentDao;
+    private final UserDao userDao;
+
+    public LogComplaintController(GenericDao<Complaint, Integer> complaintDao,
+            GenericDao<Ward, Integer> wardDao,
+            GenericDao<ComplaintPriority, Integer> priorityDao,
+            GenericDao<ComplaintType, Integer> complaintTypeDao,
+            GenericDao<Department, Integer> departmentDao, UserDao userDao) {
 
         this.complaintDao = complaintDao;
+        this.wardDao = wardDao;
+        this.priorityDao = priorityDao;
+        this.complaintTypeDao = complaintTypeDao;
+        this.departmentDao = departmentDao;
+        this.userDao = userDao;
 
         setCommandName("complaint");
         setCommandClass(Complaint.class);
 
+    }
+
+    protected void initBinder(HttpServletRequest request,
+            ServletRequestDataBinder binder) {
+
+        binder.registerCustomEditor(ComplaintType.class, "complaintType",
+                new PropertyEditorSupport(binder.getTarget()) {
+
+                    public String getAsText() {
+
+                        return "";
+
+                    }
+
+                    public void setAsText(String text) {
+
+                        if (text.trim().equals("")) {
+                            return;
+                        }
+
+                        Integer typeId = Integer.valueOf(text);
+
+                        if (typeId == -1) {
+                            return;
+                        }
+
+                        Complaint source = (Complaint) getSource();
+
+                        ComplaintType type = complaintTypeDao.get(typeId);
+
+                        source.setComplaintType(type);
+
+                        setValue(type);
+
+                    }
+
+                });
+
+        binder.registerCustomEditor(Ward.class, "ward",
+                new PropertyEditorSupport(binder.getTarget()) {
+
+                    public String getAsText() {
+
+                        Complaint source = (Complaint) getSource();
+
+                        Ward ward = source.getWard();
+
+                        if (ward != null) {
+
+                            System.out
+                                    .println("1111111111111111111111111111111111111111111");
+
+                            return Integer.toString(ward.getWardId());
+                        } else {
+
+                            System.out
+                                    .println("222222222222222222222222222222222222");
+                            return (String) getValue();
+                        }
+
+                    }
+
+                    public void setAsText(String text)
+                            throws java.lang.IllegalArgumentException {
+
+                        System.out
+                                .println("333333333333333333333333333333333333333 @"
+                                        + text + "@");
+
+                        if (text.trim().equals("")) {
+                            return;
+                        }
+
+                        Integer wardId = Integer.valueOf(text);
+
+                        if (wardId == -1) {
+                            return;
+                        }
+
+                        Complaint source = (Complaint) getSource();
+
+                        System.out.println("complaint.hashCode =  "
+                                + source.hashCode());
+
+                        Ward ward = wardDao.get(wardId);
+
+                        source.setWard(ward);
+
+                    }
+
+                });
+
+        super.initBinder(request, binder);
+    }
+
+    @Override
+    protected ModelAndView showForm(HttpServletRequest request,
+            HttpServletResponse response, BindException errors)
+            throws Exception {
+
+        ModelAndView view = super.showForm(request, response, errors);
+
+        view.addObject("wardList", wardDao.getAll());
+        view.addObject("priorityList", priorityDao.getAll());
+        view.addObject("complaintTypeList", complaintTypeDao.getAll());
+        view.addObject("departmentList", departmentDao.getAll());
+
+        return view;
     }
 
     @Override
@@ -49,10 +185,35 @@ public class LogComplaintController extends BaseFormController {
     }
 
     @Override
+    public ModelAndView processFormSubmission(HttpServletRequest request,
+            HttpServletResponse response, Object command, BindException errors)
+            throws Exception {
+        if (request.getParameter("save") == null
+                && request.getParameter("department") != null) {
+
+            ModelAndView view = showForm(request, response, errors);
+
+            List<User> usersForDeptList = userDao.getUsers(departmentDao
+                    .get(Integer.parseInt(request.getParameter("department"))));
+
+            view.addObject("usersForDeptList", usersForDeptList);
+
+            return view;
+
+        }
+
+        return super.processFormSubmission(request, response, command, errors);
+    }
+
+    @Override
     protected Object formBackingObject(HttpServletRequest request)
             throws ServletException {
-        Complaint complaint = new Complaint();
-        return complaint;
+
+        System.out
+                .println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  complaint.hashCode = "
+                        + model.hashCode());
+
+        return model;
     }
 
 }

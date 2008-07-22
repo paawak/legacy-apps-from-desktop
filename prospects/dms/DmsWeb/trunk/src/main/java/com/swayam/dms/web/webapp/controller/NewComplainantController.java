@@ -36,7 +36,6 @@ public class NewComplainantController extends BaseFormController {
             GenericDao<Complainant, Integer> complainantDao) {
 
         this.complainantDao = complainantDao;
-
         setCommandName("complainant");
         setCommandClass(Complainant.class);
 

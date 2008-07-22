@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -50,6 +51,7 @@ public class User implements Serializable, UserDetails {
     private String phoneNumber;
     private String website;
     private Address address = new Address();
+    private Department department;
     private Integer version;
     private Set<Role> roles = new HashSet<Role>();
     private boolean enabled;
@@ -136,6 +138,16 @@ public class User implements Serializable, UserDetails {
     @Embedded
     public Address getAddress() {
         return address;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", nullable = false)
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)

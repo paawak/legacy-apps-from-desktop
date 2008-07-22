@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
+    <table name="department">
+        <column>department_id</column>
+        <column>name</column>
+        <column>short_name</column>
+        <row>
+            <value description="department_id">1</value>
+            <value description="name">Sewage</value>
+            <value description="short_name">SW</value>
+        </row>
+    </table>
     <table name="employee">
         <column>id</column>
         <column>username</column>
@@ -13,6 +23,7 @@
         <column>phone_number</column>
         <column>postal_code</column>
         <column>province</column>
+        <column>department_id</column>
         <column>website</column>
         <column>password_hint</column>
         <column>version</column>
@@ -33,6 +44,7 @@
             <value description="phone_number">4748845425</value>
             <value description="postal_code">560018</value>
             <value description="province">Karnataka</value>
+            <value description="department_id">1</value>
             <value description="website"></value>
             <value description="password_hint"><![CDATA[The same as your username.]]></value>
             <value description="version">1</value>
@@ -54,6 +66,7 @@
             <value description="phone_number">91354764</value>
             <value description="postal_code">560103</value>
             <value description="province">Karnataka</value>
+            <value description="department_id">1</value>
             <value description="website">http://paawak.blogspot.com</value>
             <value description="password_hint"><![CDATA[The same as your username.]]></value>
             <value description="version">1</value>
@@ -167,16 +180,6 @@
             <value description="priority">CRITICAL</value>
         </row>
     </table>    
-    <table name="department">
-        <column>department_id</column>
-        <column>name</column>
-        <column>short_name</column>
-        <row>
-            <value description="department_id">1</value>
-            <value description="name">Sewage</value>
-            <value description="short_name">SW</value>
-        </row>
-    </table>
     <table name="ward">
         <column>ward_id</column>
         <column>name</column>

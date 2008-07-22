@@ -55,6 +55,27 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
+    <bean id="wardDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.Ward"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="priorityDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.ComplaintPriority"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="complaintTypeDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.ComplaintType"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="departmentDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.Department"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    
     <!-- Swayam dao-s :: END  -->
     
     <!-- If you want to be able to do simple CRUD for new domain objects without 

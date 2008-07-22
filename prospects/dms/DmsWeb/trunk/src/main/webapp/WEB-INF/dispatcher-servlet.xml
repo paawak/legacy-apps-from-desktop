@@ -96,10 +96,15 @@
     
     <bean name="/logcomplaint.html" class="com.swayam.dms.web.webapp.controller.LogComplaintController">
         <constructor-arg ref="complaintDao"/>
+        <constructor-arg ref="wardDao"/>
+        <constructor-arg ref="priorityDao"/>
+        <constructor-arg ref="complaintTypeDao"/>
+        <constructor-arg ref="departmentDao"/>
+        <constructor-arg ref="userDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="logComplaint"/>
         <property name="successView" value="/complaintListings.html"/>
-        <property name="cancelView" value="/logcomplaint.html"/>
+        <property name="cancelView" value="complaintListings"/>
     </bean>
     
     <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">

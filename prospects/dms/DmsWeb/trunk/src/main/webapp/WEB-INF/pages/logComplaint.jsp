@@ -46,7 +46,13 @@
         <form:errors path="ward" cssClass="fieldError"/>
         <form:select path="ward" id="ward" cssClass="text large" cssErrorClass="text large error">
             <c:out value="${optionSelectOne}" escapeXml="false"/>
-            <form:options items="${wardList}" itemValue="wardId" itemLabel="name"/>
+            <c:forEach var="ward" items="${wardList}">
+                <option value="${ward.wardId}"
+                    <c:if test="${ward.wardId == complaint.ward.wardId}">
+                        selected="true"
+                    </c:if>
+                >${ward.name}</option>
+            </c:forEach>
         </form:select>
     </li>
     <li>
@@ -54,7 +60,13 @@
         <form:errors path="complaintPriority" cssClass="fieldError"/>
         <form:select path="complaintPriority" id="complaintPriority" cssClass="text large" cssErrorClass="text large error">
             <c:out value="${optionSelectOne}" escapeXml="false"/>
-            <form:options items="${priorityList}" itemValue="complaintPriorityId" itemLabel="priority"/>
+            <c:forEach var="complaintPriority" items="${priorityList}">
+                <option value="${complaintPriority.complaintPriorityId}"
+                    <c:if test="${complaintPriority.complaintPriorityId == complaint.complaintPriority.complaintPriorityId}">
+                        selected="true"
+                    </c:if>
+                >${complaintPriority.priority}</option>
+            </c:forEach>
         </form:select>
     </li>
     
@@ -63,7 +75,13 @@
         <form:errors path="department" cssClass="fieldError"/>
         <form:select path="department" id="department" cssClass="text large" cssErrorClass="text large error" onchange="javascript:submit();">
             <c:out value="${optionSelectOne}" escapeXml="false"/>
-            <form:options items="${departmentList}" itemValue="departmentId" itemLabel="name"/>
+            <c:forEach var="department" items="${departmentList}">
+                <option value="${department.departmentId}"
+                    <c:if test="${department.departmentId == complaint.department.departmentId}">
+                        selected="true"
+                    </c:if>
+                >${department.name}</option>
+            </c:forEach>
         </form:select>
     </li>
 
@@ -72,7 +90,13 @@
         <form:errors path="assignedTo" cssClass="fieldError"/>
         <form:select path="assignedTo" id="assignedTo" cssClass="text large" cssErrorClass="text large error">
             <c:out value="${optionSelectOne}" escapeXml="false"/>
-            <form:options items="${usersForDeptList}" itemValue="id" itemLabel="username"/>
+            <c:forEach var="assignedTo" items="${usersForDeptList}">
+                <option value="${assignedTo.id}"
+                    <c:if test="${assignedTo.id == complaint.assignedTo.id}">
+                        selected="true"
+                    </c:if>
+                >${assignedTo.username}</option>
+            </c:forEach>
         </form:select>
     </li>
 

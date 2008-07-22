@@ -73,31 +73,21 @@ public class LogComplaintController extends BaseFormController {
             ServletRequestDataBinder binder) {
 
         binder.registerCustomEditor(ComplaintType.class, "complaintType",
-                new PropertyEditorSupport(binder.getTarget()) {
-
-                    public String getAsText() {
-
-                        return "";
-
-                    }
+                new PropertyEditorSupport() {
 
                     public void setAsText(String text) {
 
-                        if (text.trim().equals("")) {
+                        if (isValueBlank(text, this)) {
                             return;
                         }
 
                         Integer typeId = Integer.valueOf(text);
 
-                        if (typeId == -1) {
+                        if (isValueBlank(typeId, this)) {
                             return;
                         }
 
-                        Complaint source = (Complaint) getSource();
-
                         ComplaintType type = complaintTypeDao.get(typeId);
-
-                        source.setComplaintType(type);
 
                         setValue(type);
 
@@ -106,54 +96,23 @@ public class LogComplaintController extends BaseFormController {
                 });
 
         binder.registerCustomEditor(Ward.class, "ward",
-                new PropertyEditorSupport(binder.getTarget()) {
+                new PropertyEditorSupport() {
 
-                    public String getAsText() {
+                    public void setAsText(String text) {
 
-                        Complaint source = (Complaint) getSource();
-
-                        Ward ward = source.getWard();
-
-                        if (ward != null) {
-
-                            System.out
-                                    .println("1111111111111111111111111111111111111111111");
-
-                            return Integer.toString(ward.getWardId());
-                        } else {
-
-                            System.out
-                                    .println("222222222222222222222222222222222222");
-                            return (String) getValue();
-                        }
-
-                    }
-
-                    public void setAsText(String text)
-                            throws java.lang.IllegalArgumentException {
-
-                        System.out
-                                .println("333333333333333333333333333333333333333 @"
-                                        + text + "@");
-
-                        if (text.trim().equals("")) {
+                        if (isValueBlank(text, this)) {
                             return;
                         }
 
                         Integer wardId = Integer.valueOf(text);
 
-                        if (wardId == -1) {
+                        if (isValueBlank(wardId, this)) {
                             return;
                         }
 
-                        Complaint source = (Complaint) getSource();
-
-                        System.out.println("complaint.hashCode =  "
-                                + source.hashCode());
-
                         Ward ward = wardDao.get(wardId);
 
-                        source.setWard(ward);
+                        setValue(ward);
 
                     }
 
@@ -209,11 +168,34 @@ public class LogComplaintController extends BaseFormController {
     protected Object formBackingObject(HttpServletRequest request)
             throws ServletException {
 
-        System.out
-                .println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  complaint.hashCode = "
-                        + model.hashCode());
-
         return model;
+    }
+
+    private boolean isValueBlank(Object value,
+            PropertyEditorSupport propertyEditorSupport) {
+
+        boolean blank = false;
+
+        if (value instanceof String) {
+
+            if (value.equals("")) {
+                blank = true;
+            }
+
+        } else if (value instanceof Integer) {
+
+            if ((Integer) value == -1) {
+                blank = true;
+            }
+
+        }
+
+        if (blank) {
+            propertyEditorSupport.setSource(null);
+        }
+
+        return blank;
+
     }
 
 }

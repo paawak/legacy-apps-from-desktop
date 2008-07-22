@@ -36,6 +36,22 @@
             </c:forEach>
         </form:select>
     </li>
+
+    <li>
+        <appfuse:label styleClass="desc" key="logComplaint.complainant"/>
+        <form:errors path="complainant" cssClass="fieldError"/>
+        <form:select path="complainant" id="complainant" cssClass="text large" cssErrorClass="text large error">
+            <c:out value="${optionSelectOne}" escapeXml="false"/>
+            <c:forEach var="complainant" items="${complainantList}">
+                <option value="${complainant.complainantId}"
+                    <c:if test="${complainant.complainantId == complaint.complainant.complainantId}">
+                        selected="true"
+                    </c:if>
+                >${complainant.firstName} ${complainant.lastName}</option>
+            </c:forEach>
+        </form:select>
+    </li>
+
     <li>
         <appfuse:label styleClass="desc" key="logComplaint.details"/>
         <form:errors path="details" cssClass="fieldError"/>

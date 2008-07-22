@@ -16,12 +16,16 @@
 package com.swayam.dms.web.webapp.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.Authentication;
+import org.springframework.security.context.SecurityContext;
+import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,8 +33,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.swayam.dms.web.dao.GenericDao;
 import com.swayam.dms.web.dao.UserDao;
+import com.swayam.dms.web.model.Complainant;
 import com.swayam.dms.web.model.Complaint;
 import com.swayam.dms.web.model.ComplaintPriority;
+import com.swayam.dms.web.model.ComplaintStatus;
 import com.swayam.dms.web.model.ComplaintType;
 import com.swayam.dms.web.model.Department;
 import com.swayam.dms.web.model.User;
@@ -48,12 +54,16 @@ public class LogComplaintController extends BaseFormController {
     private final GenericDao<ComplaintType, Integer> complaintTypeDao;
     private final GenericDao<Department, Integer> departmentDao;
     private final UserDao userDao;
+    private final GenericDao<Complainant, Integer> complainantDao;
+    private final GenericDao<ComplaintStatus, Integer> complaintStatusDao;
 
     public LogComplaintController(GenericDao<Complaint, Integer> complaintDao,
             GenericDao<Ward, Integer> wardDao,
             GenericDao<ComplaintPriority, Integer> priorityDao,
             GenericDao<ComplaintType, Integer> complaintTypeDao,
-            GenericDao<Department, Integer> departmentDao, UserDao userDao) {
+            GenericDao<Department, Integer> departmentDao, UserDao userDao,
+            GenericDao<Complainant, Integer> complainantDao,
+            GenericDao<ComplaintStatus, Integer> complaintStatusDao) {
 
         this.complaintDao = complaintDao;
         this.wardDao = wardDao;
@@ -61,6 +71,8 @@ public class LogComplaintController extends BaseFormController {
         this.complaintTypeDao = complaintTypeDao;
         this.departmentDao = departmentDao;
         this.userDao = userDao;
+        this.complainantDao = complainantDao;
+        this.complaintStatusDao = complaintStatusDao;
 
         setCommandName("complaint");
         setCommandClass(Complaint.class);
@@ -71,7 +83,8 @@ public class LogComplaintController extends BaseFormController {
             ServletRequestDataBinder binder) {
 
         Class<?>[] classes = new Class<?>[] { ComplaintType.class, Ward.class,
-                ComplaintPriority.class, Department.class, User.class };
+                ComplaintPriority.class, Department.class, User.class,
+                Complainant.class };
 
         for (Class<?> clazz : classes) {
             binder.registerCustomEditor(clazz, new LogComplaintEditor(clazz));
@@ -91,6 +104,7 @@ public class LogComplaintController extends BaseFormController {
         view.addObject("priorityList", priorityDao.getAll());
         view.addObject("complaintTypeList", complaintTypeDao.getAll());
         view.addObject("departmentList", departmentDao.getAll());
+        view.addObject("complainantList", complainantDao.getAll());
 
         return view;
     }
@@ -98,6 +112,22 @@ public class LogComplaintController extends BaseFormController {
     @Override
     public ModelAndView onSubmit(Object command) throws ServletException {
         Complaint complaint = (Complaint) command;
+
+        complaint.setRaisedDate(new Date());
+
+        // set status
+
+        complaint.setComplaintStatus(complaintStatusDao.get(1));
+
+        // set logged by
+
+        SecurityContext ctx = SecurityContextHolder.getContext();
+
+        if (ctx.getAuthentication() != null) {
+            Authentication auth = ctx.getAuthentication();
+            complaint.setLoggedBy((User) auth.getPrincipal());
+        }
+
         complaintDao.save(complaint);
         return new ModelAndView(new RedirectView(getSuccessView()));
     }
@@ -193,6 +223,8 @@ public class LogComplaintController extends BaseFormController {
                 dao = departmentDao;
             } else if (clazz == User.class) {
                 dao = userDao;
+            } else if (clazz == Complainant.class) {
+                dao = complainantDao;
             } else {
 
                 throw new IllegalArgumentException("Dao for the class "

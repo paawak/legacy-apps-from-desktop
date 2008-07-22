@@ -101,6 +101,8 @@
         <constructor-arg ref="complaintTypeDao"/>
         <constructor-arg ref="departmentDao"/>
         <constructor-arg ref="userDao"/>
+        <constructor-arg ref="complainantDao"/>
+        <constructor-arg ref="complaintStatusDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="logComplaint"/>
         <property name="successView" value="/complaintListings.html"/>

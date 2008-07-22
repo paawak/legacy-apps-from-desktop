@@ -70,6 +70,11 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
+    <bean id="complaintStatusDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.dms.web.model.ComplaintStatus"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
     <bean id="departmentDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
         <constructor-arg value="com.swayam.dms.web.model.Department"/>
         <property name="sessionFactory" ref="sessionFactory"/>

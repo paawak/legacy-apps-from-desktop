@@ -202,7 +202,7 @@
         <column>complaint_status_id</column>
         <column>department_id</column>
         <row>
-            <value description="complaint_id">1</value>
+            <value description="complaint_id">-2</value>
             <value description="details">No supply of drinking water in our area for the past three days</value>
             <value description="raised_date">7-31-2007</value>
             <value description="resolved_date">8-31-2007</value>
@@ -216,7 +216,7 @@
             <value description="department_id">1</value>
         </row>
         <row>
-            <value description="complaint_id">2</value>
+            <value description="complaint_id">-1</value>
             <value description="details">Sewage not collceted</value>
             <value description="raised_date">12-2-2007</value>
             <value description="resolved_date">12-31-2007</value>

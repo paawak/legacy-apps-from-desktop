@@ -5,7 +5,6 @@
     <div id="switchLocale"><a href="<c:url value='/?locale=en'/>"><fmt:message key="webapp.name"/> in English</a></div>
 </c:if>
 --%>
-<c:set var="optionSelectOne" value='<option value="-1">____Select One____</option>' scope="session" />
 
 <c:choose>
   <c:when test="${pageContext.request.locale.language == 'en'}">

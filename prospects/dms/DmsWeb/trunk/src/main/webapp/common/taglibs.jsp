@@ -16,3 +16,4 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="datePattern"><fmt:message key="date.format"/></c:set>
+<c:set var="optionSelectOne" value='<option value="-1">____Select One____</option>' scope="session" />

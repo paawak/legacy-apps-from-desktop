@@ -27,7 +27,13 @@
         <form:errors path="complaintType" cssClass="fieldError"/>
         <form:select path="complaintType" id="complaintType" cssClass="text large" cssErrorClass="text large error">
             <option value="-1">Select...</option>
-            <form:options items="${complaintTypeList}" itemValue="complaintTypeId" itemLabel="shortDescription"/>
+            <c:forEach var="type" items="${complaintTypeList}">
+                <option value="${type.complaintTypeId}"
+                    <c:if test="${type.complaintTypeId == complaint.complaintType.complaintTypeId}">
+                        selected="true"
+                    </c:if>
+                >${type.shortDescription}</option>
+            </c:forEach>
         </form:select>
     </li>
     <li>

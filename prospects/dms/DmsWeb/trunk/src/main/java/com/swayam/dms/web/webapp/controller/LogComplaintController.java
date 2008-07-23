@@ -137,6 +137,7 @@ public class LogComplaintController extends BaseFormController {
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         if (request.getParameter("save") == null
+                && request.getParameter("cancel") == null
                 && request.getParameter("department") != null) {
 
             ModelAndView view = showForm(request, response, errors);

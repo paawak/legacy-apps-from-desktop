@@ -20,10 +20,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.Authentication;
+import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.swayam.dms.web.dao.GenericDao;
 import com.swayam.dms.web.model.Complaint;
+import com.swayam.dms.web.model.User;
 
 /**
  * 
@@ -42,7 +45,20 @@ public class ComplaintListingsController extends BaseFormController {
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        List<Complaint> complaints = complaintDao.getAll();
+        Authentication auth = SecurityContextHolder.getContext()
+                .getAuthentication();
+
+        User loggedInUser;
+
+        if (auth != null) {
+            loggedInUser = (User) auth.getPrincipal();
+        } else {
+            throw new IllegalArgumentException("User not logged in");
+        }
+
+        String hql = "from Complaint where assignedTo = ?";
+
+        List<Complaint> complaints = complaintDao.get(hql, loggedInUser);
 
         ModelAndView view = new ModelAndView("myComplaintListings");
 
@@ -51,5 +67,4 @@ public class ComplaintListingsController extends BaseFormController {
         return view;
 
     }
-
 }

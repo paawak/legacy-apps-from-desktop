@@ -44,7 +44,7 @@ public class ComplaintListingsController extends BaseFormController {
 
         List<Complaint> complaints = complaintDao.getAll();
 
-        ModelAndView view = new ModelAndView("complaintListings");
+        ModelAndView view = new ModelAndView("myComplaintListings");
 
         view.addObject("complaints", complaints);
 

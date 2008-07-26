@@ -1,10 +1,10 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <head>
-<title><fmt:message key="complaintListings.title" /></title>
+<title><fmt:message key="myComplaintListings.title" /></title>
 <meta name="heading"
-	content="<fmt:message key='complaintListings.heading'/>" />
-<meta name="menu" content="ComplaintListings" />
+	content="<fmt:message key='myComplaintListings.heading'/>" />
+<meta name="menu" content="MyComplaintListings" />
 <link rel="stylesheet" type="text/css" media="all"
 	href="<c:url value='/styles/${appConfig["csstheme"]}/layout-1col.css'/>" />
 </head>

@@ -12,7 +12,6 @@ import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 
 import com.swayam.dms.web.dao.UserDao;
-import com.swayam.dms.web.model.Department;
 import com.swayam.dms.web.model.User;
 
 /**
@@ -85,14 +84,6 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Integer>
         } else {
             return (UserDetails) users.get(0);
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<User> getUsers(Department department) {
-
-        return (List<User>) getHibernateTemplate().find(
-                "from User where department=?", department);
-
     }
 
     /**

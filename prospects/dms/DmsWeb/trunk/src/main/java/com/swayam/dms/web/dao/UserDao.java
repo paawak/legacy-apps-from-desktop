@@ -7,7 +7,6 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.swayam.dms.web.model.Department;
 import com.swayam.dms.web.model.User;
 
 /**
@@ -36,8 +35,6 @@ public interface UserDao extends GenericDao<User, Integer> {
      * @return List populated list of users
      */
     List<User> getUsers();
-
-    List<User> getUsers(Department department);
 
     /**
      * Saves a user's information.

@@ -105,8 +105,8 @@
         <constructor-arg ref="complaintStatusDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="logComplaint"/>
-        <property name="successView" value="/complaintListings.html"/>
-        <property name="cancelView" value="redirect:complaintListings.html"/>
+        <property name="successView" value="/myComplaintListings.html"/>
+        <property name="cancelView" value="redirect:myComplaintListings.html"/>
     </bean>
     
     <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
@@ -114,7 +114,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="complainant"/>
         <property name="successView" value="/logcomplaint.html"/>
-        <property name="cancelView" value="redirect:complaintListings.html"/>
+        <property name="cancelView" value="redirect:myComplaintListings.html"/>
     </bean>
     
     <!-- Swayam custom beans :: END  -->

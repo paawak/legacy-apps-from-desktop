@@ -142,8 +142,9 @@ public class LogComplaintController extends BaseFormController {
 
             ModelAndView view = showForm(request, response, errors);
 
-            List<User> usersForDeptList = userDao.getUsers(departmentDao
-                    .get(Integer.parseInt(request.getParameter("department"))));
+            List<User> usersForDeptList = userDao.get(
+                    "from User where department=?", departmentDao.get(Integer
+                            .parseInt(request.getParameter("department"))));
 
             view.addObject("usersForDeptList", usersForDeptList);
 

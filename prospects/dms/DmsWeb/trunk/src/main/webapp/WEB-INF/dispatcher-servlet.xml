@@ -92,7 +92,10 @@
     
     <bean id="myComplaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
         <constructor-arg ref="complaintDao"/>
-        <constructor-arg value="All"/>
+        <constructor-arg>
+            <bean id="com.swayam.dms.web.webapp.controller.ComplaintListingsController.MODE_ALL" 
+            class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+        </constructor-arg>
     </bean>
     
     <bean name="/logcomplaint.html" class="com.swayam.dms.web.webapp.controller.LogComplaintController">

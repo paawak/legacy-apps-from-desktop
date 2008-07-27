@@ -34,6 +34,10 @@ import com.swayam.dms.web.model.User;
  */
 public class ComplaintListingsController extends BaseFormController {
 
+    public static final String MODE_OPEN = "Open";
+    public static final String MODE_RESOLVED = "Resolved";
+    public static final String MODE_ALL = "All";
+
     private final String mode;
 
     private final GenericDao<Complaint, Integer> complaintDao;

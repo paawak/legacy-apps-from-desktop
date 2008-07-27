@@ -4,9 +4,9 @@
         <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
     </Displayers>
     <Menus>
-        <Menu name="New" title="New" page="/myAllComplaintListings.html" roles="ROLE_ADMIN,ROLE_USER">
-            <Item name="NewComplainant" title="complainant.new.title" page="/newcomplainant.html"/>
-            <Item name="NewComplaint" title="logComplaint.title" page="/logcomplaint.html"/>
+        <Menu name="New" title="New" page="/myOpenComplaints.html" roles="ROLE_ADMIN,ROLE_USER">
+            <Item name="NewComplainant" title="complainant.new.title" page="/newComplainant.html"/>
+            <Item name="NewComplaint" title="logComplaint.title" page="/logComplaint.html"/>
         </Menu> 
         <Menu name="MyComplaintListings" title="myComplaintListings.title" page="/myOpenComplaints.html" roles="ROLE_ADMIN,ROLE_USER">
             <Item name="MyOpenComplaints" title="myOpenComplaintListings.title" page="/myOpenComplaints.html"/>

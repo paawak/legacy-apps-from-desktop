@@ -16,6 +16,11 @@ import javax.persistence.Table;
 @Table(name = "complaint_status")
 public class ComplaintStatus implements java.io.Serializable {
 
+    public static final String NEW = "NEW";
+    public static final String OPEN = "OPEN";
+    public static final String RESOLVED = "RESOLVED";
+    public static final String CLOSED = "CLOSED";
+
     private int complaintStatusId;
     private String status;
 

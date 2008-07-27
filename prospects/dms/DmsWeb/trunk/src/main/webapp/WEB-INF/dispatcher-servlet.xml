@@ -78,14 +78,18 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
+                /userform.html=userFormController
                 /myOpenComplaints.html=myOpenComplaintListingsController
                 /myResolvedComplaints.html=myResolvedComplaintListingsController
                 /myAllComplaints.html=myAllComplaintListingsController
+                /newComplainant.html=newComplainant
+                /logComplaint.html=logComplaint
             </value>
         </property>
         <property name="order" value="0"/>
     </bean>
 
+    <!-- Commented out, to enbale the same controller class to be used for different URL mapping -->
     <!--
     
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
@@ -120,7 +124,7 @@
         </constructor-arg>
     </bean>
     
-    <bean name="/logcomplaint.html" class="com.swayam.dms.web.webapp.controller.LogComplaintController">
+    <bean name="logComplaint" class="com.swayam.dms.web.webapp.controller.LogComplaintController">
         <constructor-arg ref="complaintDao"/>
         <constructor-arg ref="wardDao"/>
         <constructor-arg ref="priorityDao"/>
@@ -131,16 +135,16 @@
         <constructor-arg ref="complaintStatusDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="logComplaint"/>
-        <property name="successView" value="/myAllComplaintListings.html"/>
-        <property name="cancelView" value="redirect:myAllComplaintListings.html"/>
+        <property name="successView" value="/myOpenComplaints.html"/>
+        <property name="cancelView" value="redirect:myOpenComplaints.html"/>
     </bean>
     
-    <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
+    <bean name="newComplainant" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
         <constructor-arg ref="complainantDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="complainant"/>
         <property name="successView" value="/logcomplaint.html"/>
-        <property name="cancelView" value="redirect:myAllComplaintListings.html"/>
+        <property name="cancelView" value="redirect:myOpenComplaints.html"/>
     </bean>
     
     <!-- Swayam custom beans :: END  -->

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.swayam.dms.web.dao.GenericDao;
 import com.swayam.dms.web.model.Complaint;
+import com.swayam.dms.web.model.ComplaintStatus;
 import com.swayam.dms.web.model.User;
 
 /**
@@ -52,6 +53,20 @@ public class ComplaintListingsController extends BaseFormController {
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
+        List<Complaint> complaints = getComplaintsForMode();
+
+        ModelAndView view = new ModelAndView("complaintListings");
+
+        view.addObject("complaints", complaints);
+
+        view.addObject("mode", mode);
+
+        return view;
+
+    }
+
+    private List<Complaint> getComplaintsForMode() {
+
         Authentication auth = SecurityContextHolder.getContext()
                 .getAuthentication();
 
@@ -63,17 +78,29 @@ public class ComplaintListingsController extends BaseFormController {
             throw new IllegalArgumentException("User not logged in");
         }
 
-        String hql = "from Complaint where assignedTo = ?";
+        List<Complaint> complaints;
 
-        List<Complaint> complaints = complaintDao.get(hql, loggedInUser);
+        if (MODE_ALL.equals(mode)) {
 
-        ModelAndView view = new ModelAndView("complaintListings");
+            String hql = "from Complaint where assignedTo = ?";
+            complaints = complaintDao.get(hql, loggedInUser);
 
-        view.addObject("complaints", complaints);
+        } else if (MODE_RESOLVED.equals(mode)) {
 
-        view.addObject("mode", mode);
+            String hql = "FROM Complaint WHERE assignedTo = ? AND (complaintStatus.status = ? OR complaintStatus.status = ? )";
+            complaints = complaintDao.get(hql, loggedInUser,
+                    ComplaintStatus.CLOSED, ComplaintStatus.RESOLVED);
 
-        return view;
+        } else {// default query is MODE_OPEN
+
+            String hql = "FROM Complaint WHERE assignedTo = ? AND (complaintStatus.status = ? OR complaintStatus.status = ? )";
+            complaints = complaintDao.get(hql, loggedInUser,
+                    ComplaintStatus.NEW, ComplaintStatus.OPEN);
+
+        }
+
+        return complaints;
 
     }
+
 }

@@ -8,10 +8,10 @@
             <Item name="NewComplainant" title="complainant.new.title" page="/newcomplainant.html"/>
             <Item name="NewComplaint" title="logComplaint.title" page="/logcomplaint.html"/>
         </Menu> 
-        <Menu name="MyComplaintListings" title="myComplaintListings.title" page="/myAllComplaintListings.html" roles="ROLE_ADMIN,ROLE_USER">
-            <Item name="MyOpenComplaints" title="myOpenComplaintListings.title" page="/myAllComplaintListings.html"/>
-            <Item name="MyResolvedComplaints" title="myResolvedComplaintListings.title" page="/myAllComplaintListings.html"/>
-            <Item name="MyAllComplaints" title="myAllComplaintListings.title" page="/myAllComplaintListings.html"/>
+        <Menu name="MyComplaintListings" title="myComplaintListings.title" page="/myOpenComplaints.html" roles="ROLE_ADMIN,ROLE_USER">
+            <Item name="MyOpenComplaints" title="myOpenComplaintListings.title" page="/myOpenComplaints.html"/>
+            <Item name="MyResolvedComplaints" title="myResolvedComplaintListings.title" page="/myResolvedComplaints.html"/>
+            <Item name="MyAllComplaints" title="myAllComplaintListings.title" page="/myAllComplaints.html"/>
         </Menu> 
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>
         <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" width="120" page="/admin/users.html">

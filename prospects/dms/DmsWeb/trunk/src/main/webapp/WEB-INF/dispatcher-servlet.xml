@@ -78,19 +78,41 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
-                /myAllComplaintListings.html=myComplaintListingsController
+                /myOpenComplaints.html=myOpenComplaintListingsController
+                /myResolvedComplaints.html=myResolvedComplaintListingsController
+                /myAllComplaints.html=myAllComplaintListingsController
             </value>
         </property>
         <property name="order" value="0"/>
     </bean>
 
+    <!--
+    
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         <property name="order" value="1"/>
     </bean>
     
+    -->
+    
     <!-- Swayam custom beans :: START  -->
     
-    <bean id="myComplaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
+    <bean id="myOpenComplaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
+        <constructor-arg ref="complaintDao"/>
+        <constructor-arg>
+            <bean id="com.swayam.dms.web.webapp.controller.ComplaintListingsController.MODE_OPEN" 
+            class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="myResolvedComplaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
+        <constructor-arg ref="complaintDao"/>
+        <constructor-arg>
+            <bean id="com.swayam.dms.web.webapp.controller.ComplaintListingsController.MODE_RESOLVED" 
+            class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="myAllComplaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
         <constructor-arg ref="complaintDao"/>
         <constructor-arg>
             <bean id="com.swayam.dms.web.webapp.controller.ComplaintListingsController.MODE_ALL" 

@@ -34,11 +34,14 @@ import com.swayam.dms.web.model.User;
  */
 public class ComplaintListingsController extends BaseFormController {
 
+    private final String mode;
+
     private final GenericDao<Complaint, Integer> complaintDao;
 
     public ComplaintListingsController(
-            GenericDao<Complaint, Integer> complaintDao) {
+            GenericDao<Complaint, Integer> complaintDao, String mode) {
         this.complaintDao = complaintDao;
+        this.mode = mode;
     }
 
     @Override
@@ -60,9 +63,11 @@ public class ComplaintListingsController extends BaseFormController {
 
         List<Complaint> complaints = complaintDao.get(hql, loggedInUser);
 
-        ModelAndView view = new ModelAndView("myComplaintListings");
+        ModelAndView view = new ModelAndView("complaintListings");
 
         view.addObject("complaints", complaints);
+
+        view.addObject("mode", mode);
 
         return view;
 

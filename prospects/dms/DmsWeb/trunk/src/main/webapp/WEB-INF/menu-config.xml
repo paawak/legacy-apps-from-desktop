@@ -4,11 +4,15 @@
         <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
     </Displayers>
     <Menus>
-        <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu.html" roles="ROLE_ADMIN,ROLE_USER">
+        <Menu name="New" title="New" page="/myAllComplaintListings.html" roles="ROLE_ADMIN,ROLE_USER">
             <Item name="NewComplainant" title="complainant.new.title" page="/newcomplainant.html"/>
             <Item name="NewComplaint" title="logComplaint.title" page="/logcomplaint.html"/>
-            <Item name="MyComplaintListings" title="myComplaintListings.title" page="/myComplaintListings.html"/>
-        </Menu>
+        </Menu> 
+        <Menu name="MyComplaintListings" title="myComplaintListings.title" page="/myAllComplaintListings.html" roles="ROLE_ADMIN,ROLE_USER">
+            <Item name="MyOpenComplaints" title="myOpenComplaintListings.title" page="/myAllComplaintListings.html"/>
+            <Item name="MyResolvedComplaints" title="myResolvedComplaintListings.title" page="/myAllComplaintListings.html"/>
+            <Item name="MyAllComplaints" title="myAllComplaintListings.title" page="/myAllComplaintListings.html"/>
+        </Menu> 
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>
         <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" width="120" page="/admin/users.html">
             <Item name="ViewUsers" title="menu.admin.users" page="/admin/users.html"/>

@@ -78,7 +78,7 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
-                /myComplaintListings.html=myComplaintListingsController
+                /myAllComplaintListings.html=myComplaintListingsController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -92,6 +92,7 @@
     
     <bean id="myComplaintListingsController" class="com.swayam.dms.web.webapp.controller.ComplaintListingsController">
         <constructor-arg ref="complaintDao"/>
+        <constructor-arg value="All"/>
     </bean>
     
     <bean name="/logcomplaint.html" class="com.swayam.dms.web.webapp.controller.LogComplaintController">
@@ -105,8 +106,8 @@
         <constructor-arg ref="complaintStatusDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="logComplaint"/>
-        <property name="successView" value="/myComplaintListings.html"/>
-        <property name="cancelView" value="redirect:myComplaintListings.html"/>
+        <property name="successView" value="/myAllComplaintListings.html"/>
+        <property name="cancelView" value="redirect:myAllComplaintListings.html"/>
     </bean>
     
     <bean name="/newcomplainant.html" class="com.swayam.dms.web.webapp.controller.NewComplainantController">
@@ -114,7 +115,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="complainant"/>
         <property name="successView" value="/logcomplaint.html"/>
-        <property name="cancelView" value="redirect:myComplaintListings.html"/>
+        <property name="cancelView" value="redirect:myAllComplaintListings.html"/>
     </bean>
     
     <!-- Swayam custom beans :: END  -->

@@ -30,21 +30,6 @@ public class ComplaintType implements java.io.Serializable {
     public ComplaintType() {
     }
 
-    public ComplaintType(int complaintTypeId, String shortDescription,
-            String details) {
-        this.complaintTypeId = complaintTypeId;
-        this.shortDescription = shortDescription;
-        this.details = details;
-    }
-
-    public ComplaintType(int complaintTypeId, String shortDescription,
-            String details, Set<Complaint> complaints) {
-        this.complaintTypeId = complaintTypeId;
-        this.shortDescription = shortDescription;
-        this.details = details;
-        this.complaints = complaints;
-    }
-
     @Id
     @Column(name = "complaint_type_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

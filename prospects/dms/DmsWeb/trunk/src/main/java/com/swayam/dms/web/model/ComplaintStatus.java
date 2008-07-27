@@ -27,11 +27,6 @@ public class ComplaintStatus implements java.io.Serializable {
     public ComplaintStatus() {
     }
 
-    public ComplaintStatus(int complaintStatusId, String status) {
-        this.complaintStatusId = complaintStatusId;
-        this.status = status;
-    }
-
     @Id
     @Column(name = "complaint_status_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

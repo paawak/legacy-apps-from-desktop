@@ -2,8 +2,6 @@ package com.swayam.dms.web.model;
 
 // Generated May 12, 2008 1:40:30 AM by Hibernate Tools 3.2.1.GA
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,13 +25,6 @@ public class Department implements java.io.Serializable {
 
     public Department(int departmentId) {
         this.departmentId = departmentId;
-    }
-
-    public Department(int departmentId, String name, String shortName,
-            Set<User> employees, Set<Complaint> complaints) {
-        this.departmentId = departmentId;
-        this.name = name;
-        this.shortName = shortName;
     }
 
     @Id

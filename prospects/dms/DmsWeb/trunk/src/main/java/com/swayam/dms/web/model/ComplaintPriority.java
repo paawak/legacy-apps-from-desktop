@@ -29,18 +29,6 @@ public class ComplaintPriority implements java.io.Serializable {
     public ComplaintPriority() {
     }
 
-    public ComplaintPriority(int complaintPriorityId, String priority) {
-        this.complaintPriorityId = complaintPriorityId;
-        this.priority = priority;
-    }
-
-    public ComplaintPriority(int complaintPriorityId, String priority,
-            Set<Complaint> complaints) {
-        this.complaintPriorityId = complaintPriorityId;
-        this.priority = priority;
-        this.complaints = complaints;
-    }
-
     @Id
     @Column(name = "complaint_priority_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

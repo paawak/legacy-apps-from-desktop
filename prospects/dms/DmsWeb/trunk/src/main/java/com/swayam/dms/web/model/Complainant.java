@@ -35,28 +35,6 @@ public class Complainant implements java.io.Serializable {
     public Complainant() {
     }
 
-    public Complainant(int complainantId, String firstName, String lastName,
-            Address address) {
-        this.complainantId = complainantId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-    }
-
-    public Complainant(int complainantId, String firstName, String lastName,
-            Address address, String emailId, String homePhone,
-            String handPhone, Set<Complaint> complaints) {
-        this.complainantId = complainantId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-
-        this.emailId = emailId;
-        this.homePhone = homePhone;
-        this.handPhone = handPhone;
-        this.complaints = complaints;
-    }
-
     @Id
     @Column(name = "complainant_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

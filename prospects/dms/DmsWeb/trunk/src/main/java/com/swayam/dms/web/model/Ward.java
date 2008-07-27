@@ -29,17 +29,6 @@ public class Ward implements java.io.Serializable {
     public Ward() {
     }
 
-    public Ward(int wardId, String name) {
-        this.wardId = wardId;
-        this.name = name;
-    }
-
-    public Ward(int wardId, String name, Set<Complaint> complaints) {
-        this.wardId = wardId;
-        this.name = name;
-        this.complaints = complaints;
-    }
-
     @Id
     @Column(name = "ward_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

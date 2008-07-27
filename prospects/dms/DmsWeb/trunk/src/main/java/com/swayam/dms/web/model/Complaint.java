@@ -45,42 +45,6 @@ public class Complaint implements java.io.Serializable {
     public Complaint() {
     }
 
-    public Complaint(int complaintId, ComplaintStatus complaintStatus,
-            Department department, Complainant complainant,
-            User employeeByLoggedBy, ComplaintPriority complaintPriority,
-            ComplaintType complaintType, Ward ward, Date raisedDate) {
-        this.complaintId = complaintId;
-        this.complaintStatus = complaintStatus;
-        this.department = department;
-        this.complainant = complainant;
-        this.loggedBy = employeeByLoggedBy;
-        this.complaintPriority = complaintPriority;
-        this.complaintType = complaintType;
-        this.ward = ward;
-        this.raisedDate = raisedDate;
-    }
-
-    public Complaint(int complaintId, User employeeByAssignedTo,
-            ComplaintStatus complaintStatus, Department department,
-            Complainant complainant, User employeeByLoggedBy,
-            ComplaintPriority complaintPriority, ComplaintType complaintType,
-            Ward ward, Date raisedDate, Date resolvedDate, String details,
-            Set<ComplaintHistory> complaintHistories) {
-        this.complaintId = complaintId;
-        this.assignedTo = employeeByAssignedTo;
-        this.complaintStatus = complaintStatus;
-        this.department = department;
-        this.complainant = complainant;
-        this.loggedBy = employeeByLoggedBy;
-        this.complaintPriority = complaintPriority;
-        this.complaintType = complaintType;
-        this.ward = ward;
-        this.raisedDate = raisedDate;
-        this.resolvedDate = resolvedDate;
-        this.details = details;
-        this.complaintHistories = complaintHistories;
-    }
-
     @Id
     @Column(name = "complaint_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

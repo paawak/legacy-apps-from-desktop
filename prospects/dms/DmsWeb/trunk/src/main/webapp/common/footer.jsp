@@ -1,6 +1,8 @@
 <%@ include file="/common/taglibs.jsp" %>
 
-    <div id="divider"><div></div></div>
+	
+	<table border= "0" width = "100%"><tr><td>	
+    <div id="divider"></div>
     <span class="left"><fmt:message key="webapp.version"/> |
         <span id="validators">
             <a href="http://validator.w3.org/check?uri=referer" target="_blank">XHTML Valid</a> |
@@ -13,3 +15,4 @@
     <span class="right">
         &copy; <fmt:message key="copyright.year"/> <a href="<fmt:message key="company.url"/>" target="_blank"><fmt:message key="company.name"/></a>
     </span>
+    </td></tr></table>

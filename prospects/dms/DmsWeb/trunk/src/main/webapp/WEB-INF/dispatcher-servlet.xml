@@ -78,6 +78,7 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
+                /signup.html=signupController
                 /userform.html=userFormController
                 /myOpenComplaints.html=myOpenComplaintListingsController
                 /myResolvedComplaints.html=myResolvedComplaintListingsController

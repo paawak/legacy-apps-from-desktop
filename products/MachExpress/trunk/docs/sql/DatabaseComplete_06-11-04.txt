@@ -1,0 +1,157 @@
+CREATE DATABASE MachExpress;
+USE MachExpress;
+
+CREATE TABLE semaphores (
+  tablename varchar(20) NOT NULL default '',
+  counterformat varchar(5) NOT NULL default '0',
+  prefix varchar(5) NOT NULL default '',
+  maxcount int(5) NOT NULL default '0',
+  suffix varchar(5) NOT NULL default '',
+  remarks varchar(50) NOT NULL default '',
+  PRIMARY KEY  (tablename)
+);
+
+CREATE TABLE clientaccount(
+accnum VARCHAR(50) PRIMARY KEY ,
+#full name of the company
+name VARCHAR(250) NOT NULL ,
+#short name of the company/abbreviation
+shortname VARCHAR(15) NOT NULL ,
+#contact name of the person in the company
+contactfirstname  VARCHAR(15) NOT NULL ,
+contactmiddlename  VARCHAR(15) NOT NULL DEFAULT "",
+contactlastname  VARCHAR(15) NOT NULL ,
+telephone1 VARCHAR(15) NOT NULL,
+telephone2 VARCHAR(15) NOT NULL  DEFAULT "",
+mobile VARCHAR(15) NOT NULL  DEFAULT "",
+fax VARCHAR(15) NOT NULL  DEFAULT "",
+email VARCHAR(25) NOT NULL  DEFAULT "",
+address1 VARCHAR(250) NOT NULL  DEFAULT "",
+address2 VARCHAR(250) NOT NULL  DEFAULT "",
+city VARCHAR(100) NOT NULL  DEFAULT "",
+state VARCHAR(100) NOT NULL  DEFAULT "",
+#flag to check whether client is an organization / person
+isorganization TINYINT(1) NOT NULL ,
+#flag to check the status: ---> 1=active
+status  TINYINT(1) NOT NULL DEFAULT 1
+);
+INSERT INTO semaphores VALUES('clientaccount','0000','CLMB',0,'','');
+
+CREATE TABLE employee(
+employeeid VARCHAR(25) PRIMARY KEY ,
+firstname  VARCHAR(15) NOT NULL ,
+middlename  VARCHAR(15) NOT NULL DEFAULT "",
+lastname  VARCHAR(15) NOT NULL ,
+telephone1 VARCHAR(15) NOT NULL,
+telephone2 VARCHAR(15) NOT NULL  DEFAULT "",
+mobile VARCHAR(15) NOT NULL  DEFAULT "",
+fax VARCHAR(15) NOT NULL  DEFAULT "",
+email VARCHAR(25) NOT NULL  DEFAULT "",
+address1 VARCHAR(30) NOT NULL  DEFAULT "",
+address2 VARCHAR(30) NOT NULL  DEFAULT "",
+city VARCHAR(30) NOT NULL  DEFAULT "",
+state VARCHAR(30) NOT NULL  DEFAULT "",
+dateofbirth DATE NOT NULL ,
+startdate DATE NOT NULL ,
+enddate DATE NOT NULL ,
+#flag to check the status: ---> 1=active
+status  TINYINT(1) NOT NULL DEFAULT 1
+);
+INSERT INTO semaphores VALUES('employee','0','EMB',0,'','');
+
+
+CREATE TABLE user (
+
+username VARCHAR(20) PRIMARY KEY NOT NULL,
+password VARCHAR(20) NOT NULL,
+privilege TINYINT(1) NOT NULL DEFAULT 1
+
+);
+
+INSERT INTO user VALUES('p','p','1');
+
+#modified on 10-04-04
+
+CREATE TABLE dailyorderbook(
+consignmentnum VARCHAR(25) NOT NULL UNIQUE,
+consignmentdate DATE NOT NULL,
+consignmenttime TIME NOT NULL,
+#Each of the customers have their account no(denoted by accnum) by which
+#they will always be referred by us
+accnum VARCHAR(15) NOT NULL,
+destination VARCHAR(60) NOT NULL,
+type VARCHAR(25) NOT NULL,#local/domestic/international
+#total weight of all the packets: individual wt. of each packets are immaterial
+weightkg INT(4) NOT NULL,
+weightgram SMALLINT(3) NOT NULL,
+packets SMALLINT(2) NOT NULL DEFAULT 1,
+amount DOUBLE(12,2) NOT NULL,
+#the type of transaction: cash/credit: if it is on credit, iscredit=0, else iscredit=1
+iscredit TINYINT(1) NOT NULL DEFAULT 1,
+#the id of the employee entering the data
+employeeid VARCHAR(15) NOT NULL,
+#the date/time at which data is entered
+entrydate DATETIME NOT NULL,
+deliverydate DATE,
+#deliverytime is optional
+deliverytime TIME
+);
+
+#added on 21-04-04
+
+CREATE TABLE invoice(
+invoicenum VARCHAR(25) PRIMARY KEY,
+invoicedate DATE,
+curmonth TINYINT(2) NOT NULL,
+curyear YEAR NOT NULL ,
+accnum VARCHAR(15) NOT NULL,
+#the total monthly bill ---> totalamt
+totalamt DOUBLE(12,2) NOT NULL,
+#the tax on the totalamt
+tax DOUBLE(12,2) NOT NULL DEFAULT 0,
+#TDS tax deduction : 2% of invoiceamt is deducted and paid to the
+#governmet by the client as TDS tax on our behalf 
+#tdsamount = 0.02*invoiceamt , as on 23-03-2004, liable to change
+tdsamount DOUBLE(12,2) NOT NULL,
+#invoiceamt = totalamt + tax - tds
+invoiceamt DOUBLE(12,2) NOT NULL ,
+#sometimes some reduction/adjustment has to be made on the total amount
+bookadjamt DOUBLE(12,2) NOT NULL ,
+remarks VARCHAR(100) NOT NULL DEFAULT "",
+#netreceivable = invoiceamt - book adjustment amt
+netreceivable DOUBLE(12,2) NOT NULL,
+#the amount recieved from the client
+recievedamt DOUBLE(12,2) NOT NULL,
+#flag to check wheteher the client is making partpayments
+#ispartpayment=1------>partpayment; else ispartpayment=0, by default
+ispartpayment TINYINT(1) NOT NULL DEFAULT 0,
+#flag to check wheteher the full amount has been recived
+#haspaidfull=0---->the full payment not recieved: pending---->refer to the table monthrolldetails_partpayment for details of payment
+#haspaidfull=1---->the full payment recieved---->refer to the table monthrolldetails for details of payment
+haspaidfull TINYINT(1) NOT NULL ,
+#the id of the employee entering the data
+employeeid VARCHAR(15) NOT NULL,
+#the time at which data is entered
+entrytime TIME NOT NULL,
+entrydate DATE
+);
+
+INSERT INTO semaphores (tablename, counterformat) VALUES ('invoice', '0000');
+
+CREATE TABLE constants(
+name VARCHAR(25),
+value DOUBLE(12,2)  NOT NULL,
+remarks VARCHAR(100) NOT NULL DEFAULT ''
+);
+
+INSERT INTO constants (name, value) VALUES ('TDSPercent', '2');
+INSERT INTO constants (name, value) VALUES ('TaxPercent', '10.2');
+INSERT INTO constants VALUES ('TDSApplyAmt', '10000', 'TheAmountExceedingWhichTDSIsLevied');
+INSERT INTO constants VALUES ('AmtSlab','100','AmtSlab1');
+INSERT INTO constants VALUES ('AmtSlab','250','AmtSlab2');
+INSERT INTO constants VALUES ('AmtSlab','500','AmtSlab3');
+INSERT INTO constants VALUES ('AmtSlab','750','AmtSlab4');
+INSERT INTO constants VALUES ('AmtSlab','1000','AmtSlab5');
+INSERT INTO constants VALUES ('AmtSlab','1500','AmtSlab6');
+INSERT INTO constants VALUES ('MaxLines','57','MaxLinesToFitInAPage');
+

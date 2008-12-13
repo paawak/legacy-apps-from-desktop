@@ -941,7 +941,9 @@
         <cargo.wait>false</cargo.wait>
                 
         <!-- Database settings -->
-        <dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
+        
+        <!-- MySQL -->
+        <!--<dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
         <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
         <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
@@ -952,6 +954,20 @@
         <jdbc.username>root</jdbc.username>
         <jdbc.password></jdbc.password>
     
+        -->
+        
+        <!-- Postgres -->
+		<dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
+        <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
+        <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
+        <jdbc.groupId>postgresql</jdbc.groupId>
+        <jdbc.artifactId>postgresql</jdbc.artifactId>
+        <jdbc.version>8.1-407.jdbc3</jdbc.version>
+        <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+        <jdbc.url><![CDATA[jdbc:postgresql://localhost/ims]]></jdbc.url>
+        <jdbc.username>postgres</jdbc.username>
+        <jdbc.password>postgres</jdbc.password>        
+        
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.6.0</aspectj.version>
         <clickstream.version>1.0.2</clickstream.version>

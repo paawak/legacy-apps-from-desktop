@@ -635,15 +635,15 @@ public class ItemMasterPanel extends javax.swing.JPanel {
         // Add your handling code here:
          int KeyCode=evt.getKeyCode();
         if(KeyCode==evt.VK_ENTER){
-            System.exit(0);
+             
         } 
     }//GEN-LAST:event_jBtnExitKeyReleased
 
     private void jBtnExitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnExitKeyPressed
         // Add your handling code here:
         int KeyCode=evt.getKeyCode();
-        if(KeyCode==evt.VK_ENTER)
-            System.exit(0);      
+        if(KeyCode==evt.VK_ENTER);
+                  
     }//GEN-LAST:event_jBtnExitKeyPressed
 
     private void jTblDisplayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTblDisplayKeyPressed
@@ -952,7 +952,7 @@ public class ItemMasterPanel extends javax.swing.JPanel {
 
     /** Exit the Application */
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
-        System.exit(0);
+         
     }//GEN-LAST:event_exitForm
     
     /** Disable all the Control or Components in the form */

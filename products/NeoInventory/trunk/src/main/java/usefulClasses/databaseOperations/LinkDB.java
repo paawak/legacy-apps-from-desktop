@@ -585,7 +585,6 @@ public Object[] query1Col(int row,String colName,boolean distinct,String whereCl
        int row = queryRow("");
            if(row==0){
                JOptionPane.showMessageDialog(this," Table "+tableName+" in the Database has no entry.\n Make suitable entries in the Table to run this Form.  ","From Database:",JOptionPane.INFORMATION_MESSAGE);
-               System.exit(0);
            }//end if
    }//end checkEmpty
    

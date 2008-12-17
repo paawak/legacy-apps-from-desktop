@@ -1852,7 +1852,7 @@ public class COPanel extends javax.swing.JPanel {
 
     /** Exit the Application */
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
-        System.exit(0);
+         
     }//GEN-LAST:event_exitForm
     
     /** @ Establish the Connection to the database */
@@ -2151,7 +2151,7 @@ public class COPanel extends javax.swing.JPanel {
             ResultSet res = stat.executeQuery(ss);            
             if(!res.next()){
                 JOptionPane.showMessageDialog(this," Table "+table+" in the Database has no entry.\n Make suitable entries in the Table to run this Form.  ","From Database:",JOptionPane.ERROR_MESSAGE);                    
-                System.exit(0);
+                 
             }
             con.close();
         }

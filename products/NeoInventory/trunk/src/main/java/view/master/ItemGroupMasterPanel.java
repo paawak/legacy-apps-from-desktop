@@ -778,7 +778,7 @@ public class ItemGroupMasterPanel extends javax.swing.JPanel {
 
     /** Exit the Application */
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
-        System.exit(0);
+        
     }//GEN-LAST:event_exitForm
   /** To display data from the Respective table on to the JTable */
     public void displayData(String TableName,String OrderBy){       

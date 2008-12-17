@@ -73,7 +73,6 @@ public class Inventory {
     }    
     
     public static void exit(){
-     System.exit(0);   
     }
     
 }

@@ -492,7 +492,7 @@ public class TaxMasterPanel extends javax.swing.JPanel {
         // Add your handling code here:
          int KeyCode=evt.getKeyCode();
         if(KeyCode==evt.VK_ENTER){
-            System.exit(0);
+            
         }
     }//GEN-LAST:event_jBtnTMExitKeyReleased
 
@@ -500,7 +500,7 @@ public class TaxMasterPanel extends javax.swing.JPanel {
         // Add your handling code here:
          int KeyCode=evt.getKeyCode();
         if(KeyCode==evt.VK_ENTER){
-            System.exit(0);
+             
         }
     }//GEN-LAST:event_jBtnTMExitKeyPressed
 
@@ -849,7 +849,7 @@ public class TaxMasterPanel extends javax.swing.JPanel {
 
     /** Exit the Application */
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
-        System.exit(0);
+         
     }//GEN-LAST:event_exitForm
   
     /** To display data from the Respective table on to the JTable */

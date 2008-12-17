@@ -193,7 +193,7 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
         jLabel1.setText("Purchase Returns");
         pnlHome.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 380, -1));
 
-        btAdd.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\new5.gif"));
+//        btAdd.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\new5.gif"));
         btAdd.setMnemonic('A');
         btAdd.setText("Add");
         btAdd.setToolTipText(" ");
@@ -205,13 +205,13 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
 
         pnlHome.add(btAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 110, 27));
 
-        btSearch.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\find5.gif"));
+//        btSearch.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\find5.gif"));
         btSearch.setMnemonic('S');
         btSearch.setText("Search");
         btSearch.setToolTipText(" ");
         pnlHome.add(btSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 110, 27));
 
-        btExit.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\delete1.jpg"));
+//        btExit.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\delete1.jpg"));
         btExit.setMnemonic('X');
         btExit.setText("Exit");
         btExit.setToolTipText(" ");
@@ -324,7 +324,7 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
         jLabel22.setText("Total Loose Qty.");
         pnlAddHeader.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, -1, 20));
 
-        btSave.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\save1.gif"));
+//        btSave.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\save1.gif"));
         btSave.setMnemonic('S');
         btSave.setText("Save");
         btSave.setToolTipText(" ");
@@ -337,7 +337,7 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
 
         pnlAddHeader.add(btSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 90, 27));
 
-        btD_Cancel.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\back1.jpg"));
+//        btD_Cancel.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\back1.jpg"));
         btD_Cancel.setMnemonic('B');
         btD_Cancel.setText("Back");
         btD_Cancel.setToolTipText(" ");
@@ -543,7 +543,7 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 759, 160));
 
-        btD_Add.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\add1.gif"));
+//        btD_Add.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\add1.gif"));
         btD_Add.setMnemonic('A');
         btD_Add.setText("Add Item");
         btD_Add.setToolTipText(" ");
@@ -555,21 +555,21 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, -1));
 
-        btD_Edit.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\edit.gif"));
+//        btD_Edit.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\edit.gif"));
         btD_Edit.setMnemonic('E');
         btD_Edit.setText("Edit Item");
         btD_Edit.setToolTipText(" ");
         btD_Edit.setVisible(false);
         jPanel2.add(btD_Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 120, -1));
 
-        btD_Remove.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\minus3.gif"));
+//        btD_Remove.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\minus3.gif"));
         btD_Remove.setMnemonic('R');
         btD_Remove.setText("Remove Item");
         btD_Remove.setToolTipText(" ");
         btD_Remove.setEnabled(false);
         jPanel2.add(btD_Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 140, -1));
 
-        btD_Finish.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\finish2.gif"));
+//        btD_Finish.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\finish2.gif"));
         btD_Finish.setMnemonic('F');
         btD_Finish.setText("Finish");
         btD_Finish.setToolTipText(" ");
@@ -582,7 +582,7 @@ public class PurchaseReturnsPanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Finish, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 120, 27));
 
-        btD_SaveEdit.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\save2.gif"));
+//        btD_SaveEdit.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\save2.gif"));
         btD_SaveEdit.setMnemonic('V');
         btD_SaveEdit.setText("Save Edit");
         btD_SaveEdit.setToolTipText(" ");

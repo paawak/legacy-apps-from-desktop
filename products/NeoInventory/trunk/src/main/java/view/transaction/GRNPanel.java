@@ -634,7 +634,7 @@ public class GRNPanel extends javax.swing.JPanel {
 
         jPnlGRNSearch.add(jSPaneGRN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 150, 300));
 
-        jBtnGRNSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnGRNSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnGRNSearchClose.setMnemonic('e');
         jBtnGRNSearchClose.setText("Search Cancel");
         jBtnGRNSearchClose.setToolTipText(" ");

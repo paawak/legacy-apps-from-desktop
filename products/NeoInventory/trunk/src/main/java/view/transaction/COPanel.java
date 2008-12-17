@@ -602,7 +602,7 @@ public class COPanel extends javax.swing.JPanel {
 
         jPnlCOSearch.add(jSPaneCO, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 150, 300));
 
-        jBtnCOSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnCOSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnCOSearchClose.setMnemonic('e');
         jBtnCOSearchClose.setText("Search Cancel");
         jBtnCOSearchClose.setToolTipText(" ");

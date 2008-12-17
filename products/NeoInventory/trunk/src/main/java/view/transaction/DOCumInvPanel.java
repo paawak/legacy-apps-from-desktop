@@ -270,7 +270,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         pnlHome.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 500, 300));
 
-        btAdd.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\new5.gif"));
+//        btAdd.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\new5.gif"));
         btAdd.setMnemonic('A');
         btAdd.setText("Add");
         btAdd.setToolTipText(" ");
@@ -282,7 +282,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         pnlHome.add(btAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 110, 27));
 
-        btSearch.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\find5.gif"));
+//        btSearch.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\find5.gif"));
         btSearch.setMnemonic('S');
         btSearch.setText("Search");
         btSearch.setToolTipText(" ");
@@ -294,7 +294,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         pnlHome.add(btSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 110, 27));
 
-        btCancelPO.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete2.jpg"));
+//        btCancelPO.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete2.jpg"));
         btCancelPO.setMnemonic('C');
         btCancelPO.setText("Cancel D.O.");
         btCancelPO.setToolTipText(" ");
@@ -306,7 +306,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         pnlHome.add(btCancelPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 127, 27));
 
-        btExit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete1.jpg"));
+//        btExit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete1.jpg"));
         btExit.setMnemonic('X');
         btExit.setText("Exit");
         btExit.setToolTipText(" ");
@@ -472,7 +472,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
         jLabel22.setText("Net Total");
         pnlAddHeader.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 505, 70, 20));
 
-        btSave.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\save1.gif"));
+//        btSave.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\save1.gif"));
         btSave.setMnemonic('S');
         btSave.setText("Save");
         btSave.setToolTipText(" ");
@@ -485,7 +485,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         pnlAddHeader.add(btSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 90, 27));
 
-        btD_Cancel.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\back1.jpg"));
+//        btD_Cancel.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\back1.jpg"));
         btD_Cancel.setMnemonic('B');
         btD_Cancel.setText("Back");
         btD_Cancel.setToolTipText(" ");
@@ -781,7 +781,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 759, 160));
 
-        btD_Add.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\add1.gif"));
+//        btD_Add.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\add1.gif"));
         btD_Add.setMnemonic('A');
         btD_Add.setText("Add Item");
         btD_Add.setToolTipText(" ");
@@ -793,7 +793,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, -1));
 
-        btD_Edit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\edit.gif"));
+//        btD_Edit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\edit.gif"));
         btD_Edit.setMnemonic('E');
         btD_Edit.setText("Edit Item");
         btD_Edit.setToolTipText(" ");
@@ -806,7 +806,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 120, -1));
 
-        btD_Remove.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\minus3.gif"));
+//        btD_Remove.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\minus3.gif"));
         btD_Remove.setMnemonic('R');
         btD_Remove.setText("Remove Item");
         btD_Remove.setToolTipText(" ");
@@ -819,7 +819,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 140, -1));
 
-        btD_Finish.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\finish2.gif"));
+//        btD_Finish.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\finish2.gif"));
         btD_Finish.setMnemonic('F');
         btD_Finish.setText("Finish");
         btD_Finish.setToolTipText(" ");
@@ -832,7 +832,7 @@ public class DOCumInvPanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Finish, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 120, 27));
 
-        btD_SaveEdit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\save2.gif"));
+//        btD_SaveEdit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\save2.gif"));
         btD_SaveEdit.setMnemonic('V');
         btD_SaveEdit.setText("Save Edit");
         btD_SaveEdit.setToolTipText(" ");
@@ -2514,9 +2514,9 @@ System.out.println(" existingStock = "+existingStock+" preIssued = "+preIssued);
             selrowH=0;
         }//end if
         else
-            JOptionPane.showMessageDialog(this," You cannot modify the selected P.O.: the P.O. may have been Cancelled or Invoiced. ","Sorry!",JOptionPane.INFORMATION_MESSAGE,new javax.swing.ImageIcon("C:\\Exp\\images\\Error.gif") );
+            JOptionPane.showMessageDialog(this," You cannot modify the selected P.O.: the P.O. may have been Cancelled or Invoiced. ","Sorry!",JOptionPane.INFORMATION_MESSAGE/*,new javax.swing.ImageIcon("C:\\Exp\\images\\Error.gif")*/ );
      else
-            JOptionPane.showMessageDialog(this," Select the P.O. No. you want to Modify  from the Table. ","Sorry!",JOptionPane.INFORMATION_MESSAGE,new javax.swing.ImageIcon("C:\\Exp\\images\\Error.gif") );
+            JOptionPane.showMessageDialog(this," Select the P.O. No. you want to Modify  from the Table. ","Sorry!",JOptionPane.INFORMATION_MESSAGE/*,new javax.swing.ImageIcon("C:\\Exp\\images\\Error.gif")*/ );
         
         
     }

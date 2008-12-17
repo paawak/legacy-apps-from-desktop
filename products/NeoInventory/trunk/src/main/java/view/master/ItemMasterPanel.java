@@ -302,7 +302,7 @@ public class ItemMasterPanel extends javax.swing.JPanel {
 
         jPnlSearch.add(jSPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 270));
 
-        jBtnSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnSearchClose.setMnemonic('e');
         jBtnSearchClose.setText("Search Close");
         jBtnSearchClose.setToolTipText(" ");

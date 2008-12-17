@@ -537,7 +537,7 @@ checkForEmptyDataBase("UnitMaster");
 
         pnlHome.add(pnlSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 180, 300));
 
-        btAdd.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\new5.gif"));
+//        btAdd.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\new5.gif"));
         btAdd.setMnemonic('A');
         btAdd.setText("Add");
         btAdd.setToolTipText(" ");

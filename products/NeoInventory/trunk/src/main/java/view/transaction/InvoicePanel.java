@@ -179,7 +179,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         pnlHome.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 500, 300));
 
-        btAdd.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\new5.gif"));
+//        btAdd.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\new5.gif"));
         btAdd.setMnemonic('A');
         btAdd.setText("Add");
         btAdd.setToolTipText(" ");
@@ -191,7 +191,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         pnlHome.add(btAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 110, 27));
 
-        btModify.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\modify2.gif"));
+//        btModify.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\modify2.gif"));
         btModify.setMnemonic('M');
         btModify.setText("Modify");
         btModify.setToolTipText(" ");
@@ -203,13 +203,13 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         pnlHome.add(btModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 110, 27));
 
-        btSearch.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\find5.gif"));
+//        btSearch.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\find5.gif"));
         btSearch.setMnemonic('S');
         btSearch.setText("Search");
         btSearch.setToolTipText(" ");
         pnlHome.add(btSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 110, 27));
 
-        btCancelPO.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete2.jpg"));
+//        btCancelPO.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete2.jpg"));
         btCancelPO.setMnemonic('C');
         btCancelPO.setText("Cancel Inv.");
         btCancelPO.setToolTipText(" ");
@@ -221,7 +221,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         pnlHome.add(btCancelPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 127, 27));
 
-        btExit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete1.jpg"));
+//        btExit.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\delete1.jpg"));
         btExit.setMnemonic('X');
         btExit.setText("Exit");
         btExit.setToolTipText(" ");
@@ -303,7 +303,7 @@ public class InvoicePanel extends javax.swing.JPanel {
         jLabel10.setText("Store");
         pnlAddHeader.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 40, 20));
 
-        btSave.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\save1.gif"));
+//        btSave.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\save1.gif"));
         btSave.setMnemonic('S');
         btSave.setText("Save");
         btSave.setToolTipText(" ");
@@ -316,7 +316,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         pnlAddHeader.add(btSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 90, 27));
 
-        btD_Cancel.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\back1.jpg"));
+//        btD_Cancel.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\back1.jpg"));
         btD_Cancel.setMnemonic('B');
         btD_Cancel.setText("Back");
         btD_Cancel.setToolTipText(" ");
@@ -452,7 +452,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 759, 160));
 
-        btD_Add.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\add1.gif"));
+//        btD_Add.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\add1.gif"));
         btD_Add.setMnemonic('A');
         btD_Add.setText("Add Item");
         btD_Add.setToolTipText(" ");
@@ -464,7 +464,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, -1));
 
-        btD_Remove.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\minus3.gif"));
+//        btD_Remove.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\minus3.gif"));
         btD_Remove.setMnemonic('R');
         btD_Remove.setText("Remove Item");
         btD_Remove.setToolTipText(" ");
@@ -477,7 +477,7 @@ public class InvoicePanel extends javax.swing.JPanel {
 
         jPanel2.add(btD_Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 140, -1));
 
-        btD_Finish.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\finish2.gif"));
+//        btD_Finish.setIcon(new javax.swing.ImageIcon("C:\\Exp\\images\\finish2.gif"));
         btD_Finish.setMnemonic('F');
         btD_Finish.setText("Finish");
         btD_Finish.setToolTipText(" ");
@@ -1515,7 +1515,7 @@ addPressed();
                 selrowH=0;
         }//end else if
         else
-            JOptionPane.showMessageDialog(this," Select the Inv. No. you want to Modify  from the Table. ","Sorry!",JOptionPane.INFORMATION_MESSAGE,new javax.swing.ImageIcon("C:\\Exp\\images\\Error.gif") );
+            JOptionPane.showMessageDialog(this," Select the Inv. No. you want to Modify  from the Table. ","Sorry!",JOptionPane.INFORMATION_MESSAGE/*,new javax.swing.ImageIcon("C:\\Exp\\images\\Error.gif")*/ );
         
         
     }

@@ -20,7 +20,7 @@ import usefulClasses.generalUtilities.*;
 
 public class PurchaseOrderPanel extends javax.swing.JPanel {
     
-    private ReadPropertyFile Props = new ReadPropertyFile("view/transaction/TransactionViewProps/PurchaseOrderView");
+//    private ReadPropertyFile Props = new ReadPropertyFile("view/transaction/TransactionViewProps/PurchaseOrderView");
 
     /** Creates new form PurchaseOrder003 */
     public PurchaseOrderPanel() {

@@ -21,6 +21,8 @@ import java.util.*;
 public class LinkDB extends javax.swing.JFrame{
 
   //VARIABLE DECLARATION 
+	
+	private static final String CONN = "jdbc:mysql://localhost/paawakco_neoinventory?user=paawakco_paawak&password=paawak";
     
     Connection con;
     
@@ -64,7 +66,8 @@ public class LinkDB extends javax.swing.JFrame{
     public void accessDB() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/neoinventory?user=root&password=agnimitra");
+            //con=DriverManager.getConnection("jdbc:mysql://localhost/neoinventory?user=root&password=agnimitra");
+            con=DriverManager.getConnection(CONN);
             stat=con.createStatement();
         }//end try
         catch(Exception e) {
@@ -76,7 +79,7 @@ public class LinkDB extends javax.swing.JFrame{
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/neoinventory?user=root&password=agnimitra");            
+            con=DriverManager.getConnection(CONN);            
         }//end try
         catch(Exception e) {
             e.printStackTrace();

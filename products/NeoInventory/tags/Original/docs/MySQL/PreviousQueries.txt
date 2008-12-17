@@ -1,0 +1,115 @@
+INSERT INTO Invoice_H(
+	InvNo,
+	InvType,
+	InvDate,
+	CustName,
+	KstNo,
+	CstNo,
+	InvDCNo,
+	InvPONo,
+	TotalAmt,
+	TaxAmt,
+	GrandAmt 
+)   VALUES (
+	'InvNo',
+	'InvType',
+	'InvDate',
+	'CustName',
+	'KstNo',
+	'CstNo',
+	'InvDCNo',
+	'InvPONo',
+	1,
+	2,
+	3 
+);
+
+INSERT INTO Invoice_D (
+	Inv_No,
+	SlNo,
+        DO_No,
+	DO_Date,
+        DO_CurrencyID,
+	DO_Discount,
+	DO_Tax,
+	DO_TotalAmount
+) VALUES(
+	'Inv_No',
+	'SlNo',
+        'DO_No',
+	'DO_Date',
+        'DO_CurrencyID',
+	1,
+	2,
+	4
+);
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "Item_G"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "PayModeMaster"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "CO_Grp"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "CustMaster"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "locmaster"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "UnitMaster"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "DiscountMaster"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "UserMaster"
+)  ;
+
+INSERT INTO Semaphores (
+        TableName)
+VALUES  (
+        "GRN_M"
+)  ;
+
+ALTER TABLE Semaphores MODIFY MaxCtr INT(11)    NOT NULL DEFAULT 1;
+
+ALTER TABLE PurchaseOrderHead ADD Invoiced CHAR NOT NULL DEFAULT "N";
+
+ALTER TABLE DO_D ADD Modified CHAR NOT NULL DEFAULT "N";
+
+ALTER TABLE DO_D ADD Modified_On TIMESTAMP ;
+
+ALTER TABLE DO_H CHANGE Col_18 Can_Modify CHAR DEFAULT 'Y' ;
+
+ALTER TABLE PurchaseReturns_D ADD Remarks VARCHAR(100) ; 
+
+LOAD DATA INFILE 'D:\\NeoInventory\\docs\\MySQL\\Inventory.txt' INTO TABLE Semaphores (FieldName);
+
+alter table co_h modify cancelled char(1) not null default 'N';

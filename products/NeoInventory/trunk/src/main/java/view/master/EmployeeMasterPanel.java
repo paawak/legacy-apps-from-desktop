@@ -8,6 +8,9 @@ package view.master;
 import java.sql.*;
 import java.lang.*;
 import javax.swing.JOptionPane;
+
+import usefulClasses.databaseOperations.LinkDB;
+
 import java.util.*;
 
 /**
@@ -990,7 +993,7 @@ public class EmployeeMasterPanel extends javax.swing.JPanel {
     public void accessDB(){
        try
        { 
-        con=usefulClasses.databaseOperations.LinkDB.getConnection();
+        con=new LinkDB().getConnection();
         stat=con.createStatement();
        }
        catch(Exception ex)

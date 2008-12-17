@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import java.awt.*;
 import java.util.*;
 import javax.swing.border.Border;
+
+import usefulClasses.databaseOperations.LinkDB;
 /**
  *
  * @author  Shanmugam
@@ -878,8 +880,7 @@ public class ItemGroupMasterPanel extends javax.swing.JPanel {
     public void accessDB(){
        try
        { 
-        Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        con=DriverManager.getConnection("jdbc:odbc:sha");
+    	con=new LinkDB().getConnection();
         stat=con.createStatement();
        }
        catch(Exception ex)

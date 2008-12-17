@@ -8,6 +8,9 @@ package view.transaction;
 import java.sql.*;
 import java.lang.*;
 import javax.swing.JOptionPane;
+
+import usefulClasses.databaseOperations.LinkDB;
+
 import java.util.*;
 /**
  *
@@ -1859,8 +1862,7 @@ public class COPanel extends javax.swing.JPanel {
     public void accessDB(){
        try
        { 
-            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            con=DriverManager.getConnection("jdbc:odbc:sha");
+    	   con=new LinkDB().getConnection();
             stat=con.createStatement();
        }
        catch(Exception ex)

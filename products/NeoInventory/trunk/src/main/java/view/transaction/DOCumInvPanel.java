@@ -1787,8 +1787,7 @@ txtFld.selectAll();
     
     public void accessDB() {
         try {
-            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            con=DriverManager.getConnection("jdbc:odbc:sha");
+        	con=new LinkDB().getConnection();
             stat=con.createStatement();
         }
         catch(Exception ex) {

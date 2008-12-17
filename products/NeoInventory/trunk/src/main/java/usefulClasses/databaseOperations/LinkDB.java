@@ -36,21 +36,21 @@ public class LinkDB extends javax.swing.JFrame{
     
     String[] allColNames;
     
-    String userName="";
-    String password="";
- 
-     /** Creates a new instance of LinkDB */
-    public LinkDB(String tableName) {//constructor
+    public LinkDB(String tableName) {
         this.tableName=tableName;
         getAllColNames();
     }
     
-    public LinkDB(String tableName,String userName, String password) {//constructor
+    public LinkDB() {
+    	accessDB();
+    }
+    
+    /*public LinkDB(String tableName,String userName, String password) {//constructor
         this.tableName=tableName;
         this.userName = userName;
         this.password = password;
         getAllColNames();
-    }    
+    }   */ 
     
     /*public void accessDB() {
         try {
@@ -63,7 +63,7 @@ public class LinkDB extends javax.swing.JFrame{
         }//end catch
     }//*/
     
-    public void accessDB() {
+    private void accessDB() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //con=DriverManager.getConnection("jdbc:mysql://localhost/neoinventory?user=root&password=agnimitra");
@@ -75,15 +75,8 @@ public class LinkDB extends javax.swing.JFrame{
         }//end catch
     }
     
-    public static Connection getConnection(){
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection(CONN);            
-        }//end try
-        catch(Exception e) {
-            e.printStackTrace();
-        }//end catch
+    public Connection getConnection(){
+    	accessDB();
         
         return con;
     }

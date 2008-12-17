@@ -14,6 +14,9 @@ package view.master;
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+
+import usefulClasses.databaseOperations.LinkDB;
+
 import java.awt.Rectangle;
 
 public class CashLocMasterPanel extends javax.swing.JPanel {
@@ -1173,9 +1176,7 @@ private int searchElement(String key,String[] a){
     
  public void  accessDB(){
      try{
-    java.lang.Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-    
-    con = java.sql.DriverManager.getConnection("jdbc:odbc:sha");
+    	 con=new LinkDB().getConnection();
     
      stat = con.createStatement();
      }//end try

@@ -13,11 +13,11 @@ package view.master;
 
 import java.sql.*;
 import java.util.*;
-import javax.swing.JOptionPane;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+import usefulClasses.databaseOperations.LinkDB;
 import usefulClasses.generalUtilities.*;
 
 public class BankMasterPanel extends javax.swing.JPanel {
@@ -898,9 +898,7 @@ private int searchElement(String key,String[] a){
     
  public void  accessDB(){
      try{
-    java.lang.Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-    
-    con = java.sql.DriverManager.getConnection("jdbc:odbc:sha");
+    	 con=new LinkDB().getConnection();
     
      stat = con.createStatement();
      }//end try

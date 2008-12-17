@@ -26,6 +26,8 @@ import view.InventoryFrame;
 
 public class HandleError extends javax.swing.JDialog {
 	
+	private static final boolean DISPLAY_ERRORS = true;
+	
 	private JLabel errorMessage;
 	private JTextArea stackTrace;
     
@@ -53,6 +55,11 @@ public class HandleError extends javax.swing.JDialog {
     }//end constructor
 
     public void displayError(String invokingMethodName,Exception e){
+    	
+    	if(!DISPLAY_ERRORS) {
+    		return;
+    	}
+    	
         setTitle("An ERROR has occured in "+invokingMethodName);
         errorMessage.setText(e.getMessage()+"\nERROR DETAILS:");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

@@ -22,7 +22,11 @@ public class LinkDB extends javax.swing.JFrame{
 
   //VARIABLE DECLARATION 
 	
-	private static final String CONN = "jdbc:mysql://localhost/paawakco_neoinventory?user=paawakco_paawak&password=paawak";
+//	private static final String HOST ="122.166.21.123";
+	private static final String HOST ="localhost";
+	
+	private static final String CONN = "jdbc:mysql://" +HOST+
+			"/paawakco_neoinventory?user=paawakco_paawak&password=paawak";
     
     Connection con;
     

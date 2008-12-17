@@ -34,10 +34,7 @@ public class Inventory {
     
         InventoryFrame frame = new InventoryFrame();
         
-        ReadPropertyFile readProp = new ReadPropertyFile("controller/InvProps/InventoryView");
-        
-        Boolean FullScreen = Boolean.valueOf(readProp.getVal("Frame.FullScreenOption"));
-        centerWindow(frame,FullScreen);        
+        centerWindow(frame,true);        
         frame.show();
     }
     
@@ -55,9 +52,8 @@ public class Inventory {
         Width=(int)screenDim.getWidth();                
         }
         else{
-        ReadPropertyFile readProp = new ReadPropertyFile("controller/InvProps/InventoryView");            
-        Height=Integer.parseInt(readProp.getVal("Frame.Height"));
-        Width=Integer.parseInt(readProp.getVal("Frame.Width"));    
+        Height=700;
+        Width=900;    
         }
                 
         

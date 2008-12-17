@@ -13,10 +13,10 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<!--
 					<includes> <include>**/*.properties</include> </includes>
-					<excludes> <exclude>META-INF/**</exclude> </excludes>
-				-->
+				<excludes> 
+					<exclude>**/*.gif</exclude> 
+				</excludes>
 			</resource>
 		</resources>
 		<testResources>

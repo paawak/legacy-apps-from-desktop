@@ -1,0 +1,474 @@
+CREATE TABLE   Semaphores  (
+	 FieldName    VARCHAR  (50)  PRIMARY KEY  NOT NULL,
+	 Prefix    VARCHAR  (12)    NOT NULL DEFAULT "",
+	 MaxCtr   INT(11)     NOT NULL DEFAULT 1,
+	 Suffix    VARCHAR  (12)    NOT NULL DEFAULT "",
+       IDFormat 	VARCHAR  (12)    NOT NULL DEFAULT "",	
+	 Remarks    VARCHAR  (50)   NOT NULL DEFAULT ""
+)  ;
+
+
+
+
+CREATE TABLE CO_D (
+	 COD_Ctr   INT(11)     ,
+	 CO_No  VARCHAR(10)    NOT NULL,
+	 SlNo    INT(11)     NOT NULL,
+	 Item_Code  VARCHAR(10)    NOT NULL,
+	 Qty_Loose   INT(11)     NOT NULL,
+	 SP_Loose   DECIMAL(12,2)     NOT NULL,
+	 Qty_Pack   INT(11)     NOT NULL,
+	 SP_Pack   DECIMAL(12,2)     NOT NULL,
+	 Qty_Bulk   INT(11)     NOT NULL,
+	 SP_Bulk   DECIMAL(12,2)     NOT NULL,
+	 IL_Disc_Perc  VARCHAR(10)    NOT NULL,
+	 IL_Disc_Amt   DECIMAL(12,2)     NOT NULL,
+	 IL_Tax_Perc  VARCHAR(10)    NOT NULL,
+	 IL_Tax_Amt   DECIMAL(12,2)     NOT NULL,
+	 NetPrice   DECIMAL(12,2)    NOT NULL
+) ; 
+ 
+
+CREATE TABLE  CO_Grp  (
+	 CO_Grp_Ctr   INT(11)   ,
+	 CO_Grp_ID  VARCHAR(10)    PRIMARY KEY NOT NULL,
+	 CO_Grp_Name    VARCHAR  (30)    NOT NULL,
+	 Remarks    VARCHAR  (30)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+) ; 
+ 
+
+CREATE TABLE  CO_H  (
+	 COH_Ctr   INT(11)   ,
+	 CO_GroupID  VARCHAR(10)    NOT NULL,
+	 Cust_Code  VARCHAR(10)    NOT NULL,
+	 CO_No  VARCHAR(10)  PRIMARY KEY  NOT NULL,
+	 CO_Date    VARCHAR  (10)    NOT NULL,
+	 CO_Acp_Dt    VARCHAR  (10)    NOT NULL,
+	 AuthBy_ID  VARCHAR(10)    NOT NULL,
+	 Delivry_By_Dt    VARCHAR  (10)    NOT NULL,
+	 PO_Ref_No  VARCHAR(10)    NOT NULL,
+	 PO_Ref_Dt    VARCHAR  (10)    NOT NULL,
+	 Terms    VARCHAR  (50)    NOT NULL,
+	 SL_Misc   DECIMAL(12,2)     NOT NULL,
+	 SL_Disc_Perc  VARCHAR(10)    NOT NULL,
+	 SL_Disc_Amt   DECIMAL(12,2)     NOT NULL,
+	 SL_Tax_Perc  VARCHAR(10)    NOT NULL,
+	 SL_Tax_Amt   DECIMAL(12,2)     NOT NULL,
+	 GrandTotal   DECIMAL(12,2)     NOT NULL,
+	 NetTotal   DECIMAL(12,2)     NOT NULL,
+	 Cancelled    VARCHAR  (1)   NOT NULL DEFAULT 'N'
+)  ;
+ 
+
+CREATE TABLE  DO_D  (
+	 DOD_Ctr   INT(11)    ,
+	 DO_No    VARCHAR  (10)    NOT NULL,
+	 Item_Sl_No    INT(11)     NOT NULL,
+	 Item_Code    VARCHAR  (10)    NOT NULL,
+	 Batch_No    VARCHAR  (10)    NOT NULL,
+	 Expiry_Date    VARCHAR  (12)    NOT NULL,
+	 Qty_Loose   INT(11)     NOT NULL,
+	 SP_Loose   numeric (18, 2)    NOT NULL,
+	 Qty_Pack   INT(11)     NOT NULL,
+	 SP_Pack   numeric (18, 2)    NOT NULL,
+	 Qty_Bulk   INT(11)     NOT NULL,
+	 SP_Bulk   numeric (18, 2)    NOT NULL,
+	 IL_Disc_ID    VARCHAR  (50)    NOT NULL,
+	 IL_Disc_Amt   numeric (18, 2)    NOT NULL,
+	 IL_Tax_ID    VARCHAR  (50)    NOT NULL,
+	 IL_Tax_Amt   numeric (18, 2)    NOT NULL,
+	 IL_Total_Amt   numeric (18, 2)   NOT NULL,
+	 Modified CHAR NOT NULL DEFAULT "N",
+	 Modified_On TIMESTAMP
+)  ;
+
+
+CREATE TABLE  DO_H  (
+	 DO_Ctr   INT(11)   ,
+	 DO_No    VARCHAR  (50)   PRIMARY KEY NOT NULL,
+	 DO_Date    VARCHAR  (10)    NOT NULL,
+	 Cust_Code    VARCHAR  (10)    NOT NULL,
+	 Cust_Order_No    VARCHAR  (10)    NOT NULL,
+	 Cust_Order_Date    VARCHAR  (10)    NOT NULL,
+	 PO_Ref_No    VARCHAR  (10)    NOT NULL,
+	 PO_Ref_Date    VARCHAR  (10)    NOT NULL,
+	 Cur_ID    VARCHAR  (10)    NOT NULL,
+	 SL_Disc_ID    VARCHAR  (50)    NOT NULL,
+	 SL_Disc_Amt   numeric (18, 2)    NOT NULL,
+	 SL_Tax_ID    VARCHAR  (50)    NOT NULL,
+	 SL_Tax_Amt   numeric (18, 2)    NOT NULL,
+	 SL_Total_Amt   numeric (18, 2)    NOT NULL,
+	 Store_ID    VARCHAR  (10)    NOT NULL,
+	 Cancelled    CHAR  (1)   NOT NULL DEFAULT "N",
+         Invoiced    CHAR  (1)   NOT NULL DEFAULT "N",
+         Can_Modify CHAR DEFAULT 'Y'
+)  ;
+
+ 
+
+CREATE TABLE  SiteParameters  (
+	 SitePar_Name    VARCHAR  (50)   PRIMARY KEY NOT NULL,
+	 SitePar_TextValue    VARCHAR  (125)    NOT NULL,
+	 SitePar_YesNoValue    VARCHAR  (1)    NOT NULL,
+	 SitePar_LongValue    INT(11)     NOT NULL,
+	 SitePar_DoubleValue   DECIMAL(12,2)     NOT NULL,
+	 SitePar_ParameterType    INT(11)     NOT NULL,
+	 SitePar_Remarks    VARCHAR  (125)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   BankMaster  (
+	BankID  VARCHAR(10) PRIMARY KEY   NOT NULL,
+	 BankName    VARCHAR  (30)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   CashLocMaster  (
+	 CL_Ctr   INT(11)     ,
+	 CL_ID    VARCHAR  (5) PRIMARY KEY   NOT NULL,
+	 CL_Name    VARCHAR  (5)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   CurrencyMaster  (
+	 CM_Ctr   INT(11)    ,
+	 CM_ID    VARCHAR  (7)  PRIMARY KEY  NOT NULL,
+	 CM_Name    VARCHAR  (30)    NOT NULL,
+	 CM_BaseCur   numeric (18, 2)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   CustMaster  (
+	 CustCtr   INT(11)   ,
+	 CustCode    VARCHAR  (6)  PRIMARY KEY  NOT NULL,
+	 CustName    VARCHAR  (35)    NOT NULL,
+	 Street    VARCHAR  (20)    NOT NULL,
+	 Locality    VARCHAR  (20)    NOT NULL,
+	 City    VARCHAR  (25)    NOT NULL,
+	 Pin    VARCHAR  (15)    NOT NULL,
+	 LicenseNo    VARCHAR  (30)    NOT NULL,
+	 Email    VARCHAR  (30)    NOT NULL,
+	 OPhone    VARCHAR  (15)    NOT NULL,
+	 Rphone    VARCHAR  (15)    NOT NULL,
+	 Mobile    VARCHAR  (15)    NOT NULL,
+	 Fax    VARCHAR  (15)    NOT NULL,
+	 Rating    VARCHAR  (3)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   DeptMaster  (
+	 DeptCtr   INT(11)    ,
+	 DepID    VARCHAR  (10)   PRIMARY KEY NOT NULL,
+	 DepName    VARCHAR  (30)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   DiscountMaster  (
+	 DM_Ctr   INT(11)    ,
+	 DM_ID    VARCHAR  (10)   PRIMARY KEY NOT NULL,
+	 DM_Name    VARCHAR  (30)    NOT NULL,
+	 DM_Value   numeric (18, 2)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   EmployeeMaster  (
+	 Ctr   INT(11)   ,
+	 EmpCode    VARCHAR  (6)  PRIMARY KEY  NOT NULL,
+	 EmpName    VARCHAR  (50)    NOT NULL,
+	 Street    VARCHAR  (30)    NOT NULL,
+	 Locality    VARCHAR  (40)    NOT NULL,
+	 City    VARCHAR  (20)    NOT NULL,
+	 Pin  VARCHAR(10)    NOT NULL,
+	 DOB    VARCHAR  (50)    NOT NULL,
+	 DOJ    VARCHAR  (50)    NOT NULL,
+	 Email    VARCHAR  (50)    NOT NULL,
+	 RPhone    VARCHAR  (15)    NOT NULL,
+	 Designation    VARCHAR  (30)    NOT NULL,
+	 Department    VARCHAR  (30)    NOT NULL,
+	 Active    VARCHAR  (2)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   GRN_D  (
+	 GRN_Ctr   INT(11)   ,
+	 GRN_No  VARCHAR(10)    NOT NULL,
+	 Slno    VARCHAR  (3)    NOT NULL,
+	 Item_Code  VARCHAR(10)    NOT NULL,
+	 Batch_No  VARCHAR(10)    NOT NULL,
+	 Expiry_Date    VARCHAR  (10)    NOT NULL,
+	 CP_Bulk   DECIMAL(12,2)     NOT NULL,
+	 CP_Pack   DECIMAL(12,2)     NOT NULL,
+	 CP_Loose   DECIMAL(12,2)     NOT NULL,
+	 Curr_ID  VARCHAR(10)    NOT NULL,
+	 Qty_Bulk   INT(11)     NOT NULL,
+	 Qty_Pack   INT(11)     NOT NULL,
+	 Qty_Loose   INT(11)     NOT NULL,
+	 Free_Qty_Bulk   INT(11)     NOT NULL,
+	 Free_Qty_Pack   INT(11)     NOT NULL,
+	 Free_Qty_Loose   INT(11)     NOT NULL,
+	 Disc_Perc  VARCHAR(10)    NOT NULL,
+	 Tax_Perc  VARCHAR(10)    NOT NULL,
+	 SP_Bulk   DECIMAL(12,2)     NOT NULL,
+	 SP_Pack   DECIMAL(12,2)     NOT NULL,
+	 SP_Loose   DECIMAL(12,2)     NOT NULL,
+	 Item_Tot   INT(11)    NOT NULL
+)  ;
+ 
+
+CREATE TABLE   GRN_M  (
+	 GRN_Ctr   INT(11)   ,
+	 GRN_No    VARCHAR  (9)  PRIMARY KEY  NOT NULL,
+	 GRN_Date    VARCHAR  (10)    NOT NULL,
+	 Store_ID  VARCHAR(10)    NOT NULL,
+	 Supplier_ID  VARCHAR(10)    NOT NULL,
+	 AuthBy_ID  VARCHAR(10)    NOT NULL,
+	 DC_No  VARCHAR(10)    NOT NULL,
+	 PO_No  VARCHAR(10)    NOT NULL,
+	 Bill_No  VARCHAR(10)    NOT NULL,
+	 Bill_Date    VARCHAR  (10)    NOT NULL,
+	 Disc_Percentage    VARCHAR  (50)    NOT NULL,
+	 Tax_Percentage    VARCHAR  (50)    NOT NULL,
+	 Misc_Charges    INT(11)     NOT NULL,
+	 Remarks    VARCHAR  (50)    NOT NULL,
+	 Cancelled    VARCHAR  (1)   NOT NULL
+)  ;
+
+
+CREATE TABLE Invoice_D (
+        Inv_D_Ctr BIGINT ,
+	Inv_No VARCHAR (10) NOT NULL,
+	SlNo SMALLINT(2) NOT NULL,
+        DO_No VARCHAR (10) NOT NULL,
+	DO_Date VARCHAR (10) NOT NULL ,
+        DO_CurrencyID VARCHAR (10) NOT NULL,
+	DO_Discount DECIMAL(12,2) NOT NULL DEFAULT 0,
+	DO_Tax DECIMAL(12,2)     NOT NULL DEFAULT 0,
+	DO_TotalAmount DECIMAL(12,2)     NOT NULL DEFAULT 0
+        
+);
+
+
+CREATE TABLE Invoice_H(
+        Inv_H_Ctr BIGINT ,
+	Inv_No VARCHAR (10) NOT NULL PRIMARY KEY,
+	Inv_Date VARCHAR (10) NOT NULL ,
+	Inv_StoreID VARCHAR (10) NOT NULL ,
+	CustName VARCHAR (50) NOT NULL ,
+	KstNo VARCHAR (30) NOT NULL ,
+	CstNo VARCHAR (30) NOT NULL ,
+	InvDCNo VARCHAR (30) NOT NULL ,
+	Inv_CustomerID VARCHAR (10) NOT NULL ,
+	Inv_AuthByID VARCHAR (10)     NOT NULL ,
+	TotalDiscount DECIMAL(12,2)     NOT NULL DEFAULT 0,
+	TotalTax DECIMAL(12,2)     NOT NULL DEFAULT 0,
+        TotalAmount DECIMAL(12,2)     NOT NULL DEFAULT 0,
+        Cancelled CHAR NOT NULL DEFAULT 'N',
+        Modified CHAR NOT NULL DEFAULT "N",
+        ModifiedOn TIMESTAMP(14)
+);
+
+CREATE TABLE   Item_G  (
+	 Ctr   INT(11)    ,
+	 itemGroupID  VARCHAR(10) PRIMARY KEY   NOT NULL,
+	 itemGroupName    VARCHAR  (50)    NOT NULL,
+	 remarks    VARCHAR  (50)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   Item_M  (
+	 itemCtr   INT(11)    ,
+	 itemNo  VARCHAR(10)  PRIMARY KEY  NOT NULL,
+	 itemName    VARCHAR  (50)    NOT NULL,
+	 itemShortName    VARCHAR  (10)    NOT NULL,
+	 itemGroupID  VARCHAR(10)    NOT NULL,
+	 itemLoosePrice   DECIMAL(12,2)     NOT NULL,
+	 itemPackPrice   DECIMAL(12,2)     NOT NULL,
+	 itemBulkPrice   DECIMAL(12,2)     NOT NULL,
+	 itemLooseperPack    INT(11)     NOT NULL,
+	 itemPackperBulk    INT(11)     NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   LocMaster  (
+	 LocCtr   INT(11)   ,
+	 LocID    VARCHAR  (6)   PRIMARY KEY NOT NULL,
+	 LocName    VARCHAR  (10)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+);  
+ 
+
+CREATE TABLE   POMaster  (
+	 PoNo    VARCHAR  (10)  PRIMARY KEY  NOT NULL,
+	 PoDate    VARCHAR  (50)    NOT NULL,
+	 PoGroup    VARCHAR  (30)    NOT NULL,
+	 SupplierCode    VARCHAR  (10)    NOT NULL,
+	 QuotationNo    VARCHAR  (10)    NOT NULL,
+	 QuotationDate   VARCHAR  (10)     NOT NULL,
+	 TaxType    VARCHAR  (3)    NOT NULL,
+	 TaxAmount    DECIMAL(12,2)     NOT NULL,
+	 DeliverySchedule    VARCHAR  (10)    NOT NULL,
+	 DeliveryPlace    VARCHAR  (30)    NOT NULL,
+	 Terms_Conditions    VARCHAR  (50)    NOT NULL,
+	 AuthorizingPerson    VARCHAR  (30)    NOT NULL,
+	 PkgCharge    DECIMAL(12,2)     NOT NULL,
+	 MisCharges    VARCHAR  (50)    NOT NULL,
+	 Discount    VARCHAR  (5)    NOT NULL,
+	 TotalQty    INT(11)     NOT NULL,
+	 GrandTotal   DECIMAL(12,2)     NOT NULL,
+	 DeliveryStatus    VARCHAR  (50)    NOT NULL,
+	 InvoiceStatus    VARCHAR  (50)   NOT NULL
+)  ; 
+
+CREATE TABLE   PayModeMaster  (
+	 PayModeCtr   INT(11)    ,
+	 PayModeID    VARCHAR  (5)  PRIMARY KEY  NOT NULL,
+	 PayModeName    VARCHAR  (5)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   PurchaseOrderDetails  (
+	 POD_Ctr   INT(11)  ,
+	 POM_No    VARCHAR  (50)    NOT NULL,
+	 POD_SerialNo    VARCHAR  (10)    NOT NULL,
+	 Item_ID    VARCHAR  (7)    NOT NULL,
+	 POD_Item_Grp_ID    VARCHAR  (7)    NOT NULL,
+	 POD_UOM_ID    VARCHAR  (7)    NOT NULL,
+	 POD_Item_Loose_Qty   INT(11)     NOT NULL,
+	 POD_Item_Loose_Price   numeric (18, 2)    NOT NULL,
+	 POD_Item_Pack_Qty   INT(11)     NOT NULL,
+	 POD_Item_Pack_Price   numeric (18, 2)    NOT NULL,
+	 POD_Item_Bulk_Qty   INT(11)     NOT NULL,
+	 POD_Item_Bulk_Price   numeric (18, 2)    NOT NULL,
+	 POD_Disc_IL    VARCHAR  (50)    NOT NULL,
+	 POD_Tax_IL    VARCHAR  (15)    NOT NULL,
+	 POD_Net_Loose_Price   numeric (18, 2)   
+)  ;
+ 
+
+CREATE TABLE   PurchaseOrderHead  (
+	 POM_Ctr   INT(11)   ,
+	 POM_No    VARCHAR  (7) PRIMARY KEY   NOT NULL,
+	 POM_Date    VARCHAR  (10)    NOT NULL,
+	 POM_Str_Id    VARCHAR  (50)    NOT NULL,
+	 POM_Spl_Id    VARCHAR  (50)    NOT NULL,
+	 POM_Dly_Str_Id    VARCHAR  (50)    NOT NULL,
+	 POM_Dly_Date    VARCHAR  (50)    NOT NULL,
+	 POM_PO_Grp_Id    VARCHAR  (50)    NOT NULL,
+	 PO_Cur_Id    VARCHAR  (50)    NOT NULL,
+	 POM_Auth_By_Id    VARCHAR  (50)    NOT NULL,
+	 POM_Cust_RefNo    VARCHAR  (50)    NOT NULL,
+	 POM_Terms    VARCHAR  (50)    NOT NULL,
+	 POM_Misc_Sl   numeric (18, 2)    NOT NULL,
+	 POM_Disc_Sl    VARCHAR  (15)    NOT NULL,
+	 POM_Tax_Sl    VARCHAR  (15)    NOT NULL,
+	 POM_Total_Amt   numeric (18, 2)    NOT NULL,
+	 Cancelled    VARCHAR  (1)   NOT NULL,
+         Invoiced CHAR NOT NULL DEFAULT "N"
+)  ;
+ 
+
+CREATE TABLE PurchaseReturns_H (
+	 PR_H_Ctr   INT(11)     ,
+	 PR_No  VARCHAR(10)    NOT NULL PRIMARY KEY,
+	 PR_Date  VARCHAR(10)     NOT NULL,
+	 GRN_No  VARCHAR(10)    NOT NULL,
+	 GRN_Date  VARCHAR(10)     NOT NULL,
+	 DC_No  VARCHAR(10)      NOT NULL,
+	 PO_No  VARCHAR(10)      NOT NULL,
+	 Auth_By  VARCHAR(10)      NOT NULL,
+	 Store_ID  VARCHAR(10)      NOT NULL,
+	 Supplier_ID  VARCHAR(10)      NOT NULL,
+	 Total_Loose_Qty_Returned  INT(11)     NOT NULL DEFAULT 0,
+	 Total_Amt  DECIMAL(12,2)    NOT NULL DEFAULT 0,
+	 Remarks   VARCHAR(100)      ,
+	 Cancelled   CHAR    NOT NULL DEFAULT 'N'
+) ; 
+ 
+
+CREATE TABLE PurchaseReturns_D (
+	 PR_D_Ctr   INT(11)     ,
+	 PR_No  VARCHAR(10)    NOT NULL,
+	 Sl_No  SMALLINT(2)     NOT NULL,
+	 Item_No  VARCHAR(10)    NOT NULL,
+	 Batch_No  VARCHAR(10)     NOT NULL,
+	 Expiry_Date  VARCHAR(10)      NOT NULL,
+	 Currency_ID  VARCHAR(10)      NOT NULL,
+	 Item_Loose_Qty   INT(11)     NOT NULL,
+	 Item_Loose_Price   numeric (18, 2)    NOT NULL,
+	 Item_Pack_Qty   INT(11)     NOT NULL,
+	 Item_Pack_Price   numeric (18, 2)    NOT NULL,
+	 Item_Bulk_Qty   INT(11)     NOT NULL,
+	 Item_Bulk_Price   numeric (18, 2)    NOT NULL,
+	 Net_Loose_Qty   INT(11)     NOT NULL DEFAULT 0,
+	 Net_Price  DECIMAL(12,2)    NOT NULL DEFAULT 0,
+         Remarks VARCHAR(100)
+) ; 
+
+
+
+
+
+CREATE TABLE   StoreMaster  (
+	 StoreCtr   INT(11)  ,
+	 StoreID    VARCHAR  (7)  PRIMARY KEY  NOT NULL,
+	 StoreName    VARCHAR  (30)    NOT NULL,
+	 Remarks    VARCHAR  (100)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   SupplierMaster  (
+	 SupCtr   INT(11)   ,
+	 SupCode  VARCHAR(10)   PRIMARY KEY NOT NULL,
+	 supName    VARCHAR  (35)    NOT NULL,
+	 Street    VARCHAR  (20)    NOT NULL,
+	 Locality    VARCHAR  (20)    NOT NULL,
+	 City    VARCHAR  (25)    NOT NULL,
+	 Pin    VARCHAR  (15)    NOT NULL,
+	 LicenseNo    VARCHAR  (30)    NOT NULL,
+	 Email    VARCHAR  (30)    NOT NULL,
+	 OPhone    VARCHAR  (15)    NOT NULL,
+	 Rphone    VARCHAR  (15)    NOT NULL,
+	 Mobile    VARCHAR  (15)    NOT NULL,
+	 Fax    VARCHAR  (15)    NOT NULL,
+	 Rating    VARCHAR  (3)    NOT NULL,
+	 Active    VARCHAR  (1)   NOT NULL
+)  ;
+ 
+
+CREATE TABLE   TaxMaster  (
+	 TaxCtr   INT(11)   ,
+	 TaxCode    VARCHAR  (5)  PRIMARY KEY  NOT NULL,
+	 TaxDesc    VARCHAR  (50)    NOT NULL,
+	 Percentage    VARCHAR  (5)    NOT NULL,
+	 Active    VARCHAR  (2)  NOT NULL 
+)  ;
+ 
+
+CREATE TABLE   UnitMaster  (
+	 UnitCtr   INT(11)    ,
+	 UnitID    VARCHAR  (7) PRIMARY KEY   NOT NULL,
+	 UnitName    VARCHAR  (50)    NOT NULL,
+	 Remarks    VARCHAR  (100)    NOT NULL,
+	 Active    VARCHAR  (1) NOT NULL  
+);
+ 
+
+CREATE TABLE   UserMaster  (
+	 UM_Ctr   INT(11)    ,
+	 UM_ID    VARCHAR  (5)  PRIMARY KEY  NOT NULL,
+	 UM_Name    VARCHAR  (5)    NOT NULL,
+	 Active    VARCHAR  (1)  NOT NULL 
+) ; 
+ 
+LOAD DATA INFILE 'D:\\NeoInventory\\docs\\MySQL\\Inventory.txt' INTO TABLE Semaphores (FieldName);

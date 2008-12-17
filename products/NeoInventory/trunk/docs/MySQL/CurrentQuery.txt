@@ -1,0 +1,40 @@
+DROP TABLE PurchaseReturns_H;
+
+DROP TABLE PurchaseReturns_D;
+
+CREATE TABLE PurchaseReturns_H (
+	 PR_H_Ctr   INT(11)     ,
+	 PR_No  VARCHAR(10)    NOT NULL PRIMARY KEY,
+	 PR_Date  VARCHAR(10)     NOT NULL,
+	 GRN_No  VARCHAR(10)    NOT NULL,
+	 GRN_Date  VARCHAR(10)     NOT NULL,
+	 DC_No  VARCHAR(10)      NOT NULL,
+	 PO_No  VARCHAR(10)      NOT NULL,
+	 Auth_By  VARCHAR(10)      NOT NULL,
+	 Store_ID  VARCHAR(10)      NOT NULL,
+	 Supplier_ID  VARCHAR(10)      NOT NULL,
+	 Total_Loose_Qty_Returned  INT(11)     NOT NULL DEFAULT 0,
+	 Total_Amt  DECIMAL(12,2)    NOT NULL DEFAULT 0,
+	 Remarks   VARCHAR(100)      ,
+	 Cancelled   CHAR    NOT NULL DEFAULT 'N'
+) ; 
+ 
+
+CREATE TABLE PurchaseReturns_D (
+	 PR_D_Ctr   INT(11)     ,
+	 PR_No  VARCHAR(10)    NOT NULL,
+	 Sl_No  SMALLINT(2)     NOT NULL,
+	 Item_No  VARCHAR(10)    NOT NULL,
+	 Batch_No  VARCHAR(10)     NOT NULL,
+	 Expiry_Date  VARCHAR(10)      NOT NULL,
+	 Currency_ID  VARCHAR(10)      NOT NULL,
+	 Item_Loose_Qty   INT(11)     NOT NULL,
+	 Item_Loose_Price   numeric (18, 2)    NOT NULL,
+	 Item_Pack_Qty   INT(11)     NOT NULL,
+	 Item_Pack_Price   numeric (18, 2)    NOT NULL,
+	 Item_Bulk_Qty   INT(11)     NOT NULL,
+	 Item_Bulk_Price   numeric (18, 2)    NOT NULL,
+	 Net_Loose_Qty   INT(11)     NOT NULL DEFAULT 0,
+	 Net_Price  DECIMAL(12,2)    NOT NULL DEFAULT 0,
+         Remarks VARCHAR(100)
+) ; 

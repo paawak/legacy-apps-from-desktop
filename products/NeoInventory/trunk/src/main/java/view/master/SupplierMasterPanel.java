@@ -290,7 +290,7 @@ public class SupplierMasterPanel extends javax.swing.JPanel {
 
         jPnlSMSearch.add(jSPaneSM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 270));
 
-        jBtnSMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnSMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnSMSearchClose.setMnemonic('e');
         jBtnSMSearchClose.setText("Search Close");
         jBtnSMSearchClose.setToolTipText(" ");

@@ -218,7 +218,7 @@ public class TaxMasterPanel extends javax.swing.JPanel {
 
         jPnlTMSearch.add(jTxtTMSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 140, 20));
 
-        jBtnTMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnTMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnTMSearchClose.setMnemonic('e');
         jBtnTMSearchClose.setText("Search Cancel");
         jBtnTMSearchClose.setToolTipText(" ");

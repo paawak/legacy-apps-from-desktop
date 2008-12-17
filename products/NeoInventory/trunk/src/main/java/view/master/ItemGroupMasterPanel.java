@@ -263,7 +263,7 @@ public class ItemGroupMasterPanel extends javax.swing.JPanel {
 
         jPnlIGSearch.add(jSPIGSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 270));
 
-        jBtnIGSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnIGSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnIGSearchClose.setToolTipText(" ");
         jBtnIGSearchClose.setMnemonic('e');
         jBtnIGSearchClose.setText("Search Close");

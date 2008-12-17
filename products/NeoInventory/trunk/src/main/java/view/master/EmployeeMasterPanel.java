@@ -260,7 +260,7 @@ public class EmployeeMasterPanel extends javax.swing.JPanel {
 
         jPnlEMSearch.add(jSPaneEM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 270));
 
-        jBtnEMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnEMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnEMSearchClose.setMnemonic('e');
         jBtnEMSearchClose.setText("Search Cancel");
         jBtnEMSearchClose.setToolTipText(" ");

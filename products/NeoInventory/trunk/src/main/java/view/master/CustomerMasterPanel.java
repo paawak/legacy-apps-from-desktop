@@ -281,7 +281,7 @@ public class CustomerMasterPanel extends javax.swing.JPanel {
 
         jPnlCMSearch.add(jSPaneCM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 270));
 
-        jBtnCMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
+//        jBtnCMSearchClose.setIcon(new javax.swing.ImageIcon("C:\\Program Files\\Microsoft Visual Studio\\Common\\Graphics\\Bitmaps\\TlBr_W95\\BACK.BMP"));
         jBtnCMSearchClose.setMnemonic('e');
         jBtnCMSearchClose.setText("Search Cancel");
         jBtnCMSearchClose.addActionListener(new java.awt.event.ActionListener() {

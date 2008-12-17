@@ -537,11 +537,10 @@ checkForEmptyDataBase("UnitMaster");
 
         pnlHome.add(pnlSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 180, 300));
 
-//        btAdd.setIcon(new javax.swing.ImageIcon("C:\\NeoInventory\\images\\new5.gif"));
         btAdd.setMnemonic('A');
         btAdd.setText("Add");
         btAdd.setToolTipText(" ");
-        btAdd.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Add")));
+//        btAdd.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Add")));
 
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -554,7 +553,7 @@ checkForEmptyDataBase("UnitMaster");
         btModify.setMnemonic('M');
         btModify.setText("Modify");
         btModify.setToolTipText(" ");
-        btModify.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Modify")));
+//        btModify.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Modify")));
 
         btModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -567,7 +566,7 @@ checkForEmptyDataBase("UnitMaster");
         btSearch.setMnemonic('S');
         btSearch.setText("Search");
         btSearch.setToolTipText(" ");
-        btSearch.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Search")));
+//        btSearch.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Search")));
 
         btSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -580,7 +579,7 @@ checkForEmptyDataBase("UnitMaster");
         btCancelPO.setMnemonic('C');
         btCancelPO.setText("Cancel P.O.");
         btCancelPO.setToolTipText(" ");
-        btCancelPO.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.CancelPO")));
+//        btCancelPO.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.CancelPO")));
 
         btCancelPO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -593,7 +592,7 @@ checkForEmptyDataBase("UnitMaster");
         btExit.setMnemonic('D');
         btExit.setText("Done");
         btExit.setToolTipText(" ");
-        btExit.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Done")));
+//        btExit.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Done")));
 
         btExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -841,7 +840,7 @@ checkForEmptyDataBase("UnitMaster");
         btSave.setText("Save");
         btSave.setToolTipText(" ");
         btSave.setEnabled(false);
-        btSave.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Save")));
+//        btSave.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Save")));
 
         btSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -854,7 +853,7 @@ checkForEmptyDataBase("UnitMaster");
         btD_Cancel.setMnemonic('B');
         btD_Cancel.setText("Back");
         btD_Cancel.setToolTipText(" ");
-        btD_Cancel.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Back")));
+//        btD_Cancel.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Back")));
 
         btD_Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1167,7 +1166,7 @@ checkForEmptyDataBase("UnitMaster");
         btD_Add.setMnemonic('A');
         btD_Add.setText("Add Item");
         btD_Add.setToolTipText(" ");
-        btD_Add.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.AddItem")));
+//        btD_Add.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.AddItem")));
 
         btD_Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1180,7 +1179,7 @@ checkForEmptyDataBase("UnitMaster");
         btD_Edit.setMnemonic('E');
         btD_Edit.setText("Edit Item");
         btD_Edit.setToolTipText(" ");
-        btD_Edit.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.EditItem")));
+//        btD_Edit.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.EditItem")));
         btD_Edit.setVisible(false);
         btD_Edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1194,7 +1193,7 @@ checkForEmptyDataBase("UnitMaster");
         btD_Remove.setText("RemoveItem");
         btD_Remove.setToolTipText(" ");
         btD_Remove.setEnabled(false);
-        btD_Remove.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.RemoveItem")));
+//        btD_Remove.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.RemoveItem")));
 
         btD_Remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1208,7 +1207,7 @@ checkForEmptyDataBase("UnitMaster");
         btD_Finish.setText("Finish");
         btD_Finish.setToolTipText(" ");
         btD_Finish.setEnabled(false);
-        btD_Finish.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Finish")));
+//        btD_Finish.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.Finish")));
 
         btD_Finish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1221,7 +1220,7 @@ checkForEmptyDataBase("UnitMaster");
         btD_SaveEdit.setMnemonic('V');
         btD_SaveEdit.setText("Save Edit");
         btD_SaveEdit.setToolTipText(" ");
-        btD_SaveEdit.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.SaveEdit")));
+//        btD_SaveEdit.setIcon(new javax.swing.ImageIcon(Props.getVal("Icon.SaveEdit")));
         btD_SaveEdit.setVisible(false);
         btD_SaveEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

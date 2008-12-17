@@ -5,10 +5,10 @@ package controller;
 import view.*;
 
 import java.io.*;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.JOptionPane;
 
 import usefulClasses.generalUtilities.*;
 
@@ -25,6 +25,12 @@ public class Inventory {
 
     
     public static void main(String[] args) {
+    	
+    	Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(){
+
+			public void uncaughtException(Thread t, Throwable e) {
+				e.printStackTrace();
+			}});
     
         InventoryFrame frame = new InventoryFrame();
         

@@ -78,7 +78,7 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
-                /masters/employee.html=employeeController
+                /masters/itemtype.html=itemtypeController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -96,7 +96,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     
-    <bean id="employeeController" class="com.swayam.web.controllers.masters.EmployeeController">
+    <bean id="itemtypeController" class="com.swayam.web.controllers.masters.ItemTypeController">
     </bean>
     
 </beans>

@@ -1,5 +1,5 @@
 /*
- * EmployeeController.java
+ * ItemTypeController.java
  *
  * Created on Jan 3, 2009 10:31:15 PM
  *
@@ -26,13 +26,13 @@ import com.swayam.web.webapp.controller.BaseFormController;
  * 
  * @author paawak
  */
-public class EmployeeController extends BaseFormController {
+public class ItemTypeController extends BaseFormController {
 
     @Override
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        ModelAndView view = new ModelAndView("masters/employee");
+        ModelAndView view = new ModelAndView("masters/itemType");
 
         return view;
 

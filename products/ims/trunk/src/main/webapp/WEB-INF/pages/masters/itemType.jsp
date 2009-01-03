@@ -1,5 +1,5 @@
 <html>
 	<body>
-		<h1>Employee</h1>
+		<h1>Item Type Master</h1>
 	</body>
 </html>

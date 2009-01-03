@@ -870,7 +870,10 @@
         </profile>
         <profile>
             <id>postgresql</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
             <properties>
+            	<dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
+        		<dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
                 <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
                 <jdbc.groupId>postgresql</jdbc.groupId>
                 <jdbc.artifactId>postgresql</jdbc.artifactId>
@@ -968,7 +971,7 @@
         <jdbc.username>postgres</jdbc.username>
         <jdbc.password>postgres</jdbc.password>        
         
-        <!-- Properties calculated by AppFuse when running full-source plugin -->
+		<!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.6.0</aspectj.version>
         <clickstream.version>1.0.2</clickstream.version>
         <commons.beanutils.version>1.7.0</commons.beanutils.version>

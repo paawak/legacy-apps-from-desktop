@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="ims_new">
+<project name="ims">
     <bannerLeft>
-        <name>ims_new</name>
+        <name>ims</name>
         <src>https://appfuse.dev.java.net/images/appfuse-title.gif</src>
         <href>http://appfuse.org</href>
     </bannerLeft>

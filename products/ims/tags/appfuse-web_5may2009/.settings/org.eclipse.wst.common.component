@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-  <wb-module deploy-name="ims">
-    <property name="context-root" value="ims"/>
-    <wb-resource deploy-path="/" source-path="src/main/webapp"/>
+  <wb-module deploy-name="ims-old">
     <property name="java-output-path" value="/target/classes"/>
+<property name="context-root" value="ims-old"/>
+    <wb-resource deploy-path="/" source-path="src/main/webapp"/>
     <dependent-module archiveName="activation-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/activation/activation/1.1/activation-1.1.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>

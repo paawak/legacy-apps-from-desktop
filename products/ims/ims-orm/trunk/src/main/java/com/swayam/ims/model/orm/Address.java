@@ -9,13 +9,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
- * This class is used to represent an address with address, city, province and
- * postal-code information.
+ * This class is used to represent an address with address, city, province and postal-code information.
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @Embeddable
-public class Address implements Serializable {
+public class Address extends BaseObject implements Serializable {
     private static final long serialVersionUID = 3617859655330969141L;
     private String address;
     private String city;
@@ -69,8 +68,7 @@ public class Address implements Serializable {
     }
 
     /**
-     * Overridden equals method for object comparison. Compares based on
-     * hashCode.
+     * Overridden equals method for object comparison. Compares based on hashCode.
      * 
      * @param o
      *            Object to compare
@@ -90,8 +88,7 @@ public class Address implements Serializable {
     }
 
     /**
-     * Overridden hashCode method - compares on address, city, province, country
-     * and postal code.
+     * Overridden hashCode method - compares on address, city, province, country and postal code.
      * 
      * @return hashCode
      */

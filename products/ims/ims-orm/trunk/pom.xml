@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.swayam.ims.model</groupId>
 	<artifactId>ims-orm</artifactId>
-	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Shared jar for ims</name>
+	<packaging>jar</packaging>
+	<name>Object Relational Mapping for IMS</name>
 	<url>http://www.paawak.com</url>
 	<description>
     This is the ORM, Object Relational Mapping, for the IMS. This is shared between the 

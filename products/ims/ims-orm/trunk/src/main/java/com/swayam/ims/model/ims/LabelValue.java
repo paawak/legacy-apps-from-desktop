@@ -1,4 +1,4 @@
-package com.swayam.web.model;
+package com.swayam.ims.model.ims;
 
 import java.io.Serializable;
 import java.util.Comparator;

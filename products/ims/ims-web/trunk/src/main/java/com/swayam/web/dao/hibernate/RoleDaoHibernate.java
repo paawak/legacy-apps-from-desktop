@@ -2,8 +2,8 @@ package com.swayam.web.dao.hibernate;
 
 import java.util.List;
 
+import com.swayam.ims.model.orm.Role;
 import com.swayam.web.dao.RoleDao;
-import com.swayam.web.model.Role;
 
 
 /**

@@ -2,8 +2,8 @@ package com.swayam.web.service.impl;
 
 import java.util.List;
 
+import com.swayam.ims.model.orm.Role;
 import com.swayam.web.dao.RoleDao;
-import com.swayam.web.model.Role;
 import com.swayam.web.service.RoleManager;
 
 /**

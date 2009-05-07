@@ -1,6 +1,7 @@
 package com.swayam.web.service;
 
-import com.swayam.web.model.User;
+import com.swayam.ims.model.orm.User;
+
 import org.springframework.beans.BeanUtils;
 
 public class UserExistsExceptionTest extends BaseManagerTestCase {

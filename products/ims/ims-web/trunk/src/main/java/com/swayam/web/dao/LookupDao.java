@@ -1,6 +1,6 @@
 package com.swayam.web.dao;
 
-import com.swayam.web.model.Role;
+import com.swayam.ims.model.orm.Role;
 
 import java.util.List;
 

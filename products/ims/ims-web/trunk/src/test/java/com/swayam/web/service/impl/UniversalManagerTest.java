@@ -1,7 +1,7 @@
 package com.swayam.web.service.impl;
 
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.dao.UniversalDao;
-import com.swayam.web.model.User;
 import org.jmock.Expectations;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.test.AssertThrows;

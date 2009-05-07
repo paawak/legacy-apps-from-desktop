@@ -1,9 +1,10 @@
 package com.swayam.web.webapp.controller;
 
 import org.springframework.security.AccessDeniedException;
+
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
 import com.swayam.web.service.UserManager;
-import com.swayam.web.model.User;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.validation.BindException;

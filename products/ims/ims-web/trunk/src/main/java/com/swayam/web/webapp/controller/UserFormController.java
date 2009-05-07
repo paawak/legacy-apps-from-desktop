@@ -7,9 +7,10 @@ import org.springframework.security.AuthenticationTrustResolverImpl;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.context.SecurityContextHolder;
 import org.apache.commons.lang.StringUtils;
+
+import com.swayam.ims.model.orm.Role;
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
-import com.swayam.web.model.Role;
-import com.swayam.web.model.User;
 import com.swayam.web.service.RoleManager;
 import com.swayam.web.service.UserExistsException;
 import com.swayam.web.service.UserManager;

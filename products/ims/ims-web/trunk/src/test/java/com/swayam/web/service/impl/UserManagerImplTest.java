@@ -1,10 +1,10 @@
 package com.swayam.web.service.impl;
 
+import com.swayam.ims.model.orm.Role;
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
 import com.swayam.web.dao.RoleDao;
 import com.swayam.web.dao.UserDao;
-import com.swayam.web.model.Role;
-import com.swayam.web.model.User;
 import com.swayam.web.service.UserExistsException;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JMock;

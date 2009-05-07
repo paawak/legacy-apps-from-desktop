@@ -3,9 +3,10 @@ package com.swayam.web.service;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.swayam.ims.model.orm.Role;
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
-import com.swayam.web.model.Role;
-import com.swayam.web.model.User;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.security.AccessDeniedException;

@@ -1,6 +1,7 @@
 package com.swayam.web.dao;
 
-import com.swayam.web.model.User;
+import com.swayam.ims.model.orm.User;
+
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.orm.ObjectRetrievalFailureException;
 

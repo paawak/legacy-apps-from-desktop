@@ -336,8 +336,14 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <dependencies>
+    
+    <dependency>
+    		<groupId>com.swayam.ims.model</groupId>
+			<artifactId>ims-orm</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
         <dependency>
             <groupId>${jdbc.groupId}</groupId>
             <artifactId>${jdbc.artifactId}</artifactId>

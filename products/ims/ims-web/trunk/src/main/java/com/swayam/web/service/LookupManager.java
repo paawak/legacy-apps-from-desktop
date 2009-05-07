@@ -2,7 +2,7 @@ package com.swayam.web.service;
 
 import java.util.List;
 
-import com.swayam.web.model.LabelValue;
+import com.swayam.ims.model.orm.LabelValue;
 
 /**
  * Business Service Interface to talk to persistence layer and

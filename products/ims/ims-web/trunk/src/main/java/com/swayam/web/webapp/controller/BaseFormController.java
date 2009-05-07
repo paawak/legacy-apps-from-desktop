@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
-import com.swayam.web.model.User;
 import com.swayam.web.service.MailEngine;
 import com.swayam.web.service.UserManager;
 

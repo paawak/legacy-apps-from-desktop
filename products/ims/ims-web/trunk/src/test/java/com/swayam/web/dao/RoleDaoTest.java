@@ -3,8 +3,8 @@ package com.swayam.web.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.swayam.ims.model.orm.Role;
 import com.swayam.web.Constants;
-import com.swayam.web.model.Role;
 
 public class RoleDaoTest extends BaseDaoTestCase {
     private RoleDao dao;

@@ -3,8 +3,9 @@ package com.swayam.web.webapp.controller;
 import org.springframework.security.AccessDeniedException;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
+
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
-import com.swayam.web.model.User;
 import com.swayam.web.service.RoleManager;
 import com.swayam.web.service.UserExistsException;
 import com.swayam.web.webapp.util.RequestUtil;

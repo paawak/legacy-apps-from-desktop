@@ -1,9 +1,9 @@
 package com.swayam.web.dao;
 
+import com.swayam.ims.model.orm.Address;
+import com.swayam.ims.model.orm.Role;
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.Constants;
-import com.swayam.web.model.Address;
-import com.swayam.web.model.Role;
-import com.swayam.web.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import junit.framework.Assert;

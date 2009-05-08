@@ -26,10 +26,11 @@ public class LinkDB extends javax.swing.JFrame {
     // VARIABLE DECLARATION
 
     // private static final String HOST ="122.166.21.123";
-    private static final String HOST = "192.168.1.69";
+    // private static final String HOST = "192.168.1.69";
+    private static final String HOST = "localhost";
 
     private static final String CONN = "jdbc:mysql://" + HOST
-            + "/paawakco_neoinventory?user=paawakco_paawak&password=paawak";
+            + "/neoinventory?user=pr&password=pr123";
 
     Connection con;
 
@@ -53,19 +54,12 @@ public class LinkDB extends javax.swing.JFrame {
     }
 
     /*
-     * public LinkDB(String tableName,String userName, String password)
-     * {//constructor this.tableName=tableName; this.userName = userName;
-     * this.password = password; getAllColNames(); }
+     * public LinkDB(String tableName,String userName, String password) {//constructor this.tableName=tableName; this.userName = userName; this.password = password; getAllColNames(); }
      */
 
     /*
-     * public void accessDB() { try {
-     * Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-     * con=DriverManager.getConnection("jdbc:odbc:sha");
-     * stat=con.createStatement(); }//end try catch(Exception e) {
-     * err.displayError
-     * ("class LinkDB, methd. accessDB() from table "+tableName,e); }//end catch
-     * }//
+     * public void accessDB() { try { Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); con=DriverManager.getConnection("jdbc:odbc:sha"); stat=con.createStatement(); }//end try catch(Exception e) {
+     * err.displayError ("class LinkDB, methd. accessDB() from table "+tableName,e); }//end catch }//
      */
 
     private void accessDB() {
@@ -113,7 +107,7 @@ public class LinkDB extends javax.swing.JFrame {
     }
 
     public String addData(int[] colNos, Object[] val) {// whereClause can be an
-                                                       // empty String
+        // empty String
 
         String ss = "";
         if (colNos.length != val.length)
@@ -186,7 +180,7 @@ public class LinkDB extends javax.swing.JFrame {
     }// end addData
 
     public String addDataAllColsBut1st(Object[] val) {// whereClause can be an
-                                                      // empty String
+        // empty String
 
         String ss = "";
         if (no_of_cols - 1 != val.length)

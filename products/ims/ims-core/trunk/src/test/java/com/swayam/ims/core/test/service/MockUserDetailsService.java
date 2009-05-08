@@ -1,4 +1,4 @@
-package com.swayam.web.example.service;
+package com.swayam.ims.core.test.service;
 
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;

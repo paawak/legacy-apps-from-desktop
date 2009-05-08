@@ -1,4 +1,4 @@
-package com.swayam.web.example.dao.hibernate;
+package com.swayam.ims.core.test.dao.hibernate;
 
 import com.swayam.ims.core.dao.BaseDaoTestCase;
 

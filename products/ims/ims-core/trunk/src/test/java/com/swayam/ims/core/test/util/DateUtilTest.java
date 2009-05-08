@@ -1,4 +1,4 @@
-package com.swayam.web.example.util;
+package com.swayam.ims.core.test.util;
 
 import java.util.Date;
 import java.util.Locale;

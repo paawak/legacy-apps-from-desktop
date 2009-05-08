@@ -1,4 +1,4 @@
-package com.swayam.web.example.service;
+package com.swayam.ims.core.test.service;
 
 import com.swayam.ims.core.service.BaseManagerTestCase;
 import com.swayam.ims.core.service.UserExistsException;

@@ -1,4 +1,4 @@
-package com.swayam.web.example.service.impl;
+package com.swayam.ims.core.test.service.impl;
 
 import com.swayam.ims.core.Constants;
 import com.swayam.ims.core.dao.LookupDao;

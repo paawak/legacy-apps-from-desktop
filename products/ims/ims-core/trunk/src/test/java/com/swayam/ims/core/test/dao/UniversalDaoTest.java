@@ -1,4 +1,4 @@
-package com.swayam.web.example.dao;
+package com.swayam.ims.core.test.dao;
 
 import com.swayam.ims.core.dao.BaseDaoTestCase;
 import com.swayam.ims.core.dao.UniversalDao;

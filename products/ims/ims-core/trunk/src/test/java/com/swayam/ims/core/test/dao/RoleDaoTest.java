@@ -1,4 +1,4 @@
-package com.swayam.web.example.dao;
+package com.swayam.ims.core.test.dao;
 
 import java.util.HashMap;
 import java.util.List;

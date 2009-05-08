@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.spring;
+package com.swayam.ims.webapp.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
@@ -18,7 +18,7 @@ import java.util.List;
  * <p>As an example consider the following Spring bean configuration:
 
  * <pre>
- * &lt;bean class=&quot;com.swayam.web.example.webapp.spring.ValidatorExtensionPostProcessor&quot;&gt;
+ * &lt;bean class=&quot;com.swayam.ims.webapp.spring.ValidatorExtensionPostProcessor&quot;&gt;
  *   &lt;property name=&quot;validationConfigLocations&quot;&gt;
  *     &lt;list&gt;
  *       &lt;value&gt;/WEB-INF/foo-validation.xml&lt;/value&gt;

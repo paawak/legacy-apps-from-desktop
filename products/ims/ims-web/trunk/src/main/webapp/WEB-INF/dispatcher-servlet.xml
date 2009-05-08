@@ -15,23 +15,23 @@
 
     <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 
-    <bean id="fileUploadController" class="com.swayam.web.example.webapp.controller.FileUploadController">
+    <bean id="fileUploadController" class="com.swayam.ims.webapp.controller.FileUploadController">
         <property name="validator" ref="beanValidator"/>
         <property name="cancelView" value="redirect:mainMenu.html"/>
         <property name="formView" value="uploadForm"/>
         <property name="successView" value="uploadDisplay"/>
     </bean>
 
-    <bean id="passwordHintController" class="com.swayam.web.example.webapp.controller.PasswordHintController">
+    <bean id="passwordHintController" class="com.swayam.ims.webapp.controller.PasswordHintController">
         <property name="userManager" ref="userManager"/>
         <property name="messageSource" ref="messageSource"/>
         <property name="mailEngine" ref="mailEngine"/>
         <property name="message" ref="mailMessage"/>
     </bean>
 
-    <bean id="reloadController" class="com.swayam.web.example.webapp.controller.ReloadController"/>
+    <bean id="reloadController" class="com.swayam.ims.webapp.controller.ReloadController"/>
 
-    <bean id="signupController" class="com.swayam.web.example.webapp.controller.SignupController">
+    <bean id="signupController" class="com.swayam.ims.webapp.controller.SignupController">
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="signup"/>
         <property name="successView" value="redirect:mainMenu.html"/>
@@ -42,11 +42,11 @@
         <property name="templateName" value="accountCreated.vm"/>
     </bean>
 
-    <bean id="userController" class="com.swayam.web.example.webapp.controller.UserController">
+    <bean id="userController" class="com.swayam.ims.webapp.controller.UserController">
         <property name="userManager" ref="userManager"/>
     </bean>
 
-    <bean id="userFormController" class="com.swayam.web.example.webapp.controller.UserFormController">
+    <bean id="userFormController" class="com.swayam.ims.webapp.controller.UserFormController">
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="userForm"/>
         <property name="successView" value="redirect:users.html"/>

@@ -7,7 +7,7 @@
    <global>
 
       <validator name="twofields"
-         classname="com.swayam.web.example.webapp.util.ValidationUtil"
+         classname="com.swayam.ims.webapp.util.ValidationUtil"
          method="validateTwoFields"
          methodParams="java.lang.Object,
                        org.apache.commons.validator.ValidatorAction,

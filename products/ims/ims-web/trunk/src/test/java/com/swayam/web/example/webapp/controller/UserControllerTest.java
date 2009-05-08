@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.swayam.ims.core.Constants;
+import com.swayam.ims.webapp.controller.BaseControllerTestCase;
+import com.swayam.ims.webapp.controller.UserController;
 
 public class UserControllerTest extends BaseControllerTestCase {
 

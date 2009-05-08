@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.controller;
+package com.swayam.ims.webapp.controller;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.swayam.web.example.webapp.listener.StartupListener;
+
+import com.swayam.ims.webapp.listener.StartupListener;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 

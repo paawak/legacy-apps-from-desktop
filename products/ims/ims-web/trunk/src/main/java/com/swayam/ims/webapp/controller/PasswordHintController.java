@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.controller;
+package com.swayam.ims.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.swayam.ims.core.service.MailEngine;
 import com.swayam.ims.core.service.UserManager;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.webapp.util.RequestUtil;
+import com.swayam.ims.webapp.util.RequestUtil;
 
 /**
  * Simple class to retrieve and send a password hint to users.

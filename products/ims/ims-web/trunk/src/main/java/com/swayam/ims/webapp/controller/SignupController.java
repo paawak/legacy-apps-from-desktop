@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.controller;
+package com.swayam.ims.webapp.controller;
 
 import java.util.Locale;
 
@@ -16,7 +16,7 @@ import com.swayam.ims.core.Constants;
 import com.swayam.ims.core.service.RoleManager;
 import com.swayam.ims.core.service.UserExistsException;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.webapp.util.RequestUtil;
+import com.swayam.ims.webapp.util.RequestUtil;
 
 /**
  * Controller to signup new users.

@@ -48,7 +48,7 @@
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="com.swayam.web.example.webapp.filter.StaticFilter">
+    <logger name="com.swayam.ims.webapp.filter.StaticFilter">
         <level value="INFO"/>
     </logger>
 

@@ -13,6 +13,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.swayam.ims.core.Constants;
+import com.swayam.ims.webapp.listener.StartupListener;
 
 /**
  * This class tests the StartupListener class to verify that variables are placed into the servlet context.

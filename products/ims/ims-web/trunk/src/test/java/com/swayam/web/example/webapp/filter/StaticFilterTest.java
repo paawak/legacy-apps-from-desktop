@@ -5,6 +5,8 @@ import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
+import com.swayam.ims.webapp.filter.StaticFilter;
+
 public class StaticFilterTest extends TestCase {
     private StaticFilter filter = null;
 

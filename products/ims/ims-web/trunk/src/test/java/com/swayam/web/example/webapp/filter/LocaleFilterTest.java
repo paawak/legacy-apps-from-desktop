@@ -13,6 +13,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 
 import com.swayam.ims.core.Constants;
+import com.swayam.ims.webapp.filter.LocaleFilter;
 
 public class LocaleFilterTest extends TestCase {
     private LocaleFilter filter = null;

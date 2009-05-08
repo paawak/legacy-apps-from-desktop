@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.controller;
+package com.swayam.ims.webapp.controller;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

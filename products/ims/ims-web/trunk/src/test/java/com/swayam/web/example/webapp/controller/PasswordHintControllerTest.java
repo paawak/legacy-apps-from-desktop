@@ -4,6 +4,10 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.subethamail.wiser.Wiser;
 
+import com.swayam.ims.webapp.controller.BaseControllerTestCase;
+import com.swayam.ims.webapp.controller.BaseFormController;
+import com.swayam.ims.webapp.controller.PasswordHintController;
+
 public class PasswordHintControllerTest extends BaseControllerTestCase {
     private PasswordHintController c = null;
     

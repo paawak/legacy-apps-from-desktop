@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.filter;
+package com.swayam.ims.webapp.filter;
 
 import java.io.IOException;
 import java.util.Locale;

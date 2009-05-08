@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.controller;
+package com.swayam.ims.webapp.controller;
 
 import java.util.Locale;
 
@@ -23,7 +23,7 @@ import com.swayam.ims.core.service.UserExistsException;
 import com.swayam.ims.core.service.UserManager;
 import com.swayam.ims.model.orm.Role;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.webapp.util.RequestUtil;
+import com.swayam.ims.webapp.util.RequestUtil;
 
 /**
  * Implementation of <strong>SimpleFormController</strong> that interacts with the {@link UserManager} to retrieve/persist values to the database.

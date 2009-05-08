@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.util;
+package com.swayam.ims.webapp.util;
 
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;

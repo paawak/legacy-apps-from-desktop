@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.subethamail.wiser.Wiser;
 
 import com.swayam.ims.core.Constants;
+import com.swayam.ims.webapp.controller.BaseControllerTestCase;
+import com.swayam.ims.webapp.controller.SignupController;
 
 public class SignupControllerTest extends BaseControllerTestCase {
     private SignupController c = null;

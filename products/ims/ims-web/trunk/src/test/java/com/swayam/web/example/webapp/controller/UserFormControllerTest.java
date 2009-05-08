@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.swayam.ims.core.Constants;
 import com.swayam.ims.core.service.UserManager;
 import com.swayam.ims.model.orm.User;
+import com.swayam.ims.webapp.controller.BaseControllerTestCase;
+import com.swayam.ims.webapp.controller.UserFormController;
 
 public class UserFormControllerTest extends BaseControllerTestCase {
     private UserFormController c = null;

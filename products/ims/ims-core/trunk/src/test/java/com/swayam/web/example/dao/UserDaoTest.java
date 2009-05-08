@@ -1,9 +1,12 @@
 package com.swayam.web.example.dao;
 
+import com.swayam.ims.core.Constants;
+import com.swayam.ims.core.dao.BaseDaoTestCase;
+import com.swayam.ims.core.dao.RoleDao;
+import com.swayam.ims.core.dao.UserDao;
 import com.swayam.ims.model.orm.Address;
 import com.swayam.ims.model.orm.Role;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.Constants;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import junit.framework.Assert;

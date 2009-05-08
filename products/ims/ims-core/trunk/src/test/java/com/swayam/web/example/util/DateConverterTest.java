@@ -10,6 +10,9 @@ import java.util.Locale;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import com.swayam.ims.core.util.DateConverter;
+import com.swayam.ims.core.util.DateUtil;
+
 import junit.framework.TestCase;
 
 public class DateConverterTest extends TestCase {

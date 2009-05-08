@@ -39,12 +39,12 @@
         </tx:attributes>
     </tx:advice>
     
-    <bean id="userSecurityAdvice" class="com.swayam.web.example.service.UserSecurityAdvice"/>
+    <bean id="userSecurityAdvice" class="com.swayam.ims.core.service.UserSecurityAdvice"/>
     
     <!-- =================================================================== -->
     <!-- Mail: Sender and Velocity configuration                             -->
     <!-- =================================================================== -->
-    <bean id="mailEngine" class="com.swayam.web.example.service.MailEngine">
+    <bean id="mailEngine" class="com.swayam.ims.core.service.MailEngine">
         <property name="mailSender" ref="mailSender"/>
         <property name="velocityEngine" ref="velocityEngine"/>
         <property name="from" value="${mail.default.from}"/>
@@ -89,20 +89,20 @@
     <!-- =================================================================== -->
     <!-- Managers: For accessing DAOs                                        -->
     <!-- =================================================================== -->
-    <bean id="manager" class="com.swayam.web.example.service.impl.UniversalManagerImpl">
+    <bean id="manager" class="com.swayam.ims.core.service.impl.UniversalManagerImpl">
         <property name="dao" ref="universalDao"/>
     </bean>
     
-    <bean id="lookupManager" class="com.swayam.web.example.service.impl.LookupManagerImpl">
+    <bean id="lookupManager" class="com.swayam.ims.core.service.impl.LookupManagerImpl">
         <property name="lookupDao" ref="lookupDao"/>
     </bean>
 
-    <bean id="userManager" class="com.swayam.web.example.service.impl.UserManagerImpl">
+    <bean id="userManager" class="com.swayam.ims.core.service.impl.UserManagerImpl">
         <property name="userDao" ref="userDao"/>
         <property name="passwordEncoder" ref="passwordEncoder"/>
     </bean>
 
-    <bean id="roleManager" class="com.swayam.web.example.service.impl.RoleManagerImpl">
+    <bean id="roleManager" class="com.swayam.ims.core.service.impl.RoleManagerImpl">
         <property name="roleDao" ref="roleDao"/>
     </bean>
 

@@ -1,5 +1,8 @@
 package com.swayam.web.example.service;
 
+import com.swayam.ims.core.service.BaseManagerTestCase;
+import com.swayam.ims.core.service.UserExistsException;
+import com.swayam.ims.core.service.UserManager;
 import com.swayam.ims.model.orm.User;
 
 import org.springframework.beans.BeanUtils;

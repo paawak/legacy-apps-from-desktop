@@ -13,16 +13,16 @@
     </bean>
 
     <!-- Advice Class -->
-    <bean id="userSecurityAdvice" class="com.swayam.web.example.service.UserSecurityAdvice"/>
+    <bean id="userSecurityAdvice" class="com.swayam.ims.core.service.UserSecurityAdvice"/>
 
-    <bean id="userManager" class="com.swayam.web.example.service.impl.UserManagerImpl">
+    <bean id="userManager" class="com.swayam.ims.core.service.impl.UserManagerImpl">
         <property name="passwordEncoder">
             <bean class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
         </property>
     </bean>
 
     <bean id="target" class="org.springframework.aop.framework.ProxyFactoryBean">
-        <property name="proxyInterfaces" value="com.swayam.web.example.service.UserManager"/>
+        <property name="proxyInterfaces" value="com.swayam.ims.core.service.UserManager"/>
         <property name="interceptorNames">
             <list>
                 <idref local="userSecurityInterceptor"/>

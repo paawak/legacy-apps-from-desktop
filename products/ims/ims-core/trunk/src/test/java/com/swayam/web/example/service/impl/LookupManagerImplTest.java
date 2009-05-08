@@ -1,9 +1,11 @@
 package com.swayam.web.example.service.impl;
 
+import com.swayam.ims.core.Constants;
+import com.swayam.ims.core.dao.LookupDao;
+import com.swayam.ims.core.service.impl.BaseManagerMockTestCase;
+import com.swayam.ims.core.service.impl.LookupManagerImpl;
 import com.swayam.ims.model.orm.LabelValue;
 import com.swayam.ims.model.orm.Role;
-import com.swayam.web.example.dao.LookupDao;
-import com.swayam.web.example.Constants;
 import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;

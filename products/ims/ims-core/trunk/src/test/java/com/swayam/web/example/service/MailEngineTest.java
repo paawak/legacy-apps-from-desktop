@@ -6,6 +6,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
+import com.swayam.ims.core.service.BaseManagerTestCase;
+import com.swayam.ims.core.service.MailEngine;
+
 import javax.mail.BodyPart;
 import javax.mail.Part;
 import javax.mail.internet.MimeMessage;

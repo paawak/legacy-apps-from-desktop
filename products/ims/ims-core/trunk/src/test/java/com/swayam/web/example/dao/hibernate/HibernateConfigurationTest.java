@@ -1,6 +1,7 @@
 package com.swayam.web.example.dao.hibernate;
 
-import com.swayam.web.example.dao.BaseDaoTestCase;
+import com.swayam.ims.core.dao.BaseDaoTestCase;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;

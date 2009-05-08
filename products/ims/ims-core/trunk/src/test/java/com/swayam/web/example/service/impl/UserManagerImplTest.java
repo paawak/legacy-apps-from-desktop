@@ -1,11 +1,14 @@
 package com.swayam.web.example.service.impl;
 
+import com.swayam.ims.core.Constants;
+import com.swayam.ims.core.dao.RoleDao;
+import com.swayam.ims.core.dao.UserDao;
+import com.swayam.ims.core.service.UserExistsException;
+import com.swayam.ims.core.service.impl.BaseManagerMockTestCase;
+import com.swayam.ims.core.service.impl.RoleManagerImpl;
+import com.swayam.ims.core.service.impl.UserManagerImpl;
 import com.swayam.ims.model.orm.Role;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.Constants;
-import com.swayam.web.example.dao.RoleDao;
-import com.swayam.web.example.dao.UserDao;
-import com.swayam.web.example.service.UserExistsException;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JMock;
 import static org.junit.Assert.*;

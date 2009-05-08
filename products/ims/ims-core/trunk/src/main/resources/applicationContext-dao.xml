@@ -27,19 +27,19 @@
     <!-- UniversalDao - can be used when doing standard CRUD - made available 
         for those who don't mind casting.  If you don't want to cast, look at 
         'fooDao' below. -->
-    <bean id="universalDao" class="com.swayam.web.example.dao.hibernate.UniversalDaoHibernate">
+    <bean id="universalDao" class="com.swayam.ims.core.dao.hibernate.UniversalDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="lookupDao" class="com.swayam.web.example.dao.hibernate.LookupDaoHibernate">
+    <bean id="lookupDao" class="com.swayam.ims.core.dao.hibernate.LookupDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="userDao" class="com.swayam.web.example.dao.hibernate.UserDaoHibernate">
+    <bean id="userDao" class="com.swayam.ims.core.dao.hibernate.UserDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="roleDao" class="com.swayam.web.example.dao.hibernate.RoleDaoHibernate">
+    <bean id="roleDao" class="com.swayam.ims.core.dao.hibernate.RoleDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
@@ -49,8 +49,8 @@
         
         eg... 'fooDao'
     
-    <bean id="fooDao" class="com.swayam.web.example.dao.hibernate.GenericDaoHibernate">
-        <constructor-arg value="com.swayam.web.example.model.Foo"/>
+    <bean id="fooDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.core.model.Foo"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     

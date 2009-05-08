@@ -2,6 +2,9 @@ package com.swayam.web.example.dao;
 
 import java.util.List;
 
+import com.swayam.ims.core.dao.BaseDaoTestCase;
+import com.swayam.ims.core.dao.LookupDao;
+
 /**
  * This class tests the current LookupDao implementation class
  * @author mraible

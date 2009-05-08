@@ -1,5 +1,7 @@
 package com.swayam.web.example.dao;
 
+import com.swayam.ims.core.dao.BaseDaoTestCase;
+import com.swayam.ims.core.dao.UniversalDao;
 import com.swayam.ims.model.orm.User;
 
 import org.springframework.dao.InvalidDataAccessApiUsageException;

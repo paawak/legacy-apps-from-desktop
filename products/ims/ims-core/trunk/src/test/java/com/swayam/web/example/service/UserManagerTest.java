@@ -3,8 +3,11 @@ package com.swayam.web.example.service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.swayam.ims.core.Constants;
+import com.swayam.ims.core.service.BaseManagerTestCase;
+import com.swayam.ims.core.service.RoleManager;
+import com.swayam.ims.core.service.UserManager;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.Constants;
 
 public class UserManagerTest extends BaseManagerTestCase {
     //~ Instance fields ========================================================

@@ -39,7 +39,7 @@
         <level value="WARN"/>
     </logger>
    
-    <logger name="com.swayam.web.example">
+    <logger name="com.swayam.ims.core">
         <level value="DEBUG"/>
     </logger>
 

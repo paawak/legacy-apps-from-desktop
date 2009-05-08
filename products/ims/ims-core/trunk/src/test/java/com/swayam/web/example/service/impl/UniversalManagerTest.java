@@ -1,7 +1,9 @@
 package com.swayam.web.example.service.impl;
 
+import com.swayam.ims.core.dao.UniversalDao;
+import com.swayam.ims.core.service.impl.BaseManagerMockTestCase;
+import com.swayam.ims.core.service.impl.UniversalManagerImpl;
 import com.swayam.ims.model.orm.User;
-import com.swayam.web.example.dao.UniversalDao;
 import org.jmock.Expectations;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.test.AssertThrows;

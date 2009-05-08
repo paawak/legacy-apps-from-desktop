@@ -28,7 +28,7 @@ import java.util.Properties;
  *     &lt;/property&gt;
  *     &lt;property name=&quot;annotatedClasses&quot;&gt;
  *         &lt;list&gt;
- *             &lt;value&gt;com.swayam.web.example.model.Bar&lt;/value&gt;
+ *             &lt;value&gt;com.swayam.ims.model.orm.Bar&lt;/value&gt;
  *         &lt;/list&gt;
  *     &lt;/property&gt;
  * &lt;/bean&gt;

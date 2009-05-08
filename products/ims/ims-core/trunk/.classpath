@@ -67,6 +67,7 @@
       <attribute value="jar:file:/home/paawak/.m2/repository/org/hibernate/hibernate-commons-annotations/3.3.0.ga/hibernate-commons-annotations-3.3.0.ga-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/swayam/ims/ims-orm/1.0.0-SNAPSHOT/ims-orm-1.0.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/jdom/jdom/1.0/jdom-1.0.jar" sourcepath="M2_REPO/jdom/jdom/1.0/jdom-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jmock/jmock/2.4.0/jmock-2.4.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jmock/jmock-junit4/2.4.0/jmock-junit4-2.4.0.jar"/>
@@ -90,8 +91,10 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/2.5.4/spring-core-2.5.4.jar" sourcepath="M2_REPO/org/springframework/spring-core/2.5.4/spring-core-2.5.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/2.5.4/spring-jdbc-2.5.4.jar" sourcepath="M2_REPO/org/springframework/spring-jdbc/2.5.4/spring-jdbc-2.5.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/2.5.4/spring-orm-2.5.4.jar" sourcepath="M2_REPO/org/springframework/spring-orm/2.5.4/spring-orm-2.5.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-acl/2.0.1/spring-security-acl-2.0.1.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-acl/2.0.1/spring-security-acl-2.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-core/2.0.1/spring-security-core-2.0.1.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-core/2.0.1/spring-security-core-2.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-core-tiger/2.0.1/spring-security-core-tiger-2.0.1.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-core-tiger/2.0.1/spring-security-core-tiger-2.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-taglibs/2.0.1/spring-security-taglibs-2.0.1.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-taglibs/2.0.1/spring-security-taglibs-2.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/2.5.4/spring-test-2.5.4.jar" sourcepath="M2_REPO/org/springframework/spring-test/2.5.4/spring-test-2.5.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/2.5.4/spring-tx-2.5.4.jar" sourcepath="M2_REPO/org/springframework/spring-tx/2.5.4/spring-tx-2.5.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>

@@ -3,7 +3,8 @@ package com.swayam.web.example.util;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.swayam.web.example.model.LabelValue;
+
+import com.swayam.ims.model.orm.LabelValue;
 
 import java.util.Enumeration;
 import java.util.HashMap;

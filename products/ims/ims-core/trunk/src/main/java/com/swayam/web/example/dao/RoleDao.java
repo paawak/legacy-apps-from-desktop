@@ -1,6 +1,6 @@
 package com.swayam.web.example.dao;
 
-import com.swayam.web.example.model.Role;
+import com.swayam.ims.model.orm.Role;
 
 /**
  * Role Data Access Object (DAO) interface.

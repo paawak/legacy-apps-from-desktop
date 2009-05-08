@@ -22,7 +22,7 @@ import java.util.Map;
  * <p>To register this class in your Spring context file, use the following XML.
  * <pre>
  *      &lt;bean id="fooDao" class="com.swayam.web.example.dao.hibernate.GenericDaoHibernate"&gt;
- *          &lt;constructor-arg value="com.swayam.web.example.model.Foo"/&gt;
+ *          &lt;constructor-arg value="com.swayam.ims.model.orm.Foo"/&gt;
  *          &lt;property name="sessionFactory" ref="sessionFactory"/&gt;
  *      &lt;/bean&gt;
  * </pre>

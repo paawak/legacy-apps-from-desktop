@@ -6,10 +6,11 @@ import org.springframework.security.context.SecurityContext;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.security.context.SecurityContextImpl;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
+
+import com.swayam.ims.model.orm.Role;
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.example.Constants;
 import com.swayam.web.example.dao.UserDao;
-import com.swayam.web.example.model.Role;
-import com.swayam.web.example.model.User;
 import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.jmock.Mockery;

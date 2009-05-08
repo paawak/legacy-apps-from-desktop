@@ -1,6 +1,6 @@
 package com.swayam.web.example.service;
 
-import com.swayam.web.example.model.Role;
+import com.swayam.ims.model.orm.Role;
 
 import java.util.List;
 

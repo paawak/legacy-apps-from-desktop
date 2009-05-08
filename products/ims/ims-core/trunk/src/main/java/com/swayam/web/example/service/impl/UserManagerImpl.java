@@ -4,8 +4,9 @@ import org.springframework.security.providers.dao.DaoAuthenticationProvider;
 import org.springframework.security.providers.dao.SaltSource;
 import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.example.dao.UserDao;
-import com.swayam.web.example.model.User;
 import com.swayam.web.example.service.UserExistsException;
 import com.swayam.web.example.service.UserManager;
 import com.swayam.web.example.service.UserService;

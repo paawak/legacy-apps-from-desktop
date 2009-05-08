@@ -3,8 +3,9 @@ package com.swayam.web.example.service;
 import java.util.List;
 
 import org.springframework.security.userdetails.UsernameNotFoundException;
+
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.example.dao.UserDao;
-import com.swayam.web.example.model.User;
 
 
 /**

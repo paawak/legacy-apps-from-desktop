@@ -2,7 +2,9 @@ package com.swayam.web.example.dao;
 
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
-import com.swayam.web.example.model.User;
+
+import com.swayam.ims.model.orm.User;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

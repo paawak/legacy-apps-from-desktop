@@ -3,8 +3,9 @@ package com.swayam.web.example.dao.hibernate;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+
+import com.swayam.ims.model.orm.User;
 import com.swayam.web.example.dao.UserDao;
-import com.swayam.web.example.model.User;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;

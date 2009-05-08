@@ -1,6 +1,7 @@
 <projectDescription>
   <name>ims-core</name>
-  <comment/>
+  <comment>This is the core module for IMS. All business logic, database intercation, etc, happens here.
+    This module exposes a set of interfaces so the other modules, like the web module can use it.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

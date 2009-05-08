@@ -2,8 +2,8 @@ package com.swayam.web.example.dao.hibernate;
 
 import java.util.List;
 
+import com.swayam.ims.model.orm.Role;
 import com.swayam.web.example.dao.LookupDao;
-import com.swayam.web.example.model.Role;
 
 /**
  * Hibernate implementation of LookupDao.

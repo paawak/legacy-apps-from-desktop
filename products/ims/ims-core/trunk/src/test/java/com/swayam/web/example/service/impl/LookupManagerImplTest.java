@@ -1,8 +1,8 @@
 package com.swayam.web.example.service.impl;
 
+import com.swayam.ims.model.orm.LabelValue;
+import com.swayam.ims.model.orm.Role;
 import com.swayam.web.example.dao.LookupDao;
-import com.swayam.web.example.model.Role;
-import com.swayam.web.example.model.LabelValue;
 import com.swayam.web.example.Constants;
 import org.jmock.Expectations;
 import org.junit.Before;

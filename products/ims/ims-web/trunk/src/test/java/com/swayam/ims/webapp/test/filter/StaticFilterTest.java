@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.filter;
+package com.swayam.ims.webapp.test.filter;
 
 import junit.framework.TestCase;
 import org.springframework.mock.web.MockFilterConfig;

@@ -1,4 +1,4 @@
-package com.swayam.web.example.webapp.controller;
+package com.swayam.ims.webapp.test.controller;
 
 import javax.servlet.http.HttpServletResponse;
 

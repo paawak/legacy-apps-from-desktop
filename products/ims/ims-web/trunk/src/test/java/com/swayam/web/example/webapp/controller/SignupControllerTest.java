@@ -2,14 +2,15 @@ package com.swayam.web.example.webapp.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.swayam.web.example.Constants;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.subethamail.wiser.Wiser;
-import org.springframework.security.context.SecurityContextHolder;
+
+import com.swayam.ims.core.Constants;
 
 public class SignupControllerTest extends BaseControllerTestCase {
     private SignupController c = null;
@@ -17,12 +18,13 @@ public class SignupControllerTest extends BaseControllerTestCase {
     public void setSignupController(SignupController signup) {
         this.c = signup;
     }
-    
+
     public void testDisplayForm() throws Exception {
         MockHttpServletRequest request = newGet("/signup.html");
         HttpServletResponse response = new MockHttpServletResponse();
         ModelAndView mv = c.handleRequest(request, response);
-        assertTrue("returned correct view name", mv.getViewName().equals("signup"));
+        assertTrue("returned correct view name", mv.getViewName().equals(
+                "signup"));
     }
 
     public void testSignupUser() throws Exception {
@@ -41,20 +43,21 @@ public class SignupControllerTest extends BaseControllerTestCase {
         request.addParameter("passwordHint", "Password is one with you.");
 
         HttpServletResponse response = new MockHttpServletResponse();
-        
-       // start SMTP Server
+
+        // start SMTP Server
         Wiser wiser = new Wiser();
         wiser.setPort(getSmtpPort());
         wiser.start();
-        
+
         ModelAndView mv = c.handleRequest(request, response);
-        Errors errors = (Errors) mv.getModel().get(BindException.MODEL_KEY_PREFIX + "user");
+        Errors errors = (Errors) mv.getModel().get(
+                BindException.MODEL_KEY_PREFIX + "user");
         assertTrue("no errors returned in model", errors == null);
-        
+
         // verify an account information e-mail was sent
         wiser.stop();
         assertTrue(wiser.getMessages().size() == 1);
-        
+
         // verify that success messages are in the request
         assertNotNull(request.getSession().getAttribute("successMessages"));
         assertNotNull(request.getSession().getAttribute(Constants.REGISTERED));

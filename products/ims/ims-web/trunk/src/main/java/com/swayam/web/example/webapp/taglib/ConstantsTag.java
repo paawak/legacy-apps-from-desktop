@@ -11,24 +11,31 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.swayam.web.example.Constants;
 
+import com.swayam.ims.core.Constants;
 
 /**
- * <p>This class is designed to put all the public variables in a class to a
- * specified scope - designed for exposing a Constants class to Tag
- * Libraries.</p>
- *
- * <p>It is designed to be used as follows:
- * <pre>&lt;tag:constants /&gt;</pre>
+ * <p>
+ * This class is designed to put all the public variables in a class to a specified scope - designed for exposing a Constants class to Tag Libraries.
  * </p>
- *
- * <p>Optional values are "className" (fully qualified) and "scope".</p>
- *
+ * 
+ * <p>
+ * It is designed to be used as follows:
+ * 
+ * <pre>
+ * &lt;tag:constants /&gt;
+ * </pre>
+ * 
+ * </p>
+ * 
+ * <p>
+ * Optional values are "className" (fully qualified) and "scope".
+ * </p>
+ * 
  * <p>
  * <a href="BaseAction.java.html"><i>View Source</i></a>
  * </p>
- *
+ * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 public class ConstantsTag extends TagSupport {
@@ -51,9 +58,11 @@ public class ConstantsTag extends TagSupport {
     protected String var;
 
     /**
-     * Main method that does processing and exposes Constants in specified scope 
+     * Main method that does processing and exposes Constants in specified scope
+     * 
      * @return int
-     * @throws JspException if processing fails
+     * @throws JspException
+     *             if processing fails
      */
     @Override
     public int doStartTag() throws JspException {
@@ -80,12 +89,14 @@ public class ConstantsTag extends TagSupport {
                 AccessibleObject.setAccessible(fields, true);
 
                 for (Field field : fields) {
-                    pageContext.setAttribute(field.getName(), field.get(this), toScope);
+                    pageContext.setAttribute(field.getName(), field.get(this),
+                            toScope);
                 }
             } else {
                 try {
                     Object value = c.getField(var).get(this);
-                    pageContext.setAttribute(c.getField(var).getName(), value, toScope);
+                    pageContext.setAttribute(c.getField(var).getName(), value,
+                            toScope);
                 } catch (NoSuchFieldException nsf) {
                     log.error(nsf.getMessage());
                     throw new JspException(nsf);
@@ -134,8 +145,7 @@ public class ConstantsTag extends TagSupport {
     }
 
     /**
-     * Maps lowercase JSP scope names to their PageContext integer constant
-     * values.
+     * Maps lowercase JSP scope names to their PageContext integer constant values.
      */
     private static final Map<String, Integer> SCOPES = new HashMap<String, Integer>();
 
@@ -148,19 +158,22 @@ public class ConstantsTag extends TagSupport {
         SCOPES.put("session", PageContext.SESSION_SCOPE);
         SCOPES.put("application", PageContext.APPLICATION_SCOPE);
     }
-    
+
     /**
      * Converts the scope name into its corresponding PageContext constant value.
-     * @param scopeName Can be "page", "request", "session", or "application" in any
-     * case.
+     * 
+     * @param scopeName
+     *            Can be "page", "request", "session", or "application" in any case.
      * @return The constant representing the scope (ie. PageContext.REQUEST_SCOPE).
-     * @throws JspException if the scopeName is not a valid name.
+     * @throws JspException
+     *             if the scopeName is not a valid name.
      */
     public int getScope(String scopeName) throws JspException {
         Integer scope = (Integer) SCOPES.get(scopeName.toLowerCase());
 
         if (scope == null) {
-            throw new JspException("Scope '" + scopeName + "' not a valid option");
+            throw new JspException("Scope '" + scopeName
+                    + "' not a valid option");
         }
 
         return scope;

@@ -12,20 +12,20 @@ import java.util.Locale;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.swayam.web.example.model.LabelValue;
 import org.displaytag.tags.el.ExpressionEvaluator;
 
+import com.swayam.ims.model.orm.LabelValue;
+
 /**
- * Tag for creating multiple &lt;select&gt; options for displaying a list of
- * country names.
- *
+ * Tag for creating multiple &lt;select&gt; options for displaying a list of country names.
+ * 
  * <p>
  * <b>NOTE</b> - This tag requires a Java2 (JDK 1.2 or later) platform.
  * </p>
- *
+ * 
  * @author Jens Fischer, Matt Raible
  * @version $Revision: 1.6 $ $Date: 2006/07/15 11:57:20 $
- *
+ * 
  * @jsp.tag name="country" bodycontent="empty"
  */
 public class CountryTag extends TagSupport {
@@ -36,8 +36,9 @@ public class CountryTag extends TagSupport {
     private String selected;
 
     /**
-     * @param name The name to set.
-     *
+     * @param name
+     *            The name to set.
+     * 
      * @jsp.attribute required="false" rtexprvalue="true"
      */
     public void setName(String name) {
@@ -45,7 +46,8 @@ public class CountryTag extends TagSupport {
     }
 
     /**
-     * @param prompt The prompt to set.
+     * @param prompt
+     *            The prompt to set.
      * @jsp.attribute required="false" rtexprvalue="true"
      */
     public void setPrompt(String prompt) {
@@ -53,7 +55,8 @@ public class CountryTag extends TagSupport {
     }
 
     /**
-     * @param selected The selected option.
+     * @param selected
+     *            The selected option.
      * @jsp.attribute required="false" rtexprvalue="true"
      */
     public void setDefault(String selected) {
@@ -61,11 +64,10 @@ public class CountryTag extends TagSupport {
     }
 
     /**
-     * Property used to simply stuff the list of countries into a
-     * specified scope.
-     *
+     * Property used to simply stuff the list of countries into a specified scope.
+     * 
      * @param scope
-     *
+     * 
      * @jsp.attribute required="false" rtexprvalue="true"
      */
     public void setToScope(String scope) {
@@ -74,11 +76,12 @@ public class CountryTag extends TagSupport {
 
     /**
      * Process the start of this tag.
-     *
+     * 
      * @return int status
-     *
-     * @exception JspException if a JSP exception has occurred
-     *
+     * 
+     * @exception JspException
+     *                if a JSP exception has occurred
+     * 
      * @see javax.servlet.jsp.tagext.Tag#doStartTag()
      */
     public int doStartTag() throws JspException {
@@ -101,11 +104,13 @@ public class CountryTag extends TagSupport {
             } else if (scope.equals("application")) {
                 pageContext.getServletContext().setAttribute(name, countries);
             } else {
-                throw new JspException("Attribute 'scope' must be: page, request, session or application");
+                throw new JspException(
+                        "Attribute 'scope' must be: page, request, session or application");
             }
         } else {
             StringBuffer sb = new StringBuffer();
-            sb.append("<select name=\"" + name + "\" id=\"" + name + "\" class=\"select\">\n");
+            sb.append("<select name=\"" + name + "\" id=\"" + name
+                    + "\" class=\"select\">\n");
 
             if (prompt != null) {
                 sb.append("    <option value=\"\" selected=\"selected\">");
@@ -137,7 +142,7 @@ public class CountryTag extends TagSupport {
 
     /**
      * Release aquired resources to enable tag reusage.
-     *
+     * 
      * @see javax.servlet.jsp.tagext.Tag#release()
      */
     public void release() {
@@ -145,12 +150,11 @@ public class CountryTag extends TagSupport {
     }
 
     /**
-     * Build a List of LabelValues for all the available countries. Uses
-     * the two letter uppercase ISO name of the country as the value and the
-     * localized country name as the label.
-     *
-     * @param locale The Locale used to localize the country names.
-     *
+     * Build a List of LabelValues for all the available countries. Uses the two letter uppercase ISO name of the country as the value and the localized country name as the label.
+     * 
+     * @param locale
+     *            The Locale used to localize the country names.
+     * 
      * @return List of LabelValues for all available countries.
      */
     protected List buildCountryList(Locale locale) {
@@ -178,16 +182,16 @@ public class CountryTag extends TagSupport {
     }
 
     /**
-     * Class to compare LabelValues using their labels with
-     * locale-sensitive behaviour.
+     * Class to compare LabelValues using their labels with locale-sensitive behaviour.
      */
     public class LabelValueComparator implements Comparator {
         private Comparator c;
 
         /**
          * Creates a new LabelValueComparator object.
-         *
-         * @param locale The Locale used for localized String comparison.
+         * 
+         * @param locale
+         *            The Locale used for localized String comparison.
          */
         public LabelValueComparator(Locale locale) {
             c = Collator.getInstance(locale);
@@ -195,10 +199,12 @@ public class CountryTag extends TagSupport {
 
         /**
          * Compares the localized labels of two LabelValues.
-         *
-         * @param o1 The first LabelValue to compare.
-         * @param o2 The second LabelValue to compare.
-         *
+         * 
+         * @param o1
+         *            The first LabelValue to compare.
+         * @param o2
+         *            The second LabelValue to compare.
+         * 
          * @return The value returned by comparing the localized labels.
          */
         public final int compare(Object o1, Object o2) {

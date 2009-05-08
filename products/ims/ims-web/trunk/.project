@@ -1,6 +1,6 @@
 <projectDescription>
   <name>ims-web</name>
-  <comment/>
+  <comment>This is the web interface for IMS, it uses Spring MVC.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>
@@ -17,8 +17,8 @@
     </buildCommand>
   </buildSpec>
   <natures>
-    <nature>org.eclipse.jdt.core.javanature</nature>
     <nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+    <nature>org.eclipse.jdt.core.javanature</nature>
     <nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
     <nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
     <nature>org.springframework.ide.eclipse.core.springnature</nature>

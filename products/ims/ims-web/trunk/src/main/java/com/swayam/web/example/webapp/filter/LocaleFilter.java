@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
-import com.swayam.web.example.Constants;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.swayam.ims.core.Constants;
 
 /**
  * Filter to wrap request with a request including user preferred locale.
@@ -21,18 +22,22 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class LocaleFilter extends OncePerRequestFilter {
 
     /**
-     * This method looks for a "locale" request parameter. If it finds one, it sets it as the preferred locale
-     * and also configures it to work with JSTL.
+     * This method looks for a "locale" request parameter. If it finds one, it sets it as the preferred locale and also configures it to work with JSTL.
      * 
-     * @param request the current request
-     * @param response the current response
-     * @param chain the chain
-     * @throws IOException when something goes wrong
-     * @throws ServletException when a communication failure happens
+     * @param request
+     *            the current request
+     * @param response
+     *            the current response
+     * @param chain
+     *            the chain
+     * @throws IOException
+     *             when something goes wrong
+     * @throws ServletException
+     *             when a communication failure happens
      */
     @SuppressWarnings("unchecked")
-    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                 FilterChain chain)
+    public void doFilterInternal(HttpServletRequest request,
+            HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
         String locale = request.getParameter("locale");
@@ -53,13 +58,16 @@ public class LocaleFilter extends OncePerRequestFilter {
 
         if (session != null) {
             if (preferredLocale == null) {
-                preferredLocale = (Locale) session.getAttribute(Constants.PREFERRED_LOCALE_KEY);
+                preferredLocale = (Locale) session
+                        .getAttribute(Constants.PREFERRED_LOCALE_KEY);
             } else {
-                session.setAttribute(Constants.PREFERRED_LOCALE_KEY, preferredLocale);
+                session.setAttribute(Constants.PREFERRED_LOCALE_KEY,
+                        preferredLocale);
                 Config.set(session, Config.FMT_LOCALE, preferredLocale);
             }
 
-            if (preferredLocale != null && !(request instanceof LocaleRequestWrapper)) {
+            if (preferredLocale != null
+                    && !(request instanceof LocaleRequestWrapper)) {
                 request = new LocaleRequestWrapper(request, preferredLocale);
                 LocaleContextHolder.setLocale(preferredLocale);
             }
@@ -67,7 +75,8 @@ public class LocaleFilter extends OncePerRequestFilter {
 
         String theme = request.getParameter("theme");
         if (theme != null && request.isUserInRole(Constants.ADMIN_ROLE)) {
-            Map<String, Object> config = (Map) getServletContext().getAttribute(Constants.CONFIG);
+            Map<String, Object> config = (Map) getServletContext()
+                    .getAttribute(Constants.CONFIG);
             config.put(Constants.CSS_THEME, theme);
         }
 

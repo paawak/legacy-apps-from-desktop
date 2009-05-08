@@ -2,13 +2,15 @@ package com.swayam.web.example.webapp.controller;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.swayam.web.example.model.BaseObject;
-import com.swayam.web.example.util.DateUtil;
-
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -17,7 +19,11 @@ import org.springframework.test.AbstractTransactionalDataSourceSpringContextTest
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-public abstract class BaseControllerTestCase extends AbstractTransactionalDataSourceSpringContextTests {
+import com.swayam.ims.core.util.DateUtil;
+import com.swayam.ims.model.orm.BaseObject;
+
+public abstract class BaseControllerTestCase
+        extends AbstractTransactionalDataSourceSpringContextTests {
     protected transient final Log log = LogFactory.getLog(getClass());
     private int smtpPort = 25250;
 
@@ -29,8 +35,7 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
                 "classpath:/applicationContext-service.xml",
                 "classpath*:/applicationContext.xml", // for modular archetypes
                 "/WEB-INF/applicationContext*.xml",
-                "/WEB-INF/dispatcher-servlet.xml"
-            };
+                "/WEB-INF/dispatcher-servlet.xml" };
     }
 
     @Override
@@ -38,7 +43,8 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
         smtpPort = smtpPort + (int) (Math.random() * 100);
         // change the port on the mailSender so it doesn't conflict with an
         // existing SMTP server on localhost
-        JavaMailSenderImpl mailSender = (JavaMailSenderImpl) applicationContext.getBean("mailSender");
+        JavaMailSenderImpl mailSender = (JavaMailSenderImpl) applicationContext
+                .getBean("mailSender");
         mailSender.setPort(getSmtpPort());
         mailSender.setHost("localhost");
     }
@@ -48,13 +54,14 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
     }
 
     /**
-     * Subclasses can invoke this to get a context key for the given location.
-     * This doesn't affect the applicationContext instance variable in this class.
-     * Dependency Injection cannot be applied from such contexts.
+     * Subclasses can invoke this to get a context key for the given location. This doesn't affect the applicationContext instance variable in this class. Dependency Injection cannot be applied from
+     * such contexts.
      */
-    protected ConfigurableApplicationContext loadContextLocations(String[] locations) {
+    protected ConfigurableApplicationContext loadContextLocations(
+            String[] locations) {
         if (logger.isInfoEnabled()) {
-            logger.info("Loading additional configuration from: " + StringUtils.arrayToCommaDelimitedString(locations));
+            logger.info("Loading additional configuration from: "
+                    + StringUtils.arrayToCommaDelimitedString(locations));
         }
         XmlWebApplicationContext ctx = new XmlWebApplicationContext();
         ctx.setConfigLocations(locations);
@@ -62,11 +69,13 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
         ctx.refresh();
         return ctx;
     }
-    
+
     /**
      * Convenience methods to make tests simpler
+     * 
      * @return a MockHttpServletRequest with a POST to the specified URL
-     * @param url the URL to post to
+     * @param url
+     *            the URL to post to
      */
     public MockHttpServletRequest newPost(String url) {
         return new MockHttpServletRequest("POST", url);
@@ -76,11 +85,13 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
         return new MockHttpServletRequest("GET", url);
     }
 
-    public void objectToRequestParameters(Object o, MockHttpServletRequest request) throws Exception {
+    public void objectToRequestParameters(Object o,
+            MockHttpServletRequest request) throws Exception {
         objectToRequestParameters(o, request, null);
     }
 
-    public void objectToRequestParameters(Object o, MockHttpServletRequest request, String prefix) throws Exception {
+    public void objectToRequestParameters(Object o,
+            MockHttpServletRequest request, String prefix) throws Exception {
         Class clazz = o.getClass();
         Field[] fields = getDeclaredFields(clazz);
         AccessibleObject.setAccessible(fields, true);
@@ -91,7 +102,8 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
                 if (field instanceof BaseObject) {
                     // Fix for http://issues.appfuse.org/browse/APF-429
                     if (prefix != null) {
-                        objectToRequestParameters(field, request, prefix + "." + f.getName());
+                        objectToRequestParameters(field, request, prefix + "."
+                                + f.getName());
                     } else {
                         objectToRequestParameters(field, request, f.getName());
                     }
@@ -106,8 +118,10 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
 
                     // handle Dates
                     if (field instanceof Date) {
-                        paramValue = DateUtil.convertDateToString((Date) f.get(o));
-                        if ("null".equals(paramValue)) paramValue = "";
+                        paramValue = DateUtil.convertDateToString((Date) f
+                                .get(o));
+                        if ("null".equals(paramValue))
+                            paramValue = "";
                     }
 
                     request.addParameter(paramName, paramValue);
@@ -120,11 +134,11 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalDataSo
         Field[] f = new Field[0];
         Class superClazz = clazz.getSuperclass();
         Collection<Field> rval = new ArrayList<Field>();
-        
+
         if (superClazz != null) {
             rval.addAll(Arrays.asList(getDeclaredFields(superClazz)));
         }
-        
+
         rval.addAll(Arrays.asList(clazz.getDeclaredFields()));
         return rval.toArray(f);
     }

@@ -5,5 +5,6 @@
     <session-factory>
         <mapping class="com.swayam.ims.model.orm.User"/>
         <mapping class="com.swayam.ims.model.orm.Role"/>
+        <mapping class="com.swayam.ims.model.orm.Project"/>
     </session-factory>
 </hibernate-configuration>

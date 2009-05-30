@@ -78,10 +78,15 @@
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
+                /masters/itemgroup.html=itemGroupController
             </value>
         </property>
         <property name="order" value="0"/>
     </bean>
+    
+    <bean id="itemGroupController" class="com.swayam.ims.webapp.controller.ItemGroupController">
+    </bean>
+    
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         <property name="order" value="1"/>

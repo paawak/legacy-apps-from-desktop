@@ -1,5 +1,5 @@
 /*
- * Project.java
+ * ItemGroup.java
  *
  * Created on May 30, 2009 2:56:09 PM
  *
@@ -32,7 +32,7 @@ import javax.persistence.OneToOne;
  * @author paawak
  */
 @Entity
-public class Project implements Serializable {
+public class ItemGroup implements Serializable {
 
     private static final long serialVersionUID = 6183525384802106499L;
 
@@ -43,8 +43,12 @@ public class Project implements Serializable {
     @Column(nullable = false, length = 50, unique = true)
     private String name;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String description;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parentgroup")
+    private ItemGroup parentGroup;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "createdby")
@@ -74,6 +78,14 @@ public class Project implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ItemGroup getParentGroup() {
+        return parentGroup;
+    }
+
+    public void setParentGroup(ItemGroup parentGroup) {
+        this.parentGroup = parentGroup;
     }
 
     public User getCreatedBy() {

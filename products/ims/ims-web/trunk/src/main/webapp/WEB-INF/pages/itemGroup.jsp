@@ -19,7 +19,7 @@
     </c:if>
 </spring:bind>
 
-<form:form commandName="complainant" method="post">
+<form:form commandName="itemGroup" method="post">
 		
 		<div align = "center">
 		 <!-- #D7E9E5 -->
@@ -28,21 +28,20 @@
 			<tr><td height = "20"></td></tr>
 			<tr><td width = "2%"></td>
 				<td align = "left">
-	            	<appfuse:label styleClass="desc" key="user.firstName"/>
+	            	<appfuse:label styleClass="desc" key="itemgroup.name"/>
 	            </td>
 	            <td align = "left">
-		            <form:errors path="firstName" cssClass="fieldError"/>
-		            <form:input path="firstName" id="firstName" cssClass="text medium" cssErrorClass="text medium error" maxlength="50"/>
+		            <form:errors path="name" cssClass="fieldError"/>
+		            <form:input path="name" id="name" cssClass="text medium" cssErrorClass="text medium error" maxlength="50"/>
         		</td>
         		</tr>
         		
         		<tr><td width = "2%">
         			<td align = "left">
-	            		<appfuse:label styleClass="desc" key="user.lastName"/>
+	            		<appfuse:label styleClass="desc" key="generic.description"/>
 	             	</td>
 	            	<td align = "left">
-	            		<form:errors path="lastName" cssClass="fieldError"/>
-	            		<form:input path="lastName" id="lastName" cssClass="text medium" cssErrorClass="text medium error" maxlength="50"/>
+	            		<form:input path="description" id="description" cssClass="text medium" cssErrorClass="text medium error" maxlength="100"/>
         			</td>
         		</tr>        		
 	            <tr>

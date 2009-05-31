@@ -148,5 +148,12 @@
                   <arg0 key="user.passwordHint"/>
               </field>
       </form>
+      
+      <form name="itemGroup">
+			<field property="name" depends="required">
+				<arg0 key="itemgroup.name" />
+			</field>
+		</form>      
+      
   </formset>
 </form-validation>

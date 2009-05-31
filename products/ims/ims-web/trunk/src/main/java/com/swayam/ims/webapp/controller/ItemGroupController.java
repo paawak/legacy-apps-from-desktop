@@ -56,16 +56,4 @@ public class ItemGroupController extends BaseFormController {
         return itemGroup;
     }
 
-    /*
-     * public ModelAndView handleRequest(HttpServletRequest request,
-     * 
-     * HttpServletResponse response) throws Exception {
-     * 
-     * ModelAndView view = new ModelAndView("masters/itemGroup");
-     * 
-     * return view;
-     * 
-     * }
-     */
-
 }

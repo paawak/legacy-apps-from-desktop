@@ -95,9 +95,9 @@ public class ItemGroupController extends BaseFormController {
 
             Long id = Long.valueOf(text);
 
-            Object typeForId = itemGroupDao.get(id);
+            ItemGroup itemGroup = itemGroupDao.get(id);
 
-            setValue(typeForId);
+            setValue(itemGroup);
 
         }
 

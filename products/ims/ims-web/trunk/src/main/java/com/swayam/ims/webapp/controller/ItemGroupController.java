@@ -15,9 +15,13 @@
 
 package com.swayam.ims.webapp.controller;
 
+import java.beans.PropertyEditorSupport;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -41,6 +45,16 @@ public class ItemGroupController extends BaseFormController {
     }
 
     @Override
+    protected void initBinder(HttpServletRequest request,
+            ServletRequestDataBinder binder) {
+
+        binder.registerCustomEditor(ItemGroup.class, new ItemGroupEditor());
+
+        super.initBinder(request, binder);
+
+    }
+
+    @Override
     public ModelAndView onSubmit(Object command) throws ServletException {
 
         ItemGroup itemGroup = (ItemGroup) command;
@@ -54,6 +68,39 @@ public class ItemGroupController extends BaseFormController {
             throws ServletException {
         ItemGroup itemGroup = new ItemGroup();
         return itemGroup;
+    }
+
+    @Override
+    public ModelAndView handleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView view = super.handleRequest(request, response);
+
+        // set the object to view
+        view.addObject("itemGroupParents", itemGroupDao.getAll());
+
+        return view;
+
+    }
+
+    private class ItemGroupEditor extends PropertyEditorSupport {
+
+        @Override
+        public void setAsText(String text) {
+
+            if (text.trim().equals("") || text.equals("-1")) {
+                setSource(null);
+                return;
+            }
+
+            Long id = Long.valueOf(text);
+
+            Object typeForId = itemGroupDao.get(id);
+
+            setValue(typeForId);
+
+        }
+
     }
 
 }

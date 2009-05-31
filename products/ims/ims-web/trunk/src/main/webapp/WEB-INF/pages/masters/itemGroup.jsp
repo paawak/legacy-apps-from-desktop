@@ -43,7 +43,27 @@
 	            	<td align = "left">
 	            		<form:input path="description" id="description" cssClass="text medium" cssErrorClass="text medium error" maxlength="100"/>
         			</td>
-        		</tr>        		
+        		</tr>
+        		
+        		<tr><td width = "2%">
+        			<td align = "left">
+	            		<appfuse:label styleClass="desc" key="itemgroup.parent"/>
+	             	</td>
+	            	<td align = "left">
+						        <form:select path="parentGroup" id="parentGroup" cssClass="text large" cssErrorClass="text large error">
+						        	<option value="-1">------Select One------</option>
+						        	
+						            <c:forEach var="parent" items="${itemGroupParents}">
+						                <option value="${parent.id}"
+						                    <c:if test="${parent.id == itemGroup.parentGroup.id}">
+						                        selected="true"
+						                    </c:if>
+						                >${parent.name}</option>
+						            </c:forEach>
+						        </form:select>
+        			</td>
+        		</tr>        	
+        		        		
 	            <tr>
 	            	<td colspan = "3">
 	            		<table width = "100%" cellpadding = "0" cellspacing = "0" border = "0" style = "border-collapse:collapse">

@@ -87,7 +87,7 @@
     <bean id="itemGroupController" class="com.swayam.ims.webapp.controller.ItemGroupController">
     	<constructor-arg ref="itemGroupDao"/>
         <property name="validator" ref="beanValidator"/>
-        <property name="formView" value="itemGroup"/>
+        <property name="formView" value="masters/itemGroup"/>
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="/mainMenu.html"/>
     </bean>

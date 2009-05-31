@@ -15,10 +15,14 @@
 
 package com.swayam.ims.webapp.controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.swayam.ims.core.dao.GenericDao;
+import com.swayam.ims.model.orm.ItemGroup;
 
 /**
  * 
@@ -26,14 +30,30 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class ItemGroupController extends BaseFormController {
 
-    public ModelAndView handleRequest(HttpServletRequest request,
+    private final GenericDao<ItemGroup, Long> itemGroupDao;
 
-    HttpServletResponse response) throws Exception {
+    public ItemGroupController(GenericDao<ItemGroup, Long> itemGroupDao) {
 
-        ModelAndView view = new ModelAndView("masters/itemGroup");
+        this.itemGroupDao = itemGroupDao;
+        setCommandName("itemGroup");
+        setCommandClass(ItemGroup.class);
 
-        return view;
+    }
 
+    @Override
+    public ModelAndView onSubmit(Object command) throws ServletException {
+
+        ItemGroup itemGroup = (ItemGroup) command;
+        itemGroupDao.save(itemGroup);
+        return new ModelAndView(new RedirectView(getSuccessView()));
+
+    }
+
+    @Override
+    protected Object formBackingObject(HttpServletRequest request)
+            throws ServletException {
+        ItemGroup itemGroup = new ItemGroup();
+        return itemGroup;
     }
 
 }

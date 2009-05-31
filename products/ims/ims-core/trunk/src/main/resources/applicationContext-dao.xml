@@ -60,5 +60,9 @@
     -->
 
     <!-- Add new DAOs here -->
+    <bean id="itemGroupDao" class="com.swayam.dms.web.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.ItemGroup"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 </beans>

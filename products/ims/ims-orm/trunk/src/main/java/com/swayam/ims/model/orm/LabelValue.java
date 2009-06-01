@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * A simple JavaBean to represent label-value pairs. This is most commonly used
- * when constructing user interface elements which have a label to be displayed
- * to the user, and a corresponding value to be returned to the server. One
- * example is the <code>&lt;html:options&gt;</code> tag.
+ * A simple JavaBean to represent label-value pairs. This is most commonly used when constructing user interface elements which have a label to be displayed to the user, and a corresponding value to
+ * be returned to the server. One example is the <code>&lt;html:options&gt;</code> tag.
  * 
- * <p>Note: this class has a natural ordering that is inconsistent with equals.
- *
+ * <p>
+ * Note: this class has a natural ordering that is inconsistent with equals.
+ * 
  * @see org.apache.struts.util.LabelValueBean
  */
 public class LabelValue implements Comparable, Serializable {
@@ -18,8 +17,7 @@ public class LabelValue implements Comparable, Serializable {
     private static final long serialVersionUID = 3689355407466181430L;
 
     /**
-     * Comparator that can be used for a case insensitive sort of
-     * <code>LabelValue</code> objects.
+     * Comparator that can be used for a case insensitive sort of <code>LabelValue</code> objects.
      */
     public static final Comparator CASE_INSENSITIVE_ORDER = new Comparator() {
         public int compare(Object o1, Object o2) {
@@ -31,7 +29,6 @@ public class LabelValue implements Comparable, Serializable {
 
     // ----------------------------------------------------------- Constructors
 
-
     /**
      * Default constructor.
      */
@@ -41,9 +38,11 @@ public class LabelValue implements Comparable, Serializable {
 
     /**
      * Construct an instance with the supplied property values.
-     *
-     * @param label The label to be displayed to the user.
-     * @param value The value to be returned to the server.
+     * 
+     * @param label
+     *            The label to be displayed to the user.
+     * @param value
+     *            The value to be returned to the server.
      */
     public LabelValue(final String label, final String value) {
         this.label = label;
@@ -51,7 +50,6 @@ public class LabelValue implements Comparable, Serializable {
     }
 
     // ------------------------------------------------------------- Properties
-
 
     /**
      * The property which supplies the option label visible to the end user.
@@ -66,7 +64,6 @@ public class LabelValue implements Comparable, Serializable {
         this.label = label;
     }
 
-
     /**
      * The property which supplies the value returned to the server.
      */
@@ -80,15 +77,14 @@ public class LabelValue implements Comparable, Serializable {
         this.value = value;
     }
 
-
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Compare LabelValueBeans based on the label, because that's the human
-     * viewable part of the object.
-     *
+     * Compare LabelValueBeans based on the label, because that's the human viewable part of the object.
+     * 
      * @see Comparable
-     * @param o LabelValue object to compare to
+     * @param o
+     *            LabelValue object to compare to
      * @return 0 if labels match for compared objects
      */
     public int compareTo(Object o) {
@@ -101,6 +97,7 @@ public class LabelValue implements Comparable, Serializable {
 
     /**
      * Return a string representation of this object.
+     * 
      * @return object as a string
      */
     public String toString() {
@@ -114,9 +111,10 @@ public class LabelValue implements Comparable, Serializable {
 
     /**
      * LabelValueBeans are equal if their values are both null or equal.
-     *
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
-     * @param obj object to compare to
+     * @param obj
+     *            object to compare to
      * @return true/false based on whether values match or not
      */
     public boolean equals(Object obj) {
@@ -144,7 +142,7 @@ public class LabelValue implements Comparable, Serializable {
 
     /**
      * The hash code is based on the object's value.
-     *
+     * 
      * @see java.lang.Object#hashCode()
      * @return hashCode
      */

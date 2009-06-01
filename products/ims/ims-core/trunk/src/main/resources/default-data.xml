@@ -91,7 +91,7 @@
         </row>
     </table>
     
-    <table name="unit">
+    <table name="unit_type">
         <column>id</column>
         <column>name</column>
         <column>description</column>
@@ -115,6 +115,32 @@
             <value description="name">ml</value>
             <value description="description">Volume in Milli Litres</value>
         </row>
-    </table>    
+        <row>
+            <value description="id">5</value>
+            <value description="name">pack</value>
+            <value description="description">Packet</value>
+        </row>
+    </table>   
+    
+    <table name="unit">
+        <column>id</column>
+        <column>name</column>
+        <column>description</column>
+        <column>unit_type</column>
+        <column>quantity</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Grams</value>
+            <value description="description">Loose Grams</value>
+            <value description="unit_type">1</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">125g Packet</value>
+            <value description="description">Packet of 125 Grams</value>
+            <value description="unit_type">1</value>
+            <value description="quantity">125</value>
+        </row>
+	</table> 
     
 </dataset>

@@ -12,14 +12,14 @@ import java.util.Comparator;
  * 
  * @see org.apache.struts.util.LabelValueBean
  */
-public class LabelValue implements Comparable, Serializable {
+public class LabelValue implements Comparable<Object>, Serializable {
 
     private static final long serialVersionUID = 3689355407466181430L;
 
     /**
      * Comparator that can be used for a case insensitive sort of <code>LabelValue</code> objects.
      */
-    public static final Comparator CASE_INSENSITIVE_ORDER = new Comparator() {
+    public static final Comparator<?> CASE_INSENSITIVE_ORDER = new Comparator<?>() {
         public int compare(Object o1, Object o2) {
             String label1 = ((LabelValue) o1).getLabel();
             String label2 = ((LabelValue) o2).getLabel();

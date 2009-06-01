@@ -1,7 +1,7 @@
 /*
- * Unit.java
+ * UnitType.java
  *
- * Created on Jun 1, 2009 2:42:02 PM
+ * Created on Jun 1, 2009 1:04:52 AM
  *
  * Copyright (c) 2002 - 2008 : Swayam Inc.
  *
@@ -17,46 +17,38 @@ package com.swayam.ims.model.orm;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * 
  * @author paawak
  */
 @Entity
-public class Unit implements Serializable {
+@Table(name = "unit_type")
+public class UnitType implements Serializable {
 
-    private static final long serialVersionUID = -7024688903191307773L;
+    private static final long serialVersionUID = -7451926015130484773L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = false, length = 25, unique = true)
+    @Column(nullable = false, length = 10, unique = true)
     private String name;
 
     @Column(length = 50)
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "unit_type")
-    private UnitType unitType;
-
-    @Column(nullable = true)
-    private Integer quantity;
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,22 +66,6 @@ public class Unit implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public UnitType getUnitType() {
-        return unitType;
-    }
-
-    public void setUnitType(UnitType unitType) {
-        this.unitType = unitType;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
 }

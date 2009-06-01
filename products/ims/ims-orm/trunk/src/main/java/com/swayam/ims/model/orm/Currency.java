@@ -1,7 +1,7 @@
 /*
- * Item.java
+ * Currency.java
  *
- * Created on Jun 1, 2009 12:50:10 AM
+ * Created on Jun 1, 2009 4:01:41 PM
  *
  * Copyright (c) 2002 - 2008 : Swayam Inc.
  *
@@ -21,18 +21,14 @@ import java.io.Serializable;
  * 
  * @author paawak
  */
-public class Item implements Serializable {
+public class Currency implements Serializable {
 
-    private static final long serialVersionUID = 5729868965288261711L;
+    private static final long serialVersionUID = -7806468599798972546L;
 
-    private Long id;
-
-    private String code;
+    private Integer id;
 
     private String name;
 
-    private String description;
-
-    private ItemGroup group;
+    private String symbol;
 
 }

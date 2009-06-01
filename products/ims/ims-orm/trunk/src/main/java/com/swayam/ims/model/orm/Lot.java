@@ -1,7 +1,7 @@
 /*
- * Item.java
+ * Lot.java
  *
- * Created on Jun 1, 2009 12:50:10 AM
+ * Created on Jun 1, 2009 3:58:30 PM
  *
  * Copyright (c) 2002 - 2008 : Swayam Inc.
  *
@@ -16,23 +16,34 @@
 package com.swayam.ims.model.orm;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 
  * @author paawak
  */
-public class Item implements Serializable {
+public class Lot implements Serializable {
 
-    private static final long serialVersionUID = 5729868965288261711L;
+    private static final long serialVersionUID = 6514962799603561015L;
 
     private Long id;
 
-    private String code;
+    private Item item;
 
-    private String name;
+    private String batchNo;
 
-    private String description;
+    private Date procuredOn;
 
-    private ItemGroup group;
+    private Float price;
+
+    private Currency currency;
+
+    private Date manufacturedDate;
+
+    private Date expiryDate;
+
+    private User enteredBy;
+
+    private Integer quantity;
 
 }

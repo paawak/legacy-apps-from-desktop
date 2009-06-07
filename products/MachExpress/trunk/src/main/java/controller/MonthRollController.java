@@ -10,7 +10,6 @@ package controller;
  *
  * @author  paawak
  */
-import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -61,7 +60,7 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
                     InvoiceDB.accnum, InvoiceDB.invoicenum }, false, where);
             invDB.printSQLStatement();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         if (invNos.length == 0) {
@@ -101,7 +100,7 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
                     "SUM(" + DailyOrderBookDB.amount + ")" }, false, where);
             dlOrBkDb.printSQLStatement();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             dlOrBkDb.printSQLStatement();
         }
         for (int i = 0; i < clientDet.length; i++) {
@@ -122,13 +121,18 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
             invVec.addElement(clientDet[i][0]);// accnum
             invVec.addElement(clientDet[i][1]);// total amt
             // cal culate tax , tds
-            float tax = 0, tds = 0, invAmt = 0;
+            float tax = 0, tds = 0, invAmt = 0, fuelCharge = 0;
+
             try {
                 float amt = Float.parseFloat(clientDet[i][1].toString());
-                tax = taxPercent * amt / 100;
-                if (amt >= tdsApplyAmt)
+                fuelCharge = fuelChargePercent * amt / 100;
+                tax = taxPercent * (amt + fuelCharge) / 100;
+
+                if (amt >= tdsApplyAmt) {
                     tds = tdsPercent * amt / 100;
-                invAmt = amt + tax - tds;
+                }
+
+                invAmt = amt + fuelCharge + tax - tds;
             } catch (Exception e) {
             }
             invVec.addElement(new Float(tax));// tax
@@ -154,6 +158,7 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
             try {
                 invObj = new InvoiceObject(invVec);
                 writeInvoiceDetailsToFile(invObj);
+                invObj.setFuelCharge(fuelCharge);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -212,12 +217,13 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
         GregorianCalendar gCal = new GregorianCalendar(curyear, curmonth - 1, 1);
         Date date = gCal.getTime();
         String fromDate = dt.getFormattedDate(date, pattern);
-        gCal.set(gCal.DATE, gCal.getActualMaximum(gCal.DAY_OF_MONTH));
+        gCal.set(GregorianCalendar.DATE, gCal
+                .getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
         date = gCal.getTime();
         String toDate = dt.getFormattedDate(date, pattern);
         Object totalAmt = invObj.getTotalAmt();
         Object tax = invObj.getTax();
-        Object tds = invObj.getTdsAmount();
+        // Object tds = invObj.getTdsAmount();
         Object netRecievable = invObj.getNetReceivable();
         ClientAccountObject clObj = null;
 
@@ -239,7 +245,7 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
             clAccDb.printSQLStatement();
             clObj = new ClientAccountObject(clObjArr);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         if (clObj == null) {
@@ -327,6 +333,12 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
         mainNode.add(getRighted("Total Amount: " + totalAmt));
         mainNode.add(getCentred(DOTTED_LINE));
 
+        // fuel charge
+        mainNode.add(getRighted("(+) Fuel Charge @ "
+                + moneyFormat.format(fuelChargePercent) + "%: "
+                + moneyFormat.format(invObj.getFuelCharge())));
+        mainNode.add(getCentred(DOTTED_LINE));
+
         // tax
         mainNode.add(getRighted("(+) Service Tax @ "
                 + moneyFormat.format(taxPercent) + "%: "
@@ -348,7 +360,7 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
         int index = sb.indexOf(".");
         sb.insert(index, "_" + clObj.getName());
         String filePathAbs = filePath + sb.toString();
-        new TaggedFileWriter(filePathAbs, mainNode);
+        new TaggedFileWriter(filePathAbs, mainNode).run();
         System.out.println("Written file: " + filePathAbs);
         // reset line and page counts
         lineCount = 0;
@@ -433,10 +445,32 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
         try {
             taxPercent = Float.parseFloat(constDB.queryOneElement(value,
                     "WHERE " + ConstantsDB.name + "='TaxPercent'").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
             tdsPercent = Float.parseFloat(constDB.queryOneElement(value,
                     "WHERE " + ConstantsDB.name + "='TDSPercent'").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fuelChargePercent = Float.parseFloat(constDB.queryOneElement(value,
+                    "WHERE " + ConstantsDB.name + "='FuelCharge'").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
             tdsApplyAmt = Float.parseFloat(constDB.queryOneElement(value,
                     "WHERE " + ConstantsDB.name + "='TDSApplyAmt'").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
             maxLines = Integer.parseInt(constDB.queryOneElement(value,
                     "WHERE " + ConstantsDB.name + "='MaxLines'").toString());
         } catch (Exception e) {
@@ -569,6 +603,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
      */
     private float taxPercent = 0;
 
+    private float fuelChargePercent;
+
     /**
      *holds the tds percentage
      */
@@ -579,10 +615,10 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
      */
     private float tdsApplyAmt = 0;
 
-    /**
-     *holds the output strem for the file of invoice
-     */
-    private FileOutputStream fos = null;
+    // /**
+    // *holds the output strem for the file of invoice
+    // */
+    // private FileOutputStream fos = null;
 
     private final DateTimeUtils dt = new DateTimeUtils();
     private final DecimalFormat moneyFormat = new DecimalFormat("0.00");

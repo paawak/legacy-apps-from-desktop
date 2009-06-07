@@ -77,7 +77,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-
 		<dependency>
 			<groupId>org.netbeans.lib.awtextra</groupId>
 			<artifactId>AbsoluteLayout</artifactId>

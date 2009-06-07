@@ -42,6 +42,10 @@ public class MonthRollTDSTaxSettingsView extends javax.swing.JPanel {
         frmTxtTaxPercent = new javax.swing.JFormattedTextField(
                 new java.text.DecimalFormat("0.00"));
 
+        lbFuelCharges = new javax.swing.JLabel();
+        frmTxtFuelCharges = new javax.swing.JFormattedTextField(
+                new java.text.DecimalFormat("0.00"));
+
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlTitle.setLayout(new java.awt.BorderLayout());
@@ -113,6 +117,19 @@ public class MonthRollTDSTaxSettingsView extends javax.swing.JPanel {
                 new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230,
                         140, -1));
 
+        lbFuelCharges.setText("Fuel Charge :");
+        add(lbFuelCharges, new org.netbeans.lib.awtextra.AbsoluteConstraints(
+                300, 270, -1, -1));
+
+        frmTxtFuelCharges.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        // FIXME: put correct value
+        frmTxtFuelCharges.setText(cnt.getTaxPercent());
+        frmTxtFuelCharges
+                .setFocusLostBehavior(JFormattedTextField.COMMIT_OR_REVERT);
+        add(frmTxtFuelCharges,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270,
+                        140, -1));
+
     }// GEN-END:initComponents
 
     private void btCloseMouseReleased(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btCloseMouseReleased
@@ -143,6 +160,10 @@ public class MonthRollTDSTaxSettingsView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Cannot be empty", "",
                     JOptionPane.INFORMATION_MESSAGE);
             frmTxtTaxPercent.requestFocus();
+        } else if (frmTxtFuelCharges.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Cannot be empty", "",
+                    JOptionPane.INFORMATION_MESSAGE);
+            frmTxtFuelCharges.requestFocus();
         } else
             flag = true;
         return flag;
@@ -180,10 +201,12 @@ public class MonthRollTDSTaxSettingsView extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField frmTxtTDSApplyAmt;
     private javax.swing.JFormattedTextField frmTxtTDSPercent;
     private javax.swing.JFormattedTextField frmTxtTaxPercent;
+    private javax.swing.JFormattedTextField frmTxtFuelCharges;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lbFuelCharges;
     private javax.swing.JPanel pnlTitle;
     // End of variables declaration//GEN-END:variables
 

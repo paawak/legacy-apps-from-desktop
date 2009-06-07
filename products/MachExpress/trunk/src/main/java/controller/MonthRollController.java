@@ -134,6 +134,7 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
 
                 invAmt = amt + fuelCharge + tax - tds;
             } catch (Exception e) {
+                e.printStackTrace();
             }
             invVec.addElement(new Float(tax));// tax
             invVec.addElement(new Float(tds));// tds
@@ -157,8 +158,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
             InvoiceObject invObj = null;
             try {
                 invObj = new InvoiceObject(invVec);
-                writeInvoiceDetailsToFile(invObj);
                 invObj.setFuelCharge(fuelCharge);
+                writeInvoiceDetailsToFile(invObj);
             } catch (Exception e) {
                 e.printStackTrace();
             }

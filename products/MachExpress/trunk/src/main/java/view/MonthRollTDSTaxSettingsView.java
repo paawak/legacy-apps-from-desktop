@@ -122,8 +122,7 @@ public class MonthRollTDSTaxSettingsView extends javax.swing.JPanel {
                 300, 270, -1, -1));
 
         frmTxtFuelCharges.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        // FIXME: put correct value
-        frmTxtFuelCharges.setText(cnt.getTaxPercent());
+        frmTxtFuelCharges.setText(cnt.getFuelCharge());
         frmTxtFuelCharges
                 .setFocusLostBehavior(JFormattedTextField.COMMIT_OR_REVERT);
         add(frmTxtFuelCharges,
@@ -171,18 +170,24 @@ public class MonthRollTDSTaxSettingsView extends javax.swing.JPanel {
 
     private void btSavePressed() {
         if (isDataValid())
-            if (cnt.updateTDSTaxSettings(new Object[] {
-                    frmTxtTDSPercent.getText().trim(),
-                    frmTxtTDSApplyAmt.getText().trim(),
-                    frmTxtTaxPercent.getText().trim() })) {
-                JOptionPane.showMessageDialog(this,
-                        "Data modified successfully", "Saved:",
-                        JOptionPane.INFORMATION_MESSAGE);
-                // clearInputs();
-            } else
-                JOptionPane.showMessageDialog(this,
-                        "Data could not be modified", "Sorry:",
-                        JOptionPane.ERROR_MESSAGE);
+            try {
+                if (cnt.updateTDSTaxSettings(new Object[] {
+                        frmTxtTDSPercent.getText().trim(),
+                        frmTxtTDSApplyAmt.getText().trim(),
+                        frmTxtTaxPercent.getText().trim() })
+                        && cnt.insertOrUpdateFuelCharges(frmTxtFuelCharges
+                                .getText().trim())) {
+                    JOptionPane.showMessageDialog(this,
+                            "Data modified successfully", "Saved:",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    // clearInputs();
+                } else
+                    JOptionPane.showMessageDialog(this,
+                            "Data could not be modified", "Sorry:",
+                            JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     // private void clearInputs() {

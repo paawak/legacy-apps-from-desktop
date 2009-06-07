@@ -495,9 +495,20 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
         Vector temp = new Vector();
 
-        for (int i = 0; res.next(); i++)
-            for (int j = 0; j < ColumnNames.length; j++)
-                temp.addElement(res.getString(j + 1));
+        for (int i = 0; res.next(); i++) {
+            for (int j = 0; j < ColumnNames.length; j++) {
+
+                String val = "";
+
+                try {
+                    val = res.getString(j + 1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                temp.addElement(val);
+            }
+        }
 
         int rows = temp.size() / Columns;
 

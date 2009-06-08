@@ -200,7 +200,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
     }
 
     /**
-     *method to write the INVOICE bill for each client in a file so that a printout can be taken
+     *method to write the INVOICE bill for each client in a file so that a
+     * printout can be taken
      */
     public void writeInvoiceDetailsToFile(InvoiceObject invObj) {
         // date pattern
@@ -282,7 +283,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
         DefaultMutableTreeNode header = new DefaultMutableTreeNode(
                 new TagElement(HEADER, "}\n"));
         header.add(getRighted("Invoice No.: " + invnum));
-        // getRighted()/getCentred() etc. increments lineCount by 1. but in header/footer,
+        // getRighted()/getCentred() etc. increments lineCount by 1. but in
+        // header/footer,
         // no new lines are added. so decrement lineCount
         lineCount--;
         mainNode.add(header);
@@ -387,7 +389,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
     private void printTableRow(DefaultMutableTreeNode parent, Vector cells,
             int[] cellSizes, String[] cellAlignment) {
         // \trowd\trql\trhdr\clbrdrt\brdrs\brdrw1\brdrcf1\brsp0\clbrdrl\brdrs\brdrw1\brdrcf1\brsp0\clbrdrb\brdrs\brdrw1\brdrcf1\brsp0\cellx1728\clbrdrt\brdrs\brdrw1\brdrcf1\brsp0\clbrdrl\brdrs\brdrw1\brdrcf1\brsp0\clbrdrb\brdrs\brdrw1\brdrcf1\brsp0\cellx3456\clbrdrt\brdrs\brdrw1\brdrcf1\brsp0\clbrdrl\brdrs\brdrw1\brdrcf1\brsp0\clbrdrb\brdrs\brdrw1\brdrcf1\brsp0\cellx5184\clbrdrt\brdrs\brdrw1\brdrcf1\brsp0\clbrdrl\brdrs\brdrw1\brdrcf1\brsp0\clbrdrb\brdrs\brdrw1\brdrcf1\brsp0\cellx6912\clbrdrt\brdrs\brdrw1\brdrcf1\brsp0\clbrdrl\brdrs\brdrw1\brdrcf1\brsp0\clbrdrb\brdrs\brdrw1\brdrcf1\brsp0\clbrdrr\brdrs\brdrw1\brdrcf1\brsp0\cellx8640
-        // The table row begins with the \trowd control word and ends with the \row control word
+        // The table row begins with the \trowd control word and ends with the
+        // \row control word
         DefaultMutableTreeNode row = new DefaultMutableTreeNode(new TagElement(
                 TABLE_ROW_START, TABLE_ROW_END + "\n"));
 
@@ -483,11 +486,24 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
                 "controller/props/CommonProps");
         filePath = readMainProps.getVal("InvoiceFilesDumpDirectory");
         fileName = readMainProps.getVal("InvoiceFileName");
+
         if (readMainProps.getVal("IncludeDateTimeWithInvoiceFileName").equals(
-                "true"))
+                "true")) {
             fileName += "_"
                     + dt.getFormattedDate(new Date(), "dd-MM-yyyy_HH-mm-ss");
+        }
+
         fileName += ".rtf";
+
+        int dottedLineLength = Integer.parseInt(readMainProps
+                .getVal("DottedLineLength"));
+
+        String dottedLine = "-";
+        for (int i = 0; i < dottedLineLength; i++) {
+            dottedLine += "-";
+        }
+
+        DOTTED_LINE = dottedLine;
     }
 
     /**
@@ -505,7 +521,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
     }
 
     /**
-     *method that attaches the header, i.e, address of the client, invoice num, etc..
+     *method that attaches the header, i.e, address of the client, invoice num,
+     * etc..
      */
     private void printInvoiceHeader(DefaultMutableTreeNode parent,
             Object invnum, Object invdate, Object fromDate, Object toDate,
@@ -649,7 +666,8 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
      */
     private int lineCount = 0;
     /**
-     * keeps track of the total amount for a given page: should be reset after every page, as well as new file
+     * keeps track of the total amount for a given page: should be reset after
+     * every page, as well as new file
      */
     private float amtTillPageEnd = 0;
 
@@ -659,33 +677,28 @@ public class MonthRollController implements TableListDB, SemaphoresDB,
     private Properties invProps = null;
 
     /**
-     *This contains(all units are in twips): x of 1st cell, width of 1st cell, width of 2nd cell and so on.... Usage: 2nd cell loc = cellPosData[0] + cellPosData[1] 3rd cell loc = 2nd cell loc +
-     * cellPosData[2] this is done in the constructor
+     *This contains(all units are in twips): x of 1st cell, width of 1st cell,
+     * width of 2nd cell and so on.... Usage: 2nd cell loc = cellPosData[0] +
+     * cellPosData[1] 3rd cell loc = 2nd cell loc + cellPosData[2] this is done
+     * in the constructor
      */
     private final int[] cellPosData = { 600, 1728, 1728, 1728, 1728, 1728 };
     private final static String FONT_FAMILY = "Times New Roman";
     /**
-     * this is in points. so this has to be doubled when passed to rtf as rtf uses double-point format. the page breaks are calculated on this basis.
+     * this is in points. so this has to be doubled when passed to rtf as rtf
+     * uses double-point format. the page breaks are calculated on this basis.
      */
     private static final int FONT_SIZE_POINTS = 12;
 
-    private static final String DOTTED_LINE;
-
-    static {
-        String dottedLine = "-";
-        for (int i = 0; i < 107; i++) {
-            dottedLine += "-";
-        }
-
-        DOTTED_LINE = dottedLine;
-    }
+    private String DOTTED_LINE;
 
     private final static String COMPANY_NAME = "MACH EXPRESS";
     private final static String COMPANY_ADDRESS = "No. 58, 3rd Main, Vayalikaval";
     private final static String COMPANY_CITY = "Bangalore - 560 003";
 
     // /**
-    // *this interface contains the unwholesome, idiotic, unscientific, godforsaken,
+    // *this interface contains the unwholesome, idiotic, unscientific,
+    // godforsaken,
     // *bloody units of measure understood and used only by the MS bastards
     // *and Bill Gates and the sons of bachelors who wrote the RTF specs!!
     // */

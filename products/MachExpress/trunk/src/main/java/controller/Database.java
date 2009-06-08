@@ -14,16 +14,13 @@ import utils.database.DBUtil;
  */
 public final class Database extends DBUtil {
 
-    private String TableName = new String();
-    private static final String URL = "machexpress";
-    private static final String UserName = "root";
-    private static final String Password = "agnimitra";
+    private static final DbDetails dbDetails = new DbDetails();
 
     public Database(String TableName) {
 
-        super(URL, UserName, Password, TableName, true, new String[] { "\\",
-                "\"", "'" });
-        this.TableName = TableName;
+        super(dbDetails.getDriver(), dbDetails.getUrl(), dbDetails.getUser(),
+                dbDetails.getPassword(), TableName, true, new String[] { "\\",
+                        "\"", "'" });
 
     }
 

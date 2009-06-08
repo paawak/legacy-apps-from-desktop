@@ -67,6 +67,16 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 3413478837197896498L;
 
+    private final String databaseDriver;
+
+    private final String databaseUrl;
+
+    private final String password;
+
+    private final String tableName;
+
+    private final String userName;
+
     /**
      * Holds the no. of columns in the table in the database
      */
@@ -77,34 +87,19 @@ public abstract class DBUtil extends javax.swing.JFrame {
      */
     private String[] ColumnNames;
 
-    private Connection con;
-
-    /**
-     *holds the database name
-     */
-    private String DatabaseName = "";
-
-    private String password = "";
-
     private Statement stat;
 
-    private String tableName = "";
-
-    private String userName = "";
-
-    /**
-     *holds the database vendor name: "mysqlJdbcClass4Driver" by default can be set to "postgresJdbcDriverClass3" for using postgres with class 3 jdbc driver can be set to "jdbcOdbcDriver" for using
-     * jdbc odbc driver
-     */
-    private String Driver = "mysqlJdbcClass4Driver";
+    private Connection con;
 
     /**
      *displays all error messages when this is set to true
      */
     private boolean displayErrors = false;
     /**
-     *holds the characters requiring escape character before them, in order to be saved in the database. for example, mysql doesnot store ', " and \ characters unless they are preceeded by the escape
-     * character \ i.e., \', \", \\, etc.
+     *holds the characters requiring escape character before them, in order to
+     * be saved in the database. for example, mysql doesnot store ', " and \
+     * characters unless they are preceeded by the escape character \ i.e., \',
+     * \", \\, etc.
      */
     private String[] charsWithEscapeSeq = new String[1];
 
@@ -115,95 +110,47 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
     /**
      * 
-     *Creates a new instance of DBUtil: public final DBUtil(String DatabaseName, String DatabaseUserName, String DatabasePassword, String DatabaseTableName) this is the default constructor and
-     * connects to a mysql database using mysql jdbc class 4 driver
+     *Creates a new instance of DBUtil: public final DBUtil(String
+     * DatabaseName, String DatabaseUserName, String DatabasePassword, String
+     * DatabaseTableName) this is the default constructor and connects to a
+     * mysql database using mysql jdbc class 4 driver
      */
-    public DBUtil(String DatabaseName, String userName, String password,
-            String tableName, boolean displayErrors, String[] charsWithEscapeSeq) {
-        this.DatabaseName = DatabaseName;
+    public DBUtil(String databaseDriver, String databaseUrl, String userName,
+            String password, String tableName, boolean displayErrors,
+            String[] charsWithEscapeSeq) {
+        this.databaseDriver = databaseDriver;
+        this.databaseUrl = databaseUrl;
         this.userName = userName;
         this.password = password;
         this.tableName = tableName;
         this.displayErrors = displayErrors;
         this.charsWithEscapeSeq = charsWithEscapeSeq;
         fillColumnNames();
-    }// */
+    }
 
     /**
-     * 
-     *Creates a new instance of DBUtil: the type of connection here can be set: for jdbc:odbc driver, Driver="jdbcOdbcDriver" for postgres:jdbc classs3 driver, Driver="postgresJdbcClass3Driver" for
-     * mysql:jdbc classs4 driver, Driver="mysqlJdbcClass4Driver"
-     */
-    public DBUtil(String DatabaseName, String userName, String password,
-            String tableName, boolean displayErrors,
-            String[] charsWithEscapeSeq, String Driver) {
-        this.DatabaseName = DatabaseName;
-        this.userName = userName;
-        this.password = password;
-        this.tableName = tableName;
-        this.displayErrors = displayErrors;
-        this.charsWithEscapeSeq = charsWithEscapeSeq;
-        this.Driver = Driver;
-        fillColumnNames();
-    }// */
-
-    /**
-     *Method to connect to the Database this method uses the native jdbc-odbc driver
+     *Method to connect to the Database this method uses the native jdbc-odbc
+     * driver
      * 
      */
     private final void accessDB() {
 
-        if (Driver.equalsIgnoreCase("mysqlJdbcClass4Driver")) {
-
-            accessDB_mysqlJdbcClass4Driver(DatabaseName, userName, password);
-        } else if (Driver.equalsIgnoreCase("postgresJdbcClass3Driver")) {
-
-            accessDB_postgresJdbcClass3Driver(DatabaseName, userName, password);
-        } else if (Driver.equalsIgnoreCase("jdbcOdbcDriver")) {
-
-            try {
-                Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-                if (userName.trim().equals("") || password.trim().equals(""))
-                    con = DriverManager.getConnection("jdbc:odbc:"
-                            + DatabaseName);
-                else
-                    con = DriverManager.getConnection("jdbc:odbc:"
-                            + DatabaseName, userName, password);
-                stat = con.createStatement();
-            } catch (Exception e) {
-                if (displayErrors) {
-                    String title = "Error: DBUtil.accessDB() Table: "
-                            + tableName;
-                    StringBuffer error = new StringBuffer(e.toString());
-                    if (error.length() < title.length())
-                        error.append("\t\t");
-                    JOptionPane.showMessageDialog(this, error.toString(),
-                            title, JOptionPane.ERROR_MESSAGE);
-                }
-            }
-
-        }// end else
-
-    }
-
-    /**
-     *Convinience method to connect to the Database this method uses the MySql-JDBC class 4 driver To use the MySQL Class1 JDBC driver, place the mysql-connector-java-3.0.10-stable-bin.jar in
-     * $JAVA_HOME/jre/lib/ext. the user name is the linux login name, password is not required, so it should be blank
-     */
-    private final void accessDB_mysqlJdbcClass4Driver(String DatabaseName,
-            String userName, String password) {
+        String fullUrl = null;
 
         try {
 
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName(databaseDriver).newInstance();
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost/"
-                    + DatabaseName + "?user=" + userName + "&password="
-                    + password);
+            fullUrl = databaseUrl + "?user=" + userName + "&password="
+                    + password;
+
+            con = DriverManager.getConnection(fullUrl);
 
             stat = con.createStatement();
 
         } catch (Exception e) {
+            System.err.println("Trying to connect to: " + fullUrl);
+            e.printStackTrace();
             if (displayErrors) {
                 String title = "Error: DBUtil.accessDB() Table: " + tableName;
                 StringBuffer error = new StringBuffer(e.toString());
@@ -217,37 +164,8 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *method to access a postgres database for jdbc to connect to postgres databse, use the -i option while starting the postmaster so that it accepts TCP/IP connection, otherwise, connection is
-     * refused use the follwing command while start up: postmaster -D /usr/local/pgsql/data -i postgres driver used: pg74jdbc3.jar, which means it is CLASS 3 type of jdbc driver
-     */
-    private final void accessDB_postgresJdbcClass3Driver(String DatabaseName,
-            String userName, String password) {
-
-        try {
-
-            Class.forName("org.postgresql.Driver").newInstance();
-            Connection con = // 5432 is the default port of pgsql
-            DriverManager.getConnection("jdbc:postgresql://localhost:5432/"
-                    + DatabaseName + "?user=" + userName + "&password="
-                    + password);
-
-            stat = con.createStatement();
-
-        } catch (Exception e) {
-            if (displayErrors) {
-                String title = "Error: DBUtil.accessDB() Table: " + tableName;
-                StringBuffer error = new StringBuffer(e.toString());
-                if (error.length() < title.length())
-                    error.append("\t\t");
-                JOptionPane.showMessageDialog(this, error.toString(), title,
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-    }
-
-    /**
-     *Method to execute a given SQL-Statement: public final void executeSQLStatement(String SQL-Statement)throws java.sql.SQLException
+     *Method to execute a given SQL-Statement: public final void
+     * executeSQLStatement(String SQL-Statement)throws java.sql.SQLException
      * 
      */
     public final void executeSQLStatement(String sql)
@@ -258,7 +176,8 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to get the no. of columns and the column-names of the table in the database.
+     *Method to get the no. of columns and the column-names of the table in the
+     * database.
      */
     private final void fillColumnNames() {
         try {
@@ -289,7 +208,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to construct the SQL-Statement to INSERT data in a database table: it returns the SQL-Statement as String. public final String getInsertStatement(String[] ColumnNames, Object[] Values)
+     *Method to construct the SQL-Statement to INSERT data in a database table:
+     * it returns the SQL-Statement as String. public final String
+     * getInsertStatement(String[] ColumnNames, Object[] Values)
      * 
      */
     public final String getInsertStatement(String[] col_Names, Object[] val) {
@@ -324,8 +245,10 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to construct the SQL-Statement to UPDATE data in a database table: it returns the SQL-Statement as String. public final String getUpdateStatement(String[] ColumnNames, Object[] Values,
-     * String WhereCondition)
+     *Method to construct the SQL-Statement to UPDATE data in a database table:
+     * it returns the SQL-Statement as String. public final String
+     * getUpdateStatement(String[] ColumnNames, Object[] Values, String
+     * WhereCondition)
      * 
      */
     public final String getUpdateStatement(String[] col_Names, Object[] val,
@@ -358,7 +281,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to insert data into a database table. Returns true if INSERTion is successful else returns false. public final String insertData(String[] ColumnNames, Object[] Values)
+     *Method to insert data into a database table. Returns true if INSERTion is
+     * successful else returns false. public final String insertData(String[]
+     * ColumnNames, Object[] Values)
      * 
      */
     public final boolean insertData(String[] col_Names, Object[] val) {
@@ -382,7 +307,8 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *inserts data in all columns of the database table except the autonumber column, which is assumed to be the first column in the database table
+     *inserts data in all columns of the database table except the autonumber
+     * column, which is assumed to be the first column in the database table
      */
     public final boolean insertData_autoNum(Object[] val) {
         String[] cols = new String[ColumnNames.length - 1];
@@ -411,7 +337,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY a single column from a database table: public final Object[] queryOneColumn(String ColumnNameToBeQueried, boolean RowsDistinct, String WhereCondition)throws Exception
+     *Method to QUERY a single column from a database table: public final
+     * Object[] queryOneColumn(String ColumnNameToBeQueried, boolean
+     * RowsDistinct, String WhereCondition)throws Exception
      * 
      */
     public final Object[] queryOneColumn(String colName, boolean distinct,
@@ -426,7 +354,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY all the columns from a database table: public final Object[][] queryAllColumns(boolean RowsDistinct, String WhereCondition)throws Exception
+     *Method to QUERY all the columns from a database table: public final
+     * Object[][] queryAllColumns(boolean RowsDistinct, String
+     * WhereCondition)throws Exception
      * 
      */
     public final Object[][] queryAllColumns(boolean distinct, String whereClause)
@@ -465,7 +395,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY more than one columns from a database table: public final Object[][] queryMultipleColumns(String[] ColumnNames, boolean RowsDistinct,String WhereCondition)throws Exception
+     *Method to QUERY more than one columns from a database table: public final
+     * Object[][] queryMultipleColumns(String[] ColumnNames, boolean
+     * RowsDistinct,String WhereCondition)throws Exception
      * 
      */
     public final Object[][] queryMultipleColumns(String[] ColumnNames,
@@ -554,7 +486,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY more than one columns from a database table, but which comes in a single row: public final Object[] queryMultipleElements(String[] ColumnNames, String WhereCondition)throws
+     *Method to QUERY more than one columns from a database table, but which
+     * comes in a single row: public final Object[]
+     * queryMultipleElements(String[] ColumnNames, String WhereCondition)throws
      * Exception
      * 
      */
@@ -569,7 +503,8 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY one element from a database table: public final Object queryOneElement(String ColumnName, String WhereCondition)throws Exception
+     *Method to QUERY one element from a database table: public final Object
+     * queryOneElement(String ColumnName, String WhereCondition)throws Exception
      * 
      */
     public final Object queryOneElement(String colName, String whereClause)
@@ -594,7 +529,8 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY the no. of rows in a database table: public final int queryRows(String WhereCondition,boolean RowsDistinct)throws Exception
+     *Method to QUERY the no. of rows in a database table: public final int
+     * queryRows(String WhereCondition,boolean RowsDistinct)throws Exception
      * 
      */
     public final int queryRows(String whereClause, boolean distinct)
@@ -617,8 +553,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to update data into a database table. Returns true if UPDATion is successful else returns false. public final String updateData(String[] ColumnNames, Object[] Values, String
-     * WhereCondition)
+     *Method to update data into a database table. Returns true if UPDATion is
+     * successful else returns false. public final String updateData(String[]
+     * ColumnNames, Object[] Values, String WhereCondition)
      * 
      */
     public final boolean updateData(String[] col_Names, Object[] val,
@@ -670,17 +607,18 @@ public abstract class DBUtil extends javax.swing.JFrame {
         System.out.println(SQLStatement);
     }
 
-    public final void setTable(String tableName) {
-        this.tableName = tableName;
-        fillColumnNames();
-    }
+    /*
+     * public final void setTable(String tableName) { this.tableName =
+     * tableName; fillColumnNames(); }
+     */
 
     public final String getTable() {
         return tableName;
     }
 
     /**
-     *utility to check for the characters in charsWithEscapeSeq array in the input Object and replace them with the escape characters
+     *utility to check for the characters in charsWithEscapeSeq array in the
+     * input Object and replace them with the escape characters
      */
     private final Object prefixEscapeChars(String modify) {
         int l = charsWithEscapeSeq.length;

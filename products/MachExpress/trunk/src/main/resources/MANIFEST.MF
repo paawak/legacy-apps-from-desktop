@@ -1,0 +1,4 @@
+author: paawak@gmail.com
+main-class: controller.MachExpress
+class-path: props/ libs/AbsoluteLayout.jar libs/mysql-connector-java-3.0.10-stable-bin.jar
+

@@ -12,11 +12,12 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-					<!--<includes> <include>**/*.properties</include> </includes>
+					<!--<includes> <include>**/*.properties</include> </includes>-->
 				<excludes> 
-					<exclude>**/*.gif</exclude> 
+					<exclude>MANIFEST.MF</exclude>
+					<exclude>controller/props/CommonProps.properties</exclude>
 				</excludes>
-			--></resource>
+			</resource>
 		</resources>
 		<testResources>
 			<testResource>
@@ -27,7 +28,17 @@
 			--></testResource>
 		</testResources>
 		<!--<finalName>${artifactId}-${version}-beta</finalName>
-		--><plugins>
+		-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+	        </plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
@@ -45,34 +56,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<!--
-				generate a fat jar if desired, packaging all dependencies into one
-				jar file
-			-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.0.1</version>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>assembly</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef> jar-with-dependencies </descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<mainClass> controller.MachExpress </mainClass>
-						</manifest>
-					</archive>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

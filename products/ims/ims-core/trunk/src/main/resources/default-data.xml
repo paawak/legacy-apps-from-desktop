@@ -247,6 +247,98 @@
             <value description="name">Miscellaneous Expenditure</value>
         </row>
         
+        <row>
+            <value description="id">21</value>
+            <value description="name">Suspense Account</value>
+        </row>
+        
+        <row>
+            <value description="id">22</value>
+            <value description="name">P-L Account</value>
+        </row>
+        
+        <row>
+            <value description="id">23</value>
+            <value description="name">Revenue Accounts</value>
+        </row>
+        <row>
+            <value description="id">24</value>
+            <value description="name">Sales</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">25</value>
+            <value description="name">Sales Return</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">26</value>
+            <value description="name">Purchase</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">27</value>
+            <value description="name">Purchase Return</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">28</value>
+            <value description="name">Income Indirect</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">29</value>
+            <value description="name">Income Direct</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">30</value>
+            <value description="name">Expenses Direct</value>
+            <value description="parent">23</value>
+        </row>
+        <row>
+            <value description="id">31</value>
+            <value description="name">Expenses Indirect</value>
+            <value description="parent">23</value>
+        </row>
+        
 	</table> 	 
+	
+	<table name="trx_category">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value>1</value>
+            <value>Purchase Invoice Transaction</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>Sales Invoice Transaction</value>
+        </row>
+        <row>
+            <value>3</value>
+            <value>Cash Purchase Transaction</value>
+        </row>
+        <row>
+            <value>4</value>
+            <value>Cash Sales Transaction</value>
+        </row>
+        <row>
+            <value>5</value>
+            <value>Purchase Returns Transaction</value>
+        </row>
+        <row>
+            <value>6</value>
+            <value>Sales Returns Transaction</value>
+        </row>
+        <row>
+            <value>7</value>
+            <value>Receipt Note Transaction</value>
+        </row>
+        <row>
+            <value>8</value>
+            <value>Delivery Note Transaction</value>
+        </row>
+    </table>
     
 </dataset>

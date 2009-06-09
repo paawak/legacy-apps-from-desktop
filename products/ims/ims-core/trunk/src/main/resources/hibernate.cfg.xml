@@ -10,5 +10,6 @@
         <mapping class="com.swayam.ims.model.orm.Unit"/>
         <mapping class="com.swayam.ims.model.orm.AccountGroup"/>
         <mapping class="com.swayam.ims.model.orm.Currency"/>
+        <mapping class="com.swayam.ims.model.orm.TransactionCategory"/>
     </session-factory>
 </hibernate-configuration>

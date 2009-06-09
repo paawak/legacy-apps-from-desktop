@@ -141,6 +141,112 @@
             <value description="unit_type">1</value>
             <value description="quantity">125</value>
         </row>
-	</table> 
+	</table>
+	
+    <table name="account_group">
+        <column>id</column>
+        <column>name</column>
+        <column>parent</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Capital Account</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">Reserves and Surplus</value>
+            <value description="parent">1</value>
+        </row>
+        
+        <row>
+            <value description="id">3</value>
+            <value description="name">Loans</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">Secured Loan</value>
+            <value description="parent">3</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="name">Unsecured Loan</value>
+            <value description="parent">3</value>
+        </row>
+        
+        <row>
+            <value description="id">6</value>
+            <value description="name">Current Liabilities</value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="name">Duties and Taxes</value>
+            <value description="parent">6</value>
+        </row>
+        <row>
+            <value description="id">8</value>
+            <value description="name">Provisions</value>
+            <value description="parent">6</value>
+        </row>
+        <row>
+            <value description="id">9</value>
+            <value description="name">Accounts Payable</value>
+            <value description="parent">6</value>
+        </row>
+        <row>
+            <value description="id">10</value>
+            <value description="name">Bank OD Accounts</value>
+            <value description="parent">6</value>
+        </row>
+        
+        <row>
+            <value description="id">11</value>
+            <value description="name">Fixed Assets</value>
+        </row>
+        
+        <row>
+            <value description="id">12</value>
+            <value description="name">Investments</value>
+        </row>
+        
+        <row>
+            <value description="id">13</value>
+            <value description="name">Current Assets</value>
+        </row>
+        <row>
+            <value description="id">14</value>
+            <value description="name">Bank Accounts</value>
+            <value description="parent">13</value>
+        </row>
+        <row>
+            <value description="id">15</value>
+            <value description="name">Cash In Hand</value>
+            <value description="parent">13</value>
+        </row>
+        <row>
+            <value description="id">16</value>
+            <value description="name">Stock In Hand</value>
+            <value description="parent">13</value>
+        </row>
+        <row>
+            <value description="id">17</value>
+            <value description="name">Deposits</value>
+            <value description="parent">13</value>
+        </row>
+        <row>
+            <value description="id">18</value>
+            <value description="name">Loans and Advances</value>
+            <value description="parent">13</value>
+        </row>
+        <row>
+            <value description="id">19</value>
+            <value description="name">Accounts Receivable</value>
+            <value description="parent">13</value>
+        </row>
+        
+        <row>
+            <value description="id">20</value>
+            <value description="name">Miscellaneous Expenditure</value>
+        </row>
+        
+	</table> 	 
     
 </dataset>

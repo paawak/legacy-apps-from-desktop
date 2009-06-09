@@ -8,5 +8,7 @@
         <mapping class="com.swayam.ims.model.orm.ItemGroup"/>
         <mapping class="com.swayam.ims.model.orm.UnitType"/>
         <mapping class="com.swayam.ims.model.orm.Unit"/>
+        <mapping class="com.swayam.ims.model.orm.AccountGroup"/>
+        <mapping class="com.swayam.ims.model.orm.Currency"/>
     </session-factory>
 </hibernate-configuration>

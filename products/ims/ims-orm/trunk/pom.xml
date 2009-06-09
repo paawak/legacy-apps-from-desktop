@@ -177,6 +177,7 @@
             <groupId>org.acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
             <version>${acegi.security.version}</version>
+            <scope>provided</scope>
         </dependency>
 	</dependencies>
 

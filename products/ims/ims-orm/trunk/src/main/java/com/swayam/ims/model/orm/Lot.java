@@ -18,32 +18,122 @@ package com.swayam.ims.model.orm;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  * 
  * @author paawak
  */
+@Entity
 public class Lot implements Serializable {
 
     private static final long serialVersionUID = 6514962799603561015L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private Item item;
 
+    @Column(length = 20, unique = true)
     private String batchNo;
 
+    @Column(nullable = false)
     private Date procuredOn;
 
+    @Column(nullable = false)
     private Float price;
-
-    private Currency currency;
 
     private Date manufacturedDate;
 
     private Date expiryDate;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private User enteredBy;
 
+    @Column(nullable = false)
     private Integer quantity;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public String getBatchNo() {
+        return batchNo;
+    }
+
+    public void setBatchNo(String batchNo) {
+        this.batchNo = batchNo;
+    }
+
+    public Date getProcuredOn() {
+        return procuredOn;
+    }
+
+    public void setProcuredOn(Date procuredOn) {
+        this.procuredOn = procuredOn;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Date getManufacturedDate() {
+        return manufacturedDate;
+    }
+
+    public void setManufacturedDate(Date manufacturedDate) {
+        this.manufacturedDate = manufacturedDate;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public User getEnteredBy() {
+        return enteredBy;
+    }
+
+    public void setEnteredBy(User enteredBy) {
+        this.enteredBy = enteredBy;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
 }

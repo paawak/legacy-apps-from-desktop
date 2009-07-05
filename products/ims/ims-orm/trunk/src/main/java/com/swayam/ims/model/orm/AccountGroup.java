@@ -39,7 +39,7 @@ public class AccountGroup implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 50, unique = true)
     private String name;
@@ -51,11 +51,11 @@ public class AccountGroup implements Serializable {
     @JoinColumn(name = "parent")
     private AccountGroup parent;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

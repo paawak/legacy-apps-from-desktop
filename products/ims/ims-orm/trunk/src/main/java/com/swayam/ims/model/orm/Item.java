@@ -17,22 +17,103 @@ package com.swayam.ims.model.orm;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  * 
  * @author paawak
  */
+@Entity
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 5729868965288261711L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(length = 20, unique = true)
     private String code;
 
+    @Column(length = 15, unique = true)
     private String name;
 
+    @Column(length = 50)
     private String description;
 
-    private ItemGroup group;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private ItemGroup itemGroup;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Currency currency;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Unit unit;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ItemGroup getItemGroup() {
+        return itemGroup;
+    }
+
+    public void setItemGroup(ItemGroup itemGroup) {
+        this.itemGroup = itemGroup;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 
 }

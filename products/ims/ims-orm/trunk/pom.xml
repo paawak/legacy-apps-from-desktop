@@ -173,13 +173,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!--<dependency>
+		<dependency>
             <groupId>org.acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
             <version>${acegi.security.version}</version>
             <scope>provided</scope>
         </dependency>
-	--></dependencies>
+	</dependencies>
 
 	<properties>
 		<junit.version>4.4</junit.version>
@@ -189,7 +189,7 @@
 		<hibernate.version>3.2.6.ga</hibernate.version>
 		<jpa.version>1.0</jpa.version>
 		<log4j.version>1.2.13</log4j.version>
-		<!--<acegi.security.version>1.0.6</acegi.security.version>
-	--></properties>
+		<acegi.security.version>1.0.6</acegi.security.version>
+	</properties>
 	
 </project>

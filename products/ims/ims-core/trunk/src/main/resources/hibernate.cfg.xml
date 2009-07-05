@@ -11,5 +11,7 @@
         <mapping class="com.swayam.ims.model.orm.AccountGroup"/>
         <mapping class="com.swayam.ims.model.orm.Currency"/>
         <mapping class="com.swayam.ims.model.orm.TransactionCategory"/>
+        <mapping class="com.swayam.ims.model.orm.Item"/>
+        <mapping class="com.swayam.ims.model.orm.Lot"/>
     </session-factory>
 </hibernate-configuration>

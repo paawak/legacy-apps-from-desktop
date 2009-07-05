@@ -341,4 +341,17 @@
         </row>
     </table>
     
+    <table name="currency">
+        <column>id</column>
+        <column>name</column>
+        <column>symbol</column>
+        <column>description</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">INR</value>
+            <value description="symbol">Rs.</value>
+            <value description="description">Indian Rupees</value>
+        </row>
+    </table>
+    
 </dataset>

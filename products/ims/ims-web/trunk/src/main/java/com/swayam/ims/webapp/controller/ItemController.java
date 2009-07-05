@@ -1,9 +1,9 @@
 /*
- * ItemGroupController.java
+ * ItemController.java
  *
- * Created on May 31, 2009 12:45:39 AM
+ * Created on Jul 5, 2009 7:25:13 PM
  *
- * Copyright (c) 2002 - 2008 : Swayam Inc.
+ * Copyright (c) 2002 - 2009 : Swayam Inc.
  *
  * P R O P R I E T A R Y & C O N F I D E N T I A L
  *
@@ -24,21 +24,34 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.swayam.ims.core.dao.GenericDao;
+import com.swayam.ims.model.orm.Currency;
+import com.swayam.ims.model.orm.Item;
 import com.swayam.ims.model.orm.ItemGroup;
+import com.swayam.ims.model.orm.Unit;
 
 /**
  * 
  * @author paawak
  */
-public class ItemGroupController extends BaseFormController {
+public class ItemController extends BaseFormController {
 
+    private final GenericDao<Item, Long> itemDao;
     private final GenericDao<ItemGroup, Long> itemGroupDao;
+    private final GenericDao<Currency, Long> currencyDao;
+    private final GenericDao<Unit, Long> unitDao;
 
-    public ItemGroupController(GenericDao<ItemGroup, Long> itemGroupDao) {
+    public ItemController(GenericDao<Item, Long> itemDao,
+            GenericDao<ItemGroup, Long> itemGroupDao,
+            GenericDao<Currency, Long> currencyDao,
+            GenericDao<Unit, Long> unitDao) {
 
+        this.itemDao = itemDao;
         this.itemGroupDao = itemGroupDao;
-        setCommandName("itemGroup");
-        setCommandClass(ItemGroup.class);
+        this.currencyDao = currencyDao;
+        this.unitDao = unitDao;
+
+        setCommandName("item");
+        setCommandClass(Item.class);
 
     }
 
@@ -49,6 +62,12 @@ public class ItemGroupController extends BaseFormController {
         binder.registerCustomEditor(ItemGroup.class,
                 new EntityPropertyEditorSupport<ItemGroup>(itemGroupDao));
 
+        binder.registerCustomEditor(Currency.class,
+                new EntityPropertyEditorSupport<Currency>(currencyDao));
+
+        binder.registerCustomEditor(Unit.class,
+                new EntityPropertyEditorSupport<Unit>(unitDao));
+
         super.initBinder(request, binder);
 
     }
@@ -56,8 +75,8 @@ public class ItemGroupController extends BaseFormController {
     @Override
     public ModelAndView onSubmit(Object command) throws ServletException {
 
-        ItemGroup itemGroup = (ItemGroup) command;
-        itemGroupDao.save(itemGroup);
+        Item item = (Item) command;
+        itemDao.save(item);
         return new ModelAndView(new RedirectView(getSuccessView()));
 
     }
@@ -65,8 +84,8 @@ public class ItemGroupController extends BaseFormController {
     @Override
     protected Object formBackingObject(HttpServletRequest request)
             throws ServletException {
-        ItemGroup itemGroup = new ItemGroup();
-        return itemGroup;
+        Item item = new Item();
+        return item;
     }
 
     @Override
@@ -76,30 +95,12 @@ public class ItemGroupController extends BaseFormController {
         ModelAndView view = super.handleRequest(request, response);
 
         // set the object to view
-        view.addObject("itemGroupParents", itemGroupDao.getAll());
+        view.addObject("itemGroupList", itemGroupDao.getAll());
+        view.addObject("currencyList", currencyDao.getAll());
+        view.addObject("unitList", unitDao.getAll());
 
         return view;
 
     }
-
-    /*private class ItemGroupEditor extends PropertyEditorSupport {
-
-        @Override
-        public void setAsText(String text) {
-
-            if (text.trim().equals("") || text.equals("-1")) {
-                setSource(null);
-                return;
-            }
-
-            Long id = Long.valueOf(text);
-
-            ItemGroup itemGroup = itemGroupDao.get(id);
-
-            setValue(itemGroup);
-
-        }
-
-    }*/
 
 }

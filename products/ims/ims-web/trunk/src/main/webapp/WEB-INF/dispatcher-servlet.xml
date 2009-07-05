@@ -79,6 +79,7 @@
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
                 /masters/itemgroup.html=itemGroupController
+                /masters/item.html=itemController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -88,6 +89,17 @@
     	<constructor-arg ref="itemGroupDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/itemGroup"/>
+        <property name="successView" value="/mainMenu.html"/>
+        <property name="cancelView" value="/mainMenu.html"/>
+    </bean>
+    
+    <bean id="itemController" class="com.swayam.ims.webapp.controller.ItemController">
+        <constructor-arg ref="itemDao"/>
+        <constructor-arg ref="itemGroupDao"/>
+        <constructor-arg ref="currencyDao"/>
+        <constructor-arg ref="unitDao"/>
+        <property name="validator" ref="beanValidator"/>
+        <property name="formView" value="masters/item"/>
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="/mainMenu.html"/>
     </bean>

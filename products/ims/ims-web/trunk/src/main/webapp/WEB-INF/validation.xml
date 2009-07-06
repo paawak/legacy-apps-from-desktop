@@ -125,5 +125,20 @@
             </field>
 		</form>
 		
+	    <form name="lot">
+            <field property="item" depends="required">
+                <arg0 key="lot.item" />
+            </field>
+            <field property="batchNo" depends="required">
+                <arg0 key="lot.batchNo" />
+            </field>
+            <field property="price" depends="required">
+                <arg0 key="lot.price" />
+            </field>
+            <field property="quantity" depends="required">
+                <arg0 key="lot.quantity" />
+            </field>
+        </form>
+		
 	</formset>
 </form-validation>

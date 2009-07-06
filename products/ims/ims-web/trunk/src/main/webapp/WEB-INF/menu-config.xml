@@ -7,6 +7,7 @@
         <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu.html" roles="ROLE_ADMIN,ROLE_USER">
         	<Item name="NewItemGroup" title="menu.masters.itemgroup.title" page="/masters/itemgroup.html"/>
         	<Item name="NewItem" title="menu.masters.item.title" page="/masters/item.html"/>
+        	<Item name="NewLot" title="menu.masters.lot.title" page="/masters/lot.html"/>
         </Menu>
         
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>

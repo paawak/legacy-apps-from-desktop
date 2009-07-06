@@ -19,6 +19,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -34,6 +37,9 @@ import com.swayam.ims.model.orm.Unit;
  * @author paawak
  */
 public class ItemController extends BaseFormController {
+
+    private static final Logger LOG = LoggerFactory
+            .getLogger(ItemController.class);
 
     private final GenericDao<Item, Long> itemDao;
     private final GenericDao<ItemGroup, Long> itemGroupDao;
@@ -76,8 +82,19 @@ public class ItemController extends BaseFormController {
     public ModelAndView onSubmit(Object command) throws ServletException {
 
         Item item = (Item) command;
-        itemDao.save(item);
-        return new ModelAndView(new RedirectView(getSuccessView()));
+
+        ModelAndView modelView = new ModelAndView(new RedirectView(
+                getSuccessView()));
+
+        try {
+            itemDao.save(item);
+        } catch (ConstraintViolationException e) {
+            LOG.error("Could not save Item", e);
+            modelView = new ModelAndView(new RedirectView("dataAccessFailure"));
+            modelView.addObject("exception", e);
+        }
+
+        return modelView;
 
     }
 

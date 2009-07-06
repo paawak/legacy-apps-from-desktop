@@ -79,5 +79,10 @@
         <constructor-arg value="com.swayam.ims.model.orm.Currency"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="lotDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.Lot"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 </beans>

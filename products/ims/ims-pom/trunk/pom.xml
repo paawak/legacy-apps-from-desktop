@@ -396,8 +396,8 @@
         <jdbc.version>8.1-407.jdbc3</jdbc.version>
         <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
         <jdbc.url><![CDATA[jdbc:postgresql://localhost/ims]]></jdbc.url>
-        <jdbc.username>amma</jdbc.username>
-        <jdbc.password>root123</jdbc.password>        
+        <jdbc.username>postgres</jdbc.username>
+        <jdbc.password>somerandom</jdbc.password>        
     
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.6.0</aspectj.version>

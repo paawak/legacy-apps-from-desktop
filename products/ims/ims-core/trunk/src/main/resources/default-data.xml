@@ -354,4 +354,25 @@
         </row>
     </table>
     
+   <table name="party_type">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value>1</value>
+            <value>Creditor</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>Debtor</value>
+        </row>
+        <row>
+            <value>3</value>
+            <value>Bank</value>
+        </row>
+        <row>
+            <value>4</value>
+            <value>General account</value>
+        </row>
+   </table>
+    
 </dataset>

@@ -1,11 +1,11 @@
 package com.swayam.ims.core.test.dao;
 
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.orm.ObjectRetrievalFailureException;
+
 import com.swayam.ims.core.dao.BaseDaoTestCase;
 import com.swayam.ims.core.dao.UniversalDao;
 import com.swayam.ims.model.orm.User;
-
-import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.orm.ObjectRetrievalFailureException;
 
 /**
  * This class tests the generic GenericDao and BaseDao implementation.
@@ -14,12 +14,11 @@ public class UniversalDaoTest extends BaseDaoTestCase {
     protected UniversalDao universalDao;
 
     /**
-     * This method is used instead of setUniversalDao b/c setUniversalDao uses
-     * autowire byType <code>setPopulateProtectedVariables(true)</code> can also
-     * be used, but it's a little bit slower.
+     * This method is used instead of setUniversalDao b/c setUniversalDao uses autowire byType <code>setPopulateProtectedVariables(true)</code> can also be used, but it's a little bit slower.
      */
     public void onSetUpBeforeTransaction() throws Exception {
-        universalDao = (UniversalDao) applicationContext.getBean("universalDao");
+        universalDao = (UniversalDao) applicationContext
+                .getBean("universalDao");
     }
 
     public void onTearDownAfterTransaction() throws Exception {
@@ -38,10 +37,10 @@ public class UniversalDaoTest extends BaseDaoTestCase {
         user.setLastName("last");
         user.getAddress().setCity("Denver");
         user.getAddress().setPostalCode("80465");
-        user.setEmail("foo@bar.com");
+        user.getAddress().setEmail("foo@bar.com");
 
         // create
-        user = (User)universalDao.save(user);
+        user = (User) universalDao.save(user);
         flush();
         assertNotNull(user.getId());
 
@@ -56,7 +55,7 @@ public class UniversalDaoTest extends BaseDaoTestCase {
         flush();
 
         user = (User) universalDao.get(User.class, user.getId());
-        assertEquals( "USA", user.getAddress().getCountry());
+        assertEquals("USA", user.getAddress().getCountry());
 
         // delete
         universalDao.remove(User.class, user.getId());

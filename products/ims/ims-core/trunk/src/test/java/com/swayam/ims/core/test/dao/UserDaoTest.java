@@ -1,5 +1,8 @@
 package com.swayam.ims.core.test.dao;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import com.swayam.ims.core.Constants;
 import com.swayam.ims.core.dao.BaseDaoTestCase;
 import com.swayam.ims.core.dao.RoleDao;
@@ -7,18 +10,15 @@ import com.swayam.ims.core.dao.UserDao;
 import com.swayam.ims.model.orm.Address;
 import com.swayam.ims.model.orm.Role;
 import com.swayam.ims.model.orm.User;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
-import junit.framework.Assert;
 
 public class UserDaoTest extends BaseDaoTestCase {
     private UserDao dao = null;
     private RoleDao rdao = null;
-    
+
     public void setUserDao(UserDao dao) {
         this.dao = dao;
     }
-    
+
     public void setRoleDao(RoleDao rdao) {
         this.rdao = rdao;
     }
@@ -59,7 +59,7 @@ public class UserDaoTest extends BaseDaoTestCase {
         user = dao.get(-1L);
         assertEquals(address, user.getAddress());
         assertEquals("new address", user.getAddress().getAddress());
-        
+
         // verify that violation occurs when adding new user with same username
         user.setId(null);
 
@@ -87,7 +87,7 @@ public class UserDaoTest extends BaseDaoTestCase {
         user = dao.get(-1L);
         assertEquals(2, user.getRoles().size());
 
-        //add the same role twice - should result in no additional role
+        // add the same role twice - should result in no additional role
         user.addRole(role);
         dao.saveUser(user);
         flush();
@@ -114,9 +114,9 @@ public class UserDaoTest extends BaseDaoTestCase {
         address.setCountry("USA");
         address.setPostalCode("80210");
         user.setAddress(address);
-        user.setEmail("testuser@appfuse.org");
-        user.setWebsite("http://raibledesigns.com");
-        
+        user.getAddress().setEmail("testuser@appfuse.org");
+        user.getAddress().setWebsite("http://raibledesigns.com");
+
         Role role = rdao.getRoleByName(Constants.USER_ROLE);
         assertNotNull(role.getId());
         user.addRole(role);
@@ -130,7 +130,7 @@ public class UserDaoTest extends BaseDaoTestCase {
 
         dao.remove(user.getId());
         flush();
-        
+
         try {
             dao.get(user.getId());
             fail("getUser didn't throw DataAccessException");
@@ -138,12 +138,12 @@ public class UserDaoTest extends BaseDaoTestCase {
             assertNotNull(d);
         }
     }
-    
+
     public void testUserExists() throws Exception {
         boolean b = dao.exists(-1L);
         assertTrue(b);
     }
-    
+
     public void testUserNotExists() throws Exception {
         boolean b = dao.exists(111L);
         assertFalse(b);

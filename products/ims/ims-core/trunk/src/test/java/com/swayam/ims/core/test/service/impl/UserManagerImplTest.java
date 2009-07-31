@@ -1,5 +1,15 @@
 package com.swayam.ims.core.test.service.impl;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.jmock.Expectations;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import com.swayam.ims.core.Constants;
 import com.swayam.ims.core.dao.RoleDao;
 import com.swayam.ims.core.dao.UserDao;
@@ -9,22 +19,15 @@ import com.swayam.ims.core.service.impl.RoleManagerImpl;
 import com.swayam.ims.core.service.impl.UserManagerImpl;
 import com.swayam.ims.model.orm.Role;
 import com.swayam.ims.model.orm.User;
-import org.jmock.Expectations;
-import org.jmock.integration.junit4.JMock;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.dao.DataIntegrityViolationException;
 
 public class UserManagerImplTest extends BaseManagerMockTestCase {
-    //~ Instance fields ========================================================
+    // ~ Instance fields ========================================================
     private UserManagerImpl userManager = new UserManagerImpl();
     private RoleManagerImpl roleManager = new RoleManagerImpl();
     private UserDao userDao = null;
     private RoleDao roleDao = null;
 
-    //~ Methods ================================================================
+    // ~ Methods ================================================================
     @Before
     public void setUp() throws Exception {
         userDao = context.mock(UserDao.class);
@@ -39,11 +42,13 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
         testData.getRoles().add(new Role("user"));
 
         // set expected behavior on dao
-        context.checking(new Expectations() {{
-            one(userDao).get(with(equal(1L)));
-            will(returnValue(testData));
-        }});
-        
+        context.checking(new Expectations() {
+            {
+                one(userDao).get(with(equal(1L)));
+                will(returnValue(testData));
+            }
+        });
+
         User user = userManager.getUser("1");
         assertTrue(user != null);
         assert user != null;
@@ -56,21 +61,26 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
         testData.getRoles().add(new Role("user"));
 
         // set expected behavior on dao
-        context.checking(new Expectations() {{
-            one(userDao).get(with(equal(1L)));
-            will(returnValue(testData));
-        }});
-        
-        final User user = userManager.getUser("1");
-        user.setPhoneNumber("303-555-1212");
+        context.checking(new Expectations() {
+            {
+                one(userDao).get(with(equal(1L)));
+                will(returnValue(testData));
+            }
+        });
 
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(user)));
-            will(returnValue(user));
-        }});
-        
+        final User user = userManager.getUser("1");
+        user.getAddress().setPhoneNumber("303-555-1212");
+
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(user)));
+                will(returnValue(user));
+            }
+        });
+
         User returned = userManager.saveUser(user);
-        assertTrue(returned.getPhoneNumber().equals("303-555-1212"));
+        assertTrue(returned.getAddress().getPhoneNumber()
+                .equals("303-555-1212"));
         assertTrue(returned.getRoles().size() == 1);
     }
 
@@ -81,38 +91,46 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
         // call populate method in super class to populate test data
         // from a properties file matching this class name
         user = (User) populate(user);
-        
+
         // set expected behavior on role dao
-        context.checking(new Expectations() {{
-            one(roleDao).getRoleByName(with(equal("ROLE_USER")));
-            will(returnValue(new Role("ROLE_USER")));
-        }});
-                
+        context.checking(new Expectations() {
+            {
+                one(roleDao).getRoleByName(with(equal("ROLE_USER")));
+                will(returnValue(new Role("ROLE_USER")));
+            }
+        });
+
         Role role = roleManager.getRole(Constants.USER_ROLE);
         user.addRole(role);
 
         // set expected behavior on user dao
         final User user1 = user;
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(user1)));
-            will(returnValue(user1));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(user1)));
+                will(returnValue(user1));
+            }
+        });
 
         user = userManager.saveUser(user);
         assertTrue(user.getUsername().equals("john"));
         assertTrue(user.getRoles().size() == 1);
 
-        context.checking(new Expectations() {{
-            one(userDao).remove(with(equal(5L)));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(userDao).remove(with(equal(5L)));
+            }
+        });
 
         userManager.removeUser("5");
 
-        context.checking(new Expectations() {{
-            one(userDao).get(with(equal(5L)));
-            will(returnValue(null));
-        }});
-        
+        context.checking(new Expectations() {
+            {
+                one(userDao).get(with(equal(5L)));
+                will(returnValue(null));
+            }
+        });
+
         user = userManager.getUser("5");
         assertNull(user);
     }
@@ -121,15 +139,17 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     public void testUserExistsException() {
         // set expectations
         final User user = new User("admin");
-        user.setEmail("matt@raibledesigns.com");
+        user.getAddress().setEmail("matt@raibledesigns.com");
 
         final Exception ex = new DataIntegrityViolationException("");
 
-        context.checking(new Expectations() {{
-            one(userDao).saveUser(with(same(user)));
-            will(throwException(ex));
-        }});
-        
+        context.checking(new Expectations() {
+            {
+                one(userDao).saveUser(with(same(user)));
+                will(throwException(ex));
+            }
+        });
+
         // run test
         try {
             userManager.saveUser(user);

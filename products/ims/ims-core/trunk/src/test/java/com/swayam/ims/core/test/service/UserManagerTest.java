@@ -10,17 +10,17 @@ import com.swayam.ims.core.service.UserManager;
 import com.swayam.ims.model.orm.User;
 
 public class UserManagerTest extends BaseManagerTestCase {
-    //~ Instance fields ========================================================
+    // ~ Instance fields ========================================================
 
     private UserManager mgr = null;
     private RoleManager roleManager = null;
     private Log log = LogFactory.getLog(UserManagerTest.class);
     private User user;
-    
+
     public void setUserManager(UserManager userManager) {
         this.mgr = userManager;
     }
-    
+
     public void setRoleManager(RoleManager roleManager) {
         this.roleManager = roleManager;
     }
@@ -28,19 +28,19 @@ public class UserManagerTest extends BaseManagerTestCase {
     public void testGetUser() throws Exception {
         user = mgr.getUserByUsername("user");
         assertNotNull(user);
-        
+
         log.debug(user);
         assertEquals(1, user.getRoles().size());
     }
 
     public void testSaveUser() throws Exception {
         user = mgr.getUserByUsername("user");
-        user.setPhoneNumber("303-555-1212");
+        user.getAddress().setPhoneNumber("303-555-1212");
 
         log.debug("saving user with updated phone number: " + user);
 
         user = mgr.saveUser(user);
-        assertEquals("303-555-1212", user.getPhoneNumber());
+        assertEquals("303-555-1212", user.getAddress().getPhoneNumber());
         assertEquals(1, user.getRoles().size());
     }
 

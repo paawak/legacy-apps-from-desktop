@@ -81,6 +81,7 @@
                 /masters/itemgroup.html=itemGroupController
                 /masters/item.html=itemController
                 /masters/lot.html=lotController
+                /masters/party.html=partyController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -111,6 +112,16 @@
         <constructor-arg ref="userManager"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/lot"/>
+        <property name="successView" value="/mainMenu.html"/>
+        <property name="cancelView" value="/mainMenu.html"/>
+    </bean>
+    
+    <bean id="partyController" class="com.swayam.ims.webapp.controller.PartyController">
+        <constructor-arg ref="accountGroupDao"/>
+        <constructor-arg ref="partyTypeDao"/>
+        <constructor-arg ref="partyDao"/>
+        <property name="validator" ref="beanValidator"/>
+        <property name="formView" value="masters/party"/>
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="/mainMenu.html"/>
     </bean>

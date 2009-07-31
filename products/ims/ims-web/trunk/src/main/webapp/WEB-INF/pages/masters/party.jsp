@@ -1,13 +1,11 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <head>
-    <title><fmt:message key="signup.title"/></title>
-    <meta name="heading" content="<fmt:message key='signup.heading'/>"/>
+    <title><fmt:message key="menu.masters.party.title"/></title>
+    <meta name="heading" content="<fmt:message key='menu.masters.party.title'/>"/>
 </head>
 
-<body id="signup"/>
-
-<spring:bind path="user.*">
+<spring:bind path="party.*">
     <c:if test="${not empty status.errorMessages}">
     <div class="error">    
         <c:forEach var="error" items="${status.errorMessages}">
@@ -21,46 +19,49 @@
 
 <div class="separator"></div>
 
-<form:form commandName="user" method="post" action="signup.html" onsubmit="return validateUser(this)" id="signupForm">
+<form:form commandName="party" method="post">
 <ul>
-    <li class="info">
-        <fmt:message key="signup.message"/>
+    <li>
+        <appfuse:label styleClass="desc" key="party.name"/>
+        <form:errors path="name" cssClass="fieldError"/>
+        <form:input path="name" id="name" cssClass="text large" cssErrorClass="text large error"/>
     </li>
     <li>
-        <appfuse:label styleClass="desc" key="user.username"/>
-        <form:errors path="username" cssClass="fieldError"/>
-        <form:input path="username" id="username" cssClass="text large" cssErrorClass="text large error"/>
+        <appfuse:label styleClass="desc" key="party.desc"/>
+        <form:errors path="description" cssClass="fieldError"/>
+        <form:input path="description" id="description" cssClass="text medium" cssErrorClass="text medium error" />
     </li>
     <li>
-        <div>
-            <div class="left">
-                <appfuse:label styleClass="desc" key="user.password"/>
-                <form:errors path="password" cssClass="fieldError"/>
-                <form:password path="password" id="password" cssClass="text medium" cssErrorClass="text medium error" showPassword="true"/>
-            </div>
-            <div>
-                <appfuse:label styleClass="desc" key="user.confirmPassword"/>
-                <form:errors path="confirmPassword" cssClass="fieldError"/>
-                <form:password path="confirmPassword" id="confirmPassword" cssClass="text medium" cssErrorClass="text medium error" showPassword="true"/>
-            </div>
-        </div>
+            <appfuse:label styleClass="desc" key="party.type" />
+            <form:errors path="type" cssClass="fieldError" />
+            <form:select path="type"
+                id="item" cssClass="text large"
+                cssErrorClass="text large error">
+                <option value="-1">------Select One------</option>
+
+                <c:forEach var="partyType" items="${partyTypeList}">
+                    <option value="${partyType.id}"
+                        <c:if test="${partyType.id == party.type.id}">
+                                                selected="true"
+                                            </c:if>>${partyType.name}</option>
+                </c:forEach>
+            </form:select>
     </li>
     <li>
-        <appfuse:label styleClass="desc" key="user.passwordHint"/>
-        <form:errors path="passwordHint" cssClass="fieldError"/>
-        <form:input path="passwordHint" id="passwordHint" cssClass="text large" cssErrorClass="text large error"/>
-    </li>
-    <li>
-        <div class="left">
-            <appfuse:label styleClass="desc" key="user.firstName"/>
-            <form:errors path="firstName" cssClass="fieldError"/>
-            <form:input path="firstName" id="firstName" cssClass="text medium" cssErrorClass="text medium error" maxlength="50"/>
-        </div>
-        <div>
-            <appfuse:label styleClass="desc" key="user.lastName"/>
-            <form:errors path="lastName" cssClass="fieldError"/>
-            <form:input path="lastName" id="lastName" cssClass="text medium" cssErrorClass="text medium error" maxlength="50"/>
-        </div>
+            <appfuse:label styleClass="desc" key="party.accountGrp" />
+            <form:errors path="accountGroup" cssClass="fieldError" />
+            <form:select path="accountGroup"
+                id="item" cssClass="text large"
+                cssErrorClass="text large error">
+                <option value="-1">------Select One------</option>
+
+                <c:forEach var="accountGroup" items="${accountGroupList}">
+                    <option value="${accountGroup.id}"
+                        <c:if test="${accountGroup.id == party.accountGroup.id}">
+                                                selected="true"
+                                            </c:if>>${accountGroup.name}</option>
+                </c:forEach>
+            </form:select>
     </li>
     <li>
         <div>
@@ -76,11 +77,7 @@
             </div>
         </div>
     </li>
-    <li>
-        <appfuse:label styleClass="desc" key="user.website"/>
-        <form:errors path="address.website" cssClass="fieldError"/>
-        <form:input path="address.website" id="website" cssClass="text large" cssErrorClass="text large error"/>
-    </li>
+    
     <li>
         <label class="desc"><fmt:message key="user.address.address"/></label>
         <div class="group">
@@ -117,12 +114,6 @@
 </ul>
 </form:form>
 
-<script type="text/javascript">
-    Form.focusFirstElement($('signupForm'));
-    highlightFormElements();
-</script>
 
-<v:javascript formName="user" staticJavascript="false"/>
-<script type="text/javascript" src="<c:url value="/scripts/validator.jsp"/>"></script>
 
 

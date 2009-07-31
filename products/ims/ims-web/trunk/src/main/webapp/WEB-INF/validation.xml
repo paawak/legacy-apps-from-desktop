@@ -139,6 +139,18 @@
                 <arg0 key="lot.quantity" />
             </field>
         </form>
+        
+        <form name="party">
+            <field property="name" depends="required">
+                <arg0 key="party.name" />
+            </field>
+            <field property="type" depends="required">
+                <arg0 key="party.type" />
+            </field>
+            <field property="accountGroup" depends="required">
+                <arg0 key="party.accountGroup" />
+            </field>
+        </form>        
 		
 	</formset>
 </form-validation>

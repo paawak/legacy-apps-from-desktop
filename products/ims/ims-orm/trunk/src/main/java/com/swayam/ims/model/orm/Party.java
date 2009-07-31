@@ -28,7 +28,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-
 /**
  * This stores account details of creditors, debtors, banks and other general accounts.
  * 
@@ -48,6 +47,10 @@ public class Party implements Serializable {
 
     @Column(length = 100)
     private String description;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private PartyType type;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
@@ -81,6 +84,14 @@ public class Party implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public PartyType getType() {
+        return type;
+    }
+
+    public void setType(PartyType type) {
+        this.type = type;
     }
 
     public AccountGroup getAccountGroup() {

@@ -48,7 +48,7 @@
             </form:select>
     </li>
     <li>
-            <appfuse:label styleClass="desc" key="party.accountGrp" />
+            <appfuse:label styleClass="desc" key="party.accountGroup" />
             <form:errors path="accountGroup" cssClass="fieldError" />
             <form:select path="accountGroup"
                 id="item" cssClass="text large"

@@ -57,7 +57,7 @@ public class Party implements Serializable {
     private AccountGroup accountGroup;
 
     @Embedded
-    private Address address;
+    private Address address = new Address();
 
     @Column(nullable = false)
     private Date openedOn;

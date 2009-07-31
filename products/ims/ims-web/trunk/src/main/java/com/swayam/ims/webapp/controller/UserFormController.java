@@ -99,7 +99,8 @@ public class UserFormController extends BaseFormController {
                 return null;
             } catch (UserExistsException e) {
                 errors.rejectValue("username", "errors.existing.user",
-                        new Object[] { user.getUsername(), user.getEmail() },
+                        new Object[] { user.getUsername(),
+                                user.getAddress().getEmail() },
                         "duplicate user");
 
                 // redisplay the unencrypted passwords

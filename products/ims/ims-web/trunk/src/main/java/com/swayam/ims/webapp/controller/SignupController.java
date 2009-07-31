@@ -59,8 +59,8 @@ public class SignupController extends BaseFormController {
             return null;
         } catch (UserExistsException e) {
             errors.rejectValue("username", "errors.existing.user",
-                    new Object[] { user.getUsername(), user.getEmail() },
-                    "duplicate user");
+                    new Object[] { user.getUsername(),
+                            user.getAddress().getEmail() }, "duplicate user");
 
             // redisplay the unencrypted passwords
             user.setPassword(user.getConfirmPassword());

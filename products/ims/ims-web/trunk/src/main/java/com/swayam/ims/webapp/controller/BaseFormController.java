@@ -173,10 +173,12 @@ public class BaseFormController extends SimpleFormController {
      */
     protected void sendUserMessage(User user, String msg, String url) {
         if (log.isDebugEnabled()) {
-            log.debug("sending e-mail to user [" + user.getEmail() + "]...");
+            log.debug("sending e-mail to user [" + user.getAddress().getEmail()
+                    + "]...");
         }
 
-        message.setTo(user.getFullName() + "<" + user.getEmail() + ">");
+        message.setTo(user.getFullName() + "<" + user.getAddress().getEmail()
+                + ">");
 
         Map<String, Serializable> model = new HashMap<String, Serializable>();
         model.put("user", user);

@@ -78,7 +78,7 @@ public class PasswordHintController implements Controller {
                     .append(user.getPasswordHint());
             msg.append("\n\nLogin at: ").append(RequestUtil.getAppURL(request));
 
-            message.setTo(user.getEmail());
+            message.setTo(user.getAddress().getEmail());
             String subject = '[' + text.getMessage("webapp.name") + "] "
                     + text.getMessage("user.passwordHint");
             message.setSubject(subject);
@@ -86,7 +86,7 @@ public class PasswordHintController implements Controller {
             mailEngine.send(message);
 
             saveMessage(request, text.getMessage("login.passwordHint.sent",
-                    new Object[] { username, user.getEmail() }));
+                    new Object[] { username, user.getAddress().getEmail() }));
         } catch (UsernameNotFoundException e) {
             log.warn(e.getMessage());
             saveError(request, text.getMessage("login.passwordHint.error",

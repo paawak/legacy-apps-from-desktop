@@ -84,5 +84,20 @@
         <constructor-arg value="com.swayam.ims.model.orm.Lot"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="accountGroupDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.AccountGroup"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="partyTypeDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.PartyType"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="partyDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.Party"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 </beans>

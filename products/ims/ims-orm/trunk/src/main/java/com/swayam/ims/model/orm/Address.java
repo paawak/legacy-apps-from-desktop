@@ -21,6 +21,9 @@ public class Address extends BaseObject implements Serializable {
     private String province;
     private String country;
     private String postalCode;
+    private String phoneNo;
+    private String mobileNo;
+    private String fax;
 
     @Column(length = 150)
     public String getAddress() {
@@ -65,6 +68,33 @@ public class Address extends BaseObject implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    @Column(length = 15)
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    @Column(length = 15)
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    @Column(length = 15)
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
     }
 
     /**
@@ -114,4 +144,5 @@ public class Address extends BaseObject implements Serializable {
                         this.province).append("postalCode", this.postalCode)
                 .append("city", this.city).toString();
     }
+
 }

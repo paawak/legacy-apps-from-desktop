@@ -21,9 +21,16 @@ public class Address extends BaseObject implements Serializable {
     private String province;
     private String country;
     private String postalCode;
-    private String phoneNo;
-    private String mobileNo;
+
+    private String phoneNumber;
+
+    private String mobileNumber;
+
     private String fax;
+
+    private String email;
+
+    private String website;
 
     @Column(length = 150)
     public String getAddress() {
@@ -70,22 +77,40 @@ public class Address extends BaseObject implements Serializable {
         this.province = province;
     }
 
-    @Column(length = 15)
-    public String getPhoneNo() {
-        return phoneNo;
+    @Column(length = 15, name = "phone_number")
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    @Column(length = 15)
-    public String getMobileNo() {
-        return mobileNo;
+    @Column(length = 15, name = "mobile_number")
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    @Column(length = 30)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(length = 100)
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     @Column(length = 15)

@@ -33,24 +33,51 @@ import org.springframework.security.userdetails.UserDetails;
 @Entity
 @Table(name = "app_user")
 public class User extends BaseObject implements Serializable, UserDetails {
+
     private static final long serialVersionUID = 3832626162173359411L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false, length = 50, unique = true)
     private String username; // required
+
+    @Column(nullable = false)
     private String password; // required
+
+    @Transient
     private String confirmPassword;
+
+    @Column(name = "password_hint")
     private String passwordHint;
+
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName; // required
+
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName; // required
-    // private String email; // required; unique
-    // private String phoneNumber;
-    // private String website;
+
+    @Embedded
     private Address address = new Address();
+
+    @Version
     private Integer version;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<Role>();
+
+    @Column(name = "account_enabled")
     private boolean enabled;
+
+    @Column(name = "account_expired", nullable = false)
     private boolean accountExpired;
+
+    @Column(name = "account_locked", nullable = false)
     private boolean accountLocked;
+
+    @Column(name = "credentials_expired", nullable = false)
     private boolean credentialsExpired;
 
     /**
@@ -69,55 +96,33 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.username = username;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
 
-    @Column(nullable = false, length = 50, unique = true)
     public String getUsername() {
         return username;
     }
 
-    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
 
-    @Transient
     public String getConfirmPassword() {
         return confirmPassword;
     }
 
-    @Column(name = "password_hint")
     public String getPasswordHint() {
         return passwordHint;
     }
 
-    @Column(name = "first_name", nullable = false, length = 50)
     public String getFirstName() {
         return firstName;
     }
 
-    @Column(name = "last_name", nullable = false, length = 50)
     public String getLastName() {
         return lastName;
     }
-
-    // @Column(nullable = false, unique = true)
-    // public String getEmail() {
-    // return email;
-    // }
-    //
-    // @Column(name = "phone_number")
-    // public String getPhoneNumber() {
-    // return phoneNumber;
-    // }
-    //
-    // public String getWebsite() {
-    // return website;
-    // }
 
     /**
      * Returns the full name.
@@ -129,13 +134,10 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return firstName + ' ' + lastName;
     }
 
-    @Embedded
     public Address getAddress() {
         return address;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
     public Set<Role> getRoles() {
         return roles;
     }
@@ -178,17 +180,14 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return roles.toArray(new GrantedAuthority[0]);
     }
 
-    @Version
     public Integer getVersion() {
         return version;
     }
 
-    @Column(name = "account_enabled")
     public boolean isEnabled() {
         return enabled;
     }
 
-    @Column(name = "account_expired", nullable = false)
     public boolean isAccountExpired() {
         return accountExpired;
     }
@@ -201,7 +200,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return !isAccountExpired();
     }
 
-    @Column(name = "account_locked", nullable = false)
     public boolean isAccountLocked() {
         return accountLocked;
     }
@@ -214,7 +212,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return !isAccountLocked();
     }
 
-    @Column(name = "credentials_expired", nullable = false)
     public boolean isCredentialsExpired() {
         return credentialsExpired;
     }

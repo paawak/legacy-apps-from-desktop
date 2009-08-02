@@ -15,44 +15,55 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @Embeddable
 public class Address extends BaseObject implements Serializable {
+
     private static final long serialVersionUID = 3617859655330969141L;
-    private String address;
-    private String city;
-    private String province;
-    private String country;
-    private String postalCode;
-
-    private String phoneNumber;
-
-    private String mobileNumber;
-
-    private String fax;
-
-    private String email;
-
-    private String website;
 
     @Column(length = 150)
+    private String address;
+
+    @Column(nullable = false, length = 50)
+    private String city;
+
+    @Column(length = 100)
+    private String province;
+
+    @Column(length = 100)
+    private String country;
+
+    @Column(name = "postal_code", nullable = false, length = 15)
+    private String postalCode;
+
+    @Column(length = 15, name = "phone_number")
+    private String phoneNumber;
+
+    @Column(length = 15, name = "mobile_number")
+    private String mobileNumber;
+
+    @Column(length = 15)
+    private String fax;
+
+    @Column(length = 30)
+    private String email;
+
+    @Column(length = 100)
+    private String website;
+
     public String getAddress() {
         return address;
     }
 
-    @Column(nullable = false, length = 50)
     public String getCity() {
         return city;
     }
 
-    @Column(length = 100)
     public String getProvince() {
         return province;
     }
 
-    @Column(length = 100)
     public String getCountry() {
         return country;
     }
 
-    @Column(name = "postal_code", nullable = false, length = 15)
     public String getPostalCode() {
         return postalCode;
     }
@@ -77,7 +88,6 @@ public class Address extends BaseObject implements Serializable {
         this.province = province;
     }
 
-    @Column(length = 15, name = "phone_number")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -86,7 +96,6 @@ public class Address extends BaseObject implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    @Column(length = 15, name = "mobile_number")
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -95,7 +104,6 @@ public class Address extends BaseObject implements Serializable {
         this.mobileNumber = mobileNumber;
     }
 
-    @Column(length = 30)
     public String getEmail() {
         return email;
     }
@@ -104,7 +112,6 @@ public class Address extends BaseObject implements Serializable {
         this.email = email;
     }
 
-    @Column(length = 100)
     public String getWebsite() {
         return website;
     }
@@ -113,7 +120,6 @@ public class Address extends BaseObject implements Serializable {
         this.website = website;
     }
 
-    @Column(length = 15)
     public String getFax() {
         return fax;
     }

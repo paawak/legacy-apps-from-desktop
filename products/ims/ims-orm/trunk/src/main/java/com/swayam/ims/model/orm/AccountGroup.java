@@ -15,8 +15,6 @@
 
 package com.swayam.ims.model.orm;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +31,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "account_group")
-public class AccountGroup implements Serializable {
+public class AccountGroup extends BaseObject {
 
     private static final long serialVersionUID = 8651011772980546778L;
 
@@ -81,6 +79,43 @@ public class AccountGroup implements Serializable {
 
     public void setParent(AccountGroup parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = System.identityHashCode(this);
+        result = prime * result
+                + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (getClass() != obj.getClass())
+            return false;
+        AccountGroup other = (AccountGroup) obj;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (parent == null) {
+            if (other.parent != null)
+                return false;
+        } else if (!parent.equals(other.parent))
+            return false;
+        return true;
     }
 
 }

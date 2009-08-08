@@ -10,6 +10,7 @@ import com.swayam.ims.webapp.controller.UserController;
 
 public class UserControllerTest extends BaseControllerTestCase {
 
+    @SuppressWarnings("unchecked")
     public void testHandleRequest() throws Exception {
         UserController c = (UserController) applicationContext
                 .getBean("userController");

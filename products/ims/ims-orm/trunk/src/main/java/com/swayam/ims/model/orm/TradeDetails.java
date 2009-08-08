@@ -18,19 +18,24 @@ package com.swayam.ims.model.orm;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  * 
  * @author paawak
  */
-@Entity
-@Table
+@Entity(name = "trade_details")
 public class TradeDetails extends BaseObject {
 
     private static final long serialVersionUID = 1694240781234093096L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trade_header")
@@ -49,6 +54,14 @@ public class TradeDetails extends BaseObject {
 
     @Column(nullable = false)
     private float totalPrice;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Trade getTradeHeader() {
         return tradeHeader;

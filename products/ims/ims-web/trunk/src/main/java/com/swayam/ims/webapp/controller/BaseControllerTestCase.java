@@ -90,6 +90,7 @@ public abstract class BaseControllerTestCase
         objectToRequestParameters(o, request, null);
     }
 
+    @SuppressWarnings("unchecked")
     public void objectToRequestParameters(Object o,
             MockHttpServletRequest request, String prefix) throws Exception {
         Class clazz = o.getClass();
@@ -130,6 +131,7 @@ public abstract class BaseControllerTestCase
         }
     }
 
+    @SuppressWarnings("unchecked")
     private Field[] getDeclaredFields(Class clazz) {
         Field[] f = new Field[0];
         Class superClazz = clazz.getSuperclass();

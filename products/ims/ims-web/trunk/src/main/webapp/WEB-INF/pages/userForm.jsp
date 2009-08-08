@@ -100,20 +100,20 @@
         <div>
             <div class="left">
                 <appfuse:label styleClass="desc" key="user.email"/>
-                <form:errors path="email" cssClass="fieldError"/>
-                <form:input path="email" id="email" cssClass="text medium" cssErrorClass="text medium error"/>
+                <form:errors path="address.email" cssClass="fieldError"/>
+                <form:input path="address.email" id="email" cssClass="text medium" cssErrorClass="text medium error"/>
             </div>
             <div>
                 <appfuse:label styleClass="desc" key="user.phoneNumber"/>
-                <form:errors path="phoneNumber" cssClass="fieldError"/>
-                <form:input path="phoneNumber" id="phoneNumber" cssClass="text medium" cssErrorClass="text medium error"/>
+                <form:errors path="address.phoneNumber" cssClass="fieldError"/>
+                <form:input path="address.phoneNumber" id="phoneNumber" cssClass="text medium" cssErrorClass="text medium error"/>
             </div>
         </div>
     </li>
     <li>
         <appfuse:label styleClass="desc" key="user.website"/>
-        <form:errors path="website" cssClass="fieldError"/>
-        <form:input path="website" id="website" cssClass="text large" cssErrorClass="text large error"/>
+        <form:errors path="address.website" cssClass="fieldError"/>
+        <form:input path="address.website" id="website" cssClass="text large" cssErrorClass="text large error"/>
     </li>
     <li>
         <label class="desc"><fmt:message key="user.address.address"/></label>

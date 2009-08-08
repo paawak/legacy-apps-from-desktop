@@ -89,12 +89,12 @@
 			<field property="address.province" depends="required">
 				<arg0 key="user.address.province" />
 			</field>
-			<field property="email" depends="required,email">
-				<arg0 key="user.email" />
+			<field property="address.email" depends="required,email">
+				<arg0 key="user.address.email" />
 			</field>
-			<field property="phoneNumber" depends="mask">
+			<field property="address.phoneNumber" depends="mask">
 				<msg name="mask" key="errors.phone" />
-				<arg0 key="user.phoneNumber" />
+				<arg0 key="user.address.phoneNumber" />
 				<var>
 					<var-name>mask</var-name>
 					<var-value>${phone}</var-value>

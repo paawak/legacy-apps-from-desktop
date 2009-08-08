@@ -40,8 +40,8 @@ public class SignupControllerTest extends BaseControllerTestCase {
         request.addParameter("address.province", "Colorado");
         request.addParameter("address.country", "USA");
         request.addParameter("address.postalCode", "80210");
-        request.addParameter("email", "self-registered@raibledesigns.com");
-        request.addParameter("website", "http://raibledesigns.com");
+        request.addParameter("address.email", "self@raible.com");
+        request.addParameter("address.website", "http://raibledesigns.com");
         request.addParameter("passwordHint", "Password is one with you.");
 
         HttpServletResponse response = new MockHttpServletResponse();
@@ -54,6 +54,7 @@ public class SignupControllerTest extends BaseControllerTestCase {
         ModelAndView mv = c.handleRequest(request, response);
         Errors errors = (Errors) mv.getModel().get(
                 BindException.MODEL_KEY_PREFIX + "user");
+
         assertTrue("no errors returned in model", errors == null);
 
         // verify an account information e-mail was sent
@@ -66,4 +67,5 @@ public class SignupControllerTest extends BaseControllerTestCase {
 
         SecurityContextHolder.getContext().setAuthentication(null);
     }
+
 }

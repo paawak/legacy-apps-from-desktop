@@ -157,7 +157,7 @@ public class Trade extends BaseObject {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
+        final int prime = System.identityHashCode(this);
         int result = 56;
         result = prime * result
                 + ((category == null) ? 0 : category.hashCode());

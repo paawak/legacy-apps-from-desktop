@@ -20,8 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
@@ -252,18 +250,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.lastName = lastName;
     }
 
-    // public void setEmail(String email) {
-    // this.email = email;
-    // }
-    //
-    // public void setPhoneNumber(String phoneNumber) {
-    // this.phoneNumber = phoneNumber;
-    // }
-    //
-    // public void setWebsite(String website) {
-    // this.website = website;
-    // }
-
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -317,30 +303,31 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return (username != null ? username.hashCode() : 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String toString() {
-        ToStringBuilder sb = new ToStringBuilder(this,
-                ToStringStyle.DEFAULT_STYLE).append("username", this.username)
-                .append("enabled", this.enabled).append("accountExpired",
-                        this.accountExpired).append("credentialsExpired",
-                        this.credentialsExpired).append("accountLocked",
-                        this.accountLocked);
+    // /**
+    // * {@inheritDoc}
+    // */
+    // public String toString() {
+    // ToStringBuilder sb = new ToStringBuilder(this,
+    // ToStringStyle.DEFAULT_STYLE).append("username", this.username)
+    // .append("enabled", this.enabled).append("accountExpired",
+    // this.accountExpired).append("credentialsExpired",
+    // this.credentialsExpired).append("accountLocked",
+    // this.accountLocked);
+    //
+    // GrantedAuthority[] auths = this.getAuthorities();
+    // if (auths != null) {
+    // sb.append("Granted Authorities: ");
+    //
+    // for (int i = 0; i < auths.length; i++) {
+    // if (i > 0) {
+    // sb.append(", ");
+    // }
+    // sb.append(auths[i].toString());
+    // }
+    // } else {
+    // sb.append("No Granted Authorities");
+    // }
+    // return sb.toString();
+    // }
 
-        GrantedAuthority[] auths = this.getAuthorities();
-        if (auths != null) {
-            sb.append("Granted Authorities: ");
-
-            for (int i = 0; i < auths.length; i++) {
-                if (i > 0) {
-                    sb.append(", ");
-                }
-                sb.append(auths[i].toString());
-            }
-        } else {
-            sb.append("No Granted Authorities");
-        }
-        return sb.toString();
-    }
 }

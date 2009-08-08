@@ -42,21 +42,19 @@ public class Transaction implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
+    private Trade trade;
+
+    @Column(nullable = false, name = "transaction_date")
     private Date transactionDate;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Party party;
-
-    @Column(nullable = false)
-    private Currency currency;
+    @JoinColumn(nullable = false, name = "account_number")
+    private Party partyAccount;
 
     @Column(nullable = false)
     private float amount;
-
-    @Column(nullable = false)
-    private TransactionCategory category;
 
     public Long getId() {
         return id;
@@ -64,6 +62,14 @@ public class Transaction implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Trade getTrade() {
+        return trade;
+    }
+
+    public void setTrade(Trade trade) {
+        this.trade = trade;
     }
 
     public Date getTransactionDate() {
@@ -74,20 +80,12 @@ public class Transaction implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    public Party getParty() {
-        return party;
+    public Party getPartyAccount() {
+        return partyAccount;
     }
 
-    public void setParty(Party party) {
-        this.party = party;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setPartyAccount(Party partyAccount) {
+        this.partyAccount = partyAccount;
     }
 
     public float getAmount() {
@@ -96,14 +94,6 @@ public class Transaction implements Serializable {
 
     public void setAmount(float amount) {
         this.amount = amount;
-    }
-
-    public TransactionCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(TransactionCategory category) {
-        this.category = category;
     }
 
 }

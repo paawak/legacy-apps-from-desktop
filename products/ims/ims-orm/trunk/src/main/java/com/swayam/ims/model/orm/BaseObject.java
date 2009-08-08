@@ -11,12 +11,12 @@ public abstract class BaseObject implements Serializable {
 
     private static final long serialVersionUID = -1111101872749774429L;
 
-    /**
-     * Returns a multi-line String with key=value pairs.
-     * 
-     * @return a String representation of this class.
-     */
-    public abstract String toString();
+    // /**
+    // * Returns a multi-line String with key=value pairs.
+    // *
+    // * @return a String representation of this class.
+    // */
+    // public abstract String toString();
 
     /**
      * Compares object equality. When using Hibernate, the primary key should not be a part of this comparison.

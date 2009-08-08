@@ -5,9 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 /**
  * This class is used to represent an address with address, city, province and postal-code information.
  * 
@@ -163,17 +160,17 @@ public class Address extends BaseObject implements Serializable {
         return result;
     }
 
-    /**
-     * Returns a multi-line String with key=value pairs.
-     * 
-     * @return a String representation of this class.
-     */
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("country", this.country)
-                .append("address", this.address).append("province",
-                        this.province).append("postalCode", this.postalCode)
-                .append("city", this.city).toString();
-    }
+    // /**
+    // * Returns a multi-line String with key=value pairs.
+    // *
+    // * @return a String representation of this class.
+    // */
+    // public String toString() {
+    // return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+    // .append("country", this.country)
+    // .append("address", this.address).append("province",
+    // this.province).append("postalCode", this.postalCode)
+    // .append("city", this.city).toString();
+    // }
 
 }

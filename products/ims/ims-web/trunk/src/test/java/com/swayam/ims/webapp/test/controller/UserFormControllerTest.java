@@ -113,18 +113,17 @@ public class UserFormControllerTest extends BaseControllerTestCase {
         assertNotNull(request.getSession().getAttribute("successMessages"));
     }
 
-    // TODO: palash:commenting out as it fails
-    // public void testAddWithMissingFields() throws Exception {
-    // request = newPost("/userform.html");
-    // request.addParameter("firstName", "Jack");
-    // request.setRemoteUser("user");
-    //
-    // mv = c.handleRequest(request, new MockHttpServletResponse());
-    //
-    // Errors errors = (Errors) mv.getModel().get(
-    // BindException.MODEL_KEY_PREFIX + "user");
-    // assertTrue(errors.getAllErrors().size() == 10);
-    // }
+    public void testAddWithMissingFields() throws Exception {
+        request = newPost("/userform.html");
+        request.addParameter("firstName", "Jack");
+        request.setRemoteUser("user");
+
+        mv = c.handleRequest(request, new MockHttpServletResponse());
+
+        Errors errors = (Errors) mv.getModel().get(
+                BindException.MODEL_KEY_PREFIX + "user");
+        assertTrue(errors.getAllErrors().size() == 10);
+    }
 
     public void testRemove() throws Exception {
         request = newPost("/userform.html");

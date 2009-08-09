@@ -82,6 +82,7 @@
                 /masters/item.html=itemController
                 /masters/lot.html=lotController
                 /masters/party.html=partyController
+                /masters/accountgroup.html=accountGroupFormController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -125,6 +126,14 @@
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="/mainMenu.html"/>
     </bean>
+    
+    <bean id="accountGroupFormController" class="com.swayam.ims.webapp.controller.AccountGroupFormController">
+        <constructor-arg ref="accountGroupDao"/>
+        <property name="validator" ref="beanValidator"/>
+        <property name="formView" value="masters/accountgroup"/>
+        <property name="successView" value="/mainMenu.html"/>
+        <property name="cancelView" value="/mainMenu.html"/>
+    </bean>    
     
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">

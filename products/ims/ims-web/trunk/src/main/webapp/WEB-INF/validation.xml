@@ -150,7 +150,16 @@
             <field property="accountGroup" depends="required">
                 <arg0 key="party.accountGroup" />
             </field>
-        </form>        
+        </form>
+        
+        <form name="accountGroup">
+            <field property="name" depends="required">
+                <arg0 key="accountGroup.name" />
+            </field>
+            <field property="parent" depends="required">
+                <arg0 key="accountGroup.parent" />
+            </field>
+        </form>                
 		
 	</formset>
 </form-validation>

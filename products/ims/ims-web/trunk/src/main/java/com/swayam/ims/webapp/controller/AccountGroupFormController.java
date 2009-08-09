@@ -65,13 +65,13 @@ public class AccountGroupFormController extends BaseFormController {
 
         AccountGroup accountGroup = (AccountGroup) command;
 
-        List accountGroups = accountGroupDao.findByNamedQuery(
+        List maxId = accountGroupDao.findByNamedQuery(
                 AccountGroup.NAMED_QUERY_FIND_MAX_ID, Collections.EMPTY_MAP);
 
         long id = 1;
 
-        if (!accountGroups.isEmpty()) {
-            id = (Long) accountGroups.get(0) + 1;
+        if (!maxId.isEmpty()) {
+            id = (Long) maxId.get(0) + 1;
         }
 
         accountGroup.setId(id);

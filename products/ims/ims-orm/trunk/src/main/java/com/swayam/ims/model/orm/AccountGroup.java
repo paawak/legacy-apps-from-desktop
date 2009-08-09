@@ -18,10 +18,10 @@ package com.swayam.ims.model.orm;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,12 +31,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "account_group")
+@NamedQueries( { @NamedQuery(name = AccountGroup.NAMED_QUERY_FIND_MAX_ID, query = "SELECT MAX(id) FROM AccountGroup") })
 public class AccountGroup extends BaseObject {
 
     private static final long serialVersionUID = 8651011772980546778L;
 
+    public static final String NAMED_QUERY_FIND_MAX_ID = "findMaxId";
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, length = 50, unique = true)

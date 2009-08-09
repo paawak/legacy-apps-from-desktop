@@ -9,7 +9,7 @@
         	<Item name="NewItem" title="menu.masters.item.title" page="/masters/item.html"/>
         	<Item name="NewLot" title="menu.masters.lot.title" page="/masters/lot.html"/>
         	<Item name="NewParty" title="menu.masters.party.title" page="/masters/party.html"/>
-        	<Item name="AccountGroupParty" title="menu.masters.accountgroup.title" page="/masters/accountgroup.html"/>
+        	<Item name="AccountGroupParty" title="menu.masters.accountGroup.title" page="/masters/accountgroup.html"/>
         </Menu>
         
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>

@@ -93,7 +93,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/itemGroup"/>
         <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="/mainMenu.html"/>
+        <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     
     <bean id="itemController" class="com.swayam.ims.webapp.controller.ItemController">
@@ -104,7 +104,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/item"/>
         <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="/mainMenu.html"/>
+        <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     
     <bean id="lotController" class="com.swayam.ims.webapp.controller.LotController">
@@ -114,7 +114,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/lot"/>
         <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="/mainMenu.html"/>
+        <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     
     <bean id="partyController" class="com.swayam.ims.webapp.controller.PartyController">
@@ -124,7 +124,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/party"/>
         <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="/mainMenu.html"/>
+        <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     
     <bean id="accountGroupFormController" class="com.swayam.ims.webapp.controller.AccountGroupFormController">
@@ -132,7 +132,7 @@
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/accountgroup"/>
         <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="/mainMenu.html"/>
+        <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>    
     
 

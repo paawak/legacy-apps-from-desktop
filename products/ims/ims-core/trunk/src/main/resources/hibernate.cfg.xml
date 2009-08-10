@@ -19,5 +19,6 @@
         <mapping class="com.swayam.ims.model.orm.PartyType"/>
         <mapping class="com.swayam.ims.model.orm.Trade"/>
         <mapping class="com.swayam.ims.model.orm.TradeDetails"/>
+        <mapping class="com.swayam.ims.model.orm.DoubleAccountingDetails"/>
     </session-factory>
 </hibernate-configuration>

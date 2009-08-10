@@ -23,13 +23,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * 
  * @author paawak
  */
-@Entity(name = "account_group")
-@NamedQueries( { @NamedQuery(name = AccountGroup.NAMED_QUERY_FIND_MAX_ID, query = "SELECT MAX(acg.id) FROM account_group acg") })
+@Entity
+@Table(name = "account_group")
+@NamedQueries( { @NamedQuery(name = AccountGroup.NAMED_QUERY_FIND_MAX_ID, query = "SELECT MAX(acg.id) FROM AccountGroup acg") })
 public class AccountGroup extends BaseObject {
 
     private static final long serialVersionUID = 8651011772980546778L;

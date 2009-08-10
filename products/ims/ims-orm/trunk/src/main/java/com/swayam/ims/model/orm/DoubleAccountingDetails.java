@@ -24,12 +24,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * 
  * @author paawak
  */
-@Entity(name = "double_accounting_details")
+@Entity
+@Table(name = "double_accounting_details")
 @NamedQueries( { @NamedQuery(name = DoubleAccountingDetails.FIND_DETAILS_BY_TRX_CATEGORY, query = "SELECT details FROM DoubleAccountingDetails details WHERE details.transactionCategory = :transactionCategory ") })
 public class DoubleAccountingDetails extends BaseObject {
 

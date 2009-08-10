@@ -23,14 +23,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  * 
  * @author paawak
  */
-@Entity
-@Table(name = "account_group")
+@Entity(name = "account_group")
 @NamedQueries( { @NamedQuery(name = AccountGroup.NAMED_QUERY_FIND_MAX_ID, query = "SELECT MAX(id) FROM AccountGroup") })
 public class AccountGroup extends BaseObject {
 

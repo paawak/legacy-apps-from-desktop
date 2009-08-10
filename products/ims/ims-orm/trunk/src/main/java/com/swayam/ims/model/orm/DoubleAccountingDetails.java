@@ -21,6 +21,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
@@ -28,9 +30,12 @@ import javax.persistence.OneToOne;
  * @author paawak
  */
 @Entity(name = "double_accounting_details")
+@NamedQueries( { @NamedQuery(name = DoubleAccountingDetails.FIND_DETAILS_BY_TRX_CATEGORY, query = "SELECT details FROM DoubleAccountingDetails details WHERE details.transactionCategory = :transactionCategory ") })
 public class DoubleAccountingDetails extends BaseObject {
 
     private static final long serialVersionUID = -8325231939332972684L;
+
+    public static final String FIND_DETAILS_BY_TRX_CATEGORY = "findDetailsByTransactionCategory";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

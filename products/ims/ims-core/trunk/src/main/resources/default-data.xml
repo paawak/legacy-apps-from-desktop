@@ -375,4 +375,15 @@
         </row>
    </table>
     
+    <table name="double_accounting_details">
+        <column>id</column>
+        <column>trx_category</column>
+        <column>complementary_account_grp</column>
+        <row>
+            <value description="id">1</value>
+            <value description="trx_category">1</value>
+            <value description="complementary_account_grp">26</value>
+        </row>
+    </table>    
+    
 </dataset>

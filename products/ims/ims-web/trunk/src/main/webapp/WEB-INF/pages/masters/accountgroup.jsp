@@ -39,11 +39,11 @@
                 cssErrorClass="text large error">
                 <option value="-1">------Select One------</option>
 
-                <c:forEach var="accountGroup" items="${accountGroupList}">
-                    <option value="${accountGroup.id}"
-                        <c:if test="${accountGroup.id == party.accountGroup.id}">
+                <c:forEach var="parentGroup" items="${accountGroupList}">
+                    <option value="${parentGroup.id}"
+                        <c:if test="${parentGroup.id == accountGroup.parent.id}">
                                                 selected="true"
-                                            </c:if>>${accountGroup.name}</option>
+                                            </c:if>>${parentGroup.name}</option>
                 </c:forEach>
             </form:select>
     </li>

@@ -15,7 +15,6 @@
 
 package com.swayam.ims.model.orm;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -34,7 +33,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Transaction implements Serializable {
+public class Transaction extends BaseObject {
 
     private static final long serialVersionUID = -9116362232532341855L;
 
@@ -46,12 +45,16 @@ public class Transaction implements Serializable {
     @JoinColumn(nullable = false)
     private Trade trade;
 
-    @Column(nullable = false, name = "transaction_date")
+    @Column(nullable = false, name = "trx_date")
     private Date transactionDate;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false, name = "account_number")
-    private Party partyAccount;
+    @JoinColumn(nullable = false, name = "account_group_id")
+    private AccountGroup accountGroup;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false, name = "trx_category")
+    private TransactionCategory transactionCategory;
 
     @Column(nullable = false)
     private float amount;
@@ -80,12 +83,20 @@ public class Transaction implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    public Party getPartyAccount() {
-        return partyAccount;
+    public AccountGroup getAccountGroup() {
+        return accountGroup;
     }
 
-    public void setPartyAccount(Party partyAccount) {
-        this.partyAccount = partyAccount;
+    public void setAccountGroup(AccountGroup accountGroup) {
+        this.accountGroup = accountGroup;
+    }
+
+    public TransactionCategory getTransactionCategory() {
+        return transactionCategory;
+    }
+
+    public void setTransactionCategory(TransactionCategory transactionCategory) {
+        this.transactionCategory = transactionCategory;
     }
 
     public float getAmount() {
@@ -94,6 +105,57 @@ public class Transaction implements Serializable {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((accountGroup == null) ? 0 : accountGroup.hashCode());
+        result = prime * result + Float.floatToIntBits(amount);
+        result = prime * result + ((trade == null) ? 0 : trade.hashCode());
+        result = prime
+                * result
+                + ((transactionCategory == null) ? 0 : transactionCategory
+                        .hashCode());
+        result = prime * result
+                + ((transactionDate == null) ? 0 : transactionDate.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Transaction other = (Transaction) obj;
+        if (accountGroup == null) {
+            if (other.accountGroup != null)
+                return false;
+        } else if (!accountGroup.equals(other.accountGroup))
+            return false;
+        if (Float.floatToIntBits(amount) != Float.floatToIntBits(other.amount))
+            return false;
+        if (trade == null) {
+            if (other.trade != null)
+                return false;
+        } else if (!trade.equals(other.trade))
+            return false;
+        if (transactionCategory == null) {
+            if (other.transactionCategory != null)
+                return false;
+        } else if (!transactionCategory.equals(other.transactionCategory))
+            return false;
+        if (transactionDate == null) {
+            if (other.transactionDate != null)
+                return false;
+        } else if (!transactionDate.equals(other.transactionDate))
+            return false;
+        return true;
     }
 
 }

@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry excluding="ApplicationResources_de.properties|ApplicationResources_fr.properties|ApplicationResources_ko.properties|ApplicationResources_nl.properties|ApplicationResources_no.properties|ApplicationResources_pt*.properties|ApplicationResources_tr.properties|ApplicationResources_zh*.properties|applicationContext-resources.xml|**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry excluding="**/*.java" including="**/*.xml" kind="src" output="target/test-classes" path="src/main/webapp"/>
+	<classpathentry kind="src" path="src/main/flex"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

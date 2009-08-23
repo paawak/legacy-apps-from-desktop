@@ -55,11 +55,11 @@ public class AccountGroupManager {
 
     }
 
-    public String save() {
+    public String save(String name, String desc) {
 
         AccountGroup accountGroup = new AccountGroup();
-        accountGroup.setName("some name");
-        accountGroup.setDescription("some desc");
+        accountGroup.setName(name);
+        accountGroup.setDescription(desc);
 
         accountGroup = save(accountGroup);
 

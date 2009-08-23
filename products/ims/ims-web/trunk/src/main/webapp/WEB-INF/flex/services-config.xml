@@ -2,7 +2,6 @@
 <services-config>
 	<services>
 		<service-include file-path="remoting-config.xml" />
-		<service-include file-path="proxy-config.xml" />
 		<default-channels>
 			<channel ref="my-amf" />
 		</default-channels>

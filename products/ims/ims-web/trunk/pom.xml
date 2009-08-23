@@ -370,7 +370,7 @@
         <dependency>
             <groupId>edu.oswego.util</groupId>
             <artifactId>concurrent</artifactId>
-            <version>concurrent.version</version>
+            <version>${concurrent.version}</version>
         </dependency>
         
         <!-- *******************     END flex       **************************** -->

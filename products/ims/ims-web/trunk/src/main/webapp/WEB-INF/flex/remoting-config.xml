@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<service id="remoting-service" 
-    class="flex.messaging.services.RemotingService">
+<service id="remoting-service" class="flex.messaging.services.RemotingService">
 
-    <adapters>
-        <adapter-definition id="java-object" class="flex.messaging.services.remoting.adapters.JavaAdapter" default="true"/>
-    </adapters>
+	<adapters>
+		<adapter-definition id="java-object"
+			class="flex.messaging.services.remoting.adapters.JavaAdapter"
+			default="true" />
+	</adapters>
 
-    <default-channels>
-        <channel ref="my-amf"/>
-    </default-channels>
+	<default-channels>
+		<channel ref="my-amf" />
+	</default-channels>
 
-    <destination id="HelloWorld">
-<properties>
-<source>com.swayam.HelloWorld</source>
-</properties>
-</destination>
+	<destination id="HelloWorld">
+		<properties>
+			<source>com.swayam.HelloWorld</source>
+		</properties>
+	</destination>
+
+	<destination id="account">
+		<properties>
+			<source>com.swayam.ims.core.service.impl.AccountGroupManager</source>
+		</properties>
+	</destination>
 
 </service>

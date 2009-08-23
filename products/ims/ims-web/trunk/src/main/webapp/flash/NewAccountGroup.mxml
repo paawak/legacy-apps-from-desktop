@@ -3,16 +3,16 @@
 width="1100" height="700">
 
 <!-- Associate client with BlazeDS destination via RemoteObject. -->
-<mx:RemoteObject id="remoteObject" destination="HelloWorld" />
+<mx:RemoteObject id="remoteObject" destination="account" />
 
 <mx:Panel id="mainPanel" title="Simple BlazeDS Remoting Example - Hello World">
 <mx:Form>
 <mx:FormItem label="Provide Your Name">
 <mx:TextInput id="textInput"
-change="remoteObject.processHello(textInput.text)"/>
+change="remoteObject.save(textInput.text)"/>
 </mx:FormItem>
 <mx:FormItem label="Server's Response">
-<mx:Label text="{remoteObject.processHello.lastResult}"/>
+<mx:Label text="{remoteObject.save.lastResult}"/>
 </mx:FormItem>
 </mx:Form>
 </mx:Panel>

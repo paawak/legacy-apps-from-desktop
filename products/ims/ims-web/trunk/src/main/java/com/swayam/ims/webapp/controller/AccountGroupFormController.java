@@ -15,9 +15,6 @@
 
 package com.swayam.ims.webapp.controller;
 
-import java.util.Collections;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +24,7 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.swayam.ims.core.dao.GenericDao;
+import com.swayam.ims.core.service.impl.AccountGroupManager;
 import com.swayam.ims.model.orm.AccountGroup;
 
 /**
@@ -36,11 +33,10 @@ import com.swayam.ims.model.orm.AccountGroup;
  */
 public class AccountGroupFormController extends BaseFormController {
 
-    private final GenericDao<AccountGroup, Long> accountGroupDao;
+    private final AccountGroupManager accountGroupManager;
 
-    public AccountGroupFormController(
-            GenericDao<AccountGroup, Long> accountGroupDao) {
-        this.accountGroupDao = accountGroupDao;
+    public AccountGroupFormController(AccountGroupManager accountGroupManager) {
+        this.accountGroupManager = accountGroupManager;
 
         setCommandName("accountGroup");
         setCommandClass(AccountGroup.class);
@@ -51,13 +47,13 @@ public class AccountGroupFormController extends BaseFormController {
             ServletRequestDataBinder binder) {
 
         binder.registerCustomEditor(AccountGroup.class,
-                new EntityPropertyEditorSupport<AccountGroup>(accountGroupDao));
+                new EntityPropertyEditorSupport<AccountGroup>(
+                        accountGroupManager.getAccountGroupDao()));
 
         super.initBinder(request, binder);
 
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
@@ -65,18 +61,7 @@ public class AccountGroupFormController extends BaseFormController {
 
         AccountGroup accountGroup = (AccountGroup) command;
 
-        List maxId = accountGroupDao.findByNamedQuery(
-                AccountGroup.NAMED_QUERY_FIND_MAX_ID, Collections.EMPTY_MAP);
-
-        long id = 1;
-
-        if (!maxId.isEmpty()) {
-            id = (Long) maxId.get(0) + 1;
-        }
-
-        accountGroup.setId(id);
-
-        accountGroupDao.save(accountGroup);
+        accountGroupManager.save(accountGroup);
 
         return new ModelAndView(new RedirectView(getSuccessView()));
     }
@@ -95,7 +80,8 @@ public class AccountGroupFormController extends BaseFormController {
         ModelAndView view = super.handleRequest(request, response);
 
         // set the object to view
-        view.addObject("accountGroupList", accountGroupDao.getAll());
+        view.addObject("accountGroupList", accountGroupManager
+                .getAccountGroupDao().getAll());
 
         return view;
 

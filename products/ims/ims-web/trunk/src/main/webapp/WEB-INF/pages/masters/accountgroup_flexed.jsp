@@ -30,7 +30,7 @@
     <param name="allowScriptAccess" value="sameDomain" />
     <param name="quality" value="high" />
     <param name="bgcolor" value="#ffffff" />
-    <embed src="/ims/flash/NewAccountGroup.swf" width="1000" height="400"
+    <embed src="/flash/NewAccountGroup.swf" width="1000" height="400"
     quality="high" bgcolor="#ffffff" name="NewAccountGroup" align="middle" 
     allowScriptAccess="sameDomain" type="application/x-shockwave-flash" 
     pluginspage="http://www.macromedia.com/go/getflashplayer" />

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+
+<!-- Associate client with BlazeDS destination via RemoteObject. -->
+<mx:RemoteObject id="accountGroupRemote" destination="account" />
+
+    <mx:Form>
+        <mx:FormItem label="Group Name:">
+            <mx:TextInput id="groupName"/>
+        </mx:FormItem>
+        
+        <mx:FormItem label="Description:">
+            <mx:TextInput id="description"/>
+        </mx:FormItem>
+        
+        <mx:FormItem>
+            <mx:Button label="Submit" click="accountGroupRemote.save(groupName.text, description.text);" />
+        </mx:FormItem>
+        
+        <mx:FormItem label="Server's Response">
+            <mx:Label text="{accountGroupRemote.save.lastResult}" />
+        </mx:FormItem>
+    
+    </mx:Form>
+</mx:Application>

@@ -130,7 +130,7 @@
     <bean id="accountGroupFormController" class="com.swayam.ims.webapp.controller.AccountGroupFormController">
         <constructor-arg ref="accountGroupDao"/>
         <property name="validator" ref="beanValidator"/>
-        <property name="formView" value="masters/accountgroup"/>
+        <property name="formView" value="masters/accountgroup_flexed"/>
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>    

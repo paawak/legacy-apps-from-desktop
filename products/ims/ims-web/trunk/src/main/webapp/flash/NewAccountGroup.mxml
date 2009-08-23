@@ -9,7 +9,7 @@ width="1100" height="700">
 <mx:Form>
 <mx:FormItem label="Provide Your Name">
 <mx:TextInput id="textInput"
-change="remoteObject.save(textInput.text)"/>
+change="remoteObject.save()"/>
 </mx:FormItem>
 <mx:FormItem label="Server's Response">
 <mx:Label text="{remoteObject.save.lastResult}"/>

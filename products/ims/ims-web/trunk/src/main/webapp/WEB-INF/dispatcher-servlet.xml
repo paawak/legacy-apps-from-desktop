@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
-       default-lazy-init="true">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:flex="http://www.springframework.org/schema/flex"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/flex 
+           http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
+           default-lazy-init="true">
 
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -83,6 +89,8 @@
                 /masters/lot.html=lotController
                 /masters/party.html=partyController
                 /masters/accountgroup.html=accountGroupFormController
+                <!-- map all flex requests from blaze-ds to the flex message broker -->
+                /messagebroker/*=_messageBroker
             </value>
         </property>
         <property name="order" value="0"/>
@@ -134,11 +142,30 @@
     <bean id="accountGroupFormController" class="com.swayam.ims.webapp.controller.AccountGroupFormController">
         <constructor-arg ref="accountGroupManager"/>
         <property name="validator" ref="beanValidator"/>
-        <property name="formView" value="masters/accountgroup"/>
+        <property name="formView" value="masters/accountgroup_flexed"/>
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>    
     
+    <!-- *******************     START flex       **************************** -->
+    
+    <flex:message-broker>
+        <flex:config-processor ref="imsConfigProcessor" />
+        <flex:exception-translator ref="imsExceptionTranslator"/>
+    </flex:message-broker>
+
+    <bean id="imsConfigProcessor" class="com.swayam.ims.webapp.flex.ImsMessageBrokerConfigProcessor" />
+    <bean id="imsExceptionTranslator" class="com.swayam.ims.webapp.flex.ImsExceptionTranslator" />
+
+    <!-- expose spring bean to blazeds for remoting -->
+    <flex:remoting-destination ref="accountGroupManager" destination-id="account" />
+    
+    <bean class="org.springframework.flex.servlet.MessageBrokerHandlerAdapter"/>
+    
+    <!-- if this is not present, it gives a big exception -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+    
+    <!-- *******************     END flex       **************************** -->
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         <property name="order" value="1"/>

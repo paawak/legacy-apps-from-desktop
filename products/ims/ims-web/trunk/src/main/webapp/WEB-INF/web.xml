@@ -244,7 +244,7 @@
     <!-- Map all *.spring requests to the DispatcherServlet for handling -->
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/spring/*</url-pattern>
+        <url-pattern>/spring/messagebroker/*</url-pattern>
     </servlet-mapping>    
     
     <!-- *******************     END flex       **************************** -->

@@ -7,7 +7,11 @@
             import mx.managers.PopUpManager;
  
             private function initData():void {
-                itemDaoRemote.getAll();
+            
+                var itemList:Array = itemDaoRemote.getAll();
+                
+                
+                
             }
             
 
@@ -19,9 +23,6 @@
     </mx:Script>
     
     <mx:RemoteObject id="itemDaoRemote" destination="itemDao">
-    
-        
-    
     </mx:RemoteObject>
     
 	<mx:Label x="39" y="77" text="ItemName:"/>
@@ -29,5 +30,8 @@
 	<mx:ComboBox x="140" y="75" id="itemNames"></mx:ComboBox>
 	<mx:Button x="103" y="214" label="Cancel" id="cancel"/>
 	<mx:Button x="230" y="214" label="Add" id="add"/>
+	
+	
+	
 	
 </mx:TitleWindow>

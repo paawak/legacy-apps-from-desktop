@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+    initialize="initData();">
 
     <mx:Script>
         <![CDATA[
@@ -8,6 +9,15 @@
             import dialog.ItemSelectDialog;
             import mx.controls.Alert;
             import mx.utils.ArrayUtil;
+            
+            [Bindable]
+            public var itemList:Array;
+            
+            private function initData():void {
+            
+                itemList = itemDaoRemote.getAll();
+                
+            }
             
 
             private function showAddItemDialog():void {
@@ -19,16 +29,8 @@
     </mx:Script>
     
     <mx:RemoteObject
-        id="itemDaoRO"
-        destination="itemDao"
-        showBusyCursor="true"
-        fault="Alert.show(event.fault.faultString, 'Error');">
-        <mx:method name="getAll">
-        </mx:method>
-    </mx:RemoteObject>
-    <mx:ArrayCollection id="itemList" 
-        source="{ArrayUtil.toArray(itemDaoRO.getAll.lastResult)}"/>
-
+        id="itemDaoRemote"
+        destination="itemDao"/>
     
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>

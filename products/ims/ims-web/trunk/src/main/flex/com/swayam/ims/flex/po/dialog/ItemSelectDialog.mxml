@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"  
+    showCloseButton="true" close="close();">
+    
+    <mx:Script>
+        <![CDATA[
+            import mx.managers.PopUpManager;
+
+            private function close():void {
+                // Put any clean-up code here.
+                PopUpManager.removePopUp(this);
+            }
+        ]]>
+    </mx:Script>
+    
+	<mx:Label x="39" y="77" text="ItemName:"/>
+	<mx:Label x="0" y="10" text="Item Search" width="400" textAlign="center" fontSize="18" fontWeight="bold"/>
+	<mx:ComboBox x="140" y="75" id="itemNames"></mx:ComboBox>
+	<mx:Button x="103" y="214" label="Cancel" id="cancel"/>
+	<mx:Button x="230" y="214" label="Add" id="add"/>
+	
+</mx:TitleWindow>

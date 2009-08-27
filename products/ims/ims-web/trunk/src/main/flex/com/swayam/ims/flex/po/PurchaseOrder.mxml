@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+
+    <mx:Script>
+        <![CDATA[
+            import mx.managers.PopUpManager;
+            import mx.core.IFlexDisplayObject;
+            import dialog.ItemSelectDialog;
+
+            private function showAddItemDialog():void {
+                // Create a non-modal TitleWindow container.
+                var itemWindow:IFlexDisplayObject =
+                    PopUpManager.createPopUp(this, ItemSelectDialog, true);
+            }
+        ]]>
+    </mx:Script>
+    
+
+	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
+	<mx:Label x="454" y="68" text="Date:"/>
+	<mx:Label x="37" y="130" text="Client:"/>
+	<mx:ComboBox x="174" y="128" id="client"></mx:ComboBox>
+	<mx:TextInput x="174" y="66" id="poId"/>
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+			<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+			<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button x="269" y="405" label="Save" id="save"/>
+	<mx:DateField x="513" y="66" id="poDate"/>
+	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
+	
+</mx:Application>

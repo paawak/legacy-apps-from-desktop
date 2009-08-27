@@ -12,15 +12,21 @@
         	<Item name="AccountGroupParty" title="menu.masters.accountGroup.title" page="/masters/accountgroup.html"/>
         </Menu>
         
+        <Menu name="TransactionMenu" title="trx.title" roles="ROLE_ADMIN,ROLE_USER">
+            <Item name="PurchaseOrder" title="menu.trx.po.title" page="/transactions/purchaseorder.html"/>
+        </Menu>
+        
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>
         <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" width="120" page="/admin/users.html">
             <Item name="ViewUsers" title="menu.admin.users" page="/admin/users.html"/>
             <Item name="ActiveUsers" title="mainMenu.activeUsers" page="/admin/activeUsers.html"/>
+            <!--
             <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload.html"/>
-            <Item name="FileUpload" title="menu.selectFile" page="/fileupload.html"/>
             <Item name="FlushCache" title="menu.flushCache" page="/admin/flushCache.html"/>
             <Item name="Clickstream" title="menu.clickstream" page="/admin/clickstreams.jsp"/>
+            -->
         </Menu>
+        
         <Menu name="Logout" title="user.logout" page="/logout.jsp" roles="ROLE_ADMIN,ROLE_USER"/>
     </Menus>
 </MenuConfig>

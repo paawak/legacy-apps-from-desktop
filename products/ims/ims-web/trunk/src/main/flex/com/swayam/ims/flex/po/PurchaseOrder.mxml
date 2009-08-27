@@ -6,6 +6,9 @@
             import mx.managers.PopUpManager;
             import mx.core.IFlexDisplayObject;
             import dialog.ItemSelectDialog;
+            import mx.controls.Alert;
+            import mx.utils.ArrayUtil;
+            
 
             private function showAddItemDialog():void {
                 // Create a non-modal TitleWindow container.
@@ -15,17 +18,29 @@
         ]]>
     </mx:Script>
     
+    <mx:RemoteObject
+        id="itemDaoRO"
+        destination="itemDao"
+        showBusyCursor="true"
+        fault="Alert.show(event.fault.faultString, 'Error');">
+        <mx:method name="getAll">
+        </mx:method>
+    </mx:RemoteObject>
+    <mx:ArrayCollection id="itemList" 
+        source="{ArrayUtil.toArray(itemDaoRO.getAll.lastResult)}"/>
+
+    
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
 	<mx:Label x="454" y="68" text="Date:"/>
 	<mx:Label x="37" y="130" text="Client:"/>
 	<mx:ComboBox x="174" y="128" id="client"></mx:ComboBox>
 	<mx:TextInput x="174" y="66" id="poId"/>
-	<mx:DataGrid x="37" y="188" id="itemDetails" width="511">
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemList}">
 		<mx:columns>
-			<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
-			<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
-			<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+			<mx:DataGridColumn headerText="ID" dataField="id"/>
+			<mx:DataGridColumn headerText="Name" dataField="name"/>
+			<mx:DataGridColumn headerText="Code" dataField="code"/>
 		</mx:columns>
 	</mx:DataGrid>
 	<mx:Button x="269" y="405" label="Save" id="save"/>

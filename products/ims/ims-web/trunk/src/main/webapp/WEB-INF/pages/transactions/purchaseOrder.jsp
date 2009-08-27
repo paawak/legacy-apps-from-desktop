@@ -8,7 +8,7 @@
 
 </head>
 
-<div id="spacer">
+<div id="flexSpacer">
 
 </div>
 

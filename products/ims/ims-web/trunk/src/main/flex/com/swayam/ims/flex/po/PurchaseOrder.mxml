@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
-    initialize="initData();">
+    initialize="itemDaoRO.getAll.send();">
 
     <mx:Script>
         <![CDATA[
@@ -9,15 +9,6 @@
             import dialog.ItemSelectDialog;
             import mx.controls.Alert;
             import mx.utils.ArrayUtil;
-            
-            [Bindable]
-            public var itemList:Array;
-            
-            private function initData():void {
-            
-                itemList = itemDaoRemote.getAll();
-                
-            }
             
 
             private function showAddItemDialog():void {
@@ -29,8 +20,16 @@
     </mx:Script>
     
     <mx:RemoteObject
-        id="itemDaoRemote"
-        destination="itemDao"/>
+        id="itemDaoRO"
+        destination="itemDao"
+        showBusyCursor="true"
+        fault="Alert.show(event.fault.faultString, 'Error');">
+        <mx:method name="getAll">
+        </mx:method>
+    </mx:RemoteObject>
+    <mx:ArrayCollection id="itemList" 
+        source="{ArrayUtil.toArray(itemDaoRO.getAll.lastResult)}"/>
+
     
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
@@ -40,7 +39,6 @@
 	<mx:TextInput x="174" y="66" id="poId"/>
 	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemList}">
 		<mx:columns>
-			<mx:DataGridColumn headerText="ID" dataField="id"/>
 			<mx:DataGridColumn headerText="Name" dataField="name"/>
 			<mx:DataGridColumn headerText="Code" dataField="code"/>
 		</mx:columns>

@@ -23,7 +23,7 @@
 		<!-- You may also use flex.messaging.log.ServletLogTarget -->
 		<target class="flex.messaging.log.ConsoleTarget" level="info">
 			<properties>
-				<prefix>[BlazeDS] </prefix>
+				<prefix>[BlazeDS]</prefix>
 				<includeDate>false</includeDate>
 				<includeTime>false</includeTime>
 				<includeLevel>true</includeLevel>

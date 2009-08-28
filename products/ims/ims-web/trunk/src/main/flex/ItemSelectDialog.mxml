@@ -27,7 +27,7 @@
             private function getListResultHandler(event:ResultEvent):void {
 
                 var itemsMultiArray:ArrayCollection = (ArrayCollection)(event.result);
-                var count:Number = 0;
+                var count:int = 0;
                 
                 for each (var item:Object in itemsMultiArray) {
                     var content:Object = new Object();
@@ -56,8 +56,8 @@
 	<mx:Label x="39" y="77" text="ItemName:"/>
 	<mx:Label x="0" y="10" text="Item Search" width="400" textAlign="center" fontSize="18" fontWeight="bold"/>
 	<mx:ComboBox x="140" y="75" id="itemNames" dataProvider="{itemsArray}"></mx:ComboBox>
-	<mx:Button x="103" y="214" label="Cancel" id="cancel"/>
-	<mx:Button x="230" y="214" label="Add" id="add"/>
+	<mx:Button x="103" y="214" label="Cancel" id="cancel" click="close();"/>
+	<mx:Button x="230" y="214" label="Add" id="add" click="close();"/>
 	
 	
 	

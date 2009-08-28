@@ -35,7 +35,7 @@
             private function getListResultHandler(event:ResultEvent):void {
 
                 itemsMultiArray = (ArrayCollection)(event.result);
-                var count:Number = 0;
+                var count:int = 0;
                 
                 for each (var item:Object in itemsMultiArray) {
                     var content:Object = new Object();

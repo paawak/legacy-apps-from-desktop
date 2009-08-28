@@ -165,7 +165,7 @@
     <bean id="imsExceptionTranslator" class="com.swayam.ims.webapp.flex.ImsExceptionTranslator" />
 
     <!-- expose spring bean to blazeds for remoting -->
-    <flex:remoting-destination ref="accountGroupManager" destination-id="account" />
+    <!--flex:remoting-destination ref="accountGroupManager" destination-id="account" /-->
     <flex:remoting-destination ref="itemDao"/>
     
     <bean class="org.springframework.flex.servlet.MessageBrokerHandlerAdapter"/>

@@ -167,6 +167,7 @@
     <!-- expose spring bean to blazeds for remoting -->
     <!--flex:remoting-destination ref="accountGroupManager" destination-id="account" /-->
     <flex:remoting-destination ref="itemDao"/>
+    <flex:remoting-destination ref="partyDao"/>
     
     <bean class="org.springframework.flex.servlet.MessageBrokerHandlerAdapter"/>
     

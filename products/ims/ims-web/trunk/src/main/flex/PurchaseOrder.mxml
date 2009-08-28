@@ -16,32 +16,44 @@
             
             
             [Bindable]
-            public var itemsArray:Array = new Array();
+            public var clientArray:Array = new Array();
             [Bindable]
             public var itemsMultiArray:ArrayCollection;
             
             private function initData():void {
             
+                //item
                 var itemRO:RemoteObject = new RemoteObject();
                 itemRO.destination = "itemDao";
-                
-                itemRO.getAll.addEventListener("result", getListResultHandler);
+                itemRO.getAll.addEventListener("result", getItemListResultHandler);
                 itemRO.addEventListener("fault", faultHandler);
                 itemRO.getAll();
-
+                
+                //client
+                var partyRO:RemoteObject = new RemoteObject();
+                partyRO.destination = "partyDao";
+                partyRO.getAll.addEventListener("result", getPartyListResultHandler);
+                partyRO.addEventListener("fault", faultHandler);
+                partyRO.getAll();
                 
             }
             
-            private function getListResultHandler(event:ResultEvent):void {
+            private function getItemListResultHandler(event:ResultEvent):void {
 
                 itemsMultiArray = (ArrayCollection)(event.result);
+                
+            }
+            
+            private function getPartyListResultHandler(event:ResultEvent):void {
+
+                var partyTempArray:ArrayCollection = (ArrayCollection)(event.result);
                 var count:int = 0;
                 
-                for each (var item:Object in itemsMultiArray) {
+                for each (var party:Object in partyTempArray) {
                     var content:Object = new Object();
-                    content["label"] = item.name;
-                    content["data"] = item.id;
-                    itemsArray[count++] = content;
+                    content["label"] = party.name;
+                    content["data"] = party.id;
+                    clientArray[count++] = content;
                 } 
                 
             }
@@ -65,7 +77,7 @@
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
 	<mx:Label x="454" y="68" text="Date:"/>
 	<mx:Label x="37" y="130" text="Client:"/>
-	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{itemsArray}"></mx:ComboBox>
+	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{clientArray}"></mx:ComboBox>
 	<mx:TextInput x="174" y="66" id="poId"/>
 	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsMultiArray}">
 		<mx:columns>

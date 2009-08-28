@@ -34,11 +34,15 @@
             }
             
             public function getListResultHandler(event:ResultEvent):void {
-                 // Do something
-                itemsMultiArray=(ArrayCollection)(event.result);
+
+                itemsMultiArray = (ArrayCollection)(event.result);
+                var count:Number = 0;
                 
                 for each (var item:Object in itemsMultiArray) {
-                    itemsArray.push(item.description);
+                    var content:Object = new Object();
+                    content["label"] = item.name;
+                    content["data"] = item.id;
+                    itemsArray[count++] = content;
                 } 
                 
             }

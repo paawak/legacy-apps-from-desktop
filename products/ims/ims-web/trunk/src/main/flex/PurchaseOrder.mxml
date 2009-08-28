@@ -8,20 +8,46 @@
             import mx.core.IFlexDisplayObject;
             import mx.controls.Alert;
             import mx.utils.ArrayUtil;
-            import com.swayam.ims.model.orm.Item;
+            import mx.controls.Alert;
+            import mx.rpc.remoting.RemoteObject;
+            import mx.rpc.events.ResultEvent;
+            import mx.rpc.events.FaultEvent;
+            import mx.collections.ArrayCollection;
+            
             
             [Bindable]
             public var itemsArray:Array = new Array();
+            public var itemRO:RemoteObject;
             
             private function initData():void {
             
-                var itemList:Array = ArrayUtil.toArray(itemDaoRemote.getAll());
+                itemRO = new RemoteObject();
+                itemRO.destination = "itemDao";
                 
-                for each (var item:Object in itemList) {
-                    itemsArray.push(item.fffff);
-                }
+                
+                itemRO.getAll.addEventListener("result", getListResultHandler);
+                itemRO.addEventListener("fault", faultHandler);
+                itemRO.getAll();
+
                 
             }
+            
+            public function getListResultHandler(event:ResultEvent):void {
+                 // Do something
+                var tempArray:ArrayCollection=(ArrayCollection)(event.result);
+                
+                for each (var item:Object in tempArray) {
+                    Alert.show(item.name, 'Info');
+                    itemsArray.push(item.name);
+                } 
+                
+            }
+
+            public function faultHandler (event:FaultEvent):void {
+             // Deal with event.fault.faultString, etc.
+                Alert.show(event.fault.faultString, 'Error');
+            }
+            
             
 
             private function showAddItemDialog():void {
@@ -31,10 +57,6 @@
             }
         ]]>
     </mx:Script>
-    
-    <mx:RemoteObject
-        id="itemDaoRemote"
-        destination="itemDao"/>
     
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>

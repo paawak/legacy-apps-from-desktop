@@ -17,11 +17,12 @@
             
             [Bindable]
             public var itemsArray:Array = new Array();
-            public var itemRO:RemoteObject;
+            [Bindable]
+            public var itemsMultiArray:ArrayCollection;
             
             private function initData():void {
             
-                itemRO = new RemoteObject();
+                var itemRO:RemoteObject = new RemoteObject();
                 itemRO.destination = "itemDao";
                 
                 
@@ -34,11 +35,10 @@
             
             public function getListResultHandler(event:ResultEvent):void {
                  // Do something
-                var tempArray:ArrayCollection=(ArrayCollection)(event.result);
+                itemsMultiArray=(ArrayCollection)(event.result);
                 
-                for each (var item:Object in tempArray) {
-                    Alert.show(item.name, 'Info');
-                    itemsArray.push(item.name);
+                for each (var item:Object in itemsMultiArray) {
+                    itemsArray.push(item.description);
                 } 
                 
             }
@@ -64,7 +64,7 @@
 	<mx:Label x="37" y="130" text="Client:"/>
 	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{itemsArray}"></mx:ComboBox>
 	<mx:TextInput x="174" y="66" id="poId"/>
-	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" >
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsMultiArray}">
 		<mx:columns>
 			<mx:DataGridColumn headerText="ID" dataField="id"/>
 			<mx:DataGridColumn headerText="Name" dataField="name"/>

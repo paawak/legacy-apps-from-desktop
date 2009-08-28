@@ -31,14 +31,10 @@ public class AccountGroupManager {
 
     public AccountGroupManager(GenericDao<AccountGroup, Long> accountGroupDao) {
         this.accountGroupDao = accountGroupDao;
-        System.out
-                .println("*****************AccountGroupManager.AccountGroupManager()");
     }
 
     @SuppressWarnings("unchecked")
     public AccountGroup save(AccountGroup accountGroup) {
-
-        System.out.println("############AccountGroupManager.save()");
 
         List maxId = accountGroupDao.findByNamedQuery(
                 AccountGroup.NAMED_QUERY_FIND_MAX_ID, Collections.EMPTY_MAP);
@@ -52,18 +48,6 @@ public class AccountGroupManager {
         accountGroup.setId(id);
 
         return accountGroupDao.save(accountGroup);
-
-    }
-
-    public String save(String name, String desc) {
-
-        AccountGroup accountGroup = new AccountGroup();
-        accountGroup.setName(name);
-        accountGroup.setDescription(desc);
-
-        accountGroup = save(accountGroup);
-
-        return accountGroup.getId().toString();
 
     }
 

@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
-    initialize="itemDaoRO.getAll.send();">
+    initialize="initData();">
 
     <mx:Script>
         <![CDATA[
             import mx.managers.PopUpManager;
             import mx.core.IFlexDisplayObject;
-            import dialog.ItemSelectDialog;
             import mx.controls.Alert;
             import mx.utils.ArrayUtil;
+            import com.swayam.ims.model.orm.Item;
+            
+            [Bindable]
+            public var itemsArray:Array = new Array();
+            
+            private function initData():void {
+            
+                var itemList:Array = ArrayUtil.toArray(itemDaoRemote.getAll());
+                
+                for each (var item:Object in itemList) {
+                    itemsArray.push(item.fffff);
+                }
+                
+            }
             
 
             private function showAddItemDialog():void {
@@ -20,25 +33,18 @@
     </mx:Script>
     
     <mx:RemoteObject
-        id="itemDaoRO"
-        destination="itemDao"
-        showBusyCursor="true"
-        fault="Alert.show(event.fault.faultString, 'Error');">
-        <mx:method name="getAll">
-        </mx:method>
-    </mx:RemoteObject>
-    <mx:ArrayCollection id="itemList" 
-        source="{ArrayUtil.toArray(itemDaoRO.getAll.lastResult)}"/>
-
+        id="itemDaoRemote"
+        destination="itemDao"/>
     
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
 	<mx:Label x="454" y="68" text="Date:"/>
 	<mx:Label x="37" y="130" text="Client:"/>
-	<mx:ComboBox x="174" y="128" id="client"></mx:ComboBox>
+	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{itemsArray}"></mx:ComboBox>
 	<mx:TextInput x="174" y="66" id="poId"/>
-	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemList}">
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" >
 		<mx:columns>
+			<mx:DataGridColumn headerText="ID" dataField="id"/>
 			<mx:DataGridColumn headerText="Name" dataField="name"/>
 			<mx:DataGridColumn headerText="Code" dataField="code"/>
 		</mx:columns>

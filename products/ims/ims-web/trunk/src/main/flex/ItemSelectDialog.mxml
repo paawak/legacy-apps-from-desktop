@@ -5,12 +5,21 @@
     <mx:Script>
         <![CDATA[
             import mx.managers.PopUpManager;
+            import mx.collections.*;
+            
+            [Bindable]
+            public var itemsArray:Array;
  
             private function initData():void {
             
+                itemsArray = new Array();
+                
+            
                 var itemList:Array = itemDaoRemote.getAll();
                 
-                
+                for each (var item:Object in itemList) {
+                    itemsArray.push(item.getName());
+                }
                 
             }
             
@@ -27,7 +36,7 @@
     
 	<mx:Label x="39" y="77" text="ItemName:"/>
 	<mx:Label x="0" y="10" text="Item Search" width="400" textAlign="center" fontSize="18" fontWeight="bold"/>
-	<mx:ComboBox x="140" y="75" id="itemNames"></mx:ComboBox>
+	<mx:ComboBox x="140" y="75" id="itemNames" dataProvider="{itemsArray}"></mx:ComboBox>
 	<mx:Button x="103" y="214" label="Cancel" id="cancel"/>
 	<mx:Button x="230" y="214" label="Add" id="add"/>
 	

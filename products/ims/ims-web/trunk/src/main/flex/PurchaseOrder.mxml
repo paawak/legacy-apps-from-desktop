@@ -25,7 +25,6 @@
                 var itemRO:RemoteObject = new RemoteObject();
                 itemRO.destination = "itemDao";
                 
-                
                 itemRO.getAll.addEventListener("result", getListResultHandler);
                 itemRO.addEventListener("fault", faultHandler);
                 itemRO.getAll();
@@ -33,7 +32,7 @@
                 
             }
             
-            public function getListResultHandler(event:ResultEvent):void {
+            private function getListResultHandler(event:ResultEvent):void {
 
                 itemsMultiArray = (ArrayCollection)(event.result);
                 var count:Number = 0;
@@ -47,7 +46,7 @@
                 
             }
 
-            public function faultHandler (event:FaultEvent):void {
+            private function faultHandler (event:FaultEvent):void {
              // Deal with event.fault.faultString, etc.
                 Alert.show(event.fault.faultString, 'Error');
             }

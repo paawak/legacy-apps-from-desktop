@@ -25,9 +25,9 @@
                 //item
                 var itemRO:RemoteObject = new RemoteObject();
                 itemRO.destination = "itemDao";
-                itemRO.getAll.addEventListener("result", getItemListResultHandler);
+                itemRO.addEventListener("result", getItemListResultHandler);
                 itemRO.addEventListener("fault", faultHandler);
-                itemRO.getAll();
+                itemRO.getOperation("getAll").send();
                 
                 //client
                 var partyRO:RemoteObject = new RemoteObject();

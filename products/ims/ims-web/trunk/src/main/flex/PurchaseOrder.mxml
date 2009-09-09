@@ -8,7 +8,6 @@
             import mx.core.IFlexDisplayObject;
             import mx.controls.Alert;
             import mx.utils.ArrayUtil;
-            import mx.controls.Alert;
             import mx.rpc.remoting.RemoteObject;
             import mx.rpc.events.ResultEvent;
             import mx.rpc.events.FaultEvent;

@@ -28,7 +28,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             layout="absolute";
             
             width = 500;
-            height = 250;
+            height = 300;
             
             addEventListener("close", close);
             

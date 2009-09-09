@@ -6,14 +6,14 @@ package com.swayam.ims.webapp.flex.trx.po {
 		
 		public static const EVENT_ITEM_ADDED:String = "ItemAdded";
 		
-		private var itemId:Object;
+		private var itemId:Number;
 		
-		public function ItemEvent(eventType:String, itemId:Object) {
+		public function ItemEvent(eventType:String, itemId:Number) {
 			super(eventType);
 			this.itemId = itemId;
 		}
 		
-		public function getItemId():Object {
+		public function getItemId():Number {
 			return itemId;
 		}
 		

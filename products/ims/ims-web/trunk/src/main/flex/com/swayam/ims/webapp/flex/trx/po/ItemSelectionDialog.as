@@ -7,13 +7,26 @@ package com.swayam.ims.webapp.flex.trx.po {
     import mx.managers.PopUpManager;
     import mx.controls.Alert;
     import mx.events.CloseEvent;
+    import flash.events.IEventDispatcher;
     import flash.events.MouseEvent;
+    import flash.events.EventDispatcher;
+    import flash.events.Event;
     import mx.rpc.remoting.RemoteObject;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.events.FaultEvent;
     import mx.collections.ArrayCollection;
+    
+    /**
+     *  Dispatched when the user selects Item and clicks on the Add button.
+     *
+     *  @eventType com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog.EVENT_ITEM_ADDED
+     *  @tiptext ItemAdded
+     */
+    [Event(name="ItemAdded", type="flash.events.Event")]
 
     public class ItemSelectionDialog extends TitleWindow {
+    	
+    	public static const EVENT_ITEM_ADDED:String = "ItemAdded";
     
         [Bindable]
         private var itemsArray:Array = new Array();
@@ -32,14 +45,8 @@ package com.swayam.ims.webapp.flex.trx.po {
             width = 500;
             height = 300;
             
-            addEventListener("close", closeWindow);
+            addEventListener(CloseEvent.CLOSE, closeWindow);
             
-        }
-        
-        public function getSelectedItem():Object {
-        
-            return cbItemList.selectedItem["data"];
-        
         }
         
         private function initComponents():void {
@@ -69,14 +76,14 @@ package com.swayam.ims.webapp.flex.trx.po {
             btCancel.label = "Cancel";
             btCancel.x = 103;
             btCancel.y = 214;
-            btCancel.addEventListener("click", closeOnClick);
+            btCancel.addEventListener(MouseEvent.CLICK, closeOnClick);
             addChild(btCancel);
             
             var btAdd:Button = new Button();
             btAdd.label = "Add";
             btAdd.x = 230;
             btAdd.y = 214;
-            btAdd.addEventListener("click", closeOnClick);
+            btAdd.addEventListener(MouseEvent.CLICK, addAndClose);
             addChild(btAdd);
             
         }
@@ -116,14 +123,20 @@ package com.swayam.ims.webapp.flex.trx.po {
         }
         
         private function closeOnClick(event:MouseEvent):void {
-            
-            var itemId:Object = getSelectedItem();
-            Alert.show("" + itemId, 'Info');
             close();
         }
         
+        private function addAndClose(event:MouseEvent):void {
+        	
+        	if (cbItemList.selectedItem != null) {
+        		dispatchEvent(new Event(EVENT_ITEM_ADDED));
+//        		dispatchEvent(new Event(cbItemList.selectedItem["data"]));
+                close();
+        	}
+        	
+        }
+        
         private function close():void {
-            // Put any clean-up code here.
             PopUpManager.removePopUp(this);
         }
     

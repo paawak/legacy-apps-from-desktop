@@ -14,6 +14,8 @@
             import mx.rpc.events.FaultEvent;
             import mx.collections.ArrayCollection;
             
+            import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
+            
             
             [Bindable]
             public var clientArray:Array = new Array();
@@ -66,9 +68,9 @@
             
 
             private function showAddItemDialog():void {
-                // Create a non-modal TitleWindow container.
-                var itemWindow:IFlexDisplayObject =
-                    PopUpManager.createPopUp(this, ItemSelectDialog, true);
+                // Create a modal TitleWindow container.
+                //var itemWindow:IFlexDisplayObject = PopUpManager.createPopUp(this, ItemSelectDialog, true);
+                var itemWindow:ItemSelectionDialog = (ItemSelectionDialog) (PopUpManager.createPopUp(this, ItemSelectionDialog, true));
             }
         ]]>
     </mx:Script>

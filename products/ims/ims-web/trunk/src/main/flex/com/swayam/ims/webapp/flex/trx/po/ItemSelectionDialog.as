@@ -17,6 +17,8 @@ package com.swayam.ims.webapp.flex.trx.po {
     
         [Bindable]
         private var itemsArray:Array = new Array();
+        
+        private var cbItemList:ComboBox;
     
         public function ItemSelectionDialog() {
         
@@ -30,8 +32,14 @@ package com.swayam.ims.webapp.flex.trx.po {
             width = 500;
             height = 300;
             
-            addEventListener("close", close);
+            addEventListener("close", closeWindow);
             
+        }
+        
+        public function getSelectedItem():Object {
+        
+            return cbItemList.selectedItem["data"];
+        
         }
         
         private function initComponents():void {
@@ -51,7 +59,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             lbItemName.y = 75;
             addChild(lbItemName);
             
-            var cbItemList:ComboBox = new ComboBox();
+            cbItemList = new ComboBox();
             cbItemList.x = 140;
             cbItemList.y = 75;
             cbItemList.dataProvider = itemsArray;
@@ -103,15 +111,18 @@ package com.swayam.ims.webapp.flex.trx.po {
         }            
         
 
-        private function close(event:CloseEvent):void {
-            closeMe();
+        private function closeWindow(event:CloseEvent):void {
+            close();
         }
         
         private function closeOnClick(event:MouseEvent):void {
-            closeMe();
+            
+            var itemId:Object = getSelectedItem();
+            Alert.show("" + itemId, 'Info');
+            close();
         }
         
-        private function closeMe():void {
+        private function close():void {
             // Put any clean-up code here.
             PopUpManager.removePopUp(this);
         }

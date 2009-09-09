@@ -17,20 +17,35 @@ package com.swayam.ims.webapp.flex.trx.po {
     
         public function ItemSelectionDialog() {
         
-            super();
             initComponents();
             
             showCloseButton=true;
             
             layout="absolute";
             
+            width = 500;
+            height = 200;
+            
             addEventListener("close", close);
             
         }
         
         private function initComponents():void {
+        
+            var lbTitle:Label = new Label();
+            lbTitle.text = "Item Search";
+            lbTitle.x = 0;
+            lbTitle.y = 10;
+            /*lbTitle.textAlign="center";
+            lbTitle.fontSize=18;
+            lbTitle.fontWeight="bold";*/
+            addChild(lbTitle);
+        
             var lbItemName:Label = new Label();
             lbItemName.text = "ItemName:";
+            lbItemName.x = 39;
+            lbItemName.y = 77;
+            addChild(lbItemName);
         }
         
         private function initData():void {

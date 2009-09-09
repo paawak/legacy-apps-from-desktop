@@ -2,9 +2,12 @@ package com.swayam.ims.webapp.flex.trx.po {
 
     import  mx.containers.TitleWindow;
     import  mx.controls.Label;
+    import  mx.controls.ComboBox;
+    import  mx.controls.Button;
     import mx.managers.PopUpManager;
     import mx.controls.Alert;
     import mx.events.CloseEvent;
+    import flash.events.MouseEvent;
     import mx.rpc.remoting.RemoteObject;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.events.FaultEvent;
@@ -17,6 +20,7 @@ package com.swayam.ims.webapp.flex.trx.po {
     
         public function ItemSelectionDialog() {
         
+            initData();
             initComponents();
             
             showCloseButton=true;
@@ -24,7 +28,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             layout="absolute";
             
             width = 500;
-            height = 200;
+            height = 250;
             
             addEventListener("close", close);
             
@@ -44,8 +48,29 @@ package com.swayam.ims.webapp.flex.trx.po {
             var lbItemName:Label = new Label();
             lbItemName.text = "ItemName:";
             lbItemName.x = 39;
-            lbItemName.y = 77;
+            lbItemName.y = 75;
             addChild(lbItemName);
+            
+            var cbItemList:ComboBox = new ComboBox();
+            cbItemList.x = 140;
+            cbItemList.y = 75;
+            cbItemList.dataProvider = itemsArray;
+            addChild(cbItemList);
+            
+            var btCancel:Button = new Button();
+            btCancel.label = "Cancel";
+            btCancel.x = 103;
+            btCancel.y = 214;
+            btCancel.addEventListener("click", closeOnClick);
+            addChild(btCancel);
+            
+            var btAdd:Button = new Button();
+            btAdd.label = "Add";
+            btAdd.x = 230;
+            btAdd.y = 214;
+            btAdd.addEventListener("click", closeOnClick);
+            addChild(btAdd);
+            
         }
         
         private function initData():void {
@@ -79,6 +104,14 @@ package com.swayam.ims.webapp.flex.trx.po {
         
 
         private function close(event:CloseEvent):void {
+            closeMe();
+        }
+        
+        private function closeOnClick(event:MouseEvent):void {
+            closeMe();
+        }
+        
+        private function closeMe():void {
             // Put any clean-up code here.
             PopUpManager.removePopUp(this);
         }

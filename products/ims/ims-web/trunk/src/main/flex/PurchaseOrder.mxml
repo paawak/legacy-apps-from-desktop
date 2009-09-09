@@ -29,15 +29,15 @@
                 //item
                 var itemRO:RemoteObject = new RemoteObject();
                 itemRO.destination = "itemDao";
-                itemRO.addEventListener("result", getItemListResultHandler);
-                itemRO.addEventListener("fault", faultHandler);
+                itemRO.addEventListener(ResultEvent.RESULT, getItemListResultHandler);
+                itemRO.addEventListener(FaultEvent.FAULT, faultHandler);
                 itemRO.getOperation("getAll").send();
                 
                 //client
                 var partyRO:RemoteObject = new RemoteObject();
                 partyRO.destination = "partyDao";
-                partyRO.getAll.addEventListener("result", getPartyListResultHandler);
-                partyRO.addEventListener("fault", faultHandler);
+                partyRO.getAll.addEventListener(ResultEvent.RESULT, getPartyListResultHandler);
+                partyRO.addEventListener(FaultEvent.FAULT, faultHandler);
                 partyRO.getAll();
                 
             }

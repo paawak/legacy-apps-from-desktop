@@ -13,14 +13,16 @@
             import mx.rpc.events.ResultEvent;
             import mx.rpc.events.FaultEvent;
             import mx.collections.ArrayCollection;
+            import mx.events.CloseEvent;
+            import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
             
             import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
             
             
             [Bindable]
-            public var clientArray:Array = new Array();
+            private var clientArray:Array = new Array();
             [Bindable]
-            public var itemsMultiArray:ArrayCollection;
+            private var itemsMultiArray:ArrayCollection;
             
             private function initData():void {
             
@@ -65,13 +67,17 @@
                 Alert.show(event.fault.faultString, 'Error');
             }
             
-            
-
             private function showAddItemDialog():void {
                 // Create a modal TitleWindow container.
                 //var itemWindow:IFlexDisplayObject = PopUpManager.createPopUp(this, ItemSelectDialog, true);
-                var itemWindow:ItemSelectionDialog = (ItemSelectionDialog) (PopUpManager.createPopUp(this, ItemSelectionDialog, true));
+            	var itemSelectionPopup:ItemSelectionDialog = (ItemSelectionDialog) (PopUpManager.createPopUp(this, ItemSelectionDialog, true));
+            	itemSelectionPopup.addEventListener(ItemEvent.EVENT_ITEM_ADDED, itemSelected);
             }
+
+            private function itemSelected(event:ItemEvent):void {
+                Alert.show("" + event.getItemId(), 'Info');
+            }
+            
         ]]>
     </mx:Script>
     

@@ -19,15 +19,13 @@ package com.swayam.ims.webapp.flex.trx.po {
     /**
      *  Dispatched when the user selects Item and clicks on the Add button.
      *
-     *  @eventType com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog.EVENT_ITEM_ADDED
+     *  @eventType com.swayam.ims.webapp.flex.trx.po.ItemEvent.EVENT_ITEM_ADDED
      *  @tiptext ItemAdded
      */
-    [Event(name="ItemAdded", type="flash.events.Event")]
+    [Event(name="ItemAdded", type="com.swayam.ims.webapp.flex.trx.po.ItemEvent")]
 
     public class ItemSelectionDialog extends TitleWindow {
     	
-    	public static const EVENT_ITEM_ADDED:String = "ItemAdded";
-    
         [Bindable]
         private var itemsArray:Array = new Array();
         
@@ -129,8 +127,7 @@ package com.swayam.ims.webapp.flex.trx.po {
         private function addAndClose(event:MouseEvent):void {
         	
         	if (cbItemList.selectedItem != null) {
-        		dispatchEvent(new Event(EVENT_ITEM_ADDED));
-//        		dispatchEvent(new Event(cbItemList.selectedItem["data"]));
+        		dispatchEvent(new ItemEvent(ItemEvent.EVENT_ITEM_ADDED, cbItemList.selectedItem["data"]));
                 close();
         	}
         	

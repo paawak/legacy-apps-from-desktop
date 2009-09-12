@@ -17,6 +17,7 @@
             
             [Bindable]
             private var clientArray:Array = new Array();
+            
             [Bindable]
             private var itemsArray:ArrayCollection = new ArrayCollection();
             

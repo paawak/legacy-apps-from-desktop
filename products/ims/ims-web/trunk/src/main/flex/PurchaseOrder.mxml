@@ -108,7 +108,7 @@
                 // Get the old value.
                 var oldVal:String = event.currentTarget.editedItemRenderer.data[event.dataField]; 
             	
-            	var intVal:uint = uint(newVal);
+            	var intVal:int = int(newVal);
                 
             	if (intVal <= 0) {
             		intVal = uint(oldVal);

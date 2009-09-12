@@ -21,16 +21,16 @@
             [Bindable]
             private var clientArray:Array = new Array();
             [Bindable]
-            private var itemsMultiArray:ArrayCollection;
+            private var itemsMultiArray:ArrayCollection = new ArrayCollection();
+            
+            private var itemRO:RemoteObject;
             
             private function initData():void {
             
-                //item
-                var itemRO:RemoteObject = new RemoteObject();
+                itemRO = new RemoteObject();
                 itemRO.destination = "itemDao";
                 itemRO.addEventListener(ResultEvent.RESULT, getItemListResultHandler);
                 itemRO.addEventListener(FaultEvent.FAULT, faultHandler);
-                itemRO.getOperation("getAll").send();
                 
                 //client
                 var partyRO:RemoteObject = new RemoteObject();
@@ -43,7 +43,9 @@
             
             private function getItemListResultHandler(event:ResultEvent):void {
 
-                itemsMultiArray = (ArrayCollection)(event.result);
+            	var item:Object = event.result;
+            
+            	itemsMultiArray.addItem(item);
                 
             }
             
@@ -74,7 +76,10 @@
             }
 
             private function itemSelected(event:ItemEvent):void {
-                Alert.show("" + event.getItemId(), 'Info');
+                var itemId:Number = event.getItemId();
+            	//Alert.show("" + itemId, 'Info');
+                
+                itemRO.getOperation("get").send(itemId);
             }
             
         ]]>

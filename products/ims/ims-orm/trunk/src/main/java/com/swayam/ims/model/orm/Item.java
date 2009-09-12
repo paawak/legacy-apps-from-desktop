@@ -15,8 +15,6 @@
 
 package com.swayam.ims.model.orm;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +29,7 @@ import javax.persistence.OneToOne;
  * @author paawak
  */
 @Entity
-public class Item implements Serializable {
+public class Item extends BaseObject {
 
     private static final long serialVersionUID = 5729868965288261711L;
 
@@ -114,6 +112,64 @@ public class Item implements Serializable {
 
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = System.identityHashCode(this);
+        result = prime * result + ((code == null) ? 0 : code.hashCode());
+        result = prime * result
+                + ((currency == null) ? 0 : currency.hashCode());
+        result = prime * result
+                + ((description == null) ? 0 : description.hashCode());
+        result = prime * result
+                + ((itemGroup == null) ? 0 : itemGroup.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((unit == null) ? 0 : unit.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Item other = (Item) obj;
+        if (code == null) {
+            if (other.code != null)
+                return false;
+        } else if (!code.equals(other.code))
+            return false;
+        if (currency == null) {
+            if (other.currency != null)
+                return false;
+        } else if (!currency.equals(other.currency))
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (itemGroup == null) {
+            if (other.itemGroup != null)
+                return false;
+        } else if (!itemGroup.equals(other.itemGroup))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (unit == null) {
+            if (other.unit != null)
+                return false;
+        } else if (!unit.equals(other.unit))
+            return false;
+        return true;
     }
 
 }

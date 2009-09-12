@@ -99,11 +99,6 @@
             
             private function editQuantity(event:DataGridEvent):void {
             	
-            	if(event.columnIndex != 2) {  
-                    event.preventDefault(); 
-                    return;
-                }
-            	
             	// Get the cell editor and cast it to TextInput.
                 var myEditor:TextInput = TextInput(event.currentTarget.itemEditorInstance);
                 

@@ -5,16 +5,13 @@
     <mx:Script>
         <![CDATA[
             import mx.managers.PopUpManager;
-            import mx.core.IFlexDisplayObject;
             import mx.controls.Alert;
-            import mx.utils.ArrayUtil;
             import mx.rpc.remoting.RemoteObject;
             import mx.rpc.events.ResultEvent;
             import mx.rpc.events.FaultEvent;
             import mx.collections.ArrayCollection;
-            import mx.events.CloseEvent;
-            import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
             
+            import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
             import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
             
             

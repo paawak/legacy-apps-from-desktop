@@ -21,7 +21,7 @@
             [Bindable]
             private var clientArray:Array = new Array();
             [Bindable]
-            private var itemsMultiArray:ArrayCollection = new ArrayCollection();
+            private var itemsArray:ArrayCollection = new ArrayCollection();
             
             private var itemRO:RemoteObject;
             
@@ -32,7 +32,6 @@
                 itemRO.addEventListener(ResultEvent.RESULT, getItemListResultHandler);
                 itemRO.addEventListener(FaultEvent.FAULT, faultHandler);
                 
-                //client
                 var partyRO:RemoteObject = new RemoteObject();
                 partyRO.destination = "partyDao";
                 partyRO.getAll.addEventListener(ResultEvent.RESULT, getPartyListResultHandler);
@@ -44,8 +43,21 @@
             private function getItemListResultHandler(event:ResultEvent):void {
 
             	var item:Object = event.result;
+            	var itemId:Number = (Number) (item.id);
+            	var itemExists:Boolean = false;
             
-            	itemsMultiArray.addItem(item);
+            	for each (var itemInArray:Object in itemsArray) {
+            		
+            		if (itemId == itemInArray.id) {
+            			itemExists = true;
+            			break;
+            		}
+            		
+            	}
+            	
+            	if (!itemExists) {
+            		itemsArray.addItem(item);
+            	}
                 
             }
             
@@ -77,8 +89,6 @@
 
             private function itemSelected(event:ItemEvent):void {
                 var itemId:Number = event.getItemId();
-            	//Alert.show("" + itemId, 'Info');
-                
                 itemRO.getOperation("get").send(itemId);
             }
             
@@ -91,7 +101,7 @@
 	<mx:Label x="37" y="130" text="Client:"/>
 	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{clientArray}"></mx:ComboBox>
 	<mx:TextInput x="174" y="66" id="poId"/>
-	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsMultiArray}">
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsArray}">
 		<mx:columns>
 			<mx:DataGridColumn headerText="ID" dataField="id"/>
 			<mx:DataGridColumn headerText="Name" dataField="name"/>

@@ -20,7 +20,7 @@ import com.swayam.ims.model.orm.User;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a> Modified by <a href="mailto:dan@getrolling.com">Dan Kibler</a> Extended to implement Acegi UserDetailsService interface by David
  *         Carter david@carter.net Modified by <a href="mailto:bwnoll@gmail.com">Bryan Noll</a> to work with the new BaseDaoHibernate implementation that uses generics.
  */
-public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
+public class UserDaoHibernate extends GenericDaoHibernate<User> implements
         UserDao, UserDetailsService {
 
     /**
@@ -65,6 +65,7 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         List users = getHibernateTemplate().find("from User where username=?",

@@ -10,7 +10,7 @@ import com.swayam.ims.model.orm.Role;
  * 
  * @author <a href="mailto:bwnoll@gmail.com">Bryan Noll</a>
  */
-public class RoleDaoHibernate extends GenericDaoHibernate<Role, Long> implements
+public class RoleDaoHibernate extends GenericDaoHibernate<Role> implements
         RoleDao {
 
     /**
@@ -23,6 +23,7 @@ public class RoleDaoHibernate extends GenericDaoHibernate<Role, Long> implements
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     public Role getRoleByName(String rolename) {
         List roles = getHibernateTemplate().find("from Role where name=?",
                 rolename);

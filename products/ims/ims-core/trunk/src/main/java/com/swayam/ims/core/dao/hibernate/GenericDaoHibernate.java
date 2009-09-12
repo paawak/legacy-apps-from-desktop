@@ -1,6 +1,5 @@
 package com.swayam.ims.core.dao.hibernate;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -34,8 +33,8 @@ import com.swayam.ims.core.dao.GenericDao;
  * @param <PK>
  *            the primary key for that type
  */
-public class GenericDaoHibernate<T, PK extends Serializable>
-        extends HibernateDaoSupport implements GenericDao<T, PK> {
+public class GenericDaoHibernate<T> extends HibernateDaoSupport implements
+        GenericDao<T, Long> {
     /**
      * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging
      */
@@ -73,7 +72,7 @@ public class GenericDaoHibernate<T, PK extends Serializable>
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public T get(PK id) {
+    public T get(Long id) {
         T entity = (T) super.getHibernateTemplate().get(this.persistentClass,
                 id);
 
@@ -90,7 +89,7 @@ public class GenericDaoHibernate<T, PK extends Serializable>
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public boolean exists(PK id) {
+    public boolean exists(Long id) {
         T entity = (T) super.getHibernateTemplate().get(this.persistentClass,
                 id);
         return entity != null;
@@ -107,7 +106,7 @@ public class GenericDaoHibernate<T, PK extends Serializable>
     /**
      * {@inheritDoc}
      */
-    public void remove(PK id) {
+    public void remove(Long id) {
         super.getHibernateTemplate().delete(this.get(id));
     }
 

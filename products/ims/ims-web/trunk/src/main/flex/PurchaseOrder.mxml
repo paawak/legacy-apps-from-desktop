@@ -10,6 +10,8 @@
             import mx.rpc.events.ResultEvent;
             import mx.rpc.events.FaultEvent;
             import mx.collections.ArrayCollection;
+            import mx.events.DataGridEvent;
+            import 	mx.validators.NumberValidator;
             
             import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
             import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
@@ -95,6 +97,32 @@
                 itemRO.getOperation("get").send(itemId);
             }
             
+            private function editQuantity(event:DataGridEvent):void {
+            	
+            	if(event.columnIndex != 2) {  
+                    event.preventDefault(); 
+                    return;
+                }
+            	
+            	// Get the cell editor and cast it to TextInput.
+                var myEditor:TextInput = TextInput(event.currentTarget.itemEditorInstance);
+                
+                // Get the new value from the editor.
+                var newVal:String = myEditor.text;
+                
+                // Get the old value.
+                var oldVal:String = event.currentTarget.editedItemRenderer.data[event.dataField]; 
+            	
+            	var intVal:uint = uint(newVal);
+                
+            	if (intVal <= 0) {
+            		intVal = uint(oldVal);
+            	} 
+            	
+            	myEditor.text = new String(intVal);
+            	
+            }
+            
         ]]>
     </mx:Script>
     
@@ -104,11 +132,12 @@
 	<mx:Label x="37" y="130" text="Client:"/>
 	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{clientArray}"></mx:ComboBox>
 	<mx:TextInput x="174" y="66" id="poId"/>
-	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsArray}">
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsArray}" 
+		editable="true" itemEditEnd="editQuantity(event);">
 		<mx:columns>
 			<mx:DataGridColumn headerText="Code" dataField="code" editable="false"/>
 			<mx:DataGridColumn headerText="Name" dataField="name" editable="false"/>
-			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50" editable="true" rendererIsEditor="true" itemRenderer="mx.controls.TextInput"/>
+			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50"/>
 		</mx:columns>
 	</mx:DataGrid>
 	<mx:Button x="269" y="405" label="Save" id="save"/>

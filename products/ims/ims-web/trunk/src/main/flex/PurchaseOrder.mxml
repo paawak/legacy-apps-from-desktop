@@ -108,7 +108,7 @@
 		<mx:columns>
 			<mx:DataGridColumn headerText="Code" dataField="code" editable="false"/>
 			<mx:DataGridColumn headerText="Name" dataField="name" editable="false"/>
-			<mx:DataGridColumn headerText="Quantity" dataField="qty" editable="true" rendererIsEditor="true" itemRenderer="mx.controls.TextInput"/>
+			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50" editable="true" rendererIsEditor="true" itemRenderer="mx.controls.TextInput"/>
 		</mx:columns>
 	</mx:DataGrid>
 	<mx:Button x="269" y="405" label="Save" id="save"/>

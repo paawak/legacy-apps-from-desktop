@@ -54,7 +54,12 @@
             	}
             	
             	if (!itemExists) {
-            		itemsArray.addItem(item);
+            		var content:Object = new Object();
+            		content["id"] = itemId;
+                	content["code"] = item.code;
+                	content["name"] = item.name;
+                	content["qty"] = 1;
+            		itemsArray.addItem(content);
             	}
                 
             }
@@ -101,9 +106,9 @@
 	<mx:TextInput x="174" y="66" id="poId"/>
 	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsArray}">
 		<mx:columns>
-			<mx:DataGridColumn headerText="ID" dataField="id"/>
-			<mx:DataGridColumn headerText="Name" dataField="name"/>
-			<mx:DataGridColumn headerText="Code" dataField="code"/>
+			<mx:DataGridColumn headerText="Code" dataField="code" editable="false"/>
+			<mx:DataGridColumn headerText="Name" dataField="name" editable="false"/>
+			<mx:DataGridColumn headerText="Quantity" dataField="qty" editable="true" rendererIsEditor="true" itemRenderer="mx.controls.TextInput"/>
 		</mx:columns>
 	</mx:DataGrid>
 	<mx:Button x="269" y="405" label="Save" id="save"/>

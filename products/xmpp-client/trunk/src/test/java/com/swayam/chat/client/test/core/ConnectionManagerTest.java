@@ -18,12 +18,40 @@
  * limitations under the License.
  */
 
-package com.swayam.chat.client.core;
+package com.swayam.chat.client.test.core;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.swayam.chat.client.core.ConnectionManager;
+import com.swayam.chat.client.core.Credentials;
 
 /**
- *  
+ * 
  * @author paawak
  */
 public class ConnectionManagerTest {
+
+    private ConnectionManager manager;
+
+    @Before
+    public void setup() {
+
+        Credentials creds = new Credentials("jabber.org", 5222, "paawak", "agnimitra");
+        manager = new ConnectionManager(creds);
+
+    }
+
+    @Test
+    public void test_getConnection() throws XMPPException {
+
+        XMPPConnection con = manager.getConnection();
+        assertNotNull(con);
+
+    }
 
 }

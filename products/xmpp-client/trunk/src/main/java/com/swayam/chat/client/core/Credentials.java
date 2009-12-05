@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.swayam.chat.client;
+package com.swayam.chat.client.core;
 
 /**
  * 

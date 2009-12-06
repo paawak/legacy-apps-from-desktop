@@ -36,7 +36,7 @@ class GroupImpl implements Group {
 
     private String description;
 
-    private Collection<Contact> contactList;
+    private final Collection<Contact> contactList;
 
     GroupImpl(String name) {
         this.name = name;

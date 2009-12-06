@@ -30,9 +30,13 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
+import org.jivesoftware.smack.packet.Presence.Mode;
+import org.jivesoftware.smack.packet.Presence.Type;
 
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.model.Group;
+import com.swayam.chat.client.core.model.Contact.Status;
 
 /**
  * 
@@ -47,31 +51,6 @@ public class AccountManager {
         con = new ConnectionManager().getConnection(creds);
 
     }
-
-    // public TreeNode getContatcTreeModel() throws XMPPException {
-    //
-    // DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("group");
-    //
-    // for (Group group : getContactGroups()) {
-    //
-    // DefaultMutableTreeNode groupNode = new DefaultMutableTreeNode(group.getName());
-    //
-    // for (Contact contact : group.getContacts()) {
-    //
-    // DefaultMutableTreeNode contactNode = new DefaultMutableTreeNode(contact
-    // .getDisplayName());
-    //
-    // groupNode.add(contactNode);
-    //
-    // }
-    //
-    // rootNode.add(groupNode);
-    //
-    // }
-    //
-    // return rootNode;
-    //
-    // }
 
     public List<Group> getContactGroups() throws XMPPException {
 
@@ -95,6 +74,37 @@ public class AccountManager {
 
                 ContactImpl contact = new ContactImpl();
                 contact.setDisplayName(name == null ? user : name);
+
+                Presence presence = roster.getPresence(user);
+
+                Status status = Status.OFFLINE;
+
+                Type type = presence.getType();
+
+                if (Type.available.equals(type)) {
+
+                    Mode mode = presence.getMode();
+
+                    switch (mode) {
+                    default:
+                    case available:
+                        status = Status.AVAILABLE;
+                        break;
+                    case dnd:
+                        status = Status.BUSY;
+                        break;
+                    case away:
+                        status = Status.AWAY;
+                        break;
+                    case xa:
+                        status = Status.EXTENDED_AWAY;
+                        break;
+
+                    }
+                }
+
+                contact.setStatus(status);
+
                 group.addContact(contact);
 
             }

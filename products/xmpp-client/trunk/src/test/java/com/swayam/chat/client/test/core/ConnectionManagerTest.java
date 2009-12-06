@@ -22,8 +22,14 @@ package com.swayam.chat.client.test.core;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Collection;
+
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.RosterPacket.ItemStatus;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,7 +47,7 @@ public class ConnectionManagerTest {
     @Before
     public void setup() {
 
-        Credentials creds = new Credentials("localhost", 5222, "saikat", "basu");
+        Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
         manager = new ConnectionManager(creds);
 
     }
@@ -51,6 +57,28 @@ public class ConnectionManagerTest {
 
         XMPPConnection con = manager.getConnection();
         assertNotNull(con);
+        Roster roster = con.getRoster();
+        assertNotNull(roster);
+
+        Collection<RosterGroup> groups = roster.getGroups();
+
+        for (RosterGroup group : groups) {
+
+            System.out.println("--------------------" + group.getName() + "--------------------");
+
+            Collection<RosterEntry> entries = group.getEntries();
+
+            for (RosterEntry entry : entries) {
+
+                String name = entry.getName();
+                String user = entry.getUser();
+                ItemStatus status = entry.getStatus();
+
+                System.out.println("name = " + name + ", user = " + user + ", status = " + status);
+
+            }
+
+        }
 
     }
 

@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.swayam.chat.client.core;
+package com.swayam.chat.client.core.util;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;

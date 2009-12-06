@@ -33,8 +33,8 @@ import org.jivesoftware.smack.packet.RosterPacket.ItemStatus;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.swayam.chat.client.core.ConnectionManager;
 import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.util.ConnectionManager;
 
 /**
  * 

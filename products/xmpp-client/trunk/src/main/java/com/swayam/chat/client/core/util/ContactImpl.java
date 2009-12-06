@@ -30,7 +30,7 @@ class ContactImpl implements Contact {
 
     private String displayName;
 
-    private String status;
+    private Status status;
 
     private String icon;
 
@@ -42,11 +42,11 @@ class ContactImpl implements Contact {
         this.displayName = displayName;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

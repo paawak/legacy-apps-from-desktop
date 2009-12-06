@@ -29,7 +29,7 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.RosterPacket.ItemStatus;
+import org.jivesoftware.smack.packet.Presence;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,10 +54,11 @@ public class ConnectionManagerTest {
     @Test
     public void test_getConnection() throws XMPPException {
 
-        Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
+        Credentials creds = new Credentials("localhost", 5222, "saikat", "basu");
 
         XMPPConnection con = manager.getConnection(creds);
         assertNotNull(con);
+
         Roster roster = con.getRoster();
         assertNotNull(roster);
 
@@ -73,13 +74,16 @@ public class ConnectionManagerTest {
 
                 String name = entry.getName();
                 String user = entry.getUser();
-                ItemStatus status = entry.getStatus();
+                Presence presence = roster.getPresenceResource(user);
 
-                System.out.println("name = " + name + ", user = " + user + ", status = " + status);
+                System.out.println("name = " + name + ", user = " + user + ", presence = "
+                        + presence);
 
             }
 
         }
+
+        con.disconnect();
 
     }
 

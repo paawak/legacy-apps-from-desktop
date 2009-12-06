@@ -23,12 +23,16 @@ package com.swayam.chat.client.core.util;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
+
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
+import com.swayam.chat.client.core.model.Contact;
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.model.Group;
 
@@ -46,7 +50,32 @@ public class AccountManager {
 
     }
 
-    public Group[] getContactGroups() throws XMPPException {
+    public TreeNode getContatcTreeModel() throws XMPPException {
+
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("group");
+
+        for (Group group : getContactGroups()) {
+
+            DefaultMutableTreeNode groupNode = new DefaultMutableTreeNode(group.getName());
+
+            for (Contact contact : group.getContacts()) {
+
+                DefaultMutableTreeNode contactNode = new DefaultMutableTreeNode(contact
+                        .getDisplayName());
+
+                groupNode.add(contactNode);
+
+            }
+
+            rootNode.add(groupNode);
+
+        }
+
+        return rootNode;
+
+    }
+
+    private Group[] getContactGroups() throws XMPPException {
 
         Collection<Group> groups = new ArrayList<Group>(1);
 
@@ -65,7 +94,6 @@ public class AccountManager {
 
                 String name = entry.getName();
                 String user = entry.getUser();
-                // ItemStatus status = entry.getStatus();
 
                 ContactImpl contact = new ContactImpl();
                 contact.setDisplayName(name == null ? user : name);

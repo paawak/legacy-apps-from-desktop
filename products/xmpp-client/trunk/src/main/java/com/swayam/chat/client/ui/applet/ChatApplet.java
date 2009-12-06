@@ -26,6 +26,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import org.jivesoftware.smack.XMPPException;
+
+import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.util.AccountManager;
 
 /**
  * 
@@ -60,7 +66,20 @@ public class ChatApplet extends JApplet {
         setJMenuBar(mainMenuBar);
 
         JScrollPane centerScrollPane = new JScrollPane();
-        JTree friendsListTree = new JTree();
+
+        JTree friendsListTree;
+
+        Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
+
+        try {
+            AccountManager manager = new AccountManager(creds);
+            friendsListTree = new JTree(manager.getContatcTreeModel());
+        } catch (XMPPException e) {
+            e.printStackTrace();
+            friendsListTree = new JTree(new DefaultMutableTreeNode());
+        }
+
+        friendsListTree.setRootVisible(false);
 
         centerScrollPane.setViewportView(friendsListTree);
 

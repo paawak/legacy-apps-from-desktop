@@ -28,8 +28,14 @@ public interface Contact {
 
     String getDisplayName();
 
-    String getStatus();
+    Status getStatus();
 
     String getIcon();
+
+    enum Status {
+
+        OFFLINE, AVAILABLE, BUSY, AWAY, EXTENDED_AWAY;
+
+    }
 
 }

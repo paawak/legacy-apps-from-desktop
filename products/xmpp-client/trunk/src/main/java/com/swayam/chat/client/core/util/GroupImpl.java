@@ -20,6 +20,7 @@
 
 package com.swayam.chat.client.core.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.swayam.chat.client.core.model.Contact;
@@ -39,6 +40,7 @@ class GroupImpl implements Group {
 
     GroupImpl(String name) {
         this.name = name;
+        contactList = new ArrayList<Contact>(1);
     }
 
     public String getDescription() {

@@ -31,7 +31,6 @@ import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.PacketExtension;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smack.packet.Presence.Type;
@@ -54,43 +53,14 @@ public class AccountManager {
 
     }
 
-    public List<Group> getContactGroups() throws XMPPException {
+    public List<Group> getContactGroups(RosterListener rosterListener) {
 
         List<Group> groups = new ArrayList<Group>(1);
 
         Roster roster = con.getRoster();
         Collection<RosterGroup> rosterGroups = roster.getGroups();
 
-        roster.addRosterListener(new RosterListener() {
-
-            public void entriesDeleted(Collection<String> addresses) {
-
-            }
-
-            public void entriesUpdated(Collection<String> addresses) {
-
-            }
-
-            public void presenceChanged(Presence presence) {
-                System.out.println("Presence changed: " + presence.getFrom() + ", "
-                        + presence.getExtensions());
-
-                for (PacketExtension packet : presence.getExtensions()) {
-
-                    String element = packet.getElementName();
-                    String namespace = packet.getNamespace();
-
-                    System.out.println("**** element = " + element + ", namespace = " + namespace);
-
-                }
-
-            }
-
-            public void entriesAdded(Collection<String> addresses) {
-
-            }
-
-        });
+        roster.addRosterListener(rosterListener);
 
         for (RosterGroup rosterGroup : rosterGroups) {
 

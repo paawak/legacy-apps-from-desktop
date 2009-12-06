@@ -20,6 +20,8 @@
 
 package com.swayam.chat.client.ui.applet;
 
+import java.util.Collection;
+
 import javax.swing.JApplet;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -28,7 +30,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
 
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.util.AccountManager;
@@ -42,6 +46,10 @@ import com.swayam.chat.client.ui.common.ContactListTreeModel;
 public class ChatApplet extends JApplet {
 
     private static final long serialVersionUID = -2126075630790344759L;
+
+    private JTree friendsListTree;
+
+    private AccountManager manager;
 
     public void init() {
         try {
@@ -69,15 +77,21 @@ public class ChatApplet extends JApplet {
 
         JScrollPane centerScrollPane = new JScrollPane();
 
-        JTree friendsListTree = new JTree();
+        friendsListTree = new JTree();
+        friendsListTree.setCellRenderer(new ContactListTreeCellRenderer());
+        friendsListTree.setShowsRootHandles(true);
+        friendsListTree.getSelectionModel().setSelectionMode(
+                TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+        friendsListTree.setRootVisible(false);
 
         Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
 
         try {
-            AccountManager manager = new AccountManager(creds);
+            manager = new AccountManager(creds);
 
-            friendsListTree.setModel(new ContactListTreeModel(manager.getContactGroups()));
-            friendsListTree.setCellRenderer(new ContactListTreeCellRenderer());
+            friendsListTree.setModel(new ContactListTreeModel(manager
+                    .getContactGroups(new MyRosterListener())));
 
             // FIXME:: temporary hack for expanded tree
             // friendsListTree.setSelectionRow(rootNode.getChildCount());
@@ -88,16 +102,34 @@ public class ChatApplet extends JApplet {
             e.printStackTrace();
         }
 
-        friendsListTree.setShowsRootHandles(true);
-
-        friendsListTree.getSelectionModel().setSelectionMode(
-                TreeSelectionModel.SINGLE_TREE_SELECTION);
-
-        friendsListTree.setRootVisible(false);
-
         centerScrollPane.setViewportView(friendsListTree);
 
         getContentPane().add(centerScrollPane, java.awt.BorderLayout.CENTER);
 
     }
+
+    private class MyRosterListener implements RosterListener {
+
+        public void entriesAdded(Collection<String> addresses) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void entriesDeleted(Collection<String> addresses) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void entriesUpdated(Collection<String> addresses) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void presenceChanged(Presence presence) {
+            friendsListTree.setModel(new ContactListTreeModel(manager
+                    .getContactGroups(new MyRosterListener())));
+        }
+
+    }
+
 }

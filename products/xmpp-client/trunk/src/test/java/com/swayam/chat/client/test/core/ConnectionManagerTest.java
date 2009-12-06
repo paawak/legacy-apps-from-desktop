@@ -34,7 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.swayam.chat.client.core.ConnectionManager;
-import com.swayam.chat.client.core.Credentials;
+import com.swayam.chat.client.core.model.Credentials;
 
 /**
  * 

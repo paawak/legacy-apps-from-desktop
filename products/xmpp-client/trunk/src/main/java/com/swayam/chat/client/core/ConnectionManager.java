@@ -24,6 +24,8 @@ import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
+import com.swayam.chat.client.core.model.Credentials;
+
 /**
  * 
  * @author paawak

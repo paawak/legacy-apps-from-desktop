@@ -56,8 +56,6 @@ public class ConnectionManager {
 
             con = new XMPPConnection(conf);
 
-            // con = new XMPPConnection(credentials.getServer());
-
         }
 
         // if its disconnected, reconnect

@@ -30,7 +30,7 @@ public interface Group {
 
     String getDescription();
 
-    int getNoOfContacts();
+    int getContactCount();
 
     Contact[] getContacts();
 

@@ -26,6 +26,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.tree.TreeSelectionModel;
 
 import org.jivesoftware.smack.XMPPException;
 
@@ -88,6 +89,9 @@ public class ChatApplet extends JApplet {
         }
 
         friendsListTree.setShowsRootHandles(true);
+
+        friendsListTree.getSelectionModel().setSelectionMode(
+                TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         friendsListTree.setRootVisible(false);
 

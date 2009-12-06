@@ -41,7 +41,7 @@ public class ConnectionManagerTest {
     @Before
     public void setup() {
 
-        Credentials creds = new Credentials("jabber.org", 5222, "paawak", "agnimitra");
+        Credentials creds = new Credentials("localhost", 5222, "saikat", "basu");
         manager = new ConnectionManager(creds);
 
     }

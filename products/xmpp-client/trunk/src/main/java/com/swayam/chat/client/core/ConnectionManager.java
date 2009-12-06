@@ -52,7 +52,7 @@ public class ConnectionManager {
                     credentials.getPort());
 
             conf.setReconnectionAllowed(true);
-            conf.setSendPresence(true);
+            // conf.setSendPresence(true);
 
             con = new XMPPConnection(conf);
 

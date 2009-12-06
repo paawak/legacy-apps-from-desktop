@@ -30,8 +30,6 @@ public interface Contact {
 
     Status getStatus();
 
-    String getIcon();
-
     enum Status {
 
         OFFLINE, AVAILABLE, BUSY, AWAY, EXTENDED_AWAY;

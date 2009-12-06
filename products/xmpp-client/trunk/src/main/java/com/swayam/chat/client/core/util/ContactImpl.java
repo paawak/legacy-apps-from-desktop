@@ -32,8 +32,6 @@ class ContactImpl implements Contact {
 
     private Status status;
 
-    private String icon;
-
     public String getDisplayName() {
         return displayName;
     }
@@ -50,12 +48,9 @@ class ContactImpl implements Contact {
         this.status = status;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    @Override
+    public String toString() {
+        return "ContactImpl [displayName=" + displayName + ", status=" + status + "]";
     }
 
     @Override
@@ -63,8 +58,6 @@ class ContactImpl implements Contact {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
-        result = prime * result + ((icon == null) ? 0 : icon.hashCode());
-        result = prime * result + ((status == null) ? 0 : status.hashCode());
         return result;
     }
 
@@ -82,23 +75,7 @@ class ContactImpl implements Contact {
                 return false;
         } else if (!displayName.equals(other.displayName))
             return false;
-        if (icon == null) {
-            if (other.icon != null)
-                return false;
-        } else if (!icon.equals(other.icon))
-            return false;
-        if (status == null) {
-            if (other.status != null)
-                return false;
-        } else if (!status.equals(other.status))
-            return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ContactImpl [displayName=" + displayName + ", icon=" + icon + ", status=" + status
-                + "]";
     }
 
 }

@@ -23,8 +23,13 @@ package com.swayam.chat.client.ui.common;
 import java.awt.Component;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
+
+import com.swayam.chat.client.core.model.Contact;
+import com.swayam.chat.client.core.model.Group;
+import com.swayam.chat.client.core.model.Contact.Status;
 
 /**
  * 
@@ -34,13 +39,22 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
 
     private static final long serialVersionUID = -6844158441533404757L;
 
-    private Object value;
+    private Contact contact;
 
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected,
             boolean expanded, boolean leaf, int row, boolean hasFocus) {
 
-        this.value = value;
+        if (value instanceof Group) {
+
+            value = ((Group) value).getName();
+
+        } else if (value instanceof Contact) {
+
+            contact = (Contact) value;
+            value = contact.getDisplayName();
+
+        }
 
         return super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row,
                 hasFocus);
@@ -49,8 +63,41 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
 
     @Override
     public Icon getLeafIcon() {
-        System.out.println("******ContactListTreeCellRenderer.getLeafIcon() " + value);
-        return leafIcon;
+
+        Status status = contact.getStatus();
+
+        if (status == null) {
+            status = Status.OFFLINE;
+        }
+
+        String iconPath = "/com/swayam/chat/client/assets/images/chat/status/" + status.name()
+                + ".png";
+
+        return getIcon(iconPath);
+    }
+
+    @Override
+    public Icon getOpenIcon() {
+
+        String iconPath = "/com/swayam/chat/client/assets/images/tree/node-open.png";
+
+        return getIcon(iconPath);
+
+    }
+
+    @Override
+    public Icon getClosedIcon() {
+
+        String iconPath = "/com/swayam/chat/client/assets/images/tree/node-close.png";
+
+        return getIcon(iconPath);
+
+    }
+
+    private Icon getIcon(String iconPath) {
+
+        return new ImageIcon(ContactListTreeCellRenderer.class.getResource(iconPath));
+
     }
 
 }

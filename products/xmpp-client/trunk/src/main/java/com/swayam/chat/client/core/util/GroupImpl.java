@@ -21,7 +21,8 @@
 package com.swayam.chat.client.core.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import com.swayam.chat.client.core.model.Contact;
 import com.swayam.chat.client.core.model.Group;
@@ -36,7 +37,7 @@ class GroupImpl implements Group {
 
     private String description;
 
-    private final Collection<Contact> contactList;
+    private final List<Contact> contactList;
 
     GroupImpl(String name) {
         this.name = name;
@@ -63,8 +64,8 @@ class GroupImpl implements Group {
         return contactList.size();
     }
 
-    public Contact[] getContacts() {
-        return contactList.toArray(new Contact[0]);
+    public List<Contact> getContacts() {
+        return Collections.unmodifiableList(contactList);
     }
 
 }

@@ -20,6 +20,8 @@
 
 package com.swayam.chat.client.core.model;
 
+import java.util.List;
+
 /**
  * 
  * @author paawak
@@ -32,6 +34,6 @@ public interface Group {
 
     int getContactCount();
 
-    Contact[] getContacts();
+    List<Contact> getContacts();
 
 }

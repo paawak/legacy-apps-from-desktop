@@ -26,12 +26,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.jivesoftware.smack.XMPPException;
 
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.util.AccountManager;
+import com.swayam.chat.client.ui.common.ContactListTreeCellRenderer;
+import com.swayam.chat.client.ui.common.ContactListTreeModel;
 
 /**
  * 
@@ -67,17 +68,26 @@ public class ChatApplet extends JApplet {
 
         JScrollPane centerScrollPane = new JScrollPane();
 
-        JTree friendsListTree;
+        JTree friendsListTree = new JTree();
 
         Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
 
         try {
             AccountManager manager = new AccountManager(creds);
-            friendsListTree = new JTree(manager.getContatcTreeModel());
+
+            friendsListTree.setModel(new ContactListTreeModel(manager.getContactGroups()));
+            friendsListTree.setCellRenderer(new ContactListTreeCellRenderer());
+
+            // FIXME:: temporary hack for expanded tree
+            // friendsListTree.setSelectionRow(rootNode.getChildCount());
+            // friendsListTree.expandPath(friendsListTree.getSelectionPath());
+            // friendsListTree.setSelectionRow(-1);
+
         } catch (XMPPException e) {
             e.printStackTrace();
-            friendsListTree = new JTree(new DefaultMutableTreeNode());
         }
+
+        friendsListTree.setShowsRootHandles(true);
 
         friendsListTree.setRootVisible(false);
 
@@ -86,5 +96,4 @@ public class ChatApplet extends JApplet {
         getContentPane().add(centerScrollPane, java.awt.BorderLayout.CENTER);
 
     }
-
 }

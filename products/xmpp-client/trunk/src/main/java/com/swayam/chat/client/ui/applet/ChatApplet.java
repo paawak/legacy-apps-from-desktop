@@ -21,6 +21,7 @@
 package com.swayam.chat.client.ui.applet;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JApplet;
 import javax.swing.JMenu;
@@ -35,6 +36,7 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
 import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.util.AccountManager;
 import com.swayam.chat.client.ui.common.ContactListTreeCellRenderer;
 import com.swayam.chat.client.ui.common.ContactListTreeModel;
@@ -94,11 +96,12 @@ public class ChatApplet extends JApplet {
 
             rosterListener = new MyRosterListener();
 
-            friendsListTree.setModel(new ContactListTreeModel(manager
-                    .getContactGroups(rosterListener)));
+            List<Group> groups = manager.getContactGroups(rosterListener);
+
+            friendsListTree.setModel(new ContactListTreeModel(groups));
 
             // FIXME:: temporary hack for expanded tree
-            // friendsListTree.setSelectionRow(rootNode.getChildCount());
+            // friendsListTree.setSelectionRow(groups.size());
             // friendsListTree.expandPath(friendsListTree.getSelectionPath());
             // friendsListTree.setSelectionRow(-1);
 

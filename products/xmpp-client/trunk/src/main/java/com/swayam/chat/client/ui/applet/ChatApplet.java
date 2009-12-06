@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.swayam.chat.client.core.ui.applet;
+package com.swayam.chat.client.ui.applet;
 
 import javax.swing.JApplet;
 import javax.swing.JMenu;

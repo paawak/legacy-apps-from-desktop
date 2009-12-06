@@ -20,6 +20,7 @@
 
 package com.swayam.chat.client.ui.applet;
 
+import java.awt.EventQueue;
 import java.util.Collection;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class ChatApplet extends JApplet {
 
     public void init() {
         try {
-            java.awt.EventQueue.invokeAndWait(new Runnable() {
+            EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
                     initComponents();
                 }

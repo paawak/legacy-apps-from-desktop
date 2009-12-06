@@ -74,12 +74,17 @@
 	    <dependency>
             <groupId>jivesoftware</groupId>
             <artifactId>smack</artifactId>
-            <version>3.0.4</version>
+            <version>${smack.version}</version>
         </dependency>
         <dependency>
             <groupId>jivesoftware</groupId>
             <artifactId>smackx</artifactId>
-            <version>3.0.4</version>
+            <version>${smack.version}</version>
         </dependency>
 	</dependencies>
+	<properties>
+	   <!-- working version -->
+	   <smack.version>3.0.4</smack.version>
+	   <!-- <smack.version>3.1.0</smack.version> -->
+	</properties>
 </project>

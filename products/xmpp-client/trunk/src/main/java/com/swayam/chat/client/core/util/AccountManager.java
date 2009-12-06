@@ -20,10 +20,17 @@
 
 package com.swayam.chat.client.core.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
 import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.model.Group;
 
 /**
  * 
@@ -31,11 +38,46 @@ import com.swayam.chat.client.core.model.Credentials;
  */
 public class AccountManager {
 
-    private XMPPConnection con;
+    private final XMPPConnection con;
 
     public AccountManager(Credentials creds) throws XMPPException {
 
         con = new ConnectionManager().getConnection(creds);
+
+    }
+
+    public Group[] getContactGroups() throws XMPPException {
+
+        Collection<Group> groups = new ArrayList<Group>(1);
+
+        Roster roster = con.getRoster();
+        Collection<RosterGroup> rosterGroups = roster.getGroups();
+
+        for (RosterGroup rosterGroup : rosterGroups) {
+
+            String groupName = rosterGroup.getName();
+
+            GroupImpl group = new GroupImpl(groupName);
+
+            Collection<RosterEntry> entries = rosterGroup.getEntries();
+
+            for (RosterEntry entry : entries) {
+
+                String name = entry.getName();
+                String user = entry.getUser();
+                // ItemStatus status = entry.getStatus();
+
+                ContactImpl contact = new ContactImpl();
+                contact.setDisplayName(name == null ? user : name);
+                group.addContact(contact);
+
+            }
+
+            groups.add(group);
+
+        }
+
+        return groups.toArray(new Group[0]);
 
     }
 

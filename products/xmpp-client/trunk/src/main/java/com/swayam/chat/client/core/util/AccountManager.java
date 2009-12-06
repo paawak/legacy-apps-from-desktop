@@ -1,7 +1,7 @@
 /*
- * ConnectionManager.java
+ * AccountManager.java
  *
- * Created on Dec 5, 2009 4:43:51 PM
+ * Created on Dec 6, 2009 9:49:57 PM
  *
  * Copyright (c) 2002 - 2009 : Swayam Inc.
  *
@@ -20,7 +20,6 @@
 
 package com.swayam.chat.client.core.util;
 
-import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
@@ -30,34 +29,13 @@ import com.swayam.chat.client.core.model.Credentials;
  * 
  * @author paawak
  */
-public class ConnectionManager {
+public class AccountManager {
 
-    public ConnectionManager() {
+    private XMPPConnection con;
 
-    }
+    public AccountManager(Credentials creds) throws XMPPException {
 
-    /**
-     * Establishes connection to the remote server and logs in the user.
-     * 
-     * @return
-     * @throws XMPPException
-     */
-    public XMPPConnection getConnection(Credentials credentials) throws XMPPException {
-
-        ConnectionConfiguration conf = new ConnectionConfiguration(credentials.getServer(),
-                credentials.getPort());
-
-        conf.setReconnectionAllowed(true);
-        // conf.setSendPresence(true);
-
-        XMPPConnection con = new XMPPConnection(conf);
-
-        con.connect();
-
-        // login
-        con.login(credentials.getUserName(), credentials.getPassword());
-
-        return con;
+        con = new ConnectionManager().getConnection(creds);
 
     }
 

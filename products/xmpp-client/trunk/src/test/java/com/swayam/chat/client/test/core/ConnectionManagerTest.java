@@ -47,15 +47,16 @@ public class ConnectionManagerTest {
     @Before
     public void setup() {
 
-        Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
-        manager = new ConnectionManager(creds);
+        manager = new ConnectionManager();
 
     }
 
     @Test
     public void test_getConnection() throws XMPPException {
 
-        XMPPConnection con = manager.getConnection();
+        Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
+
+        XMPPConnection con = manager.getConnection(creds);
         assertNotNull(con);
         Roster roster = con.getRoster();
         assertNotNull(roster);

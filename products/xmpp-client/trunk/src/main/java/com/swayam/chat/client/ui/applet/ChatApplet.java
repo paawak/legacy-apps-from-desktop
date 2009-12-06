@@ -51,6 +51,8 @@ public class ChatApplet extends JApplet {
 
     private AccountManager manager;
 
+    private MyRosterListener rosterListener;
+
     public void init() {
         try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
@@ -90,8 +92,10 @@ public class ChatApplet extends JApplet {
         try {
             manager = new AccountManager(creds);
 
+            rosterListener = new MyRosterListener();
+
             friendsListTree.setModel(new ContactListTreeModel(manager
-                    .getContactGroups(new MyRosterListener())));
+                    .getContactGroups(rosterListener)));
 
             // FIXME:: temporary hack for expanded tree
             // friendsListTree.setSelectionRow(rootNode.getChildCount());
@@ -126,8 +130,12 @@ public class ChatApplet extends JApplet {
         }
 
         public void presenceChanged(Presence presence) {
+
+            System.out.println("Presence changed: " + presence.getFrom() + " " + presence);
+
             friendsListTree.setModel(new ContactListTreeModel(manager
-                    .getContactGroups(new MyRosterListener())));
+                    .getContactGroups(rosterListener)));
+
         }
 
     }

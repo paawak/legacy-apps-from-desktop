@@ -86,22 +86,30 @@ public class AccountManager {
 
                 Mode mode = presence.getMode();
 
-                if (Type.available.equals(type) && (mode != null)) {
+                if (Type.available.equals(type)) {
 
-                    switch (mode) {
-                    default:
-                    case available:
+                    if (mode != null) {
+
+                        switch (mode) {
+                        default:
+                        case available:
+                            status = Status.AVAILABLE;
+                            break;
+                        case dnd:
+                            status = Status.BUSY;
+                            break;
+                        case away:
+                            status = Status.AWAY;
+                            break;
+                        case xa:
+                            status = Status.EXTENDED_AWAY;
+                            break;
+
+                        }
+
+                    } else {
+
                         status = Status.AVAILABLE;
-                        break;
-                    case dnd:
-                        status = Status.BUSY;
-                        break;
-                    case away:
-                        status = Status.AWAY;
-                        break;
-                    case xa:
-                        status = Status.EXTENDED_AWAY;
-                        break;
 
                     }
                 }

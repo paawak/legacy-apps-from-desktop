@@ -28,6 +28,7 @@ import java.util.List;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
+import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
@@ -59,6 +60,26 @@ public class AccountManager {
         Roster roster = con.getRoster();
         Collection<RosterGroup> rosterGroups = roster.getGroups();
 
+        roster.addRosterListener(new RosterListener() {
+
+            public void entriesDeleted(Collection<String> addresses) {
+
+            }
+
+            public void entriesUpdated(Collection<String> addresses) {
+
+            }
+
+            public void presenceChanged(Presence presence) {
+                System.out.println("Presence changed: " + presence.getFrom() + " " + presence);
+            }
+
+            public void entriesAdded(Collection<String> addresses) {
+
+            }
+
+        });
+
         for (RosterGroup rosterGroup : rosterGroups) {
 
             String groupName = rosterGroup.getName();
@@ -81,9 +102,9 @@ public class AccountManager {
 
                 Type type = presence.getType();
 
-                if (Type.available.equals(type)) {
+                Mode mode = presence.getMode();
 
-                    Mode mode = presence.getMode();
+                if (Type.available.equals(type) && (mode != null)) {
 
                     switch (mode) {
                     default:

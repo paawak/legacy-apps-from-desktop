@@ -88,7 +88,7 @@ public class AccountManager {
 
         } else {
 
-            GroupImpl group = new GroupImpl("Buddies");
+            GroupImpl group = GroupImpl.getFalseGroup();
 
             for (RosterEntry entry : roster.getEntries()) {
 

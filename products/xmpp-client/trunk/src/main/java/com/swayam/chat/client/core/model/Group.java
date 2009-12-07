@@ -28,6 +28,8 @@ import java.util.List;
  */
 public interface Group {
 
+    String FALSE_GROUP_NAME = "FalseGroup";
+
     String getName();
 
     String getDescription();

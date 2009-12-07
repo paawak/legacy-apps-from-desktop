@@ -68,4 +68,11 @@ class GroupImpl implements Group {
         return Collections.unmodifiableList(contactList);
     }
 
+    /**
+     * Use this for jabber servers which do not support groups
+     */
+    static GroupImpl getFalseGroup() {
+        return new GroupImpl(FALSE_GROUP_NAME);
+    }
+
 }

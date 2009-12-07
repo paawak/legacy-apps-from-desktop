@@ -50,7 +50,23 @@ public class ContactListTreeModel implements TreeModel {
     }
 
     public Object getRoot() {
-        return FALSE_ROOT;
+
+        // hide a false groups, root will be always hidden
+        Object root = FALSE_ROOT;
+
+        if (groupList.size() == 1) {
+
+            Group group = groupList.get(0);
+
+            if (Group.FALSE_GROUP_NAME.equals(group.getName())) {
+
+                root = group;
+
+            }
+
+        }
+
+        return root;
     }
 
     public int getChildCount(Object parent) {

@@ -91,11 +91,14 @@ public class ChatWindow extends JDialog implements MessageListener {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
                     // send chat
+                    String text = textEntered.getText();
                     Message message = new Message();
-                    message.setBody(textEntered.getText());
+                    message.setBody(text);
 
                     try {
                         chat.sendMessage(message);
+                        appendMessageToMainWindow("me", text);
+                        textEntered.setText("");
                     } catch (XMPPException e) {
                         e.printStackTrace();
                     }
@@ -113,8 +116,14 @@ public class ChatWindow extends JDialog implements MessageListener {
     }
 
     public void processMessage(Chat chat, Message message) {
+        appendMessageToMainWindow(message.getFrom(), message.getBody());
+    }
+
+    private void appendMessageToMainWindow(String user, String message) {
+
         String oldText = chatText.getText();
-        chatText.setText(oldText + "\n" + message.getFrom() + ":" + message.getBody());
+        chatText.setText(oldText + "\n" + user + ":" + message);
+
     }
 
 }

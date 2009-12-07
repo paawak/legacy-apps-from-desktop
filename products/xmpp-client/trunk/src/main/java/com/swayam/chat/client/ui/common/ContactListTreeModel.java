@@ -51,9 +51,9 @@ public class ContactListTreeModel implements TreeModel {
 
     public Object getRoot() {
 
-        // hide a false groups, root will be always hidden
         Object root = FALSE_ROOT;
 
+        // hide a false group, root will be always hidden, this is for servers which doesnt support groups
         if (groupList.size() == 1) {
 
             Group group = groupList.get(0);

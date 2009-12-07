@@ -52,7 +52,18 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
         } else if (value instanceof Contact) {
 
             contact = (Contact) value;
-            value = contact.getDisplayName();
+            String displayName = contact.getAliasName();
+            String userName = contact.getUserName();
+
+            if (displayName == null) {
+
+                displayName = userName;
+
+                displayName = userName.substring(0, userName.indexOf('@'));
+
+            }
+
+            value = displayName;
 
         }
 

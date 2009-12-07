@@ -26,7 +26,9 @@ package com.swayam.chat.client.core.model;
  */
 public interface Contact {
 
-    String getDisplayName();
+    String getAliasName();
+
+    String getUserName();
 
     Status getStatus();
 

@@ -76,7 +76,8 @@ public class AccountManager {
                 String user = entry.getUser();
 
                 ContactImpl contact = new ContactImpl();
-                contact.setDisplayName(name == null ? user : name);
+                contact.setUserName(user);
+                contact.setAliasName(name);
 
                 Presence presence = roster.getPresence(user);
 

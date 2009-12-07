@@ -28,36 +28,47 @@ import com.swayam.chat.client.core.model.Contact;
  */
 class ContactImpl implements Contact {
 
-    private String displayName;
+    private String aliasName;
+
+    private String userName;
 
     private Status status;
 
-    public String getDisplayName() {
-        return displayName;
+    public String getAliasName() {
+        return aliasName;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    void setAliasName(String displayName) {
+        this.aliasName = displayName;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
     public String toString() {
-        return "ContactImpl [displayName=" + displayName + ", status=" + status + "]";
+        return "ContactImpl [userName=" + userName + ", aliasName=" + aliasName + ", status="
+                + status + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
+        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
         return result;
     }
 
@@ -70,10 +81,10 @@ class ContactImpl implements Contact {
         if (getClass() != obj.getClass())
             return false;
         ContactImpl other = (ContactImpl) obj;
-        if (displayName == null) {
-            if (other.displayName != null)
+        if (userName == null) {
+            if (other.userName != null)
                 return false;
-        } else if (!displayName.equals(other.displayName))
+        } else if (!userName.equals(other.userName))
             return false;
         return true;
     }

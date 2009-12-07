@@ -22,6 +22,8 @@ package com.swayam.chat.client.ui.applet;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Collection;
 import java.util.List;
 
@@ -106,38 +108,44 @@ public class ChatApplet extends JApplet {
 
             public void valueChanged(TreeSelectionEvent e) {
 
-                TreePath path = e.getPath();
+                if (e.isAddedPath()) {
 
-                Object selectedObject = path.getLastPathComponent();
+                    TreePath path = e.getPath();
 
-                if (selectedObject instanceof Contact) {
+                    Object selectedObject = path.getLastPathComponent();
 
-                    final String user = ((Contact) selectedObject).getUserName();
-                    // begin new chat
-                    XMPPConnection con = manager.getConnection();
-                    final ChatManager chatManager = con.getChatManager();
+                    if (selectedObject instanceof Contact) {
 
-                    EventQueue.invokeLater(new Runnable() {
-                        public void run() {
-                            ChatWindow dialog = new ChatWindow();
+                        final String user = ((Contact) selectedObject).getUserName();
+                        // begin new chat
+                        XMPPConnection con = manager.getConnection();
+                        final ChatManager chatManager = con.getChatManager();
 
-                            Chat chat = chatManager.createChat(user, dialog);
+                        EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                ChatWindow dialog = new ChatWindow();
 
-                            dialog.setChat(chat);
+                                Chat chat = chatManager.createChat(user, dialog);
 
-                            // dialog.addWindowListener(new WindowAdapter() {
-                            //
-                            // public void windowClosing(WindowEvent e) {
-                            // }
-                            //
-                            // });
+                                dialog.setChat(chat);
 
-                            dialog.setVisible(true);
-                        }
-                    });
+                                dialog.addWindowListener(new WindowAdapter() {
+
+                                    public void windowClosing(WindowEvent e) {
+
+                                        friendsListTree.clearSelection();
+
+                                    }
+
+                                });
+
+                                dialog.setVisible(true);
+                            }
+                        });
+
+                    }
 
                 }
-
             }
 
         });

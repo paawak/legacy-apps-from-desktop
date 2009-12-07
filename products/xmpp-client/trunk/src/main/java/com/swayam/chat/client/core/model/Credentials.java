@@ -26,6 +26,8 @@ package com.swayam.chat.client.core.model;
  */
 public class Credentials {
 
+    public static final String GTALK_SERVER = "gmail.com";
+
     private static final int DEFAULT_PORT = 5222;
 
     private final String server;
@@ -45,6 +47,16 @@ public class Credentials {
 
     public Credentials(String server, String userName, String password) {
         this(server, DEFAULT_PORT, userName, password);
+    }
+
+    /**
+     * Use for connecting to GTalk
+     * 
+     * @param userName
+     * @param password
+     */
+    public Credentials(String userName, String password) {
+        this(GTALK_SERVER, DEFAULT_PORT, userName, password);
     }
 
     public static int getDefaultPort() {

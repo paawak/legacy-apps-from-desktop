@@ -150,7 +150,7 @@ public class ChatApplet extends JApplet {
 
         });
 
-        Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
+        Credentials creds = new Credentials("paawak", "humabratso!2x");
 
         try {
             manager = new AccountManager(creds);

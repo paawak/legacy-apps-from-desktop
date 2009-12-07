@@ -35,6 +35,7 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smack.packet.Presence.Type;
 
+import com.swayam.chat.client.core.model.Contact;
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.model.Contact.Status;
@@ -62,68 +63,36 @@ public class AccountManager {
         List<Group> groups = new ArrayList<Group>(1);
 
         Roster roster = con.getRoster();
-        Collection<RosterGroup> rosterGroups = roster.getGroups();
 
         roster.addRosterListener(rosterListener);
 
-        for (RosterGroup rosterGroup : rosterGroups) {
+        Collection<RosterGroup> rosterGroups = roster.getGroups();
 
-            String groupName = rosterGroup.getName();
+        if (rosterGroups.size() > 0) {
 
-            GroupImpl group = new GroupImpl(groupName);
+            for (RosterGroup rosterGroup : rosterGroups) {
 
-            Collection<RosterEntry> entries = rosterGroup.getEntries();
+                String groupName = rosterGroup.getName();
 
-            for (RosterEntry entry : entries) {
+                GroupImpl group = new GroupImpl(groupName);
 
-                String name = entry.getName();
-                String user = entry.getUser();
+                for (RosterEntry entry : rosterGroup.getEntries()) {
 
-                ContactImpl contact = new ContactImpl();
-                contact.setUserName(user);
-                contact.setAliasName(name);
+                    group.addContact(getContact(roster, entry));
 
-                Presence presence = roster.getPresence(user);
-
-                contact.setStatusText(presence.getStatus());
-
-                Status status = Status.OFFLINE;
-
-                Type type = presence.getType();
-
-                Mode mode = presence.getMode();
-
-                if (Type.available.equals(type)) {
-
-                    if (mode != null) {
-
-                        switch (mode) {
-                        default:
-                        case available:
-                            status = Status.AVAILABLE;
-                            break;
-                        case dnd:
-                            status = Status.BUSY;
-                            break;
-                        case away:
-                            status = Status.AWAY;
-                            break;
-                        case xa:
-                            status = Status.EXTENDED_AWAY;
-                            break;
-
-                        }
-
-                    } else {
-
-                        status = Status.AVAILABLE;
-
-                    }
                 }
 
-                contact.setStatus(status);
+                groups.add(group);
 
-                group.addContact(contact);
+            }
+
+        } else {
+
+            GroupImpl group = new GroupImpl("Buddies");
+
+            for (RosterEntry entry : roster.getEntries()) {
+
+                group.addContact(getContact(roster, entry));
 
             }
 
@@ -132,6 +101,59 @@ public class AccountManager {
         }
 
         return Collections.unmodifiableList(groups);
+
+    }
+
+    private Contact getContact(Roster roster, RosterEntry entry) {
+
+        String name = entry.getName();
+        String user = entry.getUser();
+
+        ContactImpl contact = new ContactImpl();
+        contact.setUserName(user);
+        contact.setAliasName(name);
+
+        Presence presence = roster.getPresence(user);
+
+        contact.setStatusText(presence.getStatus());
+
+        Status status = Status.OFFLINE;
+
+        Type type = presence.getType();
+
+        Mode mode = presence.getMode();
+
+        if (Type.available.equals(type)) {
+
+            if (mode != null) {
+
+                switch (mode) {
+                default:
+                case available:
+                    status = Status.AVAILABLE;
+                    break;
+                case dnd:
+                    status = Status.BUSY;
+                    break;
+                case away:
+                    status = Status.AWAY;
+                    break;
+                case xa:
+                    status = Status.EXTENDED_AWAY;
+                    break;
+
+                }
+
+            } else {
+
+                status = Status.AVAILABLE;
+
+            }
+        }
+
+        contact.setStatus(status);
+
+        return contact;
 
     }
 

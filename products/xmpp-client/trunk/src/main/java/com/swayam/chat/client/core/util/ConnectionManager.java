@@ -44,8 +44,18 @@ public class ConnectionManager {
      */
     public XMPPConnection getConnection(Credentials credentials) throws XMPPException {
 
-        ConnectionConfiguration conf = new ConnectionConfiguration(credentials.getServer(),
-                credentials.getPort());
+        ConnectionConfiguration conf;
+
+        // in case of GTalk, we must allow the dns look up to determine the correct host & port
+        if (Credentials.GTALK_SERVER.equals(credentials.getServer())) {
+
+            conf = new ConnectionConfiguration(credentials.getServer());
+
+        } else {
+
+            conf = new ConnectionConfiguration(credentials.getServer(), credentials.getPort());
+
+        }
 
         conf.setReconnectionAllowed(true);
         // conf.setSendPresence(true);

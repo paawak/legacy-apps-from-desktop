@@ -68,11 +68,11 @@ public class ContactListPane extends JScrollPane {
 
         friendsListTree.setRootVisible(false);
 
-        friendsListTree.addTreeSelectionListener(new ContactListTreeSelectionListener(acManager,
-                friendsListTree));
-
         try {
             acManager = new AccountManager(creds);
+
+            friendsListTree.addTreeSelectionListener(new ContactListTreeSelectionListener(
+                    acManager, friendsListTree));
 
             rosterListener = new ContactListChangeListener();
 

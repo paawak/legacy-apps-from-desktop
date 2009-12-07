@@ -71,7 +71,10 @@ public class LoginPanel extends JPanel {
                 String userName = txtUserName.getText().trim();
                 char[] password = txtPassword.getPassword();
 
-                if (!"".equals(userName) && (userName.indexOf('@') > 0) && (password != null)) {
+                int indexOfAt = userName.indexOf('@');
+
+                if (!"".equals(userName) && (indexOfAt != -1)
+                        && (userName.indexOf('@') + 1 < userName.length()) && (password != null)) {
 
                     String[] array = userName.split("@");
                     String user = array[0];

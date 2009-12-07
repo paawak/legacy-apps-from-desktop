@@ -80,13 +80,6 @@ public class ChatApplet extends JApplet implements CredentialListener {
 
         cardLayout.show(mainPanel, LOGIN_PANEL);
 
-        // getContentPane().setLayout(new BorderLayout());
-
-        // Credentials creds = new Credentials("paawak", "ssdsddaas");
-        // Credentials creds = new Credentials("localhost", "palash", "ray");
-        //
-        // JScrollPane centerScrollPane = new ContactListPane(creds);
-
         getContentPane().add(mainPanel, BorderLayout.CENTER);
 
     }

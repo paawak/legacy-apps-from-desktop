@@ -68,8 +68,8 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
             String statusText = contact.getStatusText();
 
             if (statusText != null) {
-                value = "<html><body><strong>" + value + "</strong><br><i>" + statusText
-                        + "</i></body></html>";
+
+                value = "<html><strong>" + value + "</strong><br><i>" + statusText + "</i></html>";
             }
 
         }

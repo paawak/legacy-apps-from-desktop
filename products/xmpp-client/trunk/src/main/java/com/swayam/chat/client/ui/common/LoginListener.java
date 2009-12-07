@@ -1,5 +1,5 @@
 /*
- * CredentialListener.java
+ * LoginListener.java
  *
  * Created on Dec 7, 2009 11:58:43 PM
  *
@@ -20,14 +20,14 @@
 
 package com.swayam.chat.client.ui.common;
 
-import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.util.AccountManager;
 
 /**
  * 
  * @author paawak
  */
-public interface CredentialListener {
+public interface LoginListener {
 
-    void credentialsEntered(Credentials creds);
+    void loginSuccess(AccountManager acManager);
 
 }

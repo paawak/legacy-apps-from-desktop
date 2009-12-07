@@ -34,7 +34,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.jivesoftware.smack.XMPPException;
+
 import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.util.AccountManager;
 
 /**
  * 
@@ -44,11 +47,11 @@ public class LoginPanel extends JPanel {
 
     private static final long serialVersionUID = 4603399021683353717L;
 
-    private final CredentialListener credListener;
+    private final LoginListener credListener;
     private JTextField txtUserName;
     private JPasswordField txtPassword;
 
-    public LoginPanel(CredentialListener credListener) {
+    public LoginPanel(LoginListener credListener) {
         this.credListener = credListener;
         initComponents();
     }
@@ -66,7 +69,7 @@ public class LoginPanel extends JPanel {
         btLogin.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
 
                 String userName = txtUserName.getText().trim();
                 char[] password = txtPassword.getPassword();
@@ -80,7 +83,17 @@ public class LoginPanel extends JPanel {
                     String user = array[0];
                     String host = array[1];
                     Credentials creds = new Credentials(host, user, new String(password));
-                    credListener.credentialsEntered(creds);
+
+                    // try to login
+                    try {
+                        AccountManager acManager = new AccountManager(creds);
+                        credListener.loginSuccess(acManager);
+                    } catch (XMPPException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(LoginPanel.this,
+                                "Could not log you on. Please try again.", "I am sorry!",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
 
                 } else {
                     JOptionPane.showMessageDialog(LoginPanel.this,

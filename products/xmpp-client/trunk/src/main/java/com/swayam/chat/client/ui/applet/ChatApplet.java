@@ -30,16 +30,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import com.swayam.chat.client.core.model.Credentials;
+import com.swayam.chat.client.core.util.AccountManager;
 import com.swayam.chat.client.ui.common.ContactListPane;
-import com.swayam.chat.client.ui.common.CredentialListener;
+import com.swayam.chat.client.ui.common.LoginListener;
 import com.swayam.chat.client.ui.common.LoginPanel;
 
 /**
  * 
  * @author paawak
  */
-public class ChatApplet extends JApplet implements CredentialListener {
+public class ChatApplet extends JApplet implements LoginListener {
 
     private static final long serialVersionUID = -2126075630790344759L;
 
@@ -85,9 +85,9 @@ public class ChatApplet extends JApplet implements CredentialListener {
     }
 
     @Override
-    public void credentialsEntered(Credentials creds) {
+    public void loginSuccess(AccountManager acManager) {
 
-        mainPanel.add(new ContactListPane(creds), CHAT_PANEL);
+        mainPanel.add(new ContactListPane(acManager), CHAT_PANEL);
         cardLayout.show(mainPanel, CHAT_PANEL);
 
     }

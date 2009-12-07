@@ -29,10 +29,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.jivesoftware.smack.RosterListener;
-import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
-import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.util.AccountManager;
 
@@ -46,19 +44,20 @@ public class ContactListPane extends JScrollPane {
 
     private JTree friendsListTree;
 
-    private AccountManager acManager;
+    private final AccountManager acManager;
 
     private ContactListChangeListener rosterListener;
 
-    public ContactListPane(Credentials creds) {
-        initTree(creds);
+    public ContactListPane(AccountManager acManager) {
+        this.acManager = acManager;
+        initTree();
     }
 
     /**
      * Adds the contact list tree to the pane.<br>
      * Should be called only once.
      */
-    private void initTree(Credentials creds) {
+    private void initTree() {
 
         friendsListTree = new JTree(new DefaultMutableTreeNode());
         friendsListTree.setCellRenderer(new ContactListTreeCellRenderer());
@@ -68,21 +67,14 @@ public class ContactListPane extends JScrollPane {
 
         friendsListTree.setRootVisible(false);
 
-        try {
-            acManager = new AccountManager(creds);
+        friendsListTree.addTreeSelectionListener(new ContactListTreeSelectionListener(acManager,
+                friendsListTree));
 
-            friendsListTree.addTreeSelectionListener(new ContactListTreeSelectionListener(
-                    acManager, friendsListTree));
+        rosterListener = new ContactListChangeListener();
 
-            rosterListener = new ContactListChangeListener();
+        List<Group> groups = acManager.getContactGroups(rosterListener);
 
-            List<Group> groups = acManager.getContactGroups(rosterListener);
-
-            friendsListTree.setModel(new ContactListTreeModel(groups));
-
-        } catch (XMPPException e) {
-            e.printStackTrace();
-        }
+        friendsListTree.setModel(new ContactListTreeModel(groups));
 
         setViewportView(friendsListTree);
 

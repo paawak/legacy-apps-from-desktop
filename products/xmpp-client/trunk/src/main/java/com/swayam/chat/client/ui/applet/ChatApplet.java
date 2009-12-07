@@ -20,6 +20,7 @@
 
 package com.swayam.chat.client.ui.applet;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.Collection;
 import java.util.List;
@@ -30,16 +31,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
+import com.swayam.chat.client.core.model.Contact;
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.util.AccountManager;
+import com.swayam.chat.client.ui.common.ChatWindow;
 import com.swayam.chat.client.ui.common.ContactListTreeCellRenderer;
 import com.swayam.chat.client.ui.common.ContactListTreeModel;
 
@@ -81,6 +87,8 @@ public class ChatApplet extends JApplet {
 
         setJMenuBar(mainMenuBar);
 
+        // getContentPane().setLayout(new BorderLayout());
+
         JScrollPane centerScrollPane = new JScrollPane();
 
         friendsListTree = new JTree(new DefaultMutableTreeNode());
@@ -90,6 +98,37 @@ public class ChatApplet extends JApplet {
                 TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         friendsListTree.setRootVisible(false);
+
+        friendsListTree.addTreeSelectionListener(new TreeSelectionListener() {
+
+            public void valueChanged(TreeSelectionEvent e) {
+
+                TreePath path = e.getPath();
+
+                Object selectedObject = path.getLastPathComponent();
+
+                if (selectedObject instanceof Contact) {
+
+                    EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            ChatWindow dialog = new ChatWindow();
+
+                            // dialog.addWindowListener(new WindowAdapter() {
+                            //
+                            // public void windowClosing(WindowEvent e) {
+                            // }
+                            //
+                            // });
+
+                            dialog.setVisible(true);
+                        }
+                    });
+
+                }
+
+            }
+
+        });
 
         Credentials creds = new Credentials("localhost", 5222, "palash", "ray");
 
@@ -108,7 +147,7 @@ public class ChatApplet extends JApplet {
 
         centerScrollPane.setViewportView(friendsListTree);
 
-        getContentPane().add(centerScrollPane, java.awt.BorderLayout.CENTER);
+        getContentPane().add(centerScrollPane, BorderLayout.CENTER);
 
     }
 

@@ -64,16 +64,24 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
     @Override
     public Icon getLeafIcon() {
 
-        Status status = contact.getStatus();
+        Icon icon = null;
 
-        if (status == null) {
-            status = Status.OFFLINE;
+        if (contact != null) {
+
+            Status status = contact.getStatus();
+
+            if (status == null) {
+                status = Status.OFFLINE;
+            }
+
+            String iconPath = "/com/swayam/chat/client/assets/images/chat/status/" + status.name()
+                    + ".png";
+
+            icon = getIcon(iconPath);
+
         }
 
-        String iconPath = "/com/swayam/chat/client/assets/images/chat/status/" + status.name()
-                + ".png";
-
-        return getIcon(iconPath);
+        return icon;
     }
 
     @Override

@@ -32,6 +32,8 @@ public interface Contact {
 
     Status getStatus();
 
+    String getStatusText();
+
     enum Status {
 
         OFFLINE, AVAILABLE, BUSY, AWAY, EXTENDED_AWAY;

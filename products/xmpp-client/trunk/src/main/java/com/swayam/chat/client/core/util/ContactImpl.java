@@ -34,6 +34,8 @@ class ContactImpl implements Contact {
 
     private Status status;
 
+    private String statusText;
+
     public String getAliasName() {
         return aliasName;
     }
@@ -56,6 +58,14 @@ class ContactImpl implements Contact {
 
     void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getStatusText() {
+        return statusText;
+    }
+
+    void setStatusText(String statusText) {
+        this.statusText = statusText;
     }
 
     @Override

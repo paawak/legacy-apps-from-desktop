@@ -81,6 +81,8 @@ public class AccountManager {
 
                 Presence presence = roster.getPresence(user);
 
+                contact.setStatusText(presence.getStatus());
+
                 Status status = Status.OFFLINE;
 
                 Type type = presence.getType();

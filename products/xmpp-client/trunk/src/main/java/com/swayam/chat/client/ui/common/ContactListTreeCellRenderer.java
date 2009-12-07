@@ -65,6 +65,13 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
 
             value = displayName;
 
+            String statusText = contact.getStatusText();
+
+            if (statusText != null) {
+                value = "<html><body><strong>" + value + "</strong><br><i>" + statusText
+                        + "</i></body></html>";
+            }
+
         }
 
         return super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row,

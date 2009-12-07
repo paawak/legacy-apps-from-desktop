@@ -20,8 +20,6 @@
 
 package com.swayam.chat.client.core.util;
 
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.GoogleTalkConnection;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
@@ -45,15 +43,16 @@ public class ConnectionManager {
      */
     public XMPPConnection getConnection(Credentials credentials) throws XMPPException {
 
-        ConnectionConfiguration conf = new ConnectionConfiguration(credentials.getServer(),
-                credentials.getPort());
+        // ConnectionConfiguration conf = new ConnectionConfiguration(credentials.getServer(),
+        // credentials.getPort());
 
-        // XMPPConnection con = new XMPPConnection(conf);
+        XMPPConnection con = new XMPPConnection(credentials.getServer(), credentials.getPort(),
+                "gmail.com");
 
-        XMPPConnection con = new GoogleTalkConnection();
+        // XMPPConnection con = new GoogleTalkConnection();
 
         // login
-        con.login(credentials.getUserName(), credentials.getPassword(), "Smack");
+        con.login(credentials.getUserName(), credentials.getPassword());
 
         return con;
 

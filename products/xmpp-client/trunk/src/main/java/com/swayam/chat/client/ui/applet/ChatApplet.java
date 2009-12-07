@@ -37,7 +37,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.RosterListener;
+import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
@@ -109,9 +112,18 @@ public class ChatApplet extends JApplet {
 
                 if (selectedObject instanceof Contact) {
 
+                    final String user = ((Contact) selectedObject).getUserName();
+                    // begin new chat
+                    XMPPConnection con = manager.getConnection();
+                    final ChatManager chatManager = con.getChatManager();
+
                     EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             ChatWindow dialog = new ChatWindow();
+
+                            Chat chat = chatManager.createChat(user, dialog);
+
+                            dialog.setChat(chat);
 
                             // dialog.addWindowListener(new WindowAdapter() {
                             //

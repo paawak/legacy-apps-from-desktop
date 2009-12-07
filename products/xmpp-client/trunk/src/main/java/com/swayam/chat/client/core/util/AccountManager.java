@@ -53,6 +53,10 @@ public class AccountManager {
 
     }
 
+    public XMPPConnection getConnection() {
+        return con;
+    }
+
     public List<Group> getContactGroups(RosterListener rosterListener) {
 
         List<Group> groups = new ArrayList<Group>(1);

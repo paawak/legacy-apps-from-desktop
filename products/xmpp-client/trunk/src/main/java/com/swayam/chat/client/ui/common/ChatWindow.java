@@ -23,6 +23,8 @@ package com.swayam.chat.client.ui.common;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
@@ -31,13 +33,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Message;
+
 /**
  * 
  * @author paawak
  */
-public class ChatWindow extends JDialog {
+public class ChatWindow extends JDialog implements MessageListener {
 
     private static final long serialVersionUID = -1624324592341163069L;
+
+    private Chat chat;
+
+    private JEditorPane textEntered;
+    private JEditorPane chatText;
 
     public ChatWindow() {
         initComponents();
@@ -54,13 +66,13 @@ public class ChatWindow extends JDialog {
         // getContentPane().setLayout(new BorderLayout());
 
         JScrollPane centreScrPane = new JScrollPane();
-        JEditorPane chatText = new JEditorPane();
+        chatText = new JEditorPane();
         chatText.setEditable(false);
         centreScrPane.setViewportView(chatText);
         getContentPane().add(centreScrPane, BorderLayout.CENTER);
 
         JScrollPane southScrPane = new JScrollPane();
-        JEditorPane textEntered = new JEditorPane();
+        textEntered = new JEditorPane();
         southScrPane.setViewportView(textEntered);
         getContentPane().add(southScrPane, BorderLayout.SOUTH);
 
@@ -71,6 +83,38 @@ public class ChatWindow extends JDialog {
 
         textEntered.requestFocusInWindow();
 
+        textEntered.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent evt) {
+
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                    // send chat
+                    Message message = new Message();
+                    message.setBody(textEntered.getText());
+
+                    try {
+                        chat.sendMessage(message);
+                    } catch (XMPPException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
+
+    public void processMessage(Chat chat, Message message) {
+        String oldText = chatText.getText();
+        chatText.setText(oldText + "\n" + message.getFrom() + ":" + message.getBody());
     }
 
 }

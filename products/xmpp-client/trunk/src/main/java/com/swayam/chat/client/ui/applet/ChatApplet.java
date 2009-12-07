@@ -102,11 +102,6 @@ public class ChatApplet extends JApplet {
 
             friendsListTree.setModel(new ContactListTreeModel(groups));
 
-            // FIXME:: temporary hack for expanded tree
-            // friendsListTree.setSelectionRow(groups.size());
-            // friendsListTree.expandPath(friendsListTree.getSelectionPath());
-            // friendsListTree.setSelectionRow(-1);
-
         } catch (XMPPException e) {
             e.printStackTrace();
         }
@@ -120,23 +115,22 @@ public class ChatApplet extends JApplet {
     private class MyRosterListener implements RosterListener {
 
         public void entriesAdded(Collection<String> addresses) {
-            // TODO Auto-generated method stub
-
+            reloadTree();
         }
 
         public void entriesDeleted(Collection<String> addresses) {
-            // TODO Auto-generated method stub
-
+            reloadTree();
         }
 
         public void entriesUpdated(Collection<String> addresses) {
-            // TODO Auto-generated method stub
-
+            reloadTree();
         }
 
         public void presenceChanged(Presence presence) {
+            reloadTree();
+        }
 
-            System.out.println("Presence changed: " + presence.getFrom() + " " + presence);
+        private void reloadTree() {
 
             friendsListTree.setModel(new ContactListTreeModel(manager
                     .getContactGroups(rosterListener)));

@@ -55,6 +55,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--  generate a fat jar if desired, packaging all dependencies into one jar file -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef> jar-with-dependencies </descriptorRef>
+                    </descriptorRefs>
+                    <!-- 
+                    <archive>
+                        <manifest>
+                            <mainClass> com.swayam.bhasha.BhashaLauncher </mainClass>
+                        </manifest>
+                    </archive>
+                    -->
+                </configuration>
+            </plugin>
         </plugins>
         <extensions>
             <extension>

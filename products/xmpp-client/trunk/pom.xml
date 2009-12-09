@@ -101,11 +101,14 @@
             <artifactId>smack</artifactId>
             <version>${smack.version}</version>
         </dependency>
+        <!-- smackx is not required as of now -->
+        <!-- 
         <dependency>
             <groupId>jivesoftware</groupId>
             <artifactId>smackx</artifactId>
             <version>${smack.version}</version>
         </dependency>
+        -->
 	</dependencies>
 	<properties>
 	   <!-- working version -->

@@ -20,17 +20,11 @@
 
 package com.swayam.chat.client.ui.common;
 
-import java.awt.EventQueue;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.XMPPConnection;
 
 import com.swayam.chat.client.core.model.Contact;
@@ -64,29 +58,8 @@ public class ContactListTreeSelectionListener implements TreeSelectionListener {
                 final String user = ((Contact) selectedObject).getUserName();
                 // begin new chat
                 XMPPConnection con = accountManager.getConnection();
-                final ChatManager chatManager = con.getChatManager();
 
-                EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        ChatWindow dialog = new ChatWindow(user.split("@")[0]);
-
-                        Chat chat = chatManager.createChat(user, dialog);
-
-                        dialog.setChat(chat);
-
-                        dialog.addWindowListener(new WindowAdapter() {
-
-                            public void windowClosing(WindowEvent e) {
-
-                                friendsListTree.clearSelection();
-
-                            }
-
-                        });
-
-                        dialog.setVisible(true);
-                    }
-                });
+                UiUtils.displayChatWindow(con, user, "", friendsListTree);
 
             }
 

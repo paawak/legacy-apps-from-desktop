@@ -43,6 +43,7 @@ import com.swayam.chat.client.core.model.Contact;
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.model.Contact.Status;
+import com.swayam.chat.client.ui.common.UiUtils;
 
 /**
  * 
@@ -127,6 +128,12 @@ public class AccountManager {
                     if (packet instanceof Message) {
 
                         Message msg = (Message) packet;
+
+                        String message = msg.getBody();
+
+                        if (message != null && !"".equals(message)) {
+                            UiUtils.displayChatWindow(con, msg.getFrom(), msg.getBody(), null);
+                        }
 
                     }
 

@@ -56,11 +56,15 @@ public class ChatWindow extends JDialog implements MessageListener {
     private JEditorPane textEntered;
     private JEditorPane chatText;
 
-    public ChatWindow(String userName) {
-        initComponents(userName);
+    public ChatWindow(String userName, String initailMessage) {
+        initComponents(userName, initailMessage);
     }
 
-    private void initComponents(String userName) {
+    public ChatWindow(String userName) {
+        this(userName, "");
+    }
+
+    private void initComponents(String userName, String initailMessage) {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu chatMenu = new JMenu();
@@ -70,13 +74,14 @@ public class ChatWindow extends JDialog implements MessageListener {
 
         // getContentPane().setLayout(new BorderLayout());
 
-        JLabel title = new JLabel(userName);
+        JLabel title = new JLabel(getUserName(userName));
         // title.setHorizontalAlignment(JLabel.CENTER);
         title.setPreferredSize(new Dimension(WIDTH, 30));
         getContentPane().add(title, BorderLayout.NORTH);
 
         JScrollPane centreScrPane = new JScrollPane();
         chatText = new JEditorPane();
+        chatText.setText(initailMessage);
         chatText.setEditable(false);
         centreScrPane.setViewportView(chatText);
         getContentPane().add(centreScrPane, BorderLayout.CENTER);
@@ -133,7 +138,26 @@ public class ChatWindow extends JDialog implements MessageListener {
     private void appendMessageToMainWindow(String user, String message) {
 
         String oldText = chatText.getText();
-        chatText.setText(oldText + "\n" + user + ":" + message);
+
+        if (!oldText.equals("")) {
+            oldText += "\n";
+        }
+
+        chatText.setText(oldText + getUserName(user) + ":" + message);
+
+    }
+
+    private String getUserName(String user) {
+
+        int indexOfAt = user.indexOf('@');
+
+        if (indexOfAt != -1) {
+
+            user = user.substring(0, indexOfAt);
+
+        }
+
+        return user;
 
     }
 

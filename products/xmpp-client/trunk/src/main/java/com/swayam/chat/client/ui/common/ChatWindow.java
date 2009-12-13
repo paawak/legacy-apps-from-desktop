@@ -64,7 +64,7 @@ public class ChatWindow extends JDialog implements MessageListener {
         this(userName, "");
     }
 
-    private void initComponents(String userName, String initailMessage) {
+    private void initComponents(String userName, String initialMessage) {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu chatMenu = new JMenu();
@@ -81,7 +81,9 @@ public class ChatWindow extends JDialog implements MessageListener {
 
         JScrollPane centreScrPane = new JScrollPane();
         chatText = new JEditorPane();
-        chatText.setText(initailMessage);
+
+        appendMessageToMainWindow(userName, initialMessage);
+
         chatText.setEditable(false);
         centreScrPane.setViewportView(chatText);
         getContentPane().add(centreScrPane, BorderLayout.CENTER);
@@ -137,13 +139,17 @@ public class ChatWindow extends JDialog implements MessageListener {
 
     private void appendMessageToMainWindow(String user, String message) {
 
-        String oldText = chatText.getText();
+        if (message != null && !message.equals("")) {
 
-        if (!oldText.equals("")) {
-            oldText += "\n";
+            String oldText = chatText.getText();
+
+            if (!oldText.equals("")) {
+                oldText += "\n";
+            }
+
+            chatText.setText(oldText + getUserName(user) + ":" + message);
+
         }
-
-        chatText.setText(oldText + getUserName(user) + ":" + message);
 
     }
 

@@ -116,11 +116,19 @@ public class ChatWindow extends JDialog implements MessageListener {
                     try {
                         chat.sendMessage(message);
                         appendMessageToMainWindow("me", text);
-                        textEntered.setText("");
                     } catch (XMPPException e) {
                         e.printStackTrace();
                     }
 
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent evt) {
+
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    textEntered.setText(null);
                 }
 
             }

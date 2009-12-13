@@ -25,12 +25,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.filter.PacketFilter;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smack.packet.Presence.Type;
@@ -108,6 +112,29 @@ public class AccountManager {
 
         String name = entry.getName();
         String user = entry.getUser();
+
+        // listen for incoming messages
+        PacketFilter filter = IncomingMessageFilterFactory.INSTANCE.getFilter(user);
+
+        // null if its been added earlier
+        if (filter != null) {
+
+            con.addPacketListener(new PacketListener() {
+
+                @Override
+                public void processPacket(Packet packet) {
+
+                    if (packet instanceof Message) {
+
+                        Message msg = (Message) packet;
+
+                    }
+
+                }
+
+            }, filter);
+
+        }
 
         ContactImpl contact = new ContactImpl();
         contact.setUserName(user);

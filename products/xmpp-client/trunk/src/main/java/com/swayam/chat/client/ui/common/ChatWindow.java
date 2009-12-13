@@ -28,6 +28,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
@@ -46,16 +47,20 @@ public class ChatWindow extends JDialog implements MessageListener {
 
     private static final long serialVersionUID = -1624324592341163069L;
 
+    private static final int WIDTH = 500;
+
+    private static final int HEIGHT = 500;
+
     private Chat chat;
 
     private JEditorPane textEntered;
     private JEditorPane chatText;
 
-    public ChatWindow() {
-        initComponents();
+    public ChatWindow(String userName) {
+        initComponents(userName);
     }
 
-    private void initComponents() {
+    private void initComponents(String userName) {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu chatMenu = new JMenu();
@@ -65,6 +70,11 @@ public class ChatWindow extends JDialog implements MessageListener {
 
         // getContentPane().setLayout(new BorderLayout());
 
+        JLabel title = new JLabel(userName);
+        // title.setHorizontalAlignment(JLabel.CENTER);
+        title.setPreferredSize(new Dimension(WIDTH, 30));
+        getContentPane().add(title, BorderLayout.NORTH);
+
         JScrollPane centreScrPane = new JScrollPane();
         chatText = new JEditorPane();
         chatText.setEditable(false);
@@ -72,6 +82,7 @@ public class ChatWindow extends JDialog implements MessageListener {
         getContentPane().add(centreScrPane, BorderLayout.CENTER);
 
         JScrollPane southScrPane = new JScrollPane();
+        southScrPane.setPreferredSize(new Dimension(WIDTH, 60));
         textEntered = new JEditorPane();
         southScrPane.setViewportView(textEntered);
         getContentPane().add(southScrPane, BorderLayout.SOUTH);
@@ -79,7 +90,7 @@ public class ChatWindow extends JDialog implements MessageListener {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width - 500) / 2, (screenSize.height - 500) / 2, 500, 500);
+        setBounds((screenSize.width - WIDTH) / 2, (screenSize.height - HEIGHT) / 2, WIDTH, HEIGHT);
 
         textEntered.requestFocusInWindow();
 

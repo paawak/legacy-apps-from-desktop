@@ -68,7 +68,7 @@ public class ContactListTreeSelectionListener implements TreeSelectionListener {
 
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        ChatWindow dialog = new ChatWindow();
+                        ChatWindow dialog = new ChatWindow(user.split("@")[0]);
 
                         Chat chat = chatManager.createChat(user, dialog);
 

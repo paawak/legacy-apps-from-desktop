@@ -192,8 +192,8 @@ public class LoginPanel extends JPanel {
             } catch (XMPPException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(LoginPanel.this,
-                        "Could not log you on. Please try again.", "I am sorry!",
-                        JOptionPane.ERROR_MESSAGE);
+                        "Could not log you on. The error message was: " + e.getMessage(),
+                        "I am sorry!", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {

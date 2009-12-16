@@ -65,7 +65,7 @@ public class AccountManager {
 
     public static AccountManager getInstance(Credentials creds) {
 
-        if (instance == null) {
+        if (instance == null || !instance.creds.equals(creds)) {
             instance = new AccountManager(creds);
         }
 

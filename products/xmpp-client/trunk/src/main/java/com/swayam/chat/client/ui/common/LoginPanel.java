@@ -86,7 +86,8 @@ public class LoginPanel extends JPanel {
 
                     // try to login
                     try {
-                        AccountManager acManager = new AccountManager(creds);
+                        AccountManager acManager = AccountManager.getInstance(creds);
+                        acManager.login();
                         credListener.loginSuccess(acManager);
                     } catch (XMPPException e) {
                         e.printStackTrace();
@@ -181,4 +182,5 @@ public class LoginPanel extends JPanel {
         gridBagConstraints.insets = new Insets(0, 10, 15, 10);
         add(lbFooter, gridBagConstraints);
     }
+
 }

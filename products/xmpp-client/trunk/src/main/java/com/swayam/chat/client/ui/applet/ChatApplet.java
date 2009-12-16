@@ -23,6 +23,8 @@ package com.swayam.chat.client.ui.applet;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JApplet;
 import javax.swing.JMenu;
@@ -48,6 +50,10 @@ public class ChatApplet extends JApplet implements LoginListener {
 
     private JPanel mainPanel;
     private CardLayout cardLayout;
+    private JMenuBar mainMenuBar;
+    private ContactListPane contactListPanel;
+
+    private AccountManager acManager;
 
     public void init() {
         try {
@@ -63,15 +69,32 @@ public class ChatApplet extends JApplet implements LoginListener {
 
     private void initComponents() {
 
-        JMenuBar mainMenuBar = new JMenuBar();
-        JMenu buddiesMenu = new JMenu();
-        buddiesMenu.setText("Buddies");
-        JMenuItem addBuddyItem = new JMenuItem();
-        addBuddyItem.setText("Add Buddy");
-        buddiesMenu.add(addBuddyItem);
-        mainMenuBar.add(buddiesMenu);
+        mainMenuBar = new JMenuBar();
+        JMenu accountMenu = new JMenu();
+        accountMenu.setText("Account");
+        JMenuItem logout = new JMenuItem();
+        logout.setText("Logout");
+
+        logout.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                acManager.logout();
+
+                mainMenuBar.setVisible(false);
+                cardLayout.show(mainPanel, LOGIN_PANEL);
+
+            }
+
+        });
+
+        accountMenu.add(logout);
+        mainMenuBar.add(accountMenu);
 
         setJMenuBar(mainMenuBar);
+
+        mainMenuBar.setVisible(false);
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
@@ -87,7 +110,21 @@ public class ChatApplet extends JApplet implements LoginListener {
     @Override
     public void loginSuccess(AccountManager acManager) {
 
-        mainPanel.add(new ContactListPane(acManager), CHAT_PANEL);
+        this.acManager = acManager;
+
+        mainMenuBar.setVisible(true);
+
+        if (contactListPanel == null) {
+
+            contactListPanel = new ContactListPane(acManager);
+            mainPanel.add(contactListPanel, CHAT_PANEL);
+
+        } else {
+
+            contactListPanel.reloadContacts();
+
+        }
+
         cardLayout.show(mainPanel, CHAT_PANEL);
 
     }

@@ -53,6 +53,13 @@ public class ContactListPane extends JScrollPane {
         initTree();
     }
 
+    public void reloadContacts() {
+
+        friendsListTree.setModel(new ContactListTreeModel(acManager
+                .getContactGroups(rosterListener)));
+
+    }
+
     /**
      * Adds the contact list tree to the pane.<br>
      * Should be called only once.
@@ -83,26 +90,19 @@ public class ContactListPane extends JScrollPane {
     private class ContactListChangeListener implements RosterListener {
 
         public void entriesAdded(Collection<String> addresses) {
-            reloadTree();
+            reloadContacts();
         }
 
         public void entriesDeleted(Collection<String> addresses) {
-            reloadTree();
+            reloadContacts();
         }
 
         public void entriesUpdated(Collection<String> addresses) {
-            reloadTree();
+            reloadContacts();
         }
 
         public void presenceChanged(Presence presence) {
-            reloadTree();
-        }
-
-        private void reloadTree() {
-
-            friendsListTree.setModel(new ContactListTreeModel(acManager
-                    .getContactGroups(rosterListener)));
-
+            reloadContacts();
         }
 
     }

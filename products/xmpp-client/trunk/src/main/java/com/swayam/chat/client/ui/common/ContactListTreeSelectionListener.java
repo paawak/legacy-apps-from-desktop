@@ -25,8 +25,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
-import org.jivesoftware.smack.XMPPConnection;
-
 import com.swayam.chat.client.core.model.Contact;
 import com.swayam.chat.client.core.util.AccountManager;
 
@@ -57,9 +55,8 @@ public class ContactListTreeSelectionListener implements TreeSelectionListener {
 
                 final String user = ((Contact) selectedObject).getUserName();
                 // begin new chat
-                XMPPConnection con = accountManager.getConnection();
-
-                ChatWindowFactory.INSTANCE.displayChatWindow(con, user, "", friendsListTree);
+                ChatWindowFactory.INSTANCE.displayChatWindow(accountManager, user, "",
+                        friendsListTree);
 
             }
 

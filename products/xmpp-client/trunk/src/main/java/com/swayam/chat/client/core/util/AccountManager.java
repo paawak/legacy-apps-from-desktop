@@ -25,6 +25,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
@@ -51,16 +53,45 @@ import com.swayam.chat.client.ui.common.ChatWindowFactory;
  */
 public class AccountManager {
 
-    private final XMPPConnection con;
+    private static AccountManager instance;
 
-    public AccountManager(Credentials creds) throws XMPPException {
+    private final Credentials creds;
 
-        con = new ConnectionManager().getConnection(creds);
+    private XMPPConnection con;
+
+    private AccountManager(Credentials creds) {
+        this.creds = creds;
+    }
+
+    public static AccountManager getInstance(Credentials creds) {
+
+        if (instance == null) {
+            instance = new AccountManager(creds);
+        }
+
+        return instance;
 
     }
 
-    public XMPPConnection getConnection() {
-        return con;
+    public void login() throws XMPPException {
+
+        if (con == null || !con.isConnected()) {
+            con = new ConnectionManager().getConnection(creds);
+        }
+
+    }
+
+    public void logout() {
+
+        con.disconnect();
+        con = null;
+
+    }
+
+    public Chat createChat(String user, MessageListener messageListener) {
+
+        return con.getChatManager().createChat(user, messageListener);
+
     }
 
     public List<Group> getContactGroups(RosterListener rosterListener) {
@@ -132,8 +163,8 @@ public class AccountManager {
                         String message = msg.getBody();
 
                         if (message != null && !"".equals(message)) {
-                            ChatWindowFactory.INSTANCE.displayChatWindow(con, msg.getFrom(), msg
-                                    .getBody(), null);
+                            ChatWindowFactory.INSTANCE.displayChatWindow(AccountManager.this, msg
+                                    .getFrom(), msg.getBody(), null);
                         }
 
                     }

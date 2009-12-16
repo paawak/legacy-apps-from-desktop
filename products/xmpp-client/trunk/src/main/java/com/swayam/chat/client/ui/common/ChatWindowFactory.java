@@ -30,7 +30,8 @@ import java.util.Set;
 import javax.swing.JTree;
 
 import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.XMPPConnection;
+
+import com.swayam.chat.client.core.util.AccountManager;
 
 /**
  * 
@@ -51,7 +52,7 @@ public class ChatWindowFactory {
 
     }
 
-    public void displayChatWindow(final XMPPConnection con, final String fullUserName,
+    public void displayChatWindow(final AccountManager acManager, final String fullUserName,
             final String initialMessage, final JTree tree) {
 
         final String user;
@@ -70,7 +71,7 @@ public class ChatWindowFactory {
                 public void run() {
                     ChatWindow dialog = new ChatWindow(user, initialMessage);
 
-                    Chat chat = con.getChatManager().createChat(user, dialog);
+                    Chat chat = acManager.createChat(user, dialog);
 
                     dialog.setChat(chat);
 

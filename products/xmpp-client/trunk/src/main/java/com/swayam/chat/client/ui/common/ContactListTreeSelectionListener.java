@@ -59,7 +59,7 @@ public class ContactListTreeSelectionListener implements TreeSelectionListener {
                 // begin new chat
                 XMPPConnection con = accountManager.getConnection();
 
-                UiUtils.displayChatWindow(con, user, "", friendsListTree);
+                ChatWindowFactory.INSTANCE.displayChatWindow(con, user, "", friendsListTree);
 
             }
 

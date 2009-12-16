@@ -43,7 +43,7 @@ import org.jivesoftware.smack.packet.Message;
  * 
  * @author paawak
  */
-public class ChatWindow extends JDialog implements MessageListener {
+class ChatWindow extends JDialog implements MessageListener {
 
     private static final long serialVersionUID = -1624324592341163069L;
 
@@ -56,11 +56,11 @@ public class ChatWindow extends JDialog implements MessageListener {
     private JEditorPane textEntered;
     private JEditorPane chatText;
 
-    public ChatWindow(String userName, String initailMessage) {
+    ChatWindow(String userName, String initailMessage) {
         initComponents(userName, initailMessage);
     }
 
-    public ChatWindow(String userName) {
+    ChatWindow(String userName) {
         this(userName, "");
     }
 

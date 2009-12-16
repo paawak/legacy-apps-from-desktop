@@ -88,10 +88,10 @@ public class LoginPanel extends JPanel {
 
         lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lbTitle
-                .setText("<html><p align=\"center\">Welcome to <i><b><font color=\"green\">theND</font></b></i> an IM based on "
-                        + "<i><font color=\"teal\">XMPP</font></i><br>"
-                        + "You can connect to your <b><font color=\"blue\">GTalk</font></b> or any other <b><font color=\"blue\">Jabber Sever</font></b>"
-                        + " account using this</p></html>");
+                .setText("<html><h1 align=\"center\">Welcome to <i><b><font color=\"green\">theND</font></b></i> an IM based on "
+                        + "<i><font color=\"teal\">XMPP</font></i><br></h1>"
+                        + "<h2 align=\"center\">You can connect to your <b><font color=\"blue\">GTalk</font></b> or any other <b><font color=\"blue\">Jabber Sever</font></b>"
+                        + " account using this</h2></html>");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

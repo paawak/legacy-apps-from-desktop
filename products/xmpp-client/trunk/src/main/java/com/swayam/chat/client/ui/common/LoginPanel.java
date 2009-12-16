@@ -87,7 +87,11 @@ public class LoginPanel extends JPanel {
         setLayout(new GridBagLayout());
 
         lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lbTitle.setText("Welcome to theND, Instant Mesanger");
+        lbTitle
+                .setText("<html><p align=\"center\">Welcome to <i><b><font color=\"green\">theND</font></b></i> an IM based on "
+                        + "<i><font color=\"teal\">XMPP</font></i><br>"
+                        + "You can connect to your <b><font color=\"blue\">GTalk</font></b> or any other <b><font color=\"blue\">Jabber Sever</font></b>"
+                        + " account using this</p></html>");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -98,7 +102,7 @@ public class LoginPanel extends JPanel {
         gridBagConstraints.weighty = 0.7;
         add(lbTitle, gridBagConstraints);
 
-        lbUserName.setText("Username:*");
+        lbUserName.setText("<html>Username:<font color=\"red\">*</font></html>");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -147,7 +151,8 @@ public class LoginPanel extends JPanel {
         gridBagConstraints.insets = new Insets(30, 0, 30, 0);
         add(btLogin, gridBagConstraints);
 
-        lbFooter.setText("* For example: john.smith@gmail.com");
+        lbFooter
+                .setText("<html><font color=\"red\">*</font> For example: <i>john.smith@gmail.com</i></html>");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;

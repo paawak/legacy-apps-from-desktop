@@ -65,45 +65,22 @@ public class LoginPanel extends JPanel {
         txtUserName = new JTextField();
         JLabel lbPassword = new JLabel();
         txtPassword = new JPasswordField();
-        JButton btLogin = new JButton();
-        btLogin.addActionListener(new ActionListener() {
+
+        ActionListener loginActionListener = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                String userName = txtUserName.getText().trim();
-                char[] password = txtPassword.getPassword();
-
-                int indexOfAt = userName.indexOf('@');
-
-                if (!"".equals(userName) && (indexOfAt != -1)
-                        && (userName.indexOf('@') + 1 < userName.length()) && (password != null)) {
-
-                    String[] array = userName.split("@");
-                    String user = array[0];
-                    String host = array[1];
-                    Credentials creds = new Credentials(host, user, new String(password));
-
-                    // try to login
-                    try {
-                        AccountManager acManager = AccountManager.getInstance(creds);
-                        acManager.login();
-                        credListener.loginSuccess(acManager);
-                    } catch (XMPPException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(LoginPanel.this,
-                                "Could not log you on. Please try again.", "I am sorry!",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(LoginPanel.this,
-                            "Please enter username/password", "Oops!", JOptionPane.ERROR_MESSAGE);
-                }
+                doLogin();
 
             }
 
-        });
+        };
+
+        txtPassword.addActionListener(loginActionListener);
+
+        JButton btLogin = new JButton();
+        btLogin.addActionListener(loginActionListener);
 
         JLabel lbFooter = new JLabel();
 
@@ -181,6 +158,44 @@ public class LoginPanel extends JPanel {
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new Insets(0, 10, 15, 10);
         add(lbFooter, gridBagConstraints);
+    }
+
+    private void doLogin() {
+
+        String userName = txtUserName.getText().trim();
+        char[] password = txtPassword.getPassword();
+
+        int indexOfAt = userName.indexOf('@');
+
+        if (!"".equals(userName) && (indexOfAt != -1)
+                && (userName.indexOf('@') + 1 < userName.length()) && (password != null)) {
+
+            String[] array = userName.split("@");
+            String user = array[0];
+            String host = array[1];
+            Credentials creds = new Credentials(host, user, new String(password));
+
+            // try to login
+            try {
+                AccountManager acManager = AccountManager.getInstance(creds);
+                acManager.login();
+                credListener.loginSuccess(acManager);
+
+                txtUserName.setText(null);
+                txtPassword.setText(null);
+
+            } catch (XMPPException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(LoginPanel.this,
+                        "Could not log you on. Please try again.", "I am sorry!",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(LoginPanel.this, "Please enter username/password",
+                    "Oops!", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
 }

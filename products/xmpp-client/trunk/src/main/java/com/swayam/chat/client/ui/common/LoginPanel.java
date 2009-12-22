@@ -34,8 +34,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import org.jivesoftware.smack.XMPPException;
-
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.util.AccountManager;
 
@@ -189,11 +187,8 @@ public class LoginPanel extends JPanel {
                 txtUserName.setText(null);
                 txtPassword.setText(null);
 
-            } catch (XMPPException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(LoginPanel.this,
-                        "Could not log you on. The error message was: " + e.getMessage(),
-                        "I am sorry!", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                Utils.displayError(LoginPanel.this, "I am sorry!", "Could not log you on.", e);
             }
 
         } else {

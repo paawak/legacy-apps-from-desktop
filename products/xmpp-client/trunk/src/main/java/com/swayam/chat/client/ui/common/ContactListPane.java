@@ -42,21 +42,37 @@ public class ContactListPane extends JScrollPane {
 
     private static final long serialVersionUID = -7122899075884225557L;
 
+    private static final long COMMAND_EXEC_TIME_FRAME_MILLIS = 2000;
+
+    private static final String COMMAND_ID = "ContactListReloadRequest";
+
     private JTree friendsListTree;
 
     private final AccountManager acManager;
+
+    private final RequestExecutor executor;
 
     private ContactListChangeListener rosterListener;
 
     public ContactListPane(AccountManager acManager) {
         this.acManager = acManager;
+        executor = new MultipleRequestExecutor(COMMAND_EXEC_TIME_FRAME_MILLIS);
         initTree();
     }
 
     public void reloadContacts() {
 
-        friendsListTree.setModel(new ContactListTreeModel(acManager
-                .getContactGroups(rosterListener)));
+        executor.executeCommand(new CommandImpl(COMMAND_ID) {
+
+            @Override
+            public void execute() {
+
+                friendsListTree.setModel(new ContactListTreeModel(acManager
+                        .getContactGroups(rosterListener)));
+
+            }
+
+        });
 
     }
 

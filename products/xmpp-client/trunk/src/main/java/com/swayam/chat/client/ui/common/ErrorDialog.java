@@ -66,7 +66,7 @@ public class ErrorDialog extends JDialog {
 
         JTextArea txtStackTrace = new JTextArea(stackTrace);
         txtStackTrace.setEditable(false);
-        txtStackTrace.selectAll();
+        // txtStackTrace.selectAll();
 
         JButton btOk = new JButton("OK");
 

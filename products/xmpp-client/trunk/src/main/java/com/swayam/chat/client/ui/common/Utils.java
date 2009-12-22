@@ -21,8 +21,7 @@
 package com.swayam.chat.client.ui.common;
 
 import java.awt.Component;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.awt.EventQueue;
 
 import javax.swing.JOptionPane;
 
@@ -36,20 +35,29 @@ public class Utils {
 
     }
 
-    public static void displayError(Component parent, String title, String message, Throwable t) {
+    public static void displayError(Component parent, final String title, final String message,
+            final Throwable t) {
 
         if (t != null) {
 
-            StringWriter writer = new StringWriter();
+            EventQueue.invokeLater(new Runnable() {
 
-            t.printStackTrace(new PrintWriter(writer));
+                public void run() {
 
-            String stackTrace = writer.toString();
+                    ErrorDialog dialog = new ErrorDialog(null, title, message
+                            + "\nThe error details are:", t);
 
-            message = message + "\nThe error message was:\n" + stackTrace;
+                    dialog.setVisible(true);
+
+                }
+
+            });
+
+        } else {
+
+            JOptionPane.showMessageDialog(parent, message, title, JOptionPane.ERROR_MESSAGE);
+
         }
-
-        JOptionPane.showMessageDialog(parent, message, title, JOptionPane.ERROR_MESSAGE);
 
     }
 

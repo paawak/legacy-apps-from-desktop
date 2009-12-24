@@ -24,7 +24,7 @@ package com.swayam.chat.client.core.model;
  * 
  * @author paawak
  */
-public interface Contact {
+public interface Contact extends Comparable<Contact> {
 
     String getAliasName();
 

@@ -65,6 +65,7 @@ class GroupImpl implements Group {
     }
 
     public List<Contact> getContacts() {
+        Collections.sort(contactList);
         return Collections.unmodifiableList(contactList);
     }
 

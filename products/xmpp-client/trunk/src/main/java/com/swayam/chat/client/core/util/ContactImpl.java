@@ -69,6 +69,20 @@ class ContactImpl implements Contact {
     }
 
     @Override
+    public int compareTo(Contact contact) {
+
+        // compare status
+        int compareResult = status.getWeight() - contact.getStatus().getWeight();
+
+        // if same status, compare the user name alphabetically
+        if (compareResult == 0) {
+            compareResult = userName.compareTo(contact.getUserName());
+        }
+
+        return compareResult;
+    }
+
+    @Override
     public String toString() {
         return "ContactImpl [userName=" + userName + ", aliasName=" + aliasName + ", status="
                 + status + "]";

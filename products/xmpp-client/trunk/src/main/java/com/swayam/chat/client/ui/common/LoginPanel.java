@@ -194,8 +194,8 @@ public class LoginPanel extends JPanel {
 
         private final Credentials creds;
 
-        AccountManager acManager = null;
-        Exception loginException = null;
+        private AccountManager acManager = null;
+        private Exception loginException = null;
 
         LoginUtil(Credentials creds) {
             this.creds = creds;

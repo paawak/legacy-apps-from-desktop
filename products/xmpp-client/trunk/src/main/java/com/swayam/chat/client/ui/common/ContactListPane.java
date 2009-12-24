@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -33,6 +34,7 @@ import org.jivesoftware.smack.packet.Presence;
 
 import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.util.AccountManager;
+import com.swayam.chat.client.ui.common.RequestExecutor.Command;
 
 /**
  * 
@@ -46,23 +48,44 @@ public class ContactListPane extends JScrollPane {
 
     private static final String COMMAND_ID = "ContactListReloadRequest";
 
-    private JTree friendsListTree;
+    private final JTree friendsListTree;
 
-    private final AccountManager acManager;
+    private AccountManager acManager;
 
     private final RequestExecutor executor;
 
     private ContactListChangeListener rosterListener;
 
+    private TreeSelectionListener treeListener;
+
     public ContactListPane(AccountManager acManager) {
-        this.acManager = acManager;
+        friendsListTree = new JTree(new DefaultMutableTreeNode());
         executor = new MultipleRequestExecutor(COMMAND_EXEC_TIME_FRAME_MILLIS);
+        setAccountManager(acManager);
         initTree();
     }
 
-    public void reloadContacts() {
+    public void setAccountManager(AccountManager acManager) {
+        this.acManager = acManager;
 
-        executor.executeCommand(new CommandImpl(COMMAND_ID) {
+        if (treeListener != null) {
+            friendsListTree.removeTreeSelectionListener(treeListener);
+        }
+
+        treeListener = new ContactListTreeSelectionListener(acManager, friendsListTree);
+
+        friendsListTree.addTreeSelectionListener(treeListener);
+
+        rosterListener = new ContactListChangeListener();
+
+        List<Group> groups = acManager.getContactGroups(rosterListener);
+
+        friendsListTree.setModel(new ContactListTreeModel(groups));
+    }
+
+    public void reloadContacts(boolean immediate) {
+
+        Command command = new CommandImpl(COMMAND_ID) {
 
             @Override
             public void execute() {
@@ -72,7 +95,13 @@ public class ContactListPane extends JScrollPane {
 
             }
 
-        });
+        };
+
+        if (immediate) {
+            command.execute();
+        } else {
+            executor.executeCommand(command);
+        }
 
     }
 
@@ -82,22 +111,12 @@ public class ContactListPane extends JScrollPane {
      */
     private void initTree() {
 
-        friendsListTree = new JTree(new DefaultMutableTreeNode());
         friendsListTree.setCellRenderer(new ContactListTreeCellRenderer());
         friendsListTree.setShowsRootHandles(true);
         friendsListTree.getSelectionModel().setSelectionMode(
                 TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         friendsListTree.setRootVisible(false);
-
-        friendsListTree.addTreeSelectionListener(new ContactListTreeSelectionListener(acManager,
-                friendsListTree));
-
-        rosterListener = new ContactListChangeListener();
-
-        List<Group> groups = acManager.getContactGroups(rosterListener);
-
-        friendsListTree.setModel(new ContactListTreeModel(groups));
 
         setViewportView(friendsListTree);
 
@@ -106,19 +125,19 @@ public class ContactListPane extends JScrollPane {
     private class ContactListChangeListener implements RosterListener {
 
         public void entriesAdded(Collection<String> addresses) {
-            reloadContacts();
+            reloadContacts(false);
         }
 
         public void entriesDeleted(Collection<String> addresses) {
-            reloadContacts();
+            reloadContacts(false);
         }
 
         public void entriesUpdated(Collection<String> addresses) {
-            reloadContacts();
+            reloadContacts(false);
         }
 
         public void presenceChanged(Presence presence) {
-            reloadContacts();
+            reloadContacts(false);
         }
 
     }

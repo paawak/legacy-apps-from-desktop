@@ -121,7 +121,8 @@ public class ChatApplet extends JApplet implements LoginListener {
 
         } else {
 
-            contactListPanel.reloadContacts();
+            contactListPanel.setAccountManager(acManager);
+            contactListPanel.reloadContacts(true);
 
         }
 

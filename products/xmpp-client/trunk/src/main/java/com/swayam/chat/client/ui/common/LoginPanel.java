@@ -20,6 +20,7 @@
 
 package com.swayam.chat.client.ui.common;
 
+import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -33,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.swayam.chat.client.core.model.Credentials;
 import com.swayam.chat.client.core.util.AccountManager;
@@ -179,21 +181,61 @@ public class LoginPanel extends JPanel {
             Credentials creds = new Credentials(host, user, new String(password));
 
             // try to login
-            try {
-                AccountManager acManager = AccountManager.getInstance(creds);
-                acManager.login();
-                credListener.loginSuccess(acManager);
-
-                txtUserName.setText(null);
-                txtPassword.setText(null);
-
-            } catch (Exception e) {
-                Utils.displayError(LoginPanel.this, "I am sorry!", "Could not log you on.", e);
-            }
+            SwingUtilities.invokeLater(new LoginUtil(creds));
 
         } else {
             JOptionPane.showMessageDialog(LoginPanel.this, "Please enter username/password",
                     "Oops!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private class LoginUtil implements Runnable {
+
+        private final Credentials creds;
+
+        AccountManager acManager = null;
+        Exception loginException = null;
+
+        LoginUtil(Credentials creds) {
+            this.creds = creds;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                acManager = AccountManager.getInstance(creds);
+                acManager.login();
+
+            } catch (Exception e) {
+
+                loginException = e;
+                acManager = null;
+
+            } finally {
+
+                txtUserName.setText(null);
+                txtPassword.setText(null);
+
+                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+            }
+
+            if (loginException != null) {
+
+                Utils.displayError(LoginPanel.this, "I am sorry!", "Could not log you on.",
+                        loginException);
+
+            } else if (acManager != null) {
+
+                credListener.loginSuccess(acManager);
+
+            }
+
         }
 
     }

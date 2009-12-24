@@ -96,23 +96,39 @@ public class AccountManager {
 
     public List<Group> getContactGroups(RosterListener rosterListener) {
 
-        List<Group> groups = new ArrayList<Group>(1);
+        List<Group> groups = new ArrayList<Group>();
 
-        Roster roster = con.getRoster();
+        if (con != null) {
 
-        roster.addRosterListener(rosterListener);
+            Roster roster = con.getRoster();
 
-        Collection<RosterGroup> rosterGroups = roster.getGroups();
+            roster.addRosterListener(rosterListener);
 
-        if (rosterGroups.size() > 0) {
+            Collection<RosterGroup> rosterGroups = roster.getGroups();
 
-            for (RosterGroup rosterGroup : rosterGroups) {
+            if (rosterGroups.size() > 0) {
 
-                String groupName = rosterGroup.getName();
+                for (RosterGroup rosterGroup : rosterGroups) {
 
-                GroupImpl group = new GroupImpl(groupName);
+                    String groupName = rosterGroup.getName();
 
-                for (RosterEntry entry : rosterGroup.getEntries()) {
+                    GroupImpl group = new GroupImpl(groupName);
+
+                    for (RosterEntry entry : rosterGroup.getEntries()) {
+
+                        group.addContact(getContact(roster, entry));
+
+                    }
+
+                    groups.add(group);
+
+                }
+
+            } else {
+
+                GroupImpl group = GroupImpl.getFalseGroup();
+
+                for (RosterEntry entry : roster.getEntries()) {
 
                     group.addContact(getContact(roster, entry));
 
@@ -121,18 +137,6 @@ public class AccountManager {
                 groups.add(group);
 
             }
-
-        } else {
-
-            GroupImpl group = GroupImpl.getFalseGroup();
-
-            for (RosterEntry entry : roster.getEntries()) {
-
-                group.addContact(getContact(roster, entry));
-
-            }
-
-            groups.add(group);
 
         }
 

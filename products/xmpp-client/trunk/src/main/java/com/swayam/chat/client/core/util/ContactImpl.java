@@ -36,8 +36,17 @@ class ContactImpl implements Contact {
 
     private String statusText;
 
-    public String getAliasName() {
-        return aliasName;
+    public String getDisplayName() {
+
+        String displayName = aliasName;
+
+        if (displayName == null) {
+
+            displayName = userName.substring(0, userName.indexOf('@'));
+
+        }
+
+        return displayName;
     }
 
     void setAliasName(String displayName) {

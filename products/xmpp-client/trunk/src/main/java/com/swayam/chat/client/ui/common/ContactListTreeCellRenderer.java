@@ -39,6 +39,9 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
 
     private static final long serialVersionUID = -6844158441533404757L;
 
+    /** Max characters to be displayed for the status text */
+    private static final int MAX_STATUS_CHARS = 50;
+
     private Contact contact;
 
     @Override
@@ -52,22 +55,17 @@ public class ContactListTreeCellRenderer extends DefaultTreeCellRenderer {
         } else if (value instanceof Contact) {
 
             contact = (Contact) value;
-            String displayName = contact.getAliasName();
-            String userName = contact.getUserName();
-
-            if (displayName == null) {
-
-                displayName = userName;
-
-                displayName = userName.substring(0, userName.indexOf('@'));
-
-            }
-
-            value = displayName;
+            value = contact.getDisplayName();
 
             String statusText = contact.getStatusText();
 
             if (statusText != null) {
+
+                if (statusText.length() > MAX_STATUS_CHARS) {
+
+                    statusText = statusText.substring(0, MAX_STATUS_CHARS) + "...";
+
+                }
 
                 value = "<html><strong>" + value + "</strong><br><i>" + statusText + "</i></html>";
             }

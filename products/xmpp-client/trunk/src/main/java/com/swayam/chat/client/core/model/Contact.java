@@ -26,7 +26,11 @@ package com.swayam.chat.client.core.model;
  */
 public interface Contact extends Comparable<Contact> {
 
-    String getAliasName();
+    /**
+     * The name to be displayed. If the <i>Alias Name</i> is null, then the <i>User Name</i> is displayed.
+     * 
+     */
+    String getDisplayName();
 
     String getUserName();
 

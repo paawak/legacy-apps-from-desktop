@@ -36,7 +36,17 @@ public interface Contact {
 
     enum Status {
 
-        OFFLINE, AVAILABLE, BUSY, AWAY, EXTENDED_AWAY;
+        OFFLINE(5), AVAILABLE(1), BUSY(2), AWAY(3), EXTENDED_AWAY(4);
+
+        private final int weight;
+
+        private Status(int weight) {
+            this.weight = weight;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
 
     }
 

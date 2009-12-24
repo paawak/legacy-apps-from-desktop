@@ -21,7 +21,6 @@
 package com.swayam.chat.client.ui.common;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -32,7 +31,6 @@ import javax.swing.tree.TreeSelectionModel;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.packet.Presence;
 
-import com.swayam.chat.client.core.model.Group;
 import com.swayam.chat.client.core.util.AccountManager;
 import com.swayam.chat.client.ui.common.RequestExecutor.Command;
 
@@ -50,16 +48,17 @@ public class ContactListPane extends JScrollPane {
 
     private final JTree friendsListTree;
 
-    private AccountManager acManager;
-
     private final RequestExecutor executor;
 
-    private ContactListChangeListener rosterListener;
+    private final ContactListChangeListener rosterListener;
+
+    private AccountManager acManager;
 
     private TreeSelectionListener treeListener;
 
     public ContactListPane(AccountManager acManager) {
         friendsListTree = new JTree(new DefaultMutableTreeNode());
+        rosterListener = new ContactListChangeListener();
         executor = new MultipleRequestExecutor(COMMAND_EXEC_TIME_FRAME_MILLIS);
         setAccountManager(acManager);
         initTree();
@@ -76,14 +75,10 @@ public class ContactListPane extends JScrollPane {
 
         friendsListTree.addTreeSelectionListener(treeListener);
 
-        rosterListener = new ContactListChangeListener();
-
-        List<Group> groups = acManager.getContactGroups(rosterListener);
-
-        friendsListTree.setModel(new ContactListTreeModel(groups));
+        reloadContacts(true);
     }
 
-    public void reloadContacts(boolean immediate) {
+    private void reloadContacts(boolean immediate) {
 
         Command command = new CommandImpl(COMMAND_ID) {
 

@@ -87,11 +87,12 @@
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
                 /masters/itemgroup.html=itemGroupController
-                /masters/item.html=itemController
+                /masters/new_item.html=itemController
                 /masters/lot.html=lotController
                 /masters/party.html=partyController
                 /masters/accountgroup.html=accountGroupFormController
                 /transactions/purchaseorder.html=purchaseOrderFormController
+                /masters/items.html=itemListController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -115,6 +116,14 @@
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
+    
+    <bean id="itemListController" class="com.swayam.ims.webapp.controller.ListItemController">
+        <constructor-arg ref="itemDao"/>
+        <!--<property name="validator" ref="beanValidator"/>
+        <property name="formView" value="masters/listItem"/>
+        <property name="successView" value="/mainMenu.html"/>
+        <property name="cancelView" value="redirect:/mainMenu.html"/>
+    --></bean>
     
     <bean id="lotController" class="com.swayam.ims.webapp.controller.LotController">
         <constructor-arg ref="lotDao"/>

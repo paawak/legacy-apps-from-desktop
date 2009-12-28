@@ -115,7 +115,7 @@
         <constructor-arg ref="unitDao"/>
         <property name="validator" ref="beanValidator"/>
         <property name="formView" value="masters/item"/>
-        <property name="successView" value="/mainMenu.html"/>
+        <property name="successView" value="/masters/items.html"/>
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     

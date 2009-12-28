@@ -18,28 +18,29 @@ package com.swayam.ims.webapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import com.swayam.ims.model.orm.Trade;
+import org.springframework.web.servlet.mvc.Controller;
 
 /**
  * 
  * @author paawak
  */
-public class PurchaseOrderFormController extends BaseFormController {
+public class PurchaseOrderFormController implements Controller {
+
+    private String formView;
 
     public PurchaseOrderFormController() {
-        setCommandClass(Trade.class);
+
+    }
+
+    public final void setFormView(String formView) {
+        this.formView = formView;
     }
 
     @Override
-    protected ModelAndView onSubmit(HttpServletRequest request,
-            HttpServletResponse response, Object command, BindException errors)
-            throws Exception {
-
-        return new ModelAndView(new RedirectView(getSuccessView()));
+    public ModelAndView handleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        return new ModelAndView(formView);
     }
 
 }

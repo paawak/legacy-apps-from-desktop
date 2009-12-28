@@ -161,8 +161,6 @@
     
     <bean id="purchaseOrderFormController" class="com.swayam.ims.webapp.controller.PurchaseOrderFormController">
         <property name="formView" value="transactions/purchaseOrder"/>
-        <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>      
     
     <!-- *******************     START flex       **************************** -->

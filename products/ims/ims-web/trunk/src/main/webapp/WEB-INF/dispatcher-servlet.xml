@@ -80,9 +80,11 @@
             <value>
                 <!-- map all flex requests from blaze-ds to the flex message broker -->
                 /messagebroker/*=_messageBroker
+                <!-- 
                 /admin/activeUsers.html=filenameController
                 /admin/flushCache.html=filenameController
                 /admin/reload.html=reloadController
+                -->
                 /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController

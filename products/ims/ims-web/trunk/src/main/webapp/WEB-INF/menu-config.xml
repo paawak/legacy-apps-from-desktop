@@ -5,14 +5,22 @@
     </Displayers>
     <Menus>
         <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu.html" roles="ROLE_ADMIN,ROLE_USER">
-        	<Item name="NewItemGroup" title="menu.masters.itemgroup.title" page="/masters/itemgroup.html"/>
+            <Item name="ItemGroup" title="menu.masters.itemgroup.title" page="/masters/itemgroup.html">
+                <Item name="NewItemGroup" title="generic.new" page="/masters/itemgroup.html"/>
+            </Item>
         	<Item name="Item" title="menu.masters.item.title" page="/masters/items.html">
                 <Item name="ListItems" title="generic.list" page="/masters/items.html"/>
                 <Item name="NewItem" title="generic.new" page="/masters/new_item.html"/>
             </Item>
-        	<Item name="NewLot" title="menu.masters.lot.title" page="/masters/lot.html"/>
-        	<Item name="NewParty" title="menu.masters.party.title" page="/masters/party.html"/>
-        	<Item name="AccountGroupParty" title="menu.masters.accountGroup.title" page="/masters/accountgroup.html"/>
+        	<Item name="Lot" title="menu.masters.lot.title" page="/masters/lot.html">
+        	   <Item name="NewLot" title="generic.new" page="/masters/lot.html"/>
+        	</Item>
+        	<Item name="Party" title="menu.masters.party.title" page="/masters/party.html">
+        	   <Item name="NewParty" title="generic.new" page="/masters/party.html"/>
+        	</Item>
+        	<Item name="AccountGroupParty" title="menu.masters.accountGroup.title" page="/masters/accountgroup.html">
+        	   <Item name="NewAccountGroupParty" title="generic.new" page="/masters/accountgroup.html"/>
+        	</Item>
         </Menu>
         
         <Menu name="TransactionMenu" title="trx.title" roles="ROLE_ADMIN,ROLE_USER">

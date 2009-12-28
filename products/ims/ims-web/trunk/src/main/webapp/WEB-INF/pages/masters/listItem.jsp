@@ -7,7 +7,7 @@
 <meta name="menu" content="ListItems" />
 </head>
 
-	<ul>
+	<ul class="glassList">
 		<c:forEach var="item" items="${itemList}">
 		  <li>
 		      <a href="/masters/new_item.html?id=${item.id}">${item.name}</a>

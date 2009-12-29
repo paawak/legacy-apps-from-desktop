@@ -121,6 +121,7 @@ public class BaseFormController extends SimpleFormController {
      * 
      * @return the user's populated form from the session
      */
+    @SuppressWarnings("unchecked")
     public Map getConfiguration() {
         Map config = (HashMap) getServletContext().getAttribute(
                 Constants.CONFIG);

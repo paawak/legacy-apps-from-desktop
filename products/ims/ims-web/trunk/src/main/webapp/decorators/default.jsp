@@ -25,12 +25,13 @@
         <div id="content" class="clearfix">
             <div id="main">
                 <%@ include file="/common/messages.jsp" %>
-                <h1><decorator:getProperty property="meta.heading"/></h1>
                 
-                <!-- space for menus -->
-                <div id="menuspacer">
-                </div>
-                <decorator:body/>
+                <h1 id="menuspacer"><decorator:getProperty property="meta.heading"/></h1>
+
+<!-- main body START -->
+                <decorator:body/>                
+<!-- main body END -->                
+                
             </div>
 
             <c:set var="currentMenu" scope="request"><decorator:getProperty property="meta.menu"/></c:set>

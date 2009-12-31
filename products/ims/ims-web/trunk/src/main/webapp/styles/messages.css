@@ -106,7 +106,6 @@ span.fieldError, .errorMessage {
     padding: 2em;
     text-align: left;
     background: #fff;
-    -moz-border-radius: 10px;
 }
 
 .alertContent .alertButton {

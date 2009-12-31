@@ -8,10 +8,6 @@
 
 </head>
 
-<div id="flexSpacer">
-
-</div>
-
 <p>
 
     <object id="PurchaseOrder" align="middle"

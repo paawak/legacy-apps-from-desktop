@@ -433,7 +433,8 @@ table.pickList td select {
     padding: 0;
 }
 
-#flexSpacer {
-    height: 50px
+/*space for menus*/
+#menuspacer {
+    height: 60px
 }
 

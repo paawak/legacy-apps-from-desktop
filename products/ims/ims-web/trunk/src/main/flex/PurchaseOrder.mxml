@@ -91,7 +91,8 @@
             private function getTradeIdResultHandler(event:ResultEvent):void {
 
                 var tradeId:Number = Number(event.result);
-                Alert.show("" + tradeId);
+            	
+                poId.text = String(tradeId);
                 
             }
 
@@ -133,15 +134,37 @@
             	
             }
             
+            private function doSave():void {
+            	
+            	if (client.selectedIndex != -1) {
+            		
+            		if (itemsArray.length == 0) {
+            			
+            			Alert.show("Add Items");
+            			
+            		} else {
+            		
+            			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, itemsArray);
+            			
+            		}
+            	
+            	} else {
+            	
+            		Alert.show("Select the client");
+            		
+            	}
+            	
+            }
+            
         ]]>
     </mx:Script>
     
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
-	<mx:Label x="454" y="68" text="Date:"/>
+	<!--<mx:Label x="454" y="68" text="Date:"/>-->
 	<mx:Label x="37" y="130" text="Client:"/>
 	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{clientArray}"></mx:ComboBox>
-	<mx:TextInput x="174" y="66" id="poId"/>
+	<mx:TextInput x="174" y="66" id="poId" editable="false"/>
 	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsArray}" 
 		editable="true" itemEditEnd="editQuantity(event);">
 		<mx:columns>
@@ -150,8 +173,8 @@
 			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50"/>
 		</mx:columns>
 	</mx:DataGrid>
-	<mx:Button x="269" y="405" label="Save" id="save"/>
-	<mx:DateField x="513" y="66" id="poDate"/>
+	<mx:Button x="269" y="405" label="Save" id="save" click="doSave();"/>
+	<!--<mx:DateField x="513" y="66" id="poDate"/>-->
 	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
 	
 </mx:Application>

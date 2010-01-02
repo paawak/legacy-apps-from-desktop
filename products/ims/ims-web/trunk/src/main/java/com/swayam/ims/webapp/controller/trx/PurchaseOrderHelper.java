@@ -16,11 +16,20 @@
 package com.swayam.ims.webapp.controller.trx;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
+
 import com.swayam.ims.core.dao.GenericDao;
+import com.swayam.ims.model.orm.Currency;
+import com.swayam.ims.model.orm.Party;
 import com.swayam.ims.model.orm.Trade;
 import com.swayam.ims.model.orm.TradeDetails;
+import com.swayam.ims.model.orm.TransactionCategory;
+
+import flex.messaging.io.amf.ASObject;
 
 /**
  * 
@@ -53,6 +62,44 @@ public class PurchaseOrderHelper {
         }
 
         return id;
+
+    }
+
+    public void savePurchaseOrder(Integer partyId, List<ASObject> items)
+            throws NotSupportedException, SystemException {
+
+        Trade trade = new Trade();
+        // trade.setId(getNewPurchaseOrderId());
+        TransactionCategory trxCat = new TransactionCategory();
+        trxCat.setId(new Long(1));
+        trade.setCategory(trxCat);
+        Currency curr = new Currency();
+        curr.setId(new Long(1));
+        trade.setCurrency(curr);
+        Party party = new Party();
+        party.setId(partyId.longValue());
+        trade.setCustomer(party);
+        trade.setNetAmount(100);
+        trade.setNetAmount(200);
+        trade.setTradeDate(new Date());
+
+        tradeDao.save(trade);
+
+        for (ASObject asObj : items) {
+
+            Integer id = (Integer) asObj.get("id");
+
+            Object rawQty = asObj.get("qty");
+
+            Integer qty;
+
+            if (rawQty instanceof String) {
+                qty = Integer.parseInt((String) rawQty);
+            } else {
+                qty = (Integer) rawQty;
+            }
+
+        }
 
     }
 

@@ -99,5 +99,15 @@
         <constructor-arg value="com.swayam.ims.model.orm.Party"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="tradeDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.Trade"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="tradeDetailsDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.TradeDetails"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 </beans>

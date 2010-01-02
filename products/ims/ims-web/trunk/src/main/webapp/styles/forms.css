@@ -435,8 +435,10 @@ table.pickList td select {
 
 /*space for menus*/
 #menuspacer {
+	height: 100px;
     text-align: center;
     vertical-align: middle;
-    height: 100px;
+    position: relative;
+    top: 30px;
 }
 

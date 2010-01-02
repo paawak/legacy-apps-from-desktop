@@ -25,6 +25,8 @@
             
             private var itemRO:RemoteObject;
             
+            private var purchaseOrderHelperRO:RemoteObject;
+            
             private function initData():void {
             
                 itemRO = new RemoteObject();
@@ -37,6 +39,12 @@
                 partyRO.getAll.addEventListener(ResultEvent.RESULT, getPartyListResultHandler);
                 partyRO.addEventListener(FaultEvent.FAULT, faultHandler);
                 partyRO.getAll();
+                
+                purchaseOrderHelperRO = new RemoteObject();
+                purchaseOrderHelperRO.destination = "purchaseOrderHelper";
+                purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getTradeIdResultHandler);
+                purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
+                purchaseOrderHelperRO.getNewPurchaseOrderId();
                 
             }
             
@@ -77,6 +85,13 @@
                     content["data"] = party.id;
                     clientArray[count++] = content;
                 } 
+                
+            }
+            
+            private function getTradeIdResultHandler(event:ResultEvent):void {
+
+                var tradeId:Number = Number(event.result);
+                Alert.show("" + tradeId);
                 
             }
 

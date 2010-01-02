@@ -13,7 +13,7 @@
  * issued to any third party.
  */
 
-package com.swayam.ims.webapp.controller;
+package com.swayam.ims.webapp.controller.trx;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

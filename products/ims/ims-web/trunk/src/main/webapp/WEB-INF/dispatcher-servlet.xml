@@ -159,7 +159,12 @@
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     
-    <bean id="purchaseOrderFormController" class="com.swayam.ims.webapp.controller.PurchaseOrderFormController">
+    <bean id="purchaseOrderHelper" class="com.swayam.ims.webapp.controller.trx.PurchaseOrderHelper">
+        <property name="tradeDao" ref="tradeDao"/>
+        <property name="tradeDetailsDao" ref="tradeDetailsDao"/>
+    </bean>  
+    
+     <bean id="purchaseOrderFormController" class="com.swayam.ims.webapp.controller.trx.PurchaseOrderFormController">
         <property name="formView" value="transactions/purchaseOrder"/>
     </bean>      
     
@@ -177,6 +182,7 @@
     <!--flex:remoting-destination ref="accountGroupManager" destination-id="account" /-->
     <flex:remoting-destination ref="itemDao"/>
     <flex:remoting-destination ref="partyDao"/>
+    <flex:remoting-destination ref="purchaseOrderHelper"/>
     
     <bean class="org.springframework.flex.servlet.MessageBrokerHandlerAdapter"/>
     

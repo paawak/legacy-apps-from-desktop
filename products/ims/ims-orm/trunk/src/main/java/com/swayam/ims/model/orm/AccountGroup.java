@@ -36,7 +36,7 @@ public class AccountGroup extends BaseObject {
 
     private static final long serialVersionUID = 8651011772980546778L;
 
-    public static final String NAMED_QUERY_FIND_MAX_ID = "findMaxId";
+    public static final String NAMED_QUERY_FIND_MAX_ID = "findMaxAccountGroupId";
 
     @Id
     private Long id;

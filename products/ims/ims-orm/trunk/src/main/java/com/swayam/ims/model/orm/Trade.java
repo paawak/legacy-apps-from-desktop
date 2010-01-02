@@ -24,6 +24,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,9 +35,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
+@NamedQueries( { @NamedQuery(name = Trade.NAMED_QUERY_FIND_MAX_ID, query = "SELECT MAX(trade.id) FROM Trade trade") })
 public class Trade extends BaseObject {
 
     private static final long serialVersionUID = 3109538632124621288L;
+
+    public static final String NAMED_QUERY_FIND_MAX_ID = "findMaxTradeId";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

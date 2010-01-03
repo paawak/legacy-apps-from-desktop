@@ -109,5 +109,10 @@
         <constructor-arg value="com.swayam.ims.model.orm.TradeDetails"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="trxCategoryDao" class="com.swayam.ims.core.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="com.swayam.ims.model.orm.TransactionCategory"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 </beans>

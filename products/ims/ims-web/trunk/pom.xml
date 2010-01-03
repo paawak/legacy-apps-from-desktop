@@ -36,6 +36,7 @@
                     <schema>${dbunit.schema}</schema>
                     <skip>${maven.test.skip}</skip>
                 </configuration>
+                <!--  
                 <executions>
                     <execution>
                         <id>test-compile</id>
@@ -45,7 +46,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <!-- Runs before integration tests and jetty:run-war -->
+                        Runs before integration tests and jetty:run-war 
                         <id>test</id>
                         <phase>test</phase>
                         <goals>
@@ -53,6 +54,7 @@
                         </goals>
                     </execution>
                 </executions>
+                -->
                 <dependencies>
                     <dependency>
                         <groupId>${jdbc.groupId}</groupId>

@@ -25,6 +25,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
@@ -32,9 +34,13 @@ import javax.persistence.OneToOne;
  * @author paawak
  */
 @Entity
+@NamedQueries( { @NamedQuery(name = Lot.FIND_LATEST_LOT_FOR_ITEM, query = "SELECT lot FROM Lot lot WHERE lot.item.id = :itemId AND lot.procuredOn = "
+        + "(SELECT MAX(lot.procuredOn) FROM Lot lot WHERE lot.item.id = :itemId)") })
 public class Lot implements Serializable {
 
     private static final long serialVersionUID = 6514962799603561015L;
+
+    public static final String FIND_LATEST_LOT_FOR_ITEM = "findLatestLotForItem";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

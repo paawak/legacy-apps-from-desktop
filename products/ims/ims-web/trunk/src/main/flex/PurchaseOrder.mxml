@@ -24,7 +24,7 @@
             [Bindable]
             private var itemsArray:ArrayCollection = new ArrayCollection();
             
-            private static var saveSuccessUrl:String = "/mainMenu.html";
+            private static var saveSuccessUrl:String = "/transactions/purchaseorder.html";
             private static var cancelUrl:String = "/mainMenu.html";
             
             private var itemRO:RemoteObject;

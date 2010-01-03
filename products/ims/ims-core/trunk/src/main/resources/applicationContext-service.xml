@@ -13,6 +13,7 @@
         <aop:advisor id="userManagerTx" advice-ref="userManagerTxAdvice" pointcut="execution(* *..service.UserManager.*(..))" order="0"/>        
         <aop:advisor id="userManagerSecurity" advice-ref="userSecurityAdvice" pointcut="execution(* *..service.UserManager.saveUser(..))" order="1"/>
         <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))" order="2"/>
+        <aop:advisor id="serviceTrx" advice-ref="serviceTrxAdvice" pointcut="execution(* com.swayam.ims.core.service.impl.PurchaseOrderService.*(..))" order="0"/>
     </aop:config>
     
     <!-- Enable @Transactional support -->
@@ -36,6 +37,13 @@
     <tx:advice id="userManagerTxAdvice">
         <tx:attributes>
             <tx:method name="save*" rollback-for="UserExistsException"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <tx:advice id="serviceTrxAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="save*"/>
         </tx:attributes>
     </tx:advice>
     

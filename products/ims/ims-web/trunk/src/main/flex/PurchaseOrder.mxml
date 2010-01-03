@@ -46,9 +46,9 @@
                 
                 purchaseOrderHelperRO = new RemoteObject();
                 purchaseOrderHelperRO.destination = "purchaseOrderHelper";
-                purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getTradeIdResultHandler);
-                purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
-                purchaseOrderHelperRO.getNewPurchaseOrderId();
+//                purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getTradeIdResultHandler);
+//                purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
+//                purchaseOrderHelperRO.getNewPurchaseOrderId();
                 
 //                saveSuccessUrl = Application.application.parameters.saveSuccessUrl;
 //                cancelUrl = Application.application.parameters.cancelUrl;
@@ -152,6 +152,7 @@
             		} else {
             		
             			purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getSaveResultHandler);
+            			purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
             			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, itemsArray);
             			
             		}

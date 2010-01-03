@@ -107,4 +107,15 @@
     </bean>
 
     <!-- Add new Managers here -->
+    
+    <bean id="purchaseOrderService" class="com.swayam.ims.core.service.impl.PurchaseOrderService">
+        <property name="tradeDao" ref="tradeDao"/>
+        <property name="tradeDetailsDao" ref="tradeDetailsDao"/>
+        <property name="trxCatDao" ref="trxCategoryDao"/>
+        <property name="currencyDao" ref="currencyDao"/>
+        <property name="partyDao" ref="partyDao"/>
+        <property name="lotDao" ref="lotDao"/>
+        <property name="itemDao" ref="itemDao"/>
+    </bean>
+    
 </beans>

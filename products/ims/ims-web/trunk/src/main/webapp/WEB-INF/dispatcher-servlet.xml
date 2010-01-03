@@ -160,14 +160,8 @@
     </bean>
     
     <bean id="purchaseOrderHelper" class="com.swayam.ims.webapp.controller.trx.PurchaseOrderHelper">
-        <property name="tradeDao" ref="tradeDao"/>
-        <property name="tradeDetailsDao" ref="tradeDetailsDao"/>
-        <property name="trxCatDao" ref="trxCategoryDao"/>
-        <property name="currencyDao" ref="currencyDao"/>
-        <property name="partyDao" ref="partyDao"/>
-        <property name="lotDao" ref="lotDao"/>
-        <property name="itemDao" ref="itemDao"/>
-    </bean>  
+        <constructor-arg ref="purchaseOrderService"/>
+    </bean>    
     
      <bean id="purchaseOrderFormController" class="com.swayam.ims.webapp.controller.trx.PurchaseOrderFormController">
         <property name="formView" value="transactions/purchaseOrder"/>

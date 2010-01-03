@@ -79,8 +79,10 @@ public class PurchaseOrderHelper {
 
     }
 
-    public void savePurchaseOrder(Integer partyId, List<ASObject> items)
+    public boolean savePurchaseOrder(Integer partyId, List<ASObject> items)
             throws NotSupportedException, SystemException {
+
+        boolean success = false;
 
         TransactionCategory trxCat = trxCatDao.get(1l);
         Currency curr = currencyDao.get(1l);
@@ -135,6 +137,10 @@ public class PurchaseOrderHelper {
             tradeDetailsDao.save(tradeDetails);
 
         }
+
+        success = true;
+
+        return success;
 
     }
 

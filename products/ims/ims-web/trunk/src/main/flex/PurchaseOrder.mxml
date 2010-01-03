@@ -11,7 +11,8 @@
             import mx.rpc.events.FaultEvent;
             import mx.collections.ArrayCollection;
             import mx.events.DataGridEvent;
-            import 	mx.validators.NumberValidator;
+            import mx.validators.NumberValidator;
+            import flash.net.URLRequest;
             
             import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
             import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
@@ -22,6 +23,9 @@
             
             [Bindable]
             private var itemsArray:ArrayCollection = new ArrayCollection();
+            
+            private static var saveSuccessUrl:String = "/mainMenu.html";
+            private static var cancelUrl:String = "/mainMenu.html";
             
             private var itemRO:RemoteObject;
             
@@ -45,6 +49,9 @@
                 purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getTradeIdResultHandler);
                 purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
                 purchaseOrderHelperRO.getNewPurchaseOrderId();
+                
+//                saveSuccessUrl = Application.application.parameters.saveSuccessUrl;
+//                cancelUrl = Application.application.parameters.cancelUrl;
                 
             }
             
@@ -144,6 +151,7 @@
             			
             		} else {
             		
+            			purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getSaveResultHandler);
             			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, itemsArray);
             			
             		}
@@ -153,6 +161,28 @@
             		Alert.show("Select the client");
             		
             	}
+            	
+            }
+            
+            private function getSaveResultHandler(event:ResultEvent):void {
+            	
+            	var success:Boolean = Boolean(event.result);
+            
+            	if (success) {
+            		
+            		navigateToURL(new URLRequest(saveSuccessUrl), "_self");
+            		
+            	} else {
+            	
+            		Alert.show("Sorry, could not save data. Please try again.");
+            		
+            	}
+            	
+            }
+            
+            private function doCancel():void {
+            	
+            	navigateToURL(new URLRequest(cancelUrl), "_self");
             	
             }
             
@@ -173,8 +203,9 @@
 			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50"/>
 		</mx:columns>
 	</mx:DataGrid>
-	<mx:Button x="269" y="405" label="Save" id="save" click="doSave();"/>
 	<!--<mx:DateField x="513" y="66" id="poDate"/>-->
 	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
+	<mx:Button x="137" y="405" label="Cancel" id="cancel" click="doCancel();"/>
+	<mx:Button x="469" y="405" label="Save" id="save" click="doSave();"/>
 	
 </mx:Application>

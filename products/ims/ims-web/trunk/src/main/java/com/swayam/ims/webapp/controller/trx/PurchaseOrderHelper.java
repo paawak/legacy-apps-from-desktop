@@ -60,10 +60,20 @@ public class PurchaseOrderHelper {
                 qty = (Integer) rawQty;
             }
 
+            Object rawPrice = asObj.get("price");
+
+            float price;
+
+            if (rawPrice instanceof Double) {
+                price = ((Double) rawPrice).floatValue();
+            } else {
+                price = (Integer) rawPrice;
+            }
+
             TradeDetailsLean tdLean = new TradeDetailsLean();
             tdLean.setLotId((Integer) asObj.get("lotId"));
             tdLean.setQuantity(qty);
-            tdLean.setTotalPrice((Integer) asObj.get("price"));
+            tdLean.setTotalPrice(price);
 
             itemMap.put(id, tdLean);
 

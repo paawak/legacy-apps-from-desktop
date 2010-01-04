@@ -154,7 +154,8 @@
             	
             	qtyText.text = String(intVal);
             	
-            	event.currentTarget.editedItemRenderer.data["price"] = intVal * event.currentTarget.editedItemRenderer.data["puPrice"];
+            	//change the price 
+            	itemsArray[event.rowIndex].price = intVal * itemsArray[event.rowIndex].puPrice;
             	
             }
             
@@ -232,7 +233,7 @@
 	<mx:TextInput x="459" y="386" width="90" id="totalPrice" editable="false"/>
 	
 	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
-	<mx:Button x="47" y="465" label="Cancel" id="cancel" click="doCancel();"/>
-	<mx:Button x="489" y="465" label="Save" id="save" click="doSave();"/>
+	<mx:Button x="47" y="465" width="80" label="Cancel" id="cancel" click="doCancel();"/>
+	<mx:Button x="489" y="465" width="80" label="Save" id="save" click="doSave();"/>
 	
 </mx:Application>

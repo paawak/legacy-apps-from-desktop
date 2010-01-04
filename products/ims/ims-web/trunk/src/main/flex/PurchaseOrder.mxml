@@ -158,7 +158,7 @@
             	qtyText.text = String(intVal);
             	
             	//change the price 
-            	itemsArray[event.rowIndex].price = intVal * itemsArray[event.rowIndex].puPrice;
+            	itemsArray[event.rowIndex].price = Number (intVal * itemsArray[event.rowIndex].puPrice).toFixed(2);
             	
             	updateTotalPrice();
             	

@@ -67,7 +67,7 @@ public class PurchaseOrderHelper {
             if (rawPrice instanceof Double) {
                 price = ((Double) rawPrice).floatValue();
             } else {
-                price = (Integer) rawPrice;
+                price = Float.valueOf((String) rawPrice);
             }
 
             TradeDetailsLean tdLean = new TradeDetailsLean();

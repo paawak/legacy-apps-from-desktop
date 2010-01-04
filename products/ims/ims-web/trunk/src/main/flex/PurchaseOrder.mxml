@@ -138,21 +138,23 @@
             private function editQuantity(event:DataGridEvent):void { 
             	
             	// Get the cell editor and cast it to TextInput.
-                var myEditor:TextInput = TextInput(event.currentTarget.itemEditorInstance);
+                var qtyText:TextInput = TextInput(event.currentTarget.itemEditorInstance);
                 
                 // Get the new value from the editor.
-                var newVal:String = myEditor.text;
+                var newVal:String = qtyText.text;
                 
                 // Get the old value.
                 var oldVal:String = event.currentTarget.editedItemRenderer.data[event.dataField]; 
-            	
+            
             	var intVal:int = int(newVal);
                 
             	if (intVal <= 0) {
             		intVal = uint(oldVal);
             	} 
             	
-            	myEditor.text = new String(intVal);
+            	qtyText.text = String(intVal);
+            	
+            	event.currentTarget.editedItemRenderer.data["price"] = intVal * event.currentTarget.editedItemRenderer.data["puPrice"];
             	
             }
             
@@ -226,11 +228,11 @@
 		</mx:columns>
 	</mx:DataGrid>
 	
-	<mx:Label x="37" y="388" text="Total Price:"/>
-	<mx:TextInput x="124" y="386" id="totalPrice" editable="false"/>
+	<mx:Label x="372" y="388" text="Total Price:"/>
+	<mx:TextInput x="459" y="386" width="90" id="totalPrice" editable="false"/>
 	
 	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
-	<mx:Button x="137" y="465" label="Cancel" id="cancel" click="doCancel();"/>
+	<mx:Button x="47" y="465" label="Cancel" id="cancel" click="doCancel();"/>
 	<mx:Button x="489" y="465" label="Save" id="save" click="doSave();"/>
 	
 </mx:Application>

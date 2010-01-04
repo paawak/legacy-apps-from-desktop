@@ -114,6 +114,8 @@
 	        	content["name"] = lot.item.name;
 	        	content["qty"] = 1;
 	    		itemsArray.addItem(content);
+	    		
+	    		updateTotalPrice();
                 
             }
 
@@ -156,6 +158,22 @@
             	
             	//change the price 
             	itemsArray[event.rowIndex].price = intVal * itemsArray[event.rowIndex].puPrice;
+            	
+            	updateTotalPrice();
+            	
+            }
+            
+            private function updateTotalPrice():void {
+            	
+            	var totalPrice:int = 0;
+            	
+            	for each (var itemInArray:Object in itemsArray) {
+            		
+            		totalPrice += itemInArray.price;
+            		
+            	}
+            	
+            	this.totalPrice.text = String(totalPrice);
             	
             }
             
@@ -232,7 +250,7 @@
 	<mx:Label x="372" y="388" text="Total Price:"/>
 	<mx:TextInput x="459" y="386" width="90" id="totalPrice" editable="false"/>
 	
-	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
+	<mx:Button x="556" y="338" label="Add Item" id="addItem" click="showAddItemDialog();"/>
 	<mx:Button x="47" y="465" width="80" label="Cancel" id="cancel" click="doCancel();"/>
 	<mx:Button x="489" y="465" width="80" label="Save" id="save" click="doSave();"/>
 	

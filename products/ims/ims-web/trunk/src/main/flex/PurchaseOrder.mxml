@@ -109,8 +109,8 @@
 	            var content:Object = new Object();
 	    		content["id"] = lot.item.id;
 	    		content["lotId"] = lot.id;
-	    		content["puPrice"] = lot.price;
-	    		content["price"] = lot.price;
+	    		content["puPrice"] = lot.price.toFixed(2);
+	    		content["price"] = content["puPrice"];
 	        	content["code"] = lot.item.code;
 	        	content["name"] = lot.item.name;
 	        	content["qty"] = 1;
@@ -166,7 +166,7 @@
             
             private function updateTotalPrice():void {
             	
-            	var totalPrice:int = 0;
+            	var totalPrice:Number = 0;
             	
             	for each (var itemInArray:Object in itemsArray) {
             		

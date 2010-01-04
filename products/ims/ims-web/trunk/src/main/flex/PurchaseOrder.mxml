@@ -170,11 +170,11 @@
             	
             	for each (var itemInArray:Object in itemsArray) {
             		
-            		totalPrice += itemInArray.price;
+            		totalPrice += Number (itemInArray.price);
             		
             	}
             	
-            	this.totalPrice.text = String(totalPrice);
+            	this.totalPrice.text = totalPrice.toFixed(2);
             	
             }
             

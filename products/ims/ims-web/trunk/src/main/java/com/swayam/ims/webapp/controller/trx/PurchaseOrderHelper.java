@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.swayam.ims.core.service.impl.PurchaseOrderService;
+import com.swayam.ims.core.service.impl.PurchaseOrderService.TradeDetailsLean;
 import com.swayam.ims.model.orm.Lot;
 
 import flex.messaging.io.amf.ASObject;
@@ -40,9 +41,10 @@ public class PurchaseOrderHelper {
         return service.getLot(itemId);
     }
 
-    public boolean savePurchaseOrder(Integer partyId, List<ASObject> items) {
+    public boolean savePurchaseOrder(long partyId, float totalPrice,
+            float discount, List<ASObject> items) {
 
-        Map<Long, Integer> itemQtyMap = new HashMap<Long, Integer>();
+        Map<Long, TradeDetailsLean> itemMap = new HashMap<Long, TradeDetailsLean>();
 
         for (ASObject asObj : items) {
 
@@ -58,11 +60,17 @@ public class PurchaseOrderHelper {
                 qty = (Integer) rawQty;
             }
 
-            itemQtyMap.put(id, qty);
+            TradeDetailsLean tdLean = new TradeDetailsLean();
+            tdLean.setLotId((Integer) asObj.get("lotId"));
+            tdLean.setQuantity(qty);
+            tdLean.setTotalPrice((Integer) asObj.get("price"));
+
+            itemMap.put(id, tdLean);
 
         }
 
-        return service.savePurchaseOrder(partyId, itemQtyMap);
+        return service
+                .savePurchaseOrder(partyId, totalPrice, discount, itemMap);
 
     }
 

@@ -108,6 +108,7 @@
             
 	            var content:Object = new Object();
 	    		content["id"] = lot.item.id;
+	    		content["lotId"] = lot.id;
 	    		content["puPrice"] = lot.price;
 	    		content["price"] = lot.price;
 	        	content["code"] = lot.item.code;
@@ -189,7 +190,8 @@
             		
             			purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getSaveResultHandler);
             			purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
-            			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, itemsArray);
+            			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, 
+            					Number(totalPrice.text), 0, itemsArray);
             			
             		}
             	

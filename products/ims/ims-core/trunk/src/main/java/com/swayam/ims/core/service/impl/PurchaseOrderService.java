@@ -74,6 +74,28 @@ public class PurchaseOrderService {
     //
     // }
 
+    public Lot getLot(long itemId) {
+
+        Map<String, Object> lotParams = new HashMap<String, Object>(1);
+        lotParams.put(Lot.PARAM_ITEM_ID, itemId);
+        // get the latest lot and the price
+        List<Lot> lotList = lotDao.findByNamedQuery(
+                Lot.FIND_LATEST_LOT_FOR_ITEM, lotParams);
+
+        if (lotList == null || lotList.isEmpty()) {
+
+            // for human readable message
+            Item item = itemDao.get(itemId);
+
+            throw new IllegalArgumentException("No lot found for item `"
+                    + item.getName() + "`, code : `" + item.getCode()
+                    + "`. Please make sure there is enough stock!");
+        }
+
+        return lotList.get(0);
+
+    }
+
     public boolean savePurchaseOrder(long partyId, Map<Long, Integer> itemQtyMap) {
 
         boolean success = false;
@@ -100,18 +122,7 @@ public class PurchaseOrderService {
 
             Integer qty = itemQtyMap.get(id);
 
-            Map<String, Object> lotParams = new HashMap<String, Object>(1);
-            lotParams.put("itemId", id);
-            // get the latest lot and the price
-            List<Lot> lotList = lotDao.findByNamedQuery(
-                    Lot.FIND_LATEST_LOT_FOR_ITEM, lotParams);
-
-            if (lotList == null || lotList.isEmpty()) {
-                throw new IllegalArgumentException("Not lot found for item id "
-                        + id);
-            }
-
-            Lot itemLot = lotList.get(0);
+            Lot itemLot = getLot(id);
 
             float totalPrice = itemLot.getPrice() * qty;
 

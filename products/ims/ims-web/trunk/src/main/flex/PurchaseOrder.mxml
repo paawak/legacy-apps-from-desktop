@@ -71,12 +71,11 @@
             	}
             	
             	if (!itemExists) {
-            		var content:Object = new Object();
-            		content["id"] = itemId;
-                	content["code"] = item.code;
-                	content["name"] = item.name;
-                	content["qty"] = 1;
-            		itemsArray.addItem(content);
+
+            		purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getLotResultHandler);
+        			purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
+        			purchaseOrderHelperRO.getOperation("getLot").send(itemId);
+            		
             	}
                 
             }
@@ -100,6 +99,21 @@
                 var tradeId:Number = Number(event.result);
             	
                 poId.text = String(tradeId);
+                
+            }
+            
+            private function getLotResultHandler(event:ResultEvent):void {
+
+                var lot:Object = event.result;
+            
+	            var content:Object = new Object();
+	    		content["id"] = lot.item.id;
+	    		content["puPrice"] = lot.price;
+	    		content["price"] = lot.price;
+	        	content["code"] = lot.item.code;
+	        	content["name"] = lot.item.name;
+	        	content["qty"] = 1;
+	    		itemsArray.addItem(content);
                 
             }
 
@@ -193,21 +207,30 @@
     
 
 	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
+	<mx:TextInput x="174" y="66" id="poId" editable="false"/>
+	
 	<!--<mx:Label x="454" y="68" text="Date:"/>-->
+	<!--<mx:DateField x="513" y="66" id="poDate"/>-->
+	
 	<mx:Label x="37" y="130" text="Client:"/>
 	<mx:ComboBox x="174" y="128" id="client"  dataProvider="{clientArray}"></mx:ComboBox>
-	<mx:TextInput x="174" y="66" id="poId" editable="false"/>
-	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" dataProvider="{itemsArray}" 
+	
+	<mx:DataGrid x="37" y="188" id="itemDetails" width="511" height="180" dataProvider="{itemsArray}" 
 		editable="true" itemEditEnd="editQuantity(event);">
 		<mx:columns>
-			<mx:DataGridColumn headerText="Code" dataField="code" editable="false"/>
 			<mx:DataGridColumn headerText="Name" dataField="name" editable="false"/>
+			<mx:DataGridColumn headerText="Code" dataField="code" editable="false"/>
+			<mx:DataGridColumn headerText="PU Price" dataField="puPrice" editable="false"/>
 			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50"/>
+			<mx:DataGridColumn headerText="Price" dataField="price" editable="false"/>
 		</mx:columns>
 	</mx:DataGrid>
-	<!--<mx:DateField x="513" y="66" id="poDate"/>-->
+	
+	<mx:Label x="37" y="388" text="Total Price:"/>
+	<mx:TextInput x="124" y="386" id="totalPrice" editable="false"/>
+	
 	<mx:Button x="556" y="249" label="Add Item" id="addItem" click="showAddItemDialog();"/>
-	<mx:Button x="137" y="405" label="Cancel" id="cancel" click="doCancel();"/>
-	<mx:Button x="469" y="405" label="Save" id="save" click="doSave();"/>
+	<mx:Button x="137" y="465" label="Cancel" id="cancel" click="doCancel();"/>
+	<mx:Button x="489" y="465" label="Save" id="save" click="doSave();"/>
 	
 </mx:Application>

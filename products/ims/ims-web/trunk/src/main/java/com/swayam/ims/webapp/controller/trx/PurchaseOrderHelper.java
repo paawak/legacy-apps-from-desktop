@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.swayam.ims.core.service.impl.PurchaseOrderService;
+import com.swayam.ims.model.orm.Lot;
 
 import flex.messaging.io.amf.ASObject;
 
@@ -33,6 +34,10 @@ public class PurchaseOrderHelper {
 
     public PurchaseOrderHelper(PurchaseOrderService service) {
         this.service = service;
+    }
+
+    public Lot getLot(long itemId) {
+        return service.getLot(itemId);
     }
 
     public boolean savePurchaseOrder(Integer partyId, List<ASObject> items) {

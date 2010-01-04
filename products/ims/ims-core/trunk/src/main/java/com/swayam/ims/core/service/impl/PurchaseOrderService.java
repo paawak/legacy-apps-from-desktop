@@ -96,20 +96,23 @@ public class PurchaseOrderService {
 
     }
 
-    public boolean savePurchaseOrder(long partyId, Map<Long, Integer> itemQtyMap) {
+    public boolean savePurchaseOrder(long partyId, float totalPrice,
+            float discount, Map<Long, TradeDetailsLean> itemQtyMap) {
 
-        boolean success = false;
-
+        // FIXME: do not hard-code
         TransactionCategory trxCat = trxCatDao.get(1l);
+
+        // FIXME: do not hard-code
         Currency curr = currencyDao.get(1l);
+
         Party party = partyDao.get(partyId);
 
         Trade trade = new Trade();
         trade.setCategory(trxCat);
         trade.setCurrency(curr);
         trade.setCustomer(party);
-        trade.setNetAmount(100);
-        trade.setNetAmount(200);
+        trade.setTotalAmount(totalPrice);
+        trade.setNetAmount(totalPrice - discount);
         trade.setTradeDate(new Date());
 
         trade = tradeDao.save(trade);
@@ -120,26 +123,20 @@ public class PurchaseOrderService {
 
             Long id = itemIdItr.next();
 
-            Integer qty = itemQtyMap.get(id);
-
-            Lot itemLot = getLot(id);
-
-            float totalPrice = itemLot.getPrice() * qty;
+            TradeDetailsLean tdLean = itemQtyMap.get(id);
 
             TradeDetails tradeDetails = new TradeDetails();
             tradeDetails.setItem(itemDao.get(id));
-            tradeDetails.setItemLot(itemLot);
-            tradeDetails.setQuantity(qty);
-            tradeDetails.setTotalPrice(totalPrice);
+            tradeDetails.setItemLot(lotDao.get(tdLean.getLotId()));
+            tradeDetails.setQuantity(tdLean.getQuantity());
+            tradeDetails.setTotalPrice(tdLean.getTotalPrice());
             tradeDetails.setTradeHeader(trade);
 
             tradeDetailsDao.save(tradeDetails);
 
         }
 
-        success = true;
-
-        return success;
+        return true;
 
     }
 
@@ -170,6 +167,38 @@ public class PurchaseOrderService {
 
     public void setItemDao(GenericDao<Item, Long> itemDao) {
         this.itemDao = itemDao;
+    }
+
+    public static class TradeDetailsLean {
+
+        private int quantity;
+        private long lotId;
+        private float totalPrice;
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public long getLotId() {
+            return lotId;
+        }
+
+        public void setLotId(long lotId) {
+            this.lotId = lotId;
+        }
+
+        public float getTotalPrice() {
+            return totalPrice;
+        }
+
+        public void setTotalPrice(float totalPrice) {
+            this.totalPrice = totalPrice;
+        }
+
     }
 
 }

@@ -111,16 +111,17 @@
             private function showAddItemDialog():void {
                 // Create a modal TitleWindow container.
                 //var itemWindow:IFlexDisplayObject = PopUpManager.createPopUp(this, ItemSelectDialog, true);
-            	var itemSelectionPopup:ItemSelectionDialog = (ItemSelectionDialog) (PopUpManager.createPopUp(this, ItemSelectionDialog, true));
-            	itemSelectionPopup.addEventListener(ItemEvent.EVENT_ITEM_ADDED, itemSelected);
+            	var itemSelectionPopup:ItemSelectionDialog = ItemSelectionDialog (PopUpManager.createPopUp(this, ItemSelectionDialog, true));
+            	PopUpManager.centerPopUp(itemSelectionPopup);
+            	itemSelectionPopup.addEventListener(ItemEvent.EVENT_ITEM_ADDED, itemSelected);  
             }
 
-            private function itemSelected(event:ItemEvent):void {
+            private function itemSelected(event:ItemEvent):void { 
                 var itemId:Number = event.getItemId();
                 itemRO.getOperation("get").send(itemId);
             }
-            
-            private function editQuantity(event:DataGridEvent):void {
+             
+            private function editQuantity(event:DataGridEvent):void { 
             	
             	// Get the cell editor and cast it to TextInput.
                 var myEditor:TextInput = TextInput(event.currentTarget.itemEditorInstance);

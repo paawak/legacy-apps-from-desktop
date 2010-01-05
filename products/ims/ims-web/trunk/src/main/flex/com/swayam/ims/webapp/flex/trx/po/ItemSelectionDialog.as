@@ -210,8 +210,8 @@ package com.swayam.ims.webapp.flex.trx.po {
         	
         	if (cbItemList.selectedItem == null) {
         		Alert.show("Select an Item");
-        	} else if (txtPrice.text == null) {
-        		Alert.show("Enter the price of the item");
+        	} else if (isNaN(Number(txtPrice.text))) {
+        		Alert.show("Enter a valid Price");
         	} else if (Number(txtPrice.text) <= 0) {
         		Alert.show("Price cannot be zero");
         	} else if (txtQty.text == null) {

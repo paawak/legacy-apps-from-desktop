@@ -89,6 +89,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             txtPrice.x = xPos2;
             txtPrice.y = 110;
             txtPrice.width = width;
+            txtPrice.restrict = "[0-9.]";
             addChild(txtPrice);
             
             //opening stock

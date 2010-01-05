@@ -67,7 +67,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbItemName);
             
             cbItemList = new ComboBox();
-            cbItemList.x = 140;
+            cbItemList.x = 170;
             cbItemList.y = 60;
             cbItemList.dataProvider = itemsArray;
             addChild(cbItemList);
@@ -80,7 +80,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbItemPrice);
             
             var txtPrice:TextInput = new TextInput();
-            txtPrice.x = 140;
+            txtPrice.x = 170;
             txtPrice.y = 110;
             addChild(txtPrice);
             
@@ -92,7 +92,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbQty);
             
             var txtQty:TextInput = new TextInput();
-            txtQty.x = 140;
+            txtQty.x = 170;
             txtQty.y = 160;
             addChild(txtQty);
             
@@ -104,7 +104,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbBatch);
             
             var txtBatch:TextInput = new TextInput();
-            txtBatch.x = 140;
+            txtBatch.x = 170;
             txtBatch.y = 210;
             addChild(txtBatch);
             
@@ -116,7 +116,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbManufactureDate);
             
             var dtManufactureDate:DateField = new DateField();
-            dtManufactureDate.x = 140;
+            dtManufactureDate.x = 170;
             dtManufactureDate.y = 260;
             addChild(dtManufactureDate);
             
@@ -128,7 +128,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbExpiryDate);
             
             var dtExpiryDate:DateField = new DateField();
-            dtExpiryDate.x = 140;
+            dtExpiryDate.x = 170;
             dtExpiryDate.y = 310;
             addChild(dtExpiryDate);
             

@@ -57,26 +57,7 @@
             
             private function getItemListResultHandler(event:ResultEvent):void {
 
-            	var item:Object = event.result;
-            	var itemId:Number = (Number) (item.id);
-            	var itemExists:Boolean = false;
-            
-            	for each (var itemInArray:Object in itemsArray) {
-            		
-            		if (itemId == itemInArray.id) {
-            			itemExists = true;
-            			break;
-            		}
-            		
-            	}
-            	
-            	if (!itemExists) {
 
-            		purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getLotResultHandler);
-        			purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
-        			purchaseOrderHelperRO.getOperation("getLot").send(itemId);
-            		
-            	}
                 
             }
             
@@ -106,17 +87,7 @@
 
                 var lot:Object = event.result;
             
-	            var content:Object = new Object();
-	    		content["id"] = lot.item.id;
-	    		content["lotId"] = lot.id;
-	    		content["puPrice"] = lot.price.toFixed(2);
-	    		content["price"] = content["puPrice"];
-	        	content["code"] = lot.item.code;
-	        	content["name"] = lot.item.name;
-	        	content["qty"] = 1;
-	    		itemsArray.addItem(content);
-	    		
-	    		updateTotalPrice();
+	            
                 
             }
 
@@ -135,7 +106,32 @@
 
             private function itemSelected(event:ItemEvent):void { 
                 var itemId:Number = event.itemId;
-                itemRO.getOperation("get").send(itemId);
+
+	        	var itemExists:Boolean = false;
+	        
+	        	for each (var itemInArray:Object in itemsArray) {
+	        		
+	        		if (itemId == itemInArray.id) {
+	        			itemExists = true;
+	        			break;
+	        		}
+	        		
+	        	}
+	        	
+	        	if (!itemExists) {
+	
+	        		var content:Object = new Object();
+		    		content["id"] = itemId;
+		    		content["puPrice"] = event.price.toFixed(2);
+		    		content["qty"] = event.qty;
+		    		content["price"] = content["puPrice"] * content["qty"];
+		        	content["name"] = event.itemName;
+		    		itemsArray.addItem(content);
+		    		
+		    		updateTotalPrice();
+	        		
+	        	}
+
             }
              
             private function editQuantity(event:DataGridEvent):void { 
@@ -242,7 +238,6 @@
 		editable="true" itemEditEnd="editQuantity(event);">
 		<mx:columns>
 			<mx:DataGridColumn headerText="Name" dataField="name" editable="false"/>
-			<mx:DataGridColumn headerText="Code" dataField="code" editable="false"/>
 			<mx:DataGridColumn headerText="PU Price" dataField="puPrice" editable="false"/>
 			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50"/>
 			<mx:DataGridColumn headerText="Price" dataField="price" editable="false"/>

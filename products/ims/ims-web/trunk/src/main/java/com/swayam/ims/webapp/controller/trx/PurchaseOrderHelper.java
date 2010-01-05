@@ -15,6 +15,7 @@
 
 package com.swayam.ims.webapp.controller.trx;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +44,6 @@ public class PurchaseOrderHelper {
 
         for (ASObject asObj : items) {
 
-            // System.out.println("######### asObj = " + asObj);
-
             Long id = new Long((Integer) asObj.get("id"));
 
             Object rawQty = asObj.get("qty");
@@ -64,6 +63,9 @@ public class PurchaseOrderHelper {
             TradeDetailsLean tdLean = new TradeDetailsLean();
             tdLean.setQuantity(qty);
             tdLean.setTotalPrice(price);
+            tdLean.setBatchNo((String) asObj.get("batchNo"));
+            tdLean.setManufactureDate((Date) asObj.get("manufactureDate"));
+            tdLean.setExpiryDate((Date) asObj.get("expiryDate"));
 
             itemMap.put(id, tdLean);
 

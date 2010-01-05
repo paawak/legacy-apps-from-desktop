@@ -97,6 +97,9 @@
 		    		content["qty"] = event.qty;
 		    		content["price"] = (content["rate"] * content["qty"]).toFixed(2);
 		        	content["name"] = event.itemName;
+		        	content["batchNo"] = event.batchNo;
+		        	content["manufactureDate"] = event.manufactureDate;
+		        	content["expiryDate"] = event.expiryDate;
 		    		itemsArray.addItem(content);
 		    		
 		    		updateTotalPrice();
@@ -155,7 +158,7 @@
             			
             		} else {
             		
-            			purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getSaveResultHandler);
+            			purchaseOrderHelperRO.savePurchaseOrder.addEventListener(ResultEvent.RESULT, getSaveResultHandler);
             			purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
             			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, 
             					Number(totalPrice.text), 0, itemsArray);

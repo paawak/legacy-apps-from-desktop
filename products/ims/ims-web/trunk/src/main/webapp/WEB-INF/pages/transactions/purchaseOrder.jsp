@@ -18,7 +18,7 @@
     <param name="bgcolor" value="#ffffff" />
     <param name="pluginspage" value="http://www.macromedia.com/go/getflashplayer" />
     <embed src="/flash/PurchaseOrderScreen.swf" 
-    width="800" height="600" align="middle"
+    width="690" height="550" align="middle"
     type="application/x-shockwave-flash"/>
     </object>
 

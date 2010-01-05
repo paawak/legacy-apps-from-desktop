@@ -102,6 +102,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             txtQty.x = xPos2;
             txtQty.y = 160;
             txtQty.width = width;
+            txtQty.restrict = "[0-9]";
             addChild(txtQty);
             
             //batch no.

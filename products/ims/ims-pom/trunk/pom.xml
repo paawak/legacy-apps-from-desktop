@@ -42,12 +42,6 @@
 			<email>paawak@gmail.com</email>
 			<timezone>0530</timezone>
 		</developer>
-		<developer>
-			<id>RD</id>
-			<name>Rana Das</name>
-			<email>ranaraj1983@gmail.com</email>
-			<timezone>0530</timezone>
-		</developer>
 	</developers>
     
     <build>
@@ -127,11 +121,6 @@
 
     <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <dependencies>
-    	<dependency>
-    		<groupId>com.swayam.ims</groupId>
-			<artifactId>ims-orm</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-    	</dependency>
         <dependency>
             <groupId>${jdbc.groupId}</groupId>
             <artifactId>${jdbc.artifactId}</artifactId>

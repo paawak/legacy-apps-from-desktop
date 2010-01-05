@@ -22,48 +22,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>dbunit-maven-plugin</artifactId>
-                <version>1.0-beta-1</version>
-                <configuration>
-                    <dataTypeFactoryName>${dbunit.dataTypeFactoryName}</dataTypeFactoryName>
-                    <driver>${jdbc.driverClassName}</driver>
-                    <username>${jdbc.username}</username>
-                    <password>${jdbc.password}</password>
-                    <url>${jdbc.url}</url>
-                    <src>src/test/resources/sample-data.xml</src>
-                    <type>${dbunit.operation.type}</type>
-                    <schema>${dbunit.schema}</schema>
-                    <skip>${maven.test.skip}</skip>
-                </configuration>
-                <!--  
-                <executions>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>operation</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        Runs before integration tests and jetty:run-war 
-                        <id>test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>operation</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                -->
-                <dependencies>
-                    <dependency>
-                        <groupId>${jdbc.groupId}</groupId>
-                        <artifactId>${jdbc.artifactId}</artifactId>
-                        <version>${jdbc.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <configuration>
@@ -82,6 +40,12 @@
                             </includes>
                         </scanTargetPattern>
                     </scanTargetPatterns>
+                    <systemProperties>                      
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8090</value>
+                        </systemProperty>                      
+                    </systemProperties>
                 </configuration>
             </plugin>
             <plugin>
@@ -179,7 +143,7 @@
     	<dependency>
     		<groupId>com.swayam.ims</groupId>
     		<artifactId>ims-core</artifactId>
-    		<version>0.0.1-SNAPSHOT</version>
+    		<version>1.0.0-SNAPSHOT</version>
     	</dependency>
         <dependency>
             <groupId>${jdbc.groupId}</groupId>

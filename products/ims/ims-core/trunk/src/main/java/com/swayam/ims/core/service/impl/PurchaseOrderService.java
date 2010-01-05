@@ -127,7 +127,6 @@ public class PurchaseOrderService {
 
             TradeDetails tradeDetails = new TradeDetails();
             tradeDetails.setItem(itemDao.get(id));
-            tradeDetails.setItemLot(lotDao.get(tdLean.getLotId()));
             tradeDetails.setQuantity(tdLean.getQuantity());
             tradeDetails.setTotalPrice(tdLean.getTotalPrice());
             tradeDetails.setTradeHeader(trade);

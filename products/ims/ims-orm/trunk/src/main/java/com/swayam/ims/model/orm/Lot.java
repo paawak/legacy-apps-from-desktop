@@ -55,7 +55,7 @@ public class Lot implements Serializable {
     @JoinColumn
     private Item item;
 
-    @Column(length = 20, unique = true)
+    @Column(length = 20, unique = true, nullable = true)
     private String batchNo;
 
     @Column(nullable = false)
@@ -64,16 +64,21 @@ public class Lot implements Serializable {
     @Column(nullable = false)
     private Float costPrice;
 
+    @Column
     private Date manufacturedDate;
 
+    @Column
     private Date expiryDate;
+
+    @Column
+    private Integer openingStock;
+
+    @Column
+    private Integer stockInHand;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private User enteredBy;
-
-    @Column(nullable = false)
-    private Integer quantity;
 
     public Long getId() {
         return id;
@@ -139,12 +144,20 @@ public class Lot implements Serializable {
         this.enteredBy = enteredBy;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getOpeningStock() {
+        return openingStock;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setOpeningStock(Integer openingStock) {
+        this.openingStock = openingStock;
+    }
+
+    public Integer getStockInHand() {
+        return stockInHand;
+    }
+
+    public void setStockInHand(Integer stockInHand) {
+        this.stockInHand = stockInHand;
     }
 
 }

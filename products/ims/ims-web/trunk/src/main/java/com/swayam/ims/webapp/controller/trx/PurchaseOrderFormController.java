@@ -37,7 +37,6 @@ public class PurchaseOrderFormController implements Controller {
         this.formView = formView;
     }
 
-    @Override
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         return new ModelAndView(formView);

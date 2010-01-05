@@ -38,7 +38,6 @@ public class ListItemController implements Controller {
 
     }
 
-    @Override
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 

@@ -12,7 +12,7 @@
     
     <groupId>com.swayam.ims</groupId>
     <artifactId>ims-core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Core Module for IMS</name>
     <description>
@@ -134,6 +134,11 @@
 
     <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <dependencies>
+        <dependency>
+            <groupId>com.swayam.ims</groupId>
+            <artifactId>ims-orm</artifactId>
+            <version>1.1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>

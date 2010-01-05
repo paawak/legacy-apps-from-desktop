@@ -95,7 +95,7 @@
 		    		content["id"] = itemId;
 		    		content["rate"] = event.price.toFixed(2);
 		    		content["qty"] = event.qty;
-		    		content["price"] = content["rate"] * content["qty"];
+		    		content["price"] = (content["rate"] * content["qty"]).toFixed(2);
 		        	content["name"] = event.itemName;
 		    		itemsArray.addItem(content);
 		    		
@@ -125,7 +125,7 @@
             	qtyText.text = String(intVal);
             	
             	//change the price 
-            	itemsArray[event.rowIndex].price = Number (intVal * itemsArray[event.rowIndex].puPrice).toFixed(2);
+            	itemsArray[event.rowIndex].price = Number (intVal * itemsArray[event.rowIndex].rate).toFixed(2);
             	
             	updateTotalPrice();
             	

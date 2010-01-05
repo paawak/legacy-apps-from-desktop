@@ -32,6 +32,11 @@ package com.swayam.ims.webapp.flex.trx.po {
         private var itemsArray:Array = new Array();
         
         private var cbItemList:ComboBox;
+        private var txtPrice:TextInput;
+        private var txtQty:TextInput;
+        private var txtBatch:TextInput;
+        private var dtManufactureDate:DateField;
+        private var dtExpiryDate:DateField;
     
         public function ItemSelectionDialog() {
         
@@ -85,7 +90,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             lbItemPrice.y = 110;
             addChild(lbItemPrice);
             
-            var txtPrice:TextInput = new TextInput();
+            txtPrice = new TextInput();
             txtPrice.x = xPos2;
             txtPrice.y = 110;
             txtPrice.width = width;
@@ -99,7 +104,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             lbQty.y = 160;
             addChild(lbQty);
             
-            var txtQty:TextInput = new TextInput();
+            txtQty = new TextInput();
             txtQty.x = xPos2;
             txtQty.y = 160;
             txtQty.width = width;
@@ -113,7 +118,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             lbBatch.y = 210;
             addChild(lbBatch);
             
-            var txtBatch:TextInput = new TextInput();
+            txtBatch = new TextInput();
             txtBatch.x = xPos2;
             txtBatch.y = 210;
             txtBatch.width = width;
@@ -126,7 +131,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             lbManufactureDate.y = 260;
             addChild(lbManufactureDate);
             
-            var dtManufactureDate:DateField = new DateField();
+            dtManufactureDate = new DateField();
             dtManufactureDate.x = xPos2;
             dtManufactureDate.y = 260;
             dtManufactureDate.width = width;
@@ -139,7 +144,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             lbExpiryDate.y = 310;
             addChild(lbExpiryDate);
             
-            var dtExpiryDate:DateField = new DateField();
+            dtExpiryDate = new DateField();
             dtExpiryDate.x = xPos2;
             dtExpiryDate.y = 310;
             dtExpiryDate.width = width;
@@ -203,9 +208,29 @@ package com.swayam.ims.webapp.flex.trx.po {
         
         private function addAndClose(event:MouseEvent):void {
         	
-        	if (cbItemList.selectedItem != null) {
-        		dispatchEvent(new ItemEvent(ItemEvent.EVENT_ITEM_ADDED, cbItemList.selectedItem["data"]));
-                close();
+        	if (cbItemList.selectedItem == null) {
+        		Alert.show("Select an Item");
+        	} else if (txtPrice.text == null) {
+        		Alert.show("Enter the price of the item");
+        	} else if (Number(txtPrice.text) <= 0) {
+        		Alert.show("Price cannot be zero");
+        	} else if (txtQty.text == null) {
+        		Alert.show("Enter the quantity");
+        	} else if (Number(txtQty.text) <= 0) {
+        		Alert.show("Quantity cannot be zero");
+        	} else {
+        	
+        		var itemEvent:ItemEvent = new ItemEvent(ItemEvent.EVENT_ITEM_ADDED, cbItemList.selectedItem["data"]); 
+	    		itemEvent._itemName = cbItemList.selectedItem["label"];
+	    		itemEvent._price = Number(txtPrice.text);
+	    		itemEvent._qty = int(txtQty.text);
+	    		itemEvent._batchNo = txtBatch.text;
+	    		itemEvent._manufactureDate = dtManufactureDate.selectedDate;
+	    		itemEvent._expiryDate = dtExpiryDate.selectedDate;
+	    	
+	    		dispatchEvent(itemEvent);
+	            close();
+        		
         	}
         	
         }

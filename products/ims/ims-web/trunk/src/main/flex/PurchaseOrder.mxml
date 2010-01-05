@@ -134,7 +134,7 @@
             }
 
             private function itemSelected(event:ItemEvent):void { 
-                var itemId:Number = event.getItemId();
+                var itemId:Number = event.itemId;
                 itemRO.getOperation("get").send(itemId);
             }
              

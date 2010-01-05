@@ -90,7 +90,6 @@
                 /passwordHint.html=passwordHintController
                 /masters/itemgroup.html=itemGroupController
                 /masters/new_item.html=itemController
-                /masters/lot.html=lotController
                 /masters/party.html=partyController
                 /masters/accountgroup.html=accountGroupFormController
                 /transactions/purchaseorder.html=purchaseOrderFormController
@@ -126,16 +125,6 @@
         <property name="successView" value="/mainMenu.html"/>
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     --></bean>
-    
-    <bean id="lotController" class="com.swayam.ims.webapp.controller.LotController">
-        <constructor-arg ref="lotDao"/>
-        <constructor-arg ref="itemDao"/>
-        <constructor-arg ref="userManager"/>
-        <property name="validator" ref="beanValidator"/>
-        <property name="formView" value="masters/lot"/>
-        <property name="successView" value="/mainMenu.html"/>
-        <property name="cancelView" value="redirect:/mainMenu.html"/>
-    </bean>
     
     <bean id="partyController" class="com.swayam.ims.webapp.controller.PartyController">
         <constructor-arg ref="accountGroupDao"/>

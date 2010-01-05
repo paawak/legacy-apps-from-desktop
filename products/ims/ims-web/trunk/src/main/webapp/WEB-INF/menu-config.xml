@@ -12,9 +12,7 @@
                 <Item name="ListItems" title="generic.list" page="/masters/items.html"/>
                 <Item name="NewItem" title="generic.new" page="/masters/new_item.html"/>
             </Item>
-        	<Item name="Lot" title="menu.masters.lot.title" page="/masters/lot.html">
-        	   <Item name="NewLot" title="generic.new" page="/masters/lot.html"/>
-        	</Item>
+        	
         	<Item name="Party" title="menu.masters.party.title" page="/masters/party.html">
         	   <Item name="NewParty" title="generic.new" page="/masters/party.html"/>
         	</Item>

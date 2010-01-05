@@ -3,6 +3,8 @@ package com.swayam.ims.webapp.flex.trx.po {
     import  mx.containers.TitleWindow;
     import  mx.controls.Label;
     import  mx.controls.ComboBox;
+    import  mx.controls.DateField;
+    import  mx.controls.TextInput;
     import  mx.controls.Button;
     import mx.managers.PopUpManager;
     import mx.controls.Alert;
@@ -41,7 +43,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             layout="absolute";
             
             width = 500;
-            height = 300;
+            height = 450;
             
             addEventListener(CloseEvent.CLOSE, closeWindow);
             
@@ -59,28 +61,88 @@ package com.swayam.ims.webapp.flex.trx.po {
             addChild(lbTitle);
         
             var lbItemName:Label = new Label();
-            lbItemName.text = "ItemName:";
+            lbItemName.text = "Item Name:";
             lbItemName.x = 39;
-            lbItemName.y = 75;
+            lbItemName.y = 60;
             addChild(lbItemName);
             
             cbItemList = new ComboBox();
             cbItemList.x = 140;
-            cbItemList.y = 75;
+            cbItemList.y = 60;
             cbItemList.dataProvider = itemsArray;
             addChild(cbItemList);
+            
+            //cost price
+            var lbItemPrice:Label = new Label();
+            lbItemPrice.text = "Price:";
+            lbItemPrice.x = 39;
+            lbItemPrice.y = 110;
+            addChild(lbItemPrice);
+            
+            var txtPrice:TextInput = new TextInput();
+            txtPrice.x = 140;
+            txtPrice.y = 110;
+            addChild(txtPrice);
+            
+            //opening stock
+            var lbQty:Label = new Label();
+            lbQty.text = "Quantity:";
+            lbQty.x = 39;
+            lbQty.y = 160;
+            addChild(lbQty);
+            
+            var txtQty:TextInput = new TextInput();
+            txtQty.x = 140;
+            txtQty.y = 160;
+            addChild(txtQty);
+            
+            //batch no.
+            var lbBatch:Label = new Label();
+            lbBatch.text = "Batch No.:";
+            lbBatch.x = 39;
+            lbBatch.y = 210;
+            addChild(lbBatch);
+            
+            var txtBatch:TextInput = new TextInput();
+            txtBatch.x = 140;
+            txtBatch.y = 210;
+            addChild(txtBatch);
+            
+            //maufacture date
+            var lbManufactureDate:Label = new Label();
+            lbManufactureDate.text = "Manufactured On:";
+            lbManufactureDate.x = 39;
+            lbManufactureDate.y = 260;
+            addChild(lbManufactureDate);
+            
+            var dtManufactureDate:DateField = new DateField();
+            dtManufactureDate.x = 140;
+            dtManufactureDate.y = 260;
+            addChild(dtManufactureDate);
+            
+            //expiry date
+            var lbExpiryDate:Label = new Label();
+            lbExpiryDate.text = "Expiry Date:";
+            lbExpiryDate.x = 39;
+            lbExpiryDate.y = 310;
+            addChild(lbExpiryDate);
+            
+            var dtExpiryDate:DateField = new DateField();
+            dtExpiryDate.x = 140;
+            dtExpiryDate.y = 310;
+            addChild(dtExpiryDate);
             
             var btCancel:Button = new Button();
             btCancel.label = "Cancel";
             btCancel.x = 103;
-            btCancel.y = 214;
+            btCancel.y = 360;
             btCancel.addEventListener(MouseEvent.CLICK, closeOnClick);
             addChild(btCancel);
             
             var btAdd:Button = new Button();
             btAdd.label = "Add";
             btAdd.x = 230;
-            btAdd.y = 214;
+            btAdd.y = 360;
             btAdd.addEventListener(MouseEvent.CLICK, addAndClose);
             addChild(btAdd);
             

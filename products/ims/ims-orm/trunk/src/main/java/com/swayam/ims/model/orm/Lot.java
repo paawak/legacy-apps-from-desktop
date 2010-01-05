@@ -62,7 +62,7 @@ public class Lot implements Serializable {
     private Date procuredOn;
 
     @Column(nullable = false)
-    private Float price;
+    private Float costPrice;
 
     private Date manufacturedDate;
 
@@ -107,12 +107,12 @@ public class Lot implements Serializable {
         this.procuredOn = procuredOn;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getCostPrice() {
+        return costPrice;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setCostPrice(Float costPrice) {
+        this.costPrice = costPrice;
     }
 
     public Date getManufacturedDate() {

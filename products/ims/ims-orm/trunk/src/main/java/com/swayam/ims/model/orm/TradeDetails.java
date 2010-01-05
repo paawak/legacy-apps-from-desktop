@@ -15,6 +15,8 @@
 
 package com.swayam.ims.model.orm;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +31,7 @@ import javax.persistence.OneToOne;
  * @author paawak
  */
 @Entity(name = "trade_details")
-public class TradeDetails extends BaseObject {
+public class TradeDetails implements Serializable {
 
     private static final long serialVersionUID = 1694240781234093096L;
 
@@ -44,10 +46,6 @@ public class TradeDetails extends BaseObject {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Item item;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_lot")
-    private Lot itemLot;
 
     @Column(nullable = false)
     private int quantity;
@@ -79,14 +77,6 @@ public class TradeDetails extends BaseObject {
         this.item = item;
     }
 
-    public Lot getItemLot() {
-        return itemLot;
-    }
-
-    public void setItemLot(Lot itemLot) {
-        this.itemLot = itemLot;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -101,50 +91,6 @@ public class TradeDetails extends BaseObject {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-
-        if (getClass() != obj.getClass())
-            return false;
-        TradeDetails other = (TradeDetails) obj;
-        if (item == null) {
-            if (other.item != null)
-                return false;
-        } else if (!item.equals(other.item))
-            return false;
-        if (itemLot == null) {
-            if (other.itemLot != null)
-                return false;
-        } else if (!itemLot.equals(other.itemLot))
-            return false;
-        if (quantity != other.quantity)
-            return false;
-        if (Float.floatToIntBits(totalPrice) != Float
-                .floatToIntBits(other.totalPrice))
-            return false;
-        if (tradeHeader == null) {
-            if (other.tradeHeader != null)
-                return false;
-        } else if (!tradeHeader.equals(other.tradeHeader))
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = System.identityHashCode(this);
-        result = prime * result + ((item == null) ? 0 : item.hashCode());
-        result = prime * result + ((itemLot == null) ? 0 : itemLot.hashCode());
-        result = prime * result + quantity;
-        result = prime * result + Float.floatToIntBits(totalPrice);
-        result = prime * result
-                + ((tradeHeader == null) ? 0 : tradeHeader.hashCode());
-        return result;
     }
 
 }

@@ -25,8 +25,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
@@ -34,18 +32,17 @@ import javax.persistence.OneToOne;
  * @author paawak
  */
 @Entity
-@NamedQueries( { @NamedQuery(name = Lot.FIND_LATEST_LOT_FOR_ITEM, query = "SELECT lot FROM Lot lot WHERE lot.item.id = :"
-        + Lot.PARAM_ITEM_ID
-        + " AND lot.procuredOn = "
-        + "(SELECT MAX(lot.procuredOn) FROM Lot lot WHERE lot.item.id = :"
-        + Lot.PARAM_ITEM_ID + ")") })
+// @NamedQueries( { @NamedQuery(name = Lot.FIND_LATEST_LOT_FOR_ITEM, query = "SELECT lot FROM Lot lot WHERE lot.item.id = :"
+// + Lot.PARAM_ITEM_ID
+// + " AND lot.procuredOn = "
+// + "(SELECT MAX(lot.procuredOn) FROM Lot lot WHERE lot.item.id = :"
+// + Lot.PARAM_ITEM_ID + ")") })
 public class Lot implements Serializable {
 
     private static final long serialVersionUID = 6514962799603561015L;
 
-    public static final String FIND_LATEST_LOT_FOR_ITEM = "findLatestLotForItem";
-
-    public static final String PARAM_ITEM_ID = "itemId";
+    // public static final String FIND_LATEST_LOT_FOR_ITEM = "findLatestLotForItem";
+    // public static final String PARAM_ITEM_ID = "itemId";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

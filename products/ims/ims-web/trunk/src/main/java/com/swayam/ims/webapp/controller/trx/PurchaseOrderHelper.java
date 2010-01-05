@@ -21,7 +21,6 @@ import java.util.Map;
 
 import com.swayam.ims.core.service.impl.PurchaseOrderService;
 import com.swayam.ims.core.service.impl.PurchaseOrderService.TradeDetailsLean;
-import com.swayam.ims.model.orm.Lot;
 
 import flex.messaging.io.amf.ASObject;
 
@@ -37,16 +36,14 @@ public class PurchaseOrderHelper {
         this.service = service;
     }
 
-    public Lot getLot(long itemId) {
-        return service.getLot(itemId);
-    }
-
     public boolean savePurchaseOrder(long partyId, float totalPrice,
             float discount, List<ASObject> items) {
 
         Map<Long, TradeDetailsLean> itemMap = new HashMap<Long, TradeDetailsLean>();
 
         for (ASObject asObj : items) {
+
+            // System.out.println("######### asObj = " + asObj);
 
             Long id = new Long((Integer) asObj.get("id"));
 
@@ -62,13 +59,7 @@ public class PurchaseOrderHelper {
 
             Object rawPrice = asObj.get("price");
 
-            float price;
-
-            if (rawPrice instanceof Double) {
-                price = ((Double) rawPrice).floatValue();
-            } else {
-                price = Float.valueOf((String) rawPrice);
-            }
+            float price = Float.valueOf((String) rawPrice);
 
             TradeDetailsLean tdLean = new TradeDetailsLean();
             tdLean.setQuantity(qty);

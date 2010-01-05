@@ -147,7 +147,13 @@ public class PurchaseOrderService {
             // create a new lot
             Lot itemLot = new Lot();
             itemLot.setProcuredOn(new Date());
-            itemLot.setBatchNo(tdLean.getBatchNo());
+            String batchNo = tdLean.getBatchNo();
+
+            if (batchNo != null && "".equals(batchNo.trim())) {
+                batchNo = null;
+            }
+
+            itemLot.setBatchNo(batchNo);
             itemLot.setCostPrice(tdLean.getRate());
             itemLot.setExpiryDate(tdLean.getExpiryDate());
             itemLot.setManufacturedDate(tdLean.getManufactureDate());

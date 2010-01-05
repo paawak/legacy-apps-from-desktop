@@ -39,7 +39,7 @@ package com.swayam.ims.webapp.flex.trx.po {
         private var dtExpiryDate:DateField;
     
         public function ItemSelectionDialog() {
-        
+        	
             initData();
             initComponents();
             
@@ -170,15 +170,15 @@ package com.swayam.ims.webapp.flex.trx.po {
         
         private function initData():void {
         
-            var itemRO:RemoteObject = new RemoteObject();
-            itemRO.destination = "itemDao";
-            itemRO.addEventListener("fault", faultHandler);
-            itemRO.getAll.addEventListener("result", getListResultHandler);
-            itemRO.getAll();
+        	var itemDaoRO:RemoteObject = new RemoteObject();
+        	itemDaoRO.destination = "itemDao";
+        	itemDaoRO.addEventListener("fault", faultHandler);
+        	itemDaoRO.getAll.addEventListener("result", itemListResultHandler);
+        	itemDaoRO.getAll();
             
         }
             
-        private function getListResultHandler(event:ResultEvent):void {
+        private function itemListResultHandler(event:ResultEvent):void {
 
             var itemsMultiArray:ArrayCollection = (ArrayCollection)(event.result);
             var count:int = 0;
@@ -219,7 +219,7 @@ package com.swayam.ims.webapp.flex.trx.po {
         	} else if (Number(txtQty.text) <= 0) {
         		Alert.show("Quantity cannot be zero");
         	} else {
-        	
+        		
         		var itemEvent:ItemEvent = new ItemEvent(ItemEvent.EVENT_ITEM_ADDED, cbItemList.selectedItem["data"]); 
 	    		itemEvent._itemName = cbItemList.selectedItem["label"];
 	    		itemEvent._price = Number(txtPrice.text);

@@ -17,6 +17,9 @@
             import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
             import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
             
+
+            private static var saveSuccessUrl:String = "/transactions/purchaseorder.html";
+            private static var cancelUrl:String = "/mainMenu.html";
             
             [Bindable]
             private var clientArray:Array = new Array();
@@ -24,20 +27,10 @@
             [Bindable]
             private var itemsArray:ArrayCollection = new ArrayCollection();
             
-            private static var saveSuccessUrl:String = "/transactions/purchaseorder.html";
-            private static var cancelUrl:String = "/mainMenu.html";
-            
-            private var itemRO:RemoteObject;
-            
             private var purchaseOrderHelperRO:RemoteObject;
             
             private function initData():void {
             
-                itemRO = new RemoteObject();
-                itemRO.destination = "itemDao";
-                itemRO.addEventListener(ResultEvent.RESULT, getItemListResultHandler);
-                itemRO.addEventListener(FaultEvent.FAULT, faultHandler);
-                
                 var partyRO:RemoteObject = new RemoteObject();
                 partyRO.destination = "partyDao";
                 partyRO.getAll.addEventListener(ResultEvent.RESULT, getPartyListResultHandler);
@@ -55,12 +48,6 @@
                 
             }
             
-            private function getItemListResultHandler(event:ResultEvent):void {
-
-
-                
-            }
-            
             private function getPartyListResultHandler(event:ResultEvent):void {
 
                 var partyTempArray:ArrayCollection = (ArrayCollection)(event.result);
@@ -75,22 +62,6 @@
                 
             }
             
-            private function getTradeIdResultHandler(event:ResultEvent):void {
-
-                var tradeId:Number = Number(event.result);
-            	
-                poId.text = String(tradeId);
-                
-            }
-            
-            private function getLotResultHandler(event:ResultEvent):void {
-
-                var lot:Object = event.result;
-            
-	            
-                
-            }
-
             private function faultHandler (event:FaultEvent):void {
              // Deal with event.fault.faultString, etc.
                 Alert.show(event.fault.faultString, 'Error');
@@ -105,8 +76,8 @@
             }
 
             private function itemSelected(event:ItemEvent):void { 
+            	
                 var itemId:Number = event.itemId;
-
 	        	var itemExists:Boolean = false;
 	        
 	        	for each (var itemInArray:Object in itemsArray) {
@@ -122,9 +93,9 @@
 	
 	        		var content:Object = new Object();
 		    		content["id"] = itemId;
-		    		content["puPrice"] = event.price.toFixed(2);
+		    		content["rate"] = event.price.toFixed(2);
 		    		content["qty"] = event.qty;
-		    		content["price"] = content["puPrice"] * content["qty"];
+		    		content["price"] = content["rate"] * content["qty"];
 		        	content["name"] = event.itemName;
 		    		itemsArray.addItem(content);
 		    		
@@ -238,7 +209,7 @@
 		editable="true" itemEditEnd="editQuantity(event);">
 		<mx:columns>
 			<mx:DataGridColumn headerText="Name" dataField="name" editable="false"/>
-			<mx:DataGridColumn headerText="PU Price" dataField="puPrice" editable="false"/>
+			<mx:DataGridColumn headerText="Rate" dataField="rate" editable="false"/>
 			<mx:DataGridColumn headerText="Qty." dataField="qty" width="50"/>
 			<mx:DataGridColumn headerText="Price" dataField="price" editable="false"/>
 		</mx:columns>

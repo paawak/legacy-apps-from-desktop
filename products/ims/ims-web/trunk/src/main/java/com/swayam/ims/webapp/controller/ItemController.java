@@ -87,6 +87,13 @@ public class ItemController extends BaseFormController {
                 getSuccessView()));
 
         try {
+            // get code, if its blank, set it to null
+            String itemCode = item.getCode().trim();
+
+            if ("".equals(itemCode)) {
+                item.setCode(null);
+            }
+
             itemDao.save(item);
         } catch (ConstraintViolationException e) {
             LOG.error("Could not save Item", e);

@@ -88,6 +88,12 @@
                 </c:forEach>
             </form:select>
         </li>
+        
+        <li>
+            <appfuse:label styleClass="desc" key="item.sellingPrice" />
+            <form:errors path="sellingPrice" cssClass="fieldError" />
+            <form:input path="sellingPrice" id="sellingPrice" cssClass="text medium" cssErrorClass="text medium error" maxlength="50"/>
+        </li>
 
 		<li>
 			<div>

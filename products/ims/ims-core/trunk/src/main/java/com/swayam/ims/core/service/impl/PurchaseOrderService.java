@@ -171,7 +171,6 @@ public class PurchaseOrderService {
     public static class TradeDetailsLean {
 
         private int quantity;
-        private long lotId;
         private float totalPrice;
 
         public int getQuantity() {
@@ -180,14 +179,6 @@ public class PurchaseOrderService {
 
         public void setQuantity(int quantity) {
             this.quantity = quantity;
-        }
-
-        public long getLotId() {
-            return lotId;
-        }
-
-        public void setLotId(long lotId) {
-            this.lotId = lotId;
         }
 
         public float getTotalPrice() {

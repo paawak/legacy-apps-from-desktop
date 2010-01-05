@@ -71,7 +71,6 @@ public class PurchaseOrderHelper {
             }
 
             TradeDetailsLean tdLean = new TradeDetailsLean();
-            tdLean.setLotId((Integer) asObj.get("lotId"));
             tdLean.setQuantity(qty);
             tdLean.setTotalPrice(price);
 

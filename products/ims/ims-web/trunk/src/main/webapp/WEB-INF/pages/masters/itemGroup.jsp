@@ -69,14 +69,14 @@
 	            		<table width = "100%" cellpadding = "0" cellspacing = "0" border = "0" style = "border-collapse:collapse">
 	            			<tr>
 	            				<td>
-	            					<img src="<c:url value="/images/dms/botLeft.gif"/>"/>
+	            					<img src="<c:url value="/images/botLeft.gif"/>"/>
 	            				</td>
-	            				<td align = "right" width = "90%" background = "<c:url value="/images/dms/botCenter.gif"/>">
+	            				<td align = "right" width = "90%" background = "<c:url value="/images/botCenter.gif"/>">
 	            					<input type="submit" class="button" name="save" value="<fmt:message key="button.save"/>"/>
         							<input type="submit" class="button" name="cancel" value="<fmt:message key="button.cancel"/>"/>
 	            				</td>
 	            				<td>
-	            					<img src="<c:url value="/images/dms/botRight.gif"/>"/>
+	            					<img src="<c:url value="/images/botRight.gif"/>"/>
 	            				</td>
 	            			</tr>
 	            		</table>

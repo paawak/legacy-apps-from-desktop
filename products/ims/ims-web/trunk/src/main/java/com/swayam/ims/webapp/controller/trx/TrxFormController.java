@@ -15,6 +15,10 @@
 
 package com.swayam.ims.webapp.controller.trx;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 /**
@@ -25,7 +29,7 @@ public abstract class TrxFormController implements Controller {
 
     final TrxModeIndicator modeIndicator;
 
-    String formView;
+    private String formView;
 
     public TrxFormController(TrxModeIndicator modeIndicator) {
         this.modeIndicator = modeIndicator;
@@ -33,6 +37,17 @@ public abstract class TrxFormController implements Controller {
 
     public final void setFormView(String formView) {
         this.formView = formView;
+    }
+
+    public ModelAndView handleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView modelNView = new ModelAndView(formView);
+
+        modelNView.addObject("isPurchaseMode", modeIndicator.isPurchaseMode());
+
+        return modelNView;
+
     }
 
 }

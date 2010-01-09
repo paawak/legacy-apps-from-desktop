@@ -30,12 +30,13 @@ public class SalesOrderFormController extends TrxFormController {
         super(modeIndicator);
     }
 
+    @Override
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         modeIndicator.setSalesMode();
 
-        return new ModelAndView(formView);
+        return super.handleRequest(request, response);
 
     }
 

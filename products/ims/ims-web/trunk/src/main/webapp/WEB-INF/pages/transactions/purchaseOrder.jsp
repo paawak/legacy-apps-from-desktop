@@ -1,8 +1,17 @@
 <%@ include file="/common/taglibs.jsp"%>
 
+<c:choose>
+	<c:when test="${isPurchaseMode == true}">
+	    <c:set var="title" scope="page" value="menu.trx.po.title"/>
+	</c:when>
+	<c:otherwise>
+	    <c:set var="title" scope="page" value="menu.trx.so.title"/>
+	</c:otherwise>
+</c:choose>
+
 <head>
-    <title><fmt:message key="menu.trx.po.title"/></title>
-    <meta name="heading" content="<fmt:message key='menu.trx.po.title'/>"/>
+    <title><fmt:message key="${title}"/></title>
+    <meta name="heading" content="<fmt:message key='${title}'/>"/>
     
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 

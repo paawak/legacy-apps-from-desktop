@@ -198,8 +198,12 @@
             private function getModeResultHandler(event:ResultEvent):void {
             	
             	var purchaseOrderMode:Boolean = Boolean(event.result);
-            	
-            	Alert.show("" + purchaseOrderMode);
+            
+            	if (purchaseOrderMode) {
+            		lbPoId.text = "Purchase Order No.:";
+            	} else {
+            		lbPoId.text = "Sales Order No.:";
+            	}
             	
             }
             
@@ -213,7 +217,7 @@
     </mx:Script>
     
 
-	<mx:Label x="37" y="68" text="Purchase Order No.:"/>
+	<mx:Label id="lbPoId" x="37" y="68"/>
 	<mx:TextInput x="174" y="66" id="poId" editable="false"/>
 	
 	<!--<mx:Label x="454" y="68" text="Date:"/>-->

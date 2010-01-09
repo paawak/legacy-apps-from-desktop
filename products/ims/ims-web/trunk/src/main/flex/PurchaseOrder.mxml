@@ -53,8 +53,6 @@
 //                saveSuccessUrl = Application.application.parameters.saveSuccessUrl;
 //                cancelUrl = Application.application.parameters.cancelUrl;
                 
-                
-                
             }
             
             private function getPartyListResultHandler(event:ResultEvent):void {

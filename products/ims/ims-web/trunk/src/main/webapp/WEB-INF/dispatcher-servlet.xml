@@ -91,9 +91,10 @@
                 /masters/itemgroup.html=itemGroupController
                 /masters/new_item.html=itemController
                 /masters/party.html=partyController
+                /masters/items.html=itemListController
                 /masters/accountgroup.html=accountGroupFormController
                 /transactions/purchaseorder.html=purchaseOrderFormController
-                /masters/items.html=itemListController
+                /transactions/salesorder.html=salesOrderFormController
             </value>
         </property>
         <property name="order" value="0"/>
@@ -148,13 +149,22 @@
         <property name="cancelView" value="redirect:/mainMenu.html"/>
     </bean>
     
+    <bean id="modeIndicator" class="com.swayam.ims.webapp.controller.trx.TrxModeIndicator">
+    </bean>
+    
     <bean id="purchaseOrderHelper" class="com.swayam.ims.webapp.controller.trx.PurchaseOrderHelper">
         <constructor-arg ref="purchaseOrderService"/>
     </bean>    
     
      <bean id="purchaseOrderFormController" class="com.swayam.ims.webapp.controller.trx.PurchaseOrderFormController">
+        <constructor-arg ref="modeIndicator"/>
         <property name="formView" value="transactions/purchaseOrder"/>
-    </bean>      
+    </bean>
+    
+    <bean id="salesOrderFormController" class="com.swayam.ims.webapp.controller.trx.SalesOrderFormController">
+        <constructor-arg ref="modeIndicator"/>
+        <property name="formView" value="transactions/purchaseOrder"/>
+    </bean>          
     
     <!-- *******************     START flex       **************************** -->
     
@@ -171,6 +181,7 @@
     <flex:remoting-destination ref="itemDao"/>
     <flex:remoting-destination ref="partyDao"/>
     <flex:remoting-destination ref="purchaseOrderHelper"/>
+    <flex:remoting-destination ref="modeIndicator"/>
     
     <bean class="org.springframework.flex.servlet.MessageBrokerHandlerAdapter"/>
     

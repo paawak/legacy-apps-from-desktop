@@ -23,6 +23,7 @@
         
         <Menu name="TransactionMenu" title="trx.title" roles="ROLE_ADMIN,ROLE_USER">
             <Item name="PurchaseOrder" title="menu.trx.po.title" page="/transactions/purchaseorder.html"/>
+            <Item name="SalesOrder" title="menu.trx.so.title" page="/transactions/salesorder.html"/>
         </Menu>
         
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="ROLE_ADMIN,ROLE_USER"/>

@@ -24,16 +24,16 @@ import org.springframework.web.servlet.ModelAndView;
  * 
  * @author paawak
  */
-public class PurchaseOrderFormController extends TrxFormController {
+public class SalesOrderFormController extends TrxFormController {
 
-    public PurchaseOrderFormController(TrxModeIndicator modeIndicator) {
+    public SalesOrderFormController(TrxModeIndicator modeIndicator) {
         super(modeIndicator);
     }
 
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        modeIndicator.setPurchaseMode();
+        modeIndicator.setSalesMode();
 
         return new ModelAndView(formView);
 

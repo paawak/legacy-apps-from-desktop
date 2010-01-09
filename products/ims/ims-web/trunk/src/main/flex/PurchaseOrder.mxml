@@ -39,12 +39,21 @@
                 
                 purchaseOrderHelperRO = new RemoteObject();
                 purchaseOrderHelperRO.destination = "purchaseOrderHelper";
+                purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
 //                purchaseOrderHelperRO.addEventListener(ResultEvent.RESULT, getTradeIdResultHandler);
 //                purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
 //                purchaseOrderHelperRO.getNewPurchaseOrderId();
                 
+                var modeIndicatorRO:RemoteObject = new RemoteObject();
+                modeIndicatorRO.destination = "modeIndicator";
+                modeIndicatorRO.addEventListener(FaultEvent.FAULT, faultHandler);
+                modeIndicatorRO.isPurchaseMode.addEventListener(ResultEvent.RESULT, getModeResultHandler);
+                modeIndicatorRO.getOperation("isPurchaseMode").send();
+                
 //                saveSuccessUrl = Application.application.parameters.saveSuccessUrl;
 //                cancelUrl = Application.application.parameters.cancelUrl;
+                
+                
                 
             }
             
@@ -159,7 +168,6 @@
             		} else {
             		
             			purchaseOrderHelperRO.savePurchaseOrder.addEventListener(ResultEvent.RESULT, getSaveResultHandler);
-            			purchaseOrderHelperRO.addEventListener(FaultEvent.FAULT, faultHandler);
             			purchaseOrderHelperRO.getOperation("savePurchaseOrder").send(clientArray[client.selectedIndex].data, 
             					Number(totalPrice.text), 0, itemsArray);
             			
@@ -186,6 +194,14 @@
             		Alert.show("Sorry, could not save data. Please try again.");
             		
             	}
+            	
+            }
+            
+            private function getModeResultHandler(event:ResultEvent):void {
+            	
+            	var purchaseOrderMode:Boolean = Boolean(event.result);
+            	
+            	Alert.show("" + purchaseOrderMode);
             	
             }
             

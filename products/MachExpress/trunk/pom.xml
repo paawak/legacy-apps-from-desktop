@@ -15,9 +15,11 @@
 					<!--<includes> <include>**/*.properties</include> </includes>-->
 				<excludes> 
 					<exclude>MANIFEST.MF</exclude>
-					<exclude>controller/props/CommonProps.properties</exclude>
 				</excludes>
 			</resource>
+			<resource>
+                <directory>props</directory>
+            </resource>
 		</resources>
 		<testResources>
 			<testResource>

@@ -15,7 +15,8 @@
             import flash.net.URLRequest;
             
             import com.swayam.ims.webapp.flex.trx.po.ItemEvent;
-            import com.swayam.ims.webapp.flex.trx.po.ItemSelectionDialog;
+            import com.swayam.ims.webapp.flex.trx.po.PurchaseItemSelectionDialog;
+            import com.swayam.ims.webapp.flex.trx.po.SalesItemSelectionDialog;
             
 
             private static var saveSuccessUrl:String = "/transactions/purchaseorder.html";
@@ -28,6 +29,8 @@
             private var itemsArray:ArrayCollection = new ArrayCollection();
             
             private var purchaseOrderHelperRO:RemoteObject;
+            
+            private var purchaseOrderMode:Boolean;
             
             private function initData():void {
             
@@ -77,9 +80,21 @@
             private function showAddItemDialog():void {
                 // Create a modal TitleWindow container.
                 //var itemWindow:IFlexDisplayObject = PopUpManager.createPopUp(this, ItemSelectDialog, true);
-            	var itemSelectionPopup:ItemSelectionDialog = ItemSelectionDialog (PopUpManager.createPopUp(this, ItemSelectionDialog, true));
-            	PopUpManager.centerPopUp(itemSelectionPopup);
-            	itemSelectionPopup.addEventListener(ItemEvent.EVENT_ITEM_ADDED, itemSelected);  
+            	
+            	if (purchaseOrderMode) {
+            		
+	            	var purchaseItemSelectionPopup:PurchaseItemSelectionDialog = PurchaseItemSelectionDialog (PopUpManager.createPopUp(this, PurchaseItemSelectionDialog, true));
+	            	PopUpManager.centerPopUp(purchaseItemSelectionPopup);
+	            	purchaseItemSelectionPopup.addEventListener(ItemEvent.EVENT_ITEM_ADDED, itemSelected);
+	            	
+            	} else {
+               		
+	            	var salesItemSelectionPopup:SalesItemSelectionDialog = SalesItemSelectionDialog (PopUpManager.createPopUp(this, SalesItemSelectionDialog, true));
+	            	PopUpManager.centerPopUp(salesItemSelectionPopup);
+	            	salesItemSelectionPopup.addEventListener(ItemEvent.EVENT_ITEM_ADDED, itemSelected);
+            		
+            	}
+            	
             }
 
             private function itemSelected(event:ItemEvent):void { 
@@ -197,7 +212,7 @@
             
             private function getModeResultHandler(event:ResultEvent):void {
             	
-            	var purchaseOrderMode:Boolean = Boolean(event.result);
+            	purchaseOrderMode = Boolean(event.result);
             
             	if (purchaseOrderMode) {
             		lbPoId.text = "Purchase Order No.:";

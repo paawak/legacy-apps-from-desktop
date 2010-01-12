@@ -26,7 +26,7 @@ package com.swayam.ims.webapp.flex.trx.po {
      */
     [Event(name="ItemAdded", type="com.swayam.ims.webapp.flex.trx.po.ItemEvent")]
 
-    public class ItemSelectionDialog extends TitleWindow {
+    public class SalesItemSelectionDialog extends TitleWindow {
     	
         [Bindable]
         private var itemsArray:Array = new Array();
@@ -34,11 +34,8 @@ package com.swayam.ims.webapp.flex.trx.po {
         private var cbItemList:ComboBox;
         private var txtPrice:TextInput;
         private var txtQty:TextInput;
-        private var txtBatch:TextInput;
-        private var dtManufactureDate:DateField;
-        private var dtExpiryDate:DateField;
     
-        public function ItemSelectionDialog() {
+        public function SalesItemSelectionDialog() {
         	
             initData();
             initComponents();
@@ -85,7 +82,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             
             //cost price
             var lbItemPrice:Label = new Label();
-            lbItemPrice.text = "Price:*";
+            lbItemPrice.text = "Price:";
             lbItemPrice.x = xPos1;
             lbItemPrice.y = 110;
             addChild(lbItemPrice);
@@ -94,7 +91,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             txtPrice.x = xPos2;
             txtPrice.y = 110;
             txtPrice.width = width;
-            txtPrice.restrict = "[0-9.]";
+            txtPrice.editable = false;
             addChild(txtPrice);
             
             //opening stock
@@ -111,49 +108,10 @@ package com.swayam.ims.webapp.flex.trx.po {
             txtQty.restrict = "[0-9]";
             addChild(txtQty);
             
-            //batch no.
-            var lbBatch:Label = new Label();
-            lbBatch.text = "Batch No.:";
-            lbBatch.x = xPos1;
-            lbBatch.y = 210;
-            addChild(lbBatch);
-            
-            txtBatch = new TextInput();
-            txtBatch.x = xPos2;
-            txtBatch.y = 210;
-            txtBatch.width = width;
-            addChild(txtBatch);
-            
-            //maufacture date
-            var lbManufactureDate:Label = new Label();
-            lbManufactureDate.text = "Manufactured On:";
-            lbManufactureDate.x = xPos1;
-            lbManufactureDate.y = 260;
-            addChild(lbManufactureDate);
-            
-            dtManufactureDate = new DateField();
-            dtManufactureDate.x = xPos2;
-            dtManufactureDate.y = 260;
-            dtManufactureDate.width = width;
-            addChild(dtManufactureDate);
-            
-            //expiry date
-            var lbExpiryDate:Label = new Label();
-            lbExpiryDate.text = "Expiry Date:";
-            lbExpiryDate.x = xPos1;
-            lbExpiryDate.y = 310;
-            addChild(lbExpiryDate);
-            
-            dtExpiryDate = new DateField();
-            dtExpiryDate.x = xPos2;
-            dtExpiryDate.y = 310;
-            dtExpiryDate.width = width;
-            addChild(dtExpiryDate);
-            
             var btCancel:Button = new Button();
             btCancel.label = "Cancel";
             btCancel.x = xPos1;
-            btCancel.y = 360;
+            btCancel.y = 210;
             btCancel.width = 80;
             btCancel.addEventListener(MouseEvent.CLICK, closeOnClick);
             addChild(btCancel);
@@ -161,7 +119,7 @@ package com.swayam.ims.webapp.flex.trx.po {
             var btAdd:Button = new Button();
             btAdd.label = "Add";
             btAdd.x = 330;
-            btAdd.y = 360;
+            btAdd.y = 210;
             btAdd.width = 80;
             btAdd.addEventListener(MouseEvent.CLICK, addAndClose);
             addChild(btAdd);
@@ -210,10 +168,6 @@ package com.swayam.ims.webapp.flex.trx.po {
         	
         	if (cbItemList.selectedItem == null) {
         		Alert.show("Select an Item");
-        	} else if (isNaN(Number(txtPrice.text))) {
-        		Alert.show("Enter a valid Price");
-        	} else if (Number(txtPrice.text) <= 0) {
-        		Alert.show("Price cannot be zero");
         	} else if (txtQty.text == null) {
         		Alert.show("Enter the quantity");
         	} else if (Number(txtQty.text) <= 0) {
@@ -224,9 +178,6 @@ package com.swayam.ims.webapp.flex.trx.po {
 	    		itemEvent._itemName = cbItemList.selectedItem["label"];
 	    		itemEvent._price = Number(txtPrice.text);
 	    		itemEvent._qty = int(txtQty.text);
-	    		itemEvent._batchNo = txtBatch.text;
-	    		itemEvent._manufactureDate = dtManufactureDate.selectedDate;
-	    		itemEvent._expiryDate = dtExpiryDate.selectedDate;
 	    	
 	    		dispatchEvent(itemEvent);
 	            close();

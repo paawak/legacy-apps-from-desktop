@@ -10,19 +10,22 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
-		<!-- for manifest entries -->
-		  <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.swayam.openoffice.test.LoadTest</mainClass>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+			<!-- for manifest entries -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.sun.star.lib.loader.Loader</mainClass>
+						</manifest>
+						<manifestEntries>
+							<Application-Class>FirstUnoContact</Application-Class>
+						</manifestEntries>
+						<!--<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>-->
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
@@ -32,15 +35,15 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<resources>
 			<resource>
@@ -75,11 +78,11 @@
 			<version>${openoffice.version}</version>
 		</dependency>
 		<dependency>
-            <groupId>com.sun.star.util</groupId>
-            <artifactId>loader</artifactId>
-            <version>${openoffice.version}</version>
-            <scope>test</scope>
-        </dependency>
+			<groupId>com.sun.star.util</groupId>
+			<artifactId>loader</artifactId>
+			<version>${openoffice.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -88,6 +91,6 @@
 		</dependency>
 	</dependencies>
 	<properties>
-	   <openoffice.version>3.1.0</openoffice.version>
+		<openoffice.version>3.1.0</openoffice.version>
 	</properties>
 </project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="var" path="M2_REPO/org/openoffice/juh/3.1.0/juh-3.1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/4.4/junit-4.4.jar" sourcepath="M2_REPO/junit/junit/4.4/junit-4.4-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/home/paawak/.m2/repository/junit/junit/4.4/junit-4.4-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/openoffice/jurt/3.1.0/jurt-3.1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/openoffice/ridl/3.1.0/ridl-3.1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/openoffice/unoil/3.1.0/unoil-3.1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.4"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

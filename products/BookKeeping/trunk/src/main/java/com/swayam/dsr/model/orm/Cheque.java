@@ -29,7 +29,7 @@ public class Cheque implements Serializable {
 
     private static final long serialVersionUID = 5942128218826292458L;
 
-    @Column(length = 10)
+    @Column(length = 25)
     private String chequeNo;
 
     @Column(length = 100)

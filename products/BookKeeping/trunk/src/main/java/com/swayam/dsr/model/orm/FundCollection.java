@@ -41,6 +41,9 @@ public class FundCollection implements Serializable {
     @Column(length = 3, nullable = false)
     private String flat;
 
+    @Column(nullable = false, precision = 8, scale = 2)
+    private float amountPaid;
+
     @Column
     private Date paidOn;
 
@@ -64,6 +67,14 @@ public class FundCollection implements Serializable {
 
     public void setFlat(String flat) {
         this.flat = flat;
+    }
+
+    public float getAmountPaid() {
+        return amountPaid;
+    }
+
+    public void setAmountPaid(float amountPaid) {
+        this.amountPaid = amountPaid;
     }
 
     public Date getPaidOn() {

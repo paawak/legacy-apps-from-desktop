@@ -15,14 +15,18 @@
 
 package com.swayam.dsr.migration.xls.read;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import com.swayam.dsr.model.orm.Cheque;
+import com.swayam.dsr.model.orm.FundCollection;
 
 /**
  * 
@@ -41,17 +45,24 @@ public class IncomeSheetReader {
 
     }
 
-    public void read(String sheetName) {
+    public List<FundCollection> read(String sheetName) {
+
+        List<FundCollection> fundCollectionList = new ArrayList<FundCollection>(
+                4);
 
         HSSFSheet sheet = excelBook.getSheet(sheetName);
 
         for (int rowNum = startFromRow;; rowNum++) {
 
+            FundCollection fundCollection = new FundCollection();
+
             HSSFRow row = sheet.getRow(rowNum);
 
-            String date = getCellContent(row, 1);
+            // the date is not in the correct format
+            // String date = getCellContent(row, 1);
 
             String description = getCellContent(row, 2);
+            fundCollection.setDescription(description);
 
             String amount = getCellContent(row, 3);
 
@@ -59,17 +70,28 @@ public class IncomeSheetReader {
                 break;
             }
 
-            String mode = getCellContent(row, 4);
+            fundCollection.setAmountPaid(Float.parseFloat(amount));
+
+            // String mode = getCellContent(row, 4);
 
             String chequeNum = getCellContent(row, 5);
 
-            String bankDetails = getCellContent(row, 6);
+            if (chequeNum != null && !"".equals(chequeNum.trim())) {
 
-            System.out.println("date=" + date + ", description=" + description
-                    + ", " + amount + ", mode=" + mode + ", chequeNum="
-                    + chequeNum + ", bankDetails=" + bankDetails);
+                Cheque cheque = new Cheque();
+                cheque.setChequeNo(chequeNum);
+                String bankDetails = getCellContent(row, 6);
+                cheque.setBank(bankDetails);
+
+                fundCollection.setCheque(cheque);
+
+            }
+
+            fundCollectionList.add(fundCollection);
 
         }
+
+        return fundCollectionList;
 
     }
 
@@ -103,18 +125,6 @@ public class IncomeSheetReader {
         }
 
         return content;
-
-    }
-
-    public static void main(String[] a) throws IOException {
-
-        // String file = "2008_FAIRMONT_COLLECTION.xls";
-        String file = "2009_FAIRMONT_COLLECTION.xls";
-
-        IncomeSheetReader incomeSheetReader = new IncomeSheetReader(
-                new FileInputStream("/bhandar/dsr-fairmont/accounts/" + file));
-
-        incomeSheetReader.read("306");
 
     }
 

@@ -1,0 +1,1 @@
+SELECT flat FLAT, paidon YEAR, SUM(amountpaid) TOTAL FROM fundcollection GROUP BY flat, paidon order by flat;

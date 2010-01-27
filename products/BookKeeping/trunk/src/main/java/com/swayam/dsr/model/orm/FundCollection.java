@@ -44,7 +44,7 @@ public class FundCollection implements Serializable {
     @Column(nullable = false, precision = 8, scale = 2)
     private float amountPaid;
 
-    @Column
+    @Column(nullable = false, columnDefinition = "date")
     private Date paidOn;
 
     @Column

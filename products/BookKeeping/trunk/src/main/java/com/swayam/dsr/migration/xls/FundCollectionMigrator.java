@@ -63,6 +63,8 @@ public class FundCollectionMigrator {
                     fundCollection.setFlat(flat);
                     Calendar cal = new GregorianCalendar();
                     cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, 0);
+                    cal.set(Calendar.DATE, 1);
                     fundCollection.setPaidOn(cal.getTime());
 
                     session.save(fundCollection);

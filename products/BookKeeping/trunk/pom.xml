@@ -10,14 +10,13 @@
     	<version>1.0.0</version>
     </parent>
     
-    <groupId>com.swayam.ims</groupId>
+    <groupId>com.swayam.dsr</groupId>
     <artifactId>BookKeeping</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Core Module for IMS</name>
+    <name>BookKeeping for DSR Fairmont</name>
     <description>
-    This is the core module for IMS. All business logic, database intercation, etc, happens here.
-    This module exposes a set of interfaces so the other modules, like the web module can use it.
+    Automates book keeping for the DSR Fairmont Apartment Owners' Association
     </description>
     
     <build>

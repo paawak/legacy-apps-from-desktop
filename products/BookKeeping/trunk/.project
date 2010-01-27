@@ -1,7 +1,6 @@
 <projectDescription>
   <name>BookKeeping</name>
-  <comment>This is the core module for IMS. All business logic, database intercation, etc, happens here.
-    This module exposes a set of interfaces so the other modules, like the web module can use it.</comment>
+  <comment>Automates book keeping for the DSR Fairmont Apartment Owners&apos; Association</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

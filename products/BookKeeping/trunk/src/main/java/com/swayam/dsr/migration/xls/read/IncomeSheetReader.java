@@ -108,9 +108,11 @@ public class IncomeSheetReader {
 
     public static void main(String[] a) throws IOException {
 
+        // String file = "2008_FAIRMONT_COLLECTION.xls";
+        String file = "2009_FAIRMONT_COLLECTION.xls";
+
         IncomeSheetReader incomeSheetReader = new IncomeSheetReader(
-                new FileInputStream(
-                        "/bhandar/dsr-fairmont/accounts/2008_FAIRMONT_COLLECTION.xls"));
+                new FileInputStream("/bhandar/dsr-fairmont/accounts/" + file));
 
         incomeSheetReader.read("306");
 

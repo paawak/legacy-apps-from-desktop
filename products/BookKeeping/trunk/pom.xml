@@ -11,7 +11,7 @@
     </parent>
     
     <groupId>com.swayam.ims</groupId>
-    <artifactId>ims-core</artifactId>
+    <artifactId>BookKeeping</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Core Module for IMS</name>

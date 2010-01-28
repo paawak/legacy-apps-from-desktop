@@ -17,7 +17,6 @@ package com.swayam.dsr.migration.xls;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -61,11 +60,13 @@ public class FundCollectionMigrator {
                     Session session = HibernateUtil.getSession();
 
                     fundCollection.setFlat(flat);
-                    Calendar cal = new GregorianCalendar();
-                    cal.set(Calendar.YEAR, year);
-                    cal.set(Calendar.MONTH, 0);
-                    cal.set(Calendar.DATE, 1);
-                    fundCollection.setPaidOn(cal.getTime());
+
+                    if (fundCollection.getPaidOn() == null) {
+
+                        fundCollection.setPaidOn(new GregorianCalendar(year, 0,
+                                1).getTime());
+
+                    }
 
                     session.save(fundCollection);
                     session.flush();

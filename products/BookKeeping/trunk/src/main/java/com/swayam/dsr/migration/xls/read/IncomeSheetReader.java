@@ -18,6 +18,8 @@ package com.swayam.dsr.migration.xls.read;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -58,8 +60,20 @@ public class IncomeSheetReader {
 
             HSSFRow row = sheet.getRow(rowNum);
 
-            // the date is not in the correct format
-            // String date = getCellContent(row, 1);
+            String date = getCellContent(row, 1);
+
+            if (date != null && !"".equals(date.trim())) {
+
+                // hack to have date in readble format
+                int dateInt = (int) Float.parseFloat(date);
+
+                Calendar cal = new GregorianCalendar(1899, 11, 30);
+
+                cal.add(Calendar.DATE, dateInt);
+
+                fundCollection.setPaidOn(cal.getTime());
+
+            }
 
             String description = getCellContent(row, 2);
             fundCollection.setDescription(description);

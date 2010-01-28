@@ -64,14 +64,21 @@ public class IncomeSheetReader {
 
             if (date != null && !"".equals(date.trim())) {
 
-                // hack to have date in readble format
-                int dateInt = (int) Float.parseFloat(date);
+                try {
 
-                Calendar cal = new GregorianCalendar(1899, 11, 30);
+                    // hack to have date in readble format
+                    int dateInt = (int) Float.parseFloat(date);
 
-                cal.add(Calendar.DATE, dateInt);
+                    Calendar cal = new GregorianCalendar(1899, 11, 30);
 
-                fundCollection.setPaidOn(cal.getTime());
+                    cal.add(Calendar.DATE, dateInt);
+
+                    fundCollection.setPaidOn(cal.getTime());
+
+                } catch (NumberFormatException e) {
+                    System.err.println("Could not parse date: sheet="
+                            + sheetName + ", rowNum=" + rowNum);
+                }
 
             }
 

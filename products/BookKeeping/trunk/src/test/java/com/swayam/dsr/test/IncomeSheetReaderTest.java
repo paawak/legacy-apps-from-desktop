@@ -46,7 +46,7 @@ public class IncomeSheetReaderTest {
     @Test
     public void testRead() {
 
-        List<FundCollection> fundCollectionList = incomeSheetReader.read("204");
+        List<FundCollection> fundCollectionList = incomeSheetReader.read("205");
 
         for (FundCollection fundCollection : fundCollectionList) {
             System.out.println(fundCollection.getPaidOn());

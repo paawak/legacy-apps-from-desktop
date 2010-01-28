@@ -18,14 +18,10 @@ package com.swayam.dsr.migration.xls.read;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.swayam.dsr.model.orm.Cheque;
 import com.swayam.dsr.model.orm.FundCollection;
@@ -34,16 +30,11 @@ import com.swayam.dsr.model.orm.FundCollection;
  * 
  * @author paawak
  */
-public class IncomeSheetReader {
-
-    private final HSSFWorkbook excelBook;
-
-    private int startFromRow;
+public class IncomeSheetReader extends SheetReader {
 
     public IncomeSheetReader(InputStream excelSheetContents) throws IOException {
 
-        excelBook = new HSSFWorkbook(excelSheetContents);
-        startFromRow = 6;
+        super(excelSheetContents, 6);
 
     }
 
@@ -62,24 +53,11 @@ public class IncomeSheetReader {
 
             String date = getCellContent(row, 1);
 
-            if (date != null && !"".equals(date.trim())) {
-
-                try {
-
-                    // hack to have date in readble format
-                    int dateInt = (int) Float.parseFloat(date);
-
-                    Calendar cal = new GregorianCalendar(1899, 11, 30);
-
-                    cal.add(Calendar.DATE, dateInt);
-
-                    fundCollection.setPaidOn(cal.getTime());
-
-                } catch (NumberFormatException e) {
-                    System.err.println("Could not parse date: sheet="
-                            + sheetName + ", rowNum=" + rowNum);
-                }
-
+            try {
+                fundCollection.setPaidOn(getDate(date));
+            } catch (NumberFormatException e) {
+                System.err.println("Could not parse date: sheet=" + sheetName
+                        + ", rowNum=" + rowNum);
             }
 
             String description = getCellContent(row, 2);
@@ -113,39 +91,6 @@ public class IncomeSheetReader {
         }
 
         return fundCollectionList;
-
-    }
-
-    private String getCellContent(HSSFRow row, int index) {
-
-        HSSFCell cell = row.getCell(index);
-
-        String content = null;
-
-        if (cell != null) {
-
-            int cellType = cell.getCellType();
-
-            switch (cellType) {
-            case HSSFCell.CELL_TYPE_NUMERIC:
-                content = String.valueOf(cell.getNumericCellValue());
-                break;
-            case HSSFCell.CELL_TYPE_STRING:
-                content = cell.getStringCellValue();
-                break;
-            case HSSFCell.CELL_TYPE_BOOLEAN:
-                content = String.valueOf(cell.getBooleanCellValue());
-                break;
-            case HSSFCell.CELL_TYPE_BLANK:
-                break;
-            default:
-                throw new UnsupportedOperationException("HssfCellType "
-                        + cellType + " not yet supported");
-            }
-
-        }
-
-        return content;
 
     }
 

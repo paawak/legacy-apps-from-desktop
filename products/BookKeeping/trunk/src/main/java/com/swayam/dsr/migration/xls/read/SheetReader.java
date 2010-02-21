@@ -43,9 +43,9 @@ abstract class SheetReader {
 
     }
 
-    String getCellContent(HSSFRow row, int index) {
+    String getCellContent(HSSFRow row, int columnIndex) {
 
-        HSSFCell cell = row.getCell(index);
+        HSSFCell cell = row.getCell(columnIndex);
 
         String content = null;
 
@@ -66,8 +66,9 @@ abstract class SheetReader {
             case HSSFCell.CELL_TYPE_BLANK:
                 break;
             default:
-                throw new UnsupportedOperationException("HssfCellType "
-                        + cellType + " not yet supported");
+                throw new UnsupportedOperationException("Column Index "
+                        + columnIndex + ": HssfCellType " + cellType
+                        + " not yet supported");
             }
 
         }

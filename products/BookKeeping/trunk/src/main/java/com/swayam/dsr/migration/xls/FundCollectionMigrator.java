@@ -34,7 +34,8 @@ public class FundCollectionMigrator {
 
     private static final String[] FLAT_PREFIX = { "G", "10", "20", "30" };
 
-    private static final String FUND_COLLECTION_EXCEL_PATH = "/bhandar/dsr-fairmont/accounts/FAIRMONT_COLLECTION_";
+    // private static final String FUND_COLLECTION_EXCEL_PATH = "/bhandar/dsr-fairmont/accounts/FAIRMONT_COLLECTION_";
+    private static final String FUND_COLLECTION_EXCEL_PATH = "/home/paawak/Desktop/fairmont/FAIRMONT_COLLECTION_";
 
     public void saveToDB() throws IOException {
         saveYear(2008);
@@ -52,30 +53,50 @@ public class FundCollectionMigrator {
 
                 String flat = pref + i;
 
-                List<FundCollection> fundCollectionList = incomeSheetReader
-                        .read(flat);
-
-                for (FundCollection fundCollection : fundCollectionList) {
-
-                    Session session = HibernateUtil.getSession();
-
-                    fundCollection.setFlat(flat);
-
-                    if (fundCollection.getPaidOn() == null) {
-
-                        fundCollection.setPaidOn(new GregorianCalendar(year, 0,
-                                1).getTime());
-
-                    }
-
-                    session.save(fundCollection);
-                    session.flush();
-                    session.close();
-
-                }
+                readFlat(incomeSheetReader, year, flat);
 
             }
 
+        }
+
+        readFlat(incomeSheetReader, year, "404");
+
+        readFlat(incomeSheetReader, year, "405");
+
+        readFlat(incomeSheetReader, year, "406");
+
+    }
+
+    private void readFlat(IncomeSheetReader incomeSheetReader, int year,
+            String flat) {
+
+        try {
+
+            List<FundCollection> fundCollectionList = incomeSheetReader
+                    .read(flat);
+
+            for (FundCollection fundCollection : fundCollectionList) {
+
+                Session session = HibernateUtil.getSession();
+
+                fundCollection.setFlat(flat);
+
+                if (fundCollection.getPaidOn() == null) {
+
+                    fundCollection.setPaidOn(new GregorianCalendar(year, 0, 1)
+                            .getTime());
+
+                }
+
+                session.save(fundCollection);
+                session.flush();
+                session.close();
+
+            }
+
+        } catch (Exception e) {
+            System.err.println("could not read " + flat + " for year " + year);
+            e.printStackTrace();
         }
 
     }

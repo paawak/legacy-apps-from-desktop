@@ -31,7 +31,8 @@ import com.swayam.dsr.util.HibernateUtil;
  */
 public class ExpensesMigrator {
 
-    private static final String EXPENSES_EXCEL_PATH = "/bhandar/dsr-fairmont/accounts/FAIRMONT_EXPENSES_MASTER.xls";
+    // private static final String EXPENSES_EXCEL_PATH = "/bhandar/dsr-fairmont/accounts/FAIRMONT_EXPENSES_MASTER.xls";
+    private static final String EXPENSES_EXCEL_PATH = "/home/paawak/Desktop/fairmont/FAIRMONT_EXPENSES_MASTER.xls";
 
     public void saveToDB() throws IOException {
 

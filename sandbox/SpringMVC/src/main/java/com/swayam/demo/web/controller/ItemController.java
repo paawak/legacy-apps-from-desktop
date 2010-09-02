@@ -20,6 +20,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,14 +39,35 @@ public class ItemController {
 
     private static final Logger LOG = Logger.getLogger(ItemController.class);
 
+    @InitBinder
+    public void initModel(ServletRequestDataBinder binder) {
+
+        LOG.info("");
+
+        Object target = binder.getTarget();
+
+        if (target instanceof ItemBean) {
+
+            ItemBean bean = (ItemBean) target;
+
+            if (bean.getItems() == null) {
+                populateBean(bean);
+            }
+
+        }
+
+    }
+
     @RequestMapping(value = "/showItems.htm", method = RequestMethod.GET)
     public ModelAndView showItemsPage() {
 
+        LOG.info("");
+
         ModelAndView model = new ModelAndView("Item");
 
-        ItemBean bean = getMockBean();
+        ItemBean bean = new ItemBean();
 
-        LOG.info(bean.getItems());
+        populateBean(bean);
 
         model.addObject("command", bean);
 
@@ -51,7 +75,20 @@ public class ItemController {
 
     }
 
-    private ItemBean getMockBean() {
+    @RequestMapping(value = "/checkout.htm", method = RequestMethod.POST)
+    public ModelAndView checkout(ItemBean formBean, BindingResult errors) {
+
+        LOG.info("");
+
+        ModelAndView model = new ModelAndView("Checkout");
+
+        model.addObject("command", formBean);
+
+        return model;
+
+    }
+
+    private void populateBean(ItemBean bean) {
 
         List<ItemRow> items = new ArrayList<ItemBean.ItemRow>();
 
@@ -72,11 +109,8 @@ public class ItemController {
         row3.setPrice(150.9f);
         items.add(row3);
 
-        ItemBean bean = new ItemBean();
-
         bean.setItems(items);
-
-        return bean;
+        bean.setTotalPrice(88.5f * 5);
 
     }
 

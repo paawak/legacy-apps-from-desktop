@@ -7,8 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Item</title>
-		<script type="text/javascript" src="js/item.js"></script>
+		<title>Checkout</title>
 	</head>
 	<body>
 	
@@ -27,20 +26,19 @@
 						<c:forEach var="item" items="${command.items}" varStatus="count">
 						<tr>
 							<td style="vertical-align:middle;">
-								<form:checkbox path="items[${count.index}].selected"/>
+								<c:out value="${count.count}"/>.&gt;
 							</td>
 							<td style="vertical-align:middle; color:green;">
 								<c:out value="${item.itemName}"/>
 							</td>
 							<td style="vertical-align:middle; color:blue;">
-								<input id="txtUnitPrice" type="text" readonly="readonly" value="${item.price}" size="4"/>
+								<c:out value="${item.price}"/>
 							</td>
 							<td style="vertical-align:middle;">
-								<form:input id="txtQuantity" path="items[${count.index}].quantity" size="3" 
-								onblur="updatePrice(txtItemPrice, txtQuantity, ${count.index}, ${item.price}, txtTotalPrice);"/>
+								<c:out value="${item.quantity}"/>
 							</td>
 							<td style="vertical-align:middle; color:blue;">
-								<input id="txtItemPrice" type="text" readonly="readonly" value="${item.price * item.quantity}" size="6"/>
+								<c:out value="${item.price * item.quantity}"/>
 							</td>
 						</tr>
 						</c:forEach>
@@ -52,13 +50,13 @@
 							<td style="vertical-align:middle; text-align:right; font-weight: bold;" colspan="3">
 								Total Price:
 							</td>
-							<td style="vertical-align:middle; text-align:center; color:blue;">
-								<form:input id="txtTotalPrice" path="totalPrice" readonly="true" size="6" />
+							<td style="vertical-align:middle; text-align:center; font-weight: bold; color:red;">
+								<c:out value="${command.totalPrice}"/>
 							</td>
 						</tr>
 						<tr>
 							<td style="vertical-align:middle; text-align:left; font-weight: bold;" colspan="5">
-								<input id="submit" type="submit" value="Submit"/>
+								<a href="#">Proceed to payment</a>
 							</td>
 						</tr>
 					</tbody>

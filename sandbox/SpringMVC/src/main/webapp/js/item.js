@@ -14,3 +14,12 @@ function updatePrice(txtItemPriceArray, txtQuantityArray, arrayIndex, unitPrice,
 	
 }
 
+function itemSelected(chkSelect, txtItemPriceArray, txtQuantityArray, arrayIndex, unitPrice, txtTotalPrice) {
+	
+	txtQuantityArray[arrayIndex].value = 0;
+	txtQuantityArray[arrayIndex].disabled = !chkSelect.checked;
+	
+	updatePrice(txtItemPriceArray, txtQuantityArray, arrayIndex, unitPrice, txtTotalPrice);
+	
+}
+

@@ -27,7 +27,8 @@
 						<c:forEach var="item" items="${command.items}" varStatus="count">
 						<tr>
 							<td style="vertical-align:middle;">
-								<form:checkbox path="items[${count.index}].selected"/>
+								<form:checkbox id="chkSelect" path="items[${count.index}].selected" 
+								onchange="itemSelected(chkSelect[${count.index}], txtItemPrice, txtQuantity, ${count.index}, ${item.price}, txtTotalPrice);"/>
 							</td>
 							<td style="vertical-align:middle; color:green;">
 								<c:out value="${item.itemName}"/>

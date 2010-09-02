@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,7 +40,7 @@ public class ItemController {
     private static final Logger LOG = Logger.getLogger(ItemController.class);
 
     @InitBinder
-    public void initModel(ServletRequestDataBinder binder) {
+    public void initModel(WebDataBinder binder) {
 
         LOG.info("");
 

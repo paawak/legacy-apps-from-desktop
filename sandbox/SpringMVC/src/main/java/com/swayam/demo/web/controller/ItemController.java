@@ -51,7 +51,7 @@ public class ItemController {
             ItemBean bean = (ItemBean) target;
 
             if (bean.getItems() == null) {
-                populateBean(bean);
+                populateBean(bean, false);
             }
 
         }
@@ -67,7 +67,7 @@ public class ItemController {
 
         ItemBean bean = new ItemBean();
 
-        populateBean(bean);
+        populateBean(bean, true);
 
         model.addObject("command", bean);
 
@@ -88,7 +88,7 @@ public class ItemController {
 
     }
 
-    private void populateBean(ItemBean bean) {
+    private void populateBean(ItemBean bean, boolean setQuantity) {
 
         List<ItemRow> items = new ArrayList<ItemBean.ItemRow>();
 
@@ -96,7 +96,11 @@ public class ItemController {
         row1.setSelected(true);
         row1.setItemName("Jhumroo CD");
         row1.setPrice(88.5f);
-        row1.setQuantity(5);
+
+        if (setQuantity) {
+            row1.setQuantity(5);
+        }
+
         items.add(row1);
 
         ItemRow row2 = new ItemRow();
@@ -110,7 +114,10 @@ public class ItemController {
         items.add(row3);
 
         bean.setItems(items);
-        bean.setTotalPrice(88.5f * 5);
+
+        if (setQuantity) {
+            bean.setTotalPrice(88.5f * 5);
+        }
 
     }
 

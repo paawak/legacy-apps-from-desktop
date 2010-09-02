@@ -17,7 +17,7 @@
 				cellspacing="2">
 					<tbody>
 						<tr>
-							<th style="vertical-align:top;">Select</th>
+							<th style="vertical-align:top;">Sl.</th>
 							<th style="vertical-align:top;">Item Name</th>
 							<th style="vertical-align:top;">Unit Price</th>
 							<th style="vertical-align:top;">Quantity</th>

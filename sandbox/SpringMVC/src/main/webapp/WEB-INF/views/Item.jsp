@@ -11,7 +11,15 @@
 		<script type="text/javascript" src="js/item.js"></script>
 	</head>
 	<body>
-	
+		<c:if test="${ not empty errors.allErrors }"> 
+		<div style="text-align:center; color:red;">
+			<ul>
+				<c:forEach var="error" items="${errors.allErrors}">
+					<li><spring:message code="${error.code}"  text="${error.defaultMessage}"/></li>
+				</c:forEach>
+			</ul>
+		</div>
+		</c:if>
 		<form:form commandName="command" method="post" action="checkout.htm">
 			<div>
 				<table style="text-align: left; width: 100%;" border="0" cellpadding="2"
@@ -34,10 +42,10 @@
 								<c:out value="${item.itemName}"/>
 							</td>
 							<td style="vertical-align:middle; color:blue;">
-								<input id="txtUnitPrice" type="text" readonly="readonly" value="${item.price}" size="4"/>
+								<input id="txtUnitPrice" type="text" disabled="disabled" value="${item.price}" size="4"/>
 							</td>
-							<td style="vertical-align:middle;">
-								<form:input id="txtQuantity" path="items[${count.index}].quantity" size="3" 
+							<td style="vertical-align:middle;">								
+								<form:input id="txtQuantity" path="items[${count.index}].quantity" size="3" disabled="${!item.selected}"
 								onblur="updatePrice(txtItemPrice, txtQuantity, ${count.index}, ${item.price}, txtTotalPrice);"/>
 							</td>
 							<td style="vertical-align:middle; color:blue;">

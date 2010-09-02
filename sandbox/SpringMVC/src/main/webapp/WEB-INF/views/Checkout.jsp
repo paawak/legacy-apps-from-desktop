@@ -23,10 +23,12 @@
 							<th style="vertical-align:top;">Quantity</th>
 							<th style="vertical-align:top;">Price</th>
 						</tr>
-						<c:forEach var="item" items="${command.items}" varStatus="count">
+						<c:set var="loopCount" value="1"/>
+						<c:forEach var="item" items="${command.items}">
+						<c:if test="${item.quantity > 0}">
 						<tr>
 							<td style="vertical-align:middle;">
-								<c:out value="${count.count}"/>.&gt;
+								<c:out value="${loopCount}"/>.&gt;
 							</td>
 							<td style="vertical-align:middle; color:green;">
 								<c:out value="${item.itemName}"/>
@@ -41,6 +43,8 @@
 								<c:out value="${item.price * item.quantity}"/>
 							</td>
 						</tr>
+						<c:set var="loopCount" value="${loopCount + 1}"/>
+						</c:if>
 						</c:forEach>
 						<tr>
 							<td style="height:30px;">

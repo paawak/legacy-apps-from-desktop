@@ -18,9 +18,13 @@ package com.swayam.demo.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +51,33 @@ public class ItemController {
         Object target = binder.getTarget();
 
         if (target instanceof ItemBean) {
+
+            if (binder.getValidator() == null) {
+
+                binder.setValidator(new Validator() {
+
+                    @Override
+                    public void validate(Object target, Errors errors) {
+
+                        LOG.info("");
+
+                        ItemBean bean = (ItemBean) target;
+
+                        if (bean.getTotalPrice() == 0) {
+                            errors.rejectValue("totalPrice", "noItemsSelected",
+                                    "You have not selected any items");
+                        }
+
+                    }
+
+                    @Override
+                    public boolean supports(Class<?> clazz) {
+                        return clazz == ItemBean.class;
+                    }
+
+                });
+
+            }
 
             ItemBean bean = (ItemBean) target;
 
@@ -76,13 +107,20 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/checkout.htm", method = RequestMethod.POST)
-    public ModelAndView checkout(ItemBean formBean, BindingResult errors) {
+    public ModelAndView checkout(@Valid ItemBean formBean, BindingResult errors) {
 
         LOG.info("");
 
-        ModelAndView model = new ModelAndView("Checkout");
+        ModelAndView model = new ModelAndView();
 
         model.addObject("command", formBean);
+
+        if (errors.hasErrors()) {
+            model.setViewName("Item");
+            model.addObject("errors", errors);
+        } else {
+            model.setViewName("Checkout");
+        }
 
         return model;
 

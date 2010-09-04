@@ -15,10 +15,6 @@
 
 package com.swayam.demo.web.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -184,49 +180,6 @@ public class ItemController {
             Calendar cal = new GregorianCalendar();
             cal.add(Calendar.DATE, 15);
             bean.setExpectedDelivery(cal.getTime());
-        }
-
-    }
-
-    private static class DateEditorSupport extends PropertyEditorSupport {
-
-        private final Format formatter;
-
-        DateEditorSupport(String dateFormat) {
-            formatter = new SimpleDateFormat(dateFormat);
-        }
-
-        public String getAsText() {
-
-            String date = null;
-
-            Object value = getValue();
-
-            if (value instanceof Date) {
-
-                date = formatter.format(value);
-
-            } else {
-                throw new java.lang.IllegalArgumentException("Expecting a "
-                        + Date.class.getName() + " class, got "
-                        + value.getClass().getName());
-            }
-
-            return date;
-
-        }
-
-        public void setAsText(String text) {
-
-            try {
-
-                Date date = (Date) formatter.parseObject(text);
-                setValue(date);
-
-            } catch (ParseException e) {
-                LOG.fatal("error setting date for String: " + text, e);
-            }
-
         }
 
     }

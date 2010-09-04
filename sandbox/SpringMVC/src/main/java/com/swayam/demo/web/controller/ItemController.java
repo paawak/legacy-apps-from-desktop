@@ -15,7 +15,14 @@
 
 package com.swayam.demo.web.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -29,6 +36,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.swayam.demo.web.formbean.ItemBean;
@@ -44,9 +52,12 @@ public class ItemController {
     private static final Logger LOG = Logger.getLogger(ItemController.class);
 
     @InitBinder
-    public void initModel(WebDataBinder binder) {
+    public void initModel(WebDataBinder binder, WebRequest webRequest) {
 
         LOG.info("");
+
+        binder.registerCustomEditor(Date.class, new DateEditorSupport(
+                "dd/MM/yyyy"));
 
         Object target = binder.getTarget();
 
@@ -125,7 +136,7 @@ public class ItemController {
 
     }
 
-    private void populateBean(ItemBean bean, boolean setQuantity) {
+    private void populateBean(ItemBean bean, boolean fromGet) {
 
         List<ItemRow> items = new ArrayList<ItemBean.ItemRow>();
 
@@ -134,7 +145,7 @@ public class ItemController {
         row1.setItemName("Jhumroo CD");
         row1.setPrice(88.5f);
 
-        if (setQuantity) {
+        if (fromGet) {
             row1.setQuantity(5);
         }
 
@@ -152,8 +163,57 @@ public class ItemController {
 
         bean.setItems(items);
 
-        if (setQuantity) {
+        if (fromGet) {
             bean.setTotalPrice(88.5f * 5);
+        }
+
+        if (fromGet) {
+            Calendar cal = new GregorianCalendar();
+            cal.add(Calendar.DATE, 15);
+            bean.setExpectedDelivery(cal.getTime());
+        }
+
+    }
+
+    private static class DateEditorSupport extends PropertyEditorSupport {
+
+        private final Format formatter;
+
+        DateEditorSupport(String dateFormat) {
+            formatter = new SimpleDateFormat(dateFormat);
+        }
+
+        public String getAsText() {
+
+            String date = null;
+
+            Object value = getValue();
+
+            if (value instanceof Date) {
+
+                date = formatter.format(value);
+
+            } else {
+                throw new java.lang.IllegalArgumentException("Expecting a "
+                        + Date.class.getName() + " class, got "
+                        + value.getClass().getName());
+            }
+
+            return date;
+
+        }
+
+        public void setAsText(String text) {
+
+            try {
+
+                Date date = (Date) formatter.parseObject(text);
+                setValue(date);
+
+            } catch (ParseException e) {
+                LOG.fatal("error setting date for String: " + text, e);
+            }
+
         }
 
     }

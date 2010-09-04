@@ -66,6 +66,14 @@
 							</td>
 						</tr>
 						<tr>
+							<td style="vertical-align:middle; text-align:right; font-weight: bold;" colspan="3">
+								Expected Delivery:
+							</td>
+							<td style="vertical-align:middle; text-align:center; color:blue;">
+								<form:input id="expectedDelivery" path="expectedDelivery" size="12" maxlength="10" />
+							</td>
+						</tr>
+						<tr>
 							<td style="vertical-align:middle; text-align:left; font-weight: bold;" colspan="5">
 								<input id="submit" type="submit" value="Submit"/>
 							</td>

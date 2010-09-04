@@ -15,6 +15,7 @@
 
 package com.swayam.demo.web.formbean;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class ItemBean {
 
     private float totalPrice;
 
-    private String shippingAddress;
+    private Date expectedDelivery;
 
     public List<ItemRow> getItems() {
         return items;
@@ -45,12 +46,12 @@ public class ItemBean {
         this.totalPrice = totalPrice;
     }
 
-    public String getShippingAddress() {
-        return shippingAddress;
+    public Date getExpectedDelivery() {
+        return expectedDelivery;
     }
 
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
+    public void setExpectedDelivery(Date expectedDelivery) {
+        this.expectedDelivery = expectedDelivery;
     }
 
     public static class ItemRow {

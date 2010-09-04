@@ -34,6 +34,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
@@ -52,63 +53,73 @@ public class ItemController {
     private static final Logger LOG = Logger.getLogger(ItemController.class);
 
     @InitBinder
-    public void initModel(WebDataBinder binder, WebRequest webRequest) {
+    public void initBinder(WebDataBinder binder, WebRequest webRequest) {
 
         LOG.info("");
 
         binder.registerCustomEditor(Date.class, new DateEditorSupport(
                 "dd/MM/yyyy"));
 
-        Object target = binder.getTarget();
+        if (binder.getTarget() instanceof ItemBean) {
 
-        if (target instanceof ItemBean) {
+            binder.setValidator(new Validator() {
 
-            if (binder.getValidator() == null) {
+                @Override
+                public void validate(Object target, Errors errors) {
 
-                binder.setValidator(new Validator() {
+                    LOG.info("");
 
-                    @Override
-                    public void validate(Object target, Errors errors) {
+                    ItemBean bean = (ItemBean) target;
 
-                        LOG.info("");
-
-                        ItemBean bean = (ItemBean) target;
-
-                        if (bean.getTotalPrice() == 0) {
-                            errors.rejectValue("totalPrice", "noItemsSelected");
-                        }
-
+                    if (bean.getTotalPrice() == 0) {
+                        errors.rejectValue("totalPrice", "noItemsSelected");
                     }
 
-                    @Override
-                    public boolean supports(Class<?> clazz) {
-                        return clazz == ItemBean.class;
-                    }
+                }
 
-                });
+                @Override
+                public boolean supports(Class<?> clazz) {
+                    return clazz == ItemBean.class;
+                }
 
-            }
-
-            ItemBean bean = (ItemBean) target;
-
-            if (bean.getItems() == null) {
-                populateBean(bean, false);
-            }
+            });
 
         }
 
     }
 
-    @RequestMapping(value = "/showItems.htm", method = RequestMethod.GET)
-    public ModelAndView showItemsPage() {
+    @ModelAttribute("getBean")
+    public ItemBean initBeanForGet() {
 
         LOG.info("");
-
-        ModelAndView model = new ModelAndView("Item");
 
         ItemBean bean = new ItemBean();
 
         populateBean(bean, true);
+
+        return bean;
+
+    }
+
+    @ModelAttribute("postBean")
+    public ItemBean initBeanForPost() {
+
+        LOG.info("");
+
+        ItemBean bean = new ItemBean();
+
+        populateBean(bean, true);
+
+        return bean;
+
+    }
+
+    @RequestMapping(value = "/showItems.htm", method = RequestMethod.GET)
+    public ModelAndView showItemsPage(@ModelAttribute("getBean") ItemBean bean) {
+
+        LOG.info("");
+
+        ModelAndView model = new ModelAndView("Item");
 
         model.addObject("command", bean);
 
@@ -117,7 +128,9 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/checkout.htm", method = RequestMethod.POST)
-    public ModelAndView checkout(@Valid ItemBean formBean, BindingResult errors) {
+    public ModelAndView checkout(
+            @Valid @ModelAttribute("postBean") ItemBean formBean,
+            BindingResult errors) {
 
         LOG.info("");
 

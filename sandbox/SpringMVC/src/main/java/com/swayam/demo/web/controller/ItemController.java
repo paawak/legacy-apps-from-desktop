@@ -26,8 +26,6 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,27 +56,7 @@ public class ItemController {
 
         if (binder.getTarget() instanceof ItemBean) {
 
-            binder.setValidator(new Validator() {
-
-                @Override
-                public void validate(Object target, Errors errors) {
-
-                    LOG.info("");
-
-                    ItemBean bean = (ItemBean) target;
-
-                    if (bean.getTotalPrice() == 0) {
-                        errors.rejectValue("totalPrice", "noItemsSelected");
-                    }
-
-                }
-
-                @Override
-                public boolean supports(Class<?> clazz) {
-                    return clazz == ItemBean.class;
-                }
-
-            });
+            binder.setValidator(new ItemValidator());
 
         }
 

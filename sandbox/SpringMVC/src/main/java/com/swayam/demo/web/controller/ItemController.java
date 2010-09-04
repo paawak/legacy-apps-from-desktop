@@ -64,8 +64,7 @@ public class ItemController {
                         ItemBean bean = (ItemBean) target;
 
                         if (bean.getTotalPrice() == 0) {
-                            errors.rejectValue("totalPrice", "noItemsSelected",
-                                    "You have not selected any items");
+                            errors.rejectValue("totalPrice", "noItemsSelected");
                         }
 
                     }

@@ -18,5 +18,15 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>com.swayam.demo.web.res.Messages</value>
+			</list>
+		</property>
+	</bean>
+
+
 </beans>           

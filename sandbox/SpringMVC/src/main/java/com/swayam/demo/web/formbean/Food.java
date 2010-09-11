@@ -15,6 +15,7 @@
 
 package com.swayam.demo.web.formbean;
 
+
 /**
  * 
  * @author paawak
@@ -23,8 +24,8 @@ public enum Food {
 
     ALL(null, "All"),
 
-    RICE(ALL, "Rice"), AUS(RICE, "Aus"), BASMATI(RICE, "Basmati"), SONA_MASURI(
-            RICE, "Sona Masuri"), BORO(RICE, "Boro"),
+    RICE(ALL, "Rice"), AUS(RICE, "Aus"), BASMATI(RICE, "Basmati"), SONAMASURI(
+            RICE, "SonaMasuri"), BORO(RICE, "Boro"),
 
     MANGOES(ALL, "Mangoes"), LANGDA(MANGOES, "Langda"), FOJLI(MANGOES, "Fojli"), DUSSERI(
             MANGOES, "Dusseri"), ALFONSO(MANGOES, "Alfonso"),
@@ -38,6 +39,10 @@ public enum Food {
     private Food(Food parent, String label) {
         this.parent = parent;
         this.label = label;
+    }
+
+    public static Food parse(String food) {
+        return Enum.valueOf(Food.class, food.toUpperCase());
     }
 
     @Override

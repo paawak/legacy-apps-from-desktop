@@ -15,11 +15,15 @@
 
 package com.swayam.demo.web.controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.swayam.demo.web.formbean.CheckBoxDemoBean;
@@ -32,16 +36,32 @@ import com.swayam.demo.web.formbean.Food;
 @Controller
 public class CheckBoxDemoController {
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest webRequest) {
+
+        binder.registerCustomEditor(Food.class, new PropertyEditorSupport() {
+
+            public void setAsText(String text) {
+
+                setValue(Food.parse(text));
+
+            }
+
+        });
+
+    }
+
     @RequestMapping("/checkboxdemo.htm")
-    public ModelAndView show() {
+    public ModelAndView show(CheckBoxDemoBean checkBoxDemoBean) {
 
         ModelAndView model = new ModelAndView("CheckBoxDemo");
 
-        List<Food> foods = new ArrayList<Food>();
-        foods.add(Food.ALL);
-
-        CheckBoxDemoBean checkBoxDemoBean = new CheckBoxDemoBean();
-        checkBoxDemoBean.setSelectedFoodItems(foods);
+        if (checkBoxDemoBean.getSelectedFoodItems() == null) {
+            List<Food> foods = new ArrayList<Food>();
+            foods.add(Food.LANGDA);
+            foods.add(Food.BORO);
+            checkBoxDemoBean.setSelectedFoodItems(foods);
+        }
 
         model.addObject("command", checkBoxDemoBean);
 

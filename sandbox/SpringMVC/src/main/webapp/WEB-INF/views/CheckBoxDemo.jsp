@@ -38,8 +38,11 @@
 		<td style="color:red;"><form:checkbox path="selectedFoodItems" value="<%=Food.WELLINGTON%>" label="<%=Food.WELLINGTON%>"/></td>
 	</tr>
 	<tr>
-		<td style="color:green;"><form:checkbox path="selectedFoodItems" value="<%=Food.SONA_MASURI%>" label="<%=Food.SONA_MASURI%>"/></td>
+		<td style="color:green;"><form:checkbox path="selectedFoodItems" value="<%=Food.SONAMASURI%>" label="<%=Food.SONAMASURI%>"/></td>
 		<td style="color:blue;" colspan="2"><form:checkbox path="selectedFoodItems" value="<%=Food.ALFONSO%>" label="<%=Food.ALFONSO%>"/></td>
+	</tr>
+	<tr>
+		<td style="text-align:center;" colspan="3"><input type="submit" value="Submit"/></td>
 	</tr>
 </table>
 </form:form>

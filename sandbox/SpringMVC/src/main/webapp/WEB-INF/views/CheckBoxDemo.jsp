@@ -15,30 +15,31 @@
 <form:form commandName="command" method="post">
 <table align="center"">
 	<tr>
-		<td colspan="4"><form:checkbox path="selectedFoodItems" value="<%=Food.ALL%>" label="<%=Food.ALL%>"/></td>
+		<th style="text-align:left;" colspan="3"><form:checkbox path="selectedFoodItems" value="<%=Food.ALL%>" label="<%=Food.ALL%>"/></th>
 	</tr>
 	<tr>
-		<td>Rice</td>
-		<td>Mangoes</td>
-		<td>Apples</td>
-		<td>Oranges</td>
+		<th style="color:green; text-align:left;"><form:checkbox path="selectedFoodItems" value="<%=Food.RICE%>" label="<%=Food.RICE%>"/></th>
+		<th style="color:blue; text-align:left;"><form:checkbox path="selectedFoodItems" value="<%=Food.MANGOES%>" label="<%=Food.MANGOES%>"/></th>
+		<th style="color:red; text-align:left;"><form:checkbox path="selectedFoodItems" value="<%=Food.ORANGES%>" label="<%=Food.ORANGES%>"/></th>
 	</tr>
 	<tr>
-		<td>Aus</td>
-		<td>Basmati</td>
-		<td>Sona Masuri</td>
-		<td>Boro</td>
+		<td style="color:green;"><form:checkbox path="selectedFoodItems" value="<%=Food.AUS%>" label="<%=Food.AUS%>"/></td>
+		<td style="color:blue;"><form:checkbox path="selectedFoodItems" value="<%=Food.LANGDA%>" label="<%=Food.LANGDA%>"/></td>
+		<td style="color:red;"><form:checkbox path="selectedFoodItems" value="<%=Food.NAGPUR%>" label="<%=Food.NAGPUR%>"/></td>
 	</tr>
 	<tr>
-		<td>Langda</td>
-		<td>Fojli</td>
-		<td>Dusseri</td>
-		<td>Alfonso</td>
+		<td style="color:green;"><form:checkbox path="selectedFoodItems" value="<%=Food.BORO%>" label="<%=Food.BORO%>"/></td>
+		<td style="color:blue;"><form:checkbox path="selectedFoodItems" value="<%=Food.FOJLI%>" label="<%=Food.FOJLI%>"/></td>
+		<td style="color:red;"><form:checkbox path="selectedFoodItems" value="<%=Food.DARJEELING%>" label="<%=Food.DARJEELING%>"/></td>
 	</tr>
 	<tr>
-		<td>Nagpur</td>
-		<td>Darjeeling</td>
-		<td colspan="2">Wellington</td>
+		<td style="color:green;"><form:checkbox path="selectedFoodItems" value="<%=Food.BASMATI%>" label="<%=Food.BASMATI%>"/></td>
+		<td style="color:blue;"><form:checkbox path="selectedFoodItems" value="<%=Food.DUSSERI%>" label="<%=Food.DUSSERI%>"/></td>
+		<td style="color:red;"><form:checkbox path="selectedFoodItems" value="<%=Food.WELLINGTON%>" label="<%=Food.WELLINGTON%>"/></td>
+	</tr>
+	<tr>
+		<td style="color:green;"><form:checkbox path="selectedFoodItems" value="<%=Food.SONA_MASURI%>" label="<%=Food.SONA_MASURI%>"/></td>
+		<td style="color:blue;" colspan="2"><form:checkbox path="selectedFoodItems" value="<%=Food.ALFONSO%>" label="<%=Food.ALFONSO%>"/></td>
 	</tr>
 </table>
 </form:form>

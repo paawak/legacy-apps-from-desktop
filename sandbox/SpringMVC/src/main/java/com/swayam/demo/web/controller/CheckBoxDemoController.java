@@ -1,5 +1,5 @@
 /*
- * CheckBoxController.java
+ * CheckBoxDemoController.java
  *
  * Created on Sep 11, 2010 12:06:58 PM
  *
@@ -15,21 +15,35 @@
 
 package com.swayam.demo.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.swayam.demo.web.formbean.CheckBoxDemoBean;
+import com.swayam.demo.web.formbean.Food;
 
 /**
  * 
  * @author paawak
  */
 @Controller
-public class CheckBoxController {
+public class CheckBoxDemoController {
 
     @RequestMapping("/checkboxdemo.htm")
     public ModelAndView show() {
 
         ModelAndView model = new ModelAndView("CheckBoxDemo");
+
+        List<Food> foods = new ArrayList<Food>();
+        foods.add(Food.ALL);
+
+        CheckBoxDemoBean checkBoxDemoBean = new CheckBoxDemoBean();
+        checkBoxDemoBean.setSelectedFoodItems(foods);
+
+        model.addObject("command", checkBoxDemoBean);
 
         return model;
 

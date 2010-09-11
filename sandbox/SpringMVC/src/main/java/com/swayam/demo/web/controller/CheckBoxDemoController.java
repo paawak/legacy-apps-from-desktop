@@ -19,6 +19,7 @@ import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -35,6 +36,9 @@ import com.swayam.demo.web.formbean.Food;
  */
 @Controller
 public class CheckBoxDemoController {
+
+    private static final Logger LOG = Logger
+            .getLogger(CheckBoxDemoController.class);
 
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest webRequest) {
@@ -62,6 +66,8 @@ public class CheckBoxDemoController {
             foods.add(Food.BORO);
             checkBoxDemoBean.setSelectedFoodItems(foods);
         }
+
+        LOG.info("Selected Items = " + checkBoxDemoBean.getSelectedFoodItems());
 
         model.addObject("command", checkBoxDemoBean);
 

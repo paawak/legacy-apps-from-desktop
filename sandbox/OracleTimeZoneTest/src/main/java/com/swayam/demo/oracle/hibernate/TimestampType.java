@@ -32,7 +32,7 @@ import org.hibernate.usertype.UserType;
  * 
  * @author paawak
  */
-public class ZonedTimestamp implements UserType {
+public class TimestampType implements UserType {
 
     @Override
     public int[] sqlTypes() {

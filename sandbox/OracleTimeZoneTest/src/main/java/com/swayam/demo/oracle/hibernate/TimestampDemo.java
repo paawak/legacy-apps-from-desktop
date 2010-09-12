@@ -51,7 +51,7 @@ public class TimestampDemo implements Serializable {
     private Calendar timeWithZone;
 
     @Column(name = "TIME_WITH_ZONE_LOCAL")
-    @Type(type = "com.swayam.demo.oracle.hibernate.ZonedTimestamp")
+    @Type(type = "com.swayam.demo.oracle.hibernate.TimestampType")
     private Calendar timeWithZoneLocal;
 
     public long getId() {

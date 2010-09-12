@@ -87,11 +87,14 @@ public class OracleTest {
             int id = res.getInt("ID");
             String name = res.getString("NAME");
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(timestamp);
             Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
                     new GregorianCalendar(TimeZone.getDefault()));
 
             System.out.println("ID=" + id + ", NAME=" + name + ", TIME="
-                    + timestamp + ", TIME_LOCAL=" + timestampLocal);
+                    + timestamp + "/" + cal.getTimeZone().getID()
+                    + ", TIME_LOCAL=" + timestampLocal);
 
         }
 
@@ -100,5 +103,4 @@ public class OracleTest {
         con.close();
 
     }
-
 }

@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -81,6 +82,11 @@ public class OracleTest {
         pStat.close();
 
         res = stat.executeQuery("SELECT * FROM TIMESTAMP_DEMO  ORDER BY ID");
+
+        ResultSetMetaData rsmdt = res.getMetaData();
+
+        System.out.println(rsmdt.getColumnTypeName(3) + ", "
+                + rsmdt.getColumnTypeName(4));
 
         while (res.next()) {
 

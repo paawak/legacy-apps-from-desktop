@@ -22,6 +22,7 @@ import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 
@@ -35,7 +36,14 @@ public class ZonedTimestamp extends GregorianCalendar implements SQLData {
 
     private static final Logger LOG = Logger.getLogger(ZonedTimestamp.class);
 
-    private String typeName = "TIMESTAMP";
+    private String typeName = "TIMESTAMPLTZ";
+
+    public ZonedTimestamp() {
+    }
+
+    public ZonedTimestamp(TimeZone tz) {
+        super(tz);
+    }
 
     @Override
     public String getSQLTypeName() throws SQLException {

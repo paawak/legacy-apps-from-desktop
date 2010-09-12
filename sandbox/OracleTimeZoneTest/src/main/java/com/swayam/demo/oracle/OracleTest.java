@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -59,20 +58,23 @@ public class OracleTest {
         res.close();
 
         PreparedStatement pStat = con
-                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE) VALUES (?, ?, ?)");
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, ?, ?)");
 
         pStat.setInt(1, nextVal);
         pStat.setString(2, "A" + nextVal);
-        Calendar today = getToday("Africa/Algeria");
-        // Calendar today = getToday("Asia/Tokyo");
-        // Calendar today = getToday("Asia/Kolkata");
+        String timeZoneId = "Asia/Tokyo";
+        // String timeZoneId = "Africa/Algeria";
+        // String timeZoneId = "Asia/Kolkata";
 
-        Timestamp ts = new Timestamp(today.getTimeInMillis());
+        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
 
-        System.out.println("before insert, time zone="
-                + today.getTimeZone().getDisplayName());
+        Calendar now = new GregorianCalendar(tz);
 
-        pStat.setTimestamp(3, ts, today);
+        Timestamp ts = new Timestamp(now.getTimeInMillis());
+
+        pStat.setTimestamp(3, ts, now);
+
+        pStat.setTimestamp(4, ts, now);
 
         pStat.execute();
 
@@ -85,31 +87,17 @@ public class OracleTest {
             int id = res.getInt("ID");
             String name = res.getString("NAME");
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
+            Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
+                    new GregorianCalendar(TimeZone.getDefault()));
 
-            System.err.println("ID=" + id + ", NAME=" + name + ", TIMEZONE="
-                    + getTimeZone(timestamp) + ", TIME=" + timestamp);
+            System.out.println("ID=" + id + ", NAME=" + name + ", TIME="
+                    + timestamp + ", TIME_LOCAL=" + timestampLocal);
 
         }
 
         stat.close();
         res.close();
         con.close();
-
-    }
-
-    private static String getTimeZone(Date date) {
-
-        Calendar cal = new GregorianCalendar();
-        cal.setTime(date);
-        return cal.getTimeZone().getID();
-
-    }
-
-    private static Calendar getToday(String timeZone) {
-
-        TimeZone tz = TimeZone.getTimeZone(timeZone);
-
-        return new GregorianCalendar(tz);
 
     }
 

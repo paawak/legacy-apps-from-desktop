@@ -26,7 +26,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 
 /**
  * 
@@ -49,12 +50,8 @@ public class TimestampDemo implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeWithZone;
 
-    /*
-     * @Column(name = "TIME_WITH_ZONE_LOCAL")
-     * 
-     * @Temporal(TemporalType.TIMESTAMP)
-     */
-    @Transient
+    @Column(name = "TIME_WITH_ZONE_LOCAL")
+    @Type(type = "com.swayam.demo.oracle.hibernate.ZonedTimestamp")
     private Calendar timeWithZoneLocal;
 
     public long getId() {

@@ -13,7 +13,7 @@
  * issued to any third party.
  */
 
-package com.swayam.demo.oracle;
+package com.swayam.demo.oracle.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

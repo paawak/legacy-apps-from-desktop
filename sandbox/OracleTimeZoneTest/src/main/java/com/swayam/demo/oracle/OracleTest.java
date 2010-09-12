@@ -40,7 +40,7 @@ public class OracleTest {
      */
     public static void main(String[] args) throws Exception {
 
-        // Class.forName("oracle.jdbc.OracleDriver");
+        Class.forName("oracle.jdbc.OracleDriver");
         Connection con = DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521/XE", "SWAYAM_TEST",
                 "SWAYAM_TEST");

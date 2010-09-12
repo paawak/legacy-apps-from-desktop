@@ -15,6 +15,8 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -75,8 +77,11 @@ public class TimestampTest {
 
         for (TimestampDemo demo : list) {
             Calendar cal = demo.getTimeWithZone();
+            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
+            DateFormat df = new SimpleDateFormat(dateFormat);
+            String dateTime = df.format(cal.getTime());
             System.out.println("TZ=" + cal.getTimeZone().getDisplayName()
-                    + ", Time=" + cal);
+                    + ", Time=" + dateTime);
         }
 
     }

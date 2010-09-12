@@ -75,7 +75,8 @@ public class TimestampTest {
 
         for (TimestampDemo demo : list) {
             Calendar cal = demo.getTimeWithZone();
-            System.out.println(cal.getTimeZone().getDisplayName());
+            System.out.println("TZ=" + cal.getTimeZone().getDisplayName()
+                    + ", Time=" + cal);
         }
 
     }

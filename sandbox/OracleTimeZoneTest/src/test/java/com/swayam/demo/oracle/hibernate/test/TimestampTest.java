@@ -15,11 +15,12 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.TimeZone;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.After;
@@ -48,17 +49,34 @@ public class TimestampTest {
         String timeZoneId = "Asia/Tokyo";
         TimeZone tz = TimeZone.getTimeZone(timeZoneId);
         Calendar now = new GregorianCalendar(tz);
-        Timestamp ts = new Timestamp(now.getTimeInMillis());
 
         TimestampDemo demo = new TimestampDemo();
-        // demo.setId(1);
         demo.setName("B");
-        demo.setTimeWithZone(ts);
-        demo.setTimeWithZoneLocal(ts);
+        demo.setTimeWithZone(now);
+        demo.setTimeWithZoneLocal(now);
 
         Transaction trx = session.beginTransaction();
+        // session.createSQLQuery(
+        // "ALTER SESSION SET TIME_ZONE='" + timeZoneId + "'")
+        // .executeUpdate();
         session.save(demo);
         trx.commit();
+
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testSelect() {
+
+        Query query = session.createQuery("FROM "
+                + TimestampDemo.class.getName());
+
+        List<TimestampDemo> list = query.list();
+
+        for (TimestampDemo demo : list) {
+            Calendar cal = demo.getTimeWithZone();
+            System.out.println(cal.getTimeZone().getDisplayName());
+        }
 
     }
 

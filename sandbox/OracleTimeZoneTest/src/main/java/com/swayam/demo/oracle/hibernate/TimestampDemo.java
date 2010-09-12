@@ -16,7 +16,7 @@
 package com.swayam.demo.oracle.hibernate;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +24,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * 
@@ -43,10 +46,16 @@ public class TimestampDemo implements Serializable {
     private String name;
 
     @Column(name = "TIME_WITH_ZONE")
-    private Timestamp timeWithZone;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar timeWithZone;
 
-    @Column(name = "TIME_WITH_ZONE_LOCAL")
-    private Timestamp timeWithZoneLocal;
+    /*
+     * @Column(name = "TIME_WITH_ZONE_LOCAL")
+     * 
+     * @Temporal(TemporalType.TIMESTAMP)
+     */
+    @Transient
+    private Calendar timeWithZoneLocal;
 
     public long getId() {
         return id;
@@ -64,19 +73,19 @@ public class TimestampDemo implements Serializable {
         this.name = name;
     }
 
-    public Timestamp getTimeWithZone() {
+    public Calendar getTimeWithZone() {
         return timeWithZone;
     }
 
-    public void setTimeWithZone(Timestamp timeWithZone) {
+    public void setTimeWithZone(Calendar timeWithZone) {
         this.timeWithZone = timeWithZone;
     }
 
-    public Timestamp getTimeWithZoneLocal() {
+    public Calendar getTimeWithZoneLocal() {
         return timeWithZoneLocal;
     }
 
-    public void setTimeWithZoneLocal(Timestamp timeWithZoneLocal) {
+    public void setTimeWithZoneLocal(Calendar timeWithZoneLocal) {
         this.timeWithZoneLocal = timeWithZoneLocal;
     }
 

@@ -11,6 +11,7 @@
 
 	<build>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
 
 		<resources>
 			<resource>
@@ -158,6 +159,13 @@
 			<groupId>ojdbc</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>${ojdbc.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+  			<artifactId>junit</artifactId>
+  			<version>4.7</version>
+  			<scope>test</scope>
 		</dependency>
 		
 	</dependencies>

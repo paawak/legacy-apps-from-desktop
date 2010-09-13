@@ -34,6 +34,8 @@ import org.hibernate.usertype.UserType;
  */
 public class TimestampType implements UserType {
 
+    // private static final Logger LOG = Logger.getLogger(TimestampType.class);
+
     @Override
     public int[] sqlTypes() {
         return new int[] { Types.TIMESTAMP };
@@ -92,6 +94,20 @@ public class TimestampType implements UserType {
             Calendar cal = (Calendar) value;
             Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
             st.setTimestamp(index, timestamp, cal);
+
+            // String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
+            // DateFormat df = new SimpleDateFormat(dateFormat);
+            // String dateTime = df.format(cal.getTime());
+            // String tzId = cal.getTimeZone().getID();
+            // dateTime += " " + tzId;
+            //
+            // LOG.info("dateTime=" + dateTime);
+            // LOG.info("index=" + index);
+            //
+            // String dateStr = "TO_TIMESTAMP_TZ('" + dateTime
+            // + "','YYYY-MM-DD HH24:MI:SS TZR')";
+            //
+            // st.setString(index, dateStr);
 
         }
 

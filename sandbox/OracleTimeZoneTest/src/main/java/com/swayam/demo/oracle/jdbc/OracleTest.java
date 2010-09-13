@@ -23,6 +23,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -58,11 +60,6 @@ public class OracleTest {
 
         res.close();
 
-        PreparedStatement pStat = con
-                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, ?, ?)");
-
-        pStat.setInt(1, nextVal);
-        pStat.setString(2, "A" + nextVal);
         String timeZoneId = "Asia/Tokyo";
         // String timeZoneId = "Africa/Algeria";
         // String timeZoneId = "Asia/Kolkata";
@@ -71,11 +68,29 @@ public class OracleTest {
 
         Calendar now = new GregorianCalendar(tz);
 
+        String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
+        DateFormat df = new SimpleDateFormat(dateFormat);
+        String dateTime = df.format(now.getTime());
+        String tzId = now.getTimeZone().getID();
+        dateTime += " " + tzId;
+
+        String dateStr = "TO_TIMESTAMP_TZ('" + dateTime
+                + "','YYYY-MM-DD HH24:MI:SS:FF TZR')";
+
+        System.err.println("dateStr=" + dateStr);
+
+        PreparedStatement pStat = con
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, "
+                        + dateStr + ", ?)");
+
+        pStat.setInt(1, nextVal);
+        pStat.setString(2, "A" + nextVal);
+
         Timestamp ts = new Timestamp(now.getTimeInMillis());
 
         pStat.setTimestamp(3, ts, now);
 
-        pStat.setTimestamp(4, ts, now);
+        // pStat.setTimestamp(4, ts, now);
 
         pStat.execute();
 

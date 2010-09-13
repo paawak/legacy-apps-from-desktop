@@ -105,7 +105,7 @@ public class TimestampType implements UserType {
             // LOG.info("index=" + index);
             //
             // String dateStr = "TO_TIMESTAMP_TZ('" + dateTime
-            // + "','YYYY-MM-DD HH24:MI:SS TZR')";
+            // + "','YYYY-MM-DD HH24:MI:SS:FF TZR')";
             //
             // st.setString(index, dateStr);
 

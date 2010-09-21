@@ -77,20 +77,21 @@ public class OracleTest {
         String dateStr = "TO_TIMESTAMP_TZ('" + dateTime
                 + "','YYYY-MM-DD HH24:MI:SS:FF TZR')";
 
-        System.err.println("dateStr=" + dateStr);
+        System.err.println("dateStr=" + dateStr + "\ndateTime=" + dateTime);
 
         PreparedStatement pStat = con
-                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, "
-                        + dateStr + ", ?)");
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, TO_TIMESTAMP_TZ(?, ?), ?)");
 
         pStat.setInt(1, nextVal);
         pStat.setString(2, "A" + nextVal);
 
         Timestamp ts = new Timestamp(now.getTimeInMillis());
 
-        pStat.setTimestamp(3, ts, now);
+        pStat.setString(3, dateTime);
 
-        // pStat.setTimestamp(4, ts, now);
+        pStat.setString(4, "YYYY-MM-DD HH24:MI:SS:FF TZR");
+
+        pStat.setTimestamp(5, ts, now);
 
         pStat.execute();
 

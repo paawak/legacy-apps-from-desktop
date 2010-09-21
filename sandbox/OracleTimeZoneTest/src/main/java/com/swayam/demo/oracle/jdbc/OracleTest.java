@@ -79,8 +79,11 @@ public class OracleTest {
 
         System.err.println("dateStr=" + dateStr + "\ndateTime=" + dateTime);
 
+        // PreparedStatement pStat = con
+        // .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, TO_TIMESTAMP_TZ(?, ?), ?)");
+
         PreparedStatement pStat = con
-                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, TO_TIMESTAMP_TZ(?, ?), ?)");
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)");
 
         pStat.setInt(1, nextVal);
         pStat.setString(2, "A" + nextVal);
@@ -89,9 +92,9 @@ public class OracleTest {
 
         pStat.setString(3, dateTime);
 
-        pStat.setString(4, "YYYY-MM-DD HH24:MI:SS:FF TZR");
+        // pStat.setString(4, "YYYY-MM-DD HH24:MI:SS:FF TZR");
 
-        pStat.setTimestamp(5, ts, now);
+        pStat.setTimestamp(4, ts, now);
 
         pStat.execute();
 

@@ -16,6 +16,7 @@
 package com.swayam.demo.oracle.hibernate;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLInsert;
+import org.hibernate.annotations.Type;
 
 /**
  * 
@@ -45,7 +47,8 @@ public class TimestampDemo2 implements Serializable {
     private String name;
 
     @Column(name = "TIME_WITH_ZONE")
-    private String timeWithZone;
+    @Type(type = "com.swayam.demo.oracle.hibernate.TimestampType2")
+    private Calendar timeWithZone;
 
     public long getId() {
         return id;
@@ -63,11 +66,11 @@ public class TimestampDemo2 implements Serializable {
         this.name = name;
     }
 
-    public String getTimeWithZone() {
+    public Calendar getTimeWithZone() {
         return timeWithZone;
     }
 
-    public void setTimeWithZone(String timeWithZone) {
+    public void setTimeWithZone(Calendar timeWithZone) {
         this.timeWithZone = timeWithZone;
     }
 

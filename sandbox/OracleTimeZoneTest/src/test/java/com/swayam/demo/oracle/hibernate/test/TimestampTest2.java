@@ -49,7 +49,7 @@ public class TimestampTest2 {
     public void testInsert() {
 
         TimestampDemo2 demo2 = new TimestampDemo2();
-        demo2.setId(12);
+        // demo2.setId(13);
         demo2.setName("B");
         // "2010-09-25 18:59:30:424 Asia/Tokyo"
         // TO_TIMESTAMP_TZ('2010-09-25 18:59:30:424 Asia/Tokyo', 'YYYY-MM-DD

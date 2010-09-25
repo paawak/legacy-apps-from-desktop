@@ -19,6 +19,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -35,7 +37,7 @@ public class TimestampDemo2 implements Serializable {
     private static final long serialVersionUID = 4940963602672391841L;
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @Column

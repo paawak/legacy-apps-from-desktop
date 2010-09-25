@@ -57,8 +57,12 @@ public class TimestampInterceptor extends EmptyInterceptor {
     @Override
     public String onPrepareStatement(String sql) {
         LOG.info("original sql=" + sql);
-        sql = "insert into TIMESTAMP_DEMO_2 (name, TIME_WITH_ZONE, id) values (?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)";
-        LOG.info("modified sql=" + sql);
+
+        if (sql.startsWith("insert into TIMESTAMP_DEMO_2")) {
+            sql = "insert into TIMESTAMP_DEMO_2 (name, TIME_WITH_ZONE, id) values (?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)";
+            LOG.info("modified sql=" + sql);
+        }
+
         return sql;
     }
 

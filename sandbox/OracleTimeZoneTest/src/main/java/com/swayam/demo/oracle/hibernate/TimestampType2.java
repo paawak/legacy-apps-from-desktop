@@ -95,8 +95,6 @@ public class TimestampType2 implements UserType {
 
             doInstanceCheck(value);
             Calendar cal = (Calendar) value;
-            // Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
-            // st.setTimestamp(index, timestamp, cal);
 
             String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
             DateFormat df = new SimpleDateFormat(dateFormat);
@@ -106,9 +104,6 @@ public class TimestampType2 implements UserType {
 
             LOG.info("dateTime=" + dateTime);
             LOG.info("index=" + index);
-
-            // String dateStr = "TO_TIMESTAMP_TZ('" + dateTime
-            // + "','YYYY-MM-DD HH24:MI:SS:FF TZR')";
 
             st.setString(index, dateTime);
 

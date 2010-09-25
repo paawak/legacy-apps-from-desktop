@@ -16,6 +16,7 @@
 package com.swayam.demo.oracle.hibernate;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Interceptor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -47,6 +48,13 @@ public class HibernateUtil {
     public static Session getSession() throws HibernateException {
 
         return sessionFactory.openSession();
+
+    }
+
+    public static Session getSession(Interceptor interceptor)
+            throws HibernateException {
+
+        return sessionFactory.openSession(interceptor);
 
     }
 

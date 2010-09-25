@@ -30,6 +30,7 @@
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 		
 		<mapping class="com.swayam.demo.oracle.hibernate.TimestampDemo"/>
+		<mapping class="com.swayam.demo.oracle.hibernate.TimestampDemo2"/>
 
 	</session-factory>
 </hibernate-configuration>

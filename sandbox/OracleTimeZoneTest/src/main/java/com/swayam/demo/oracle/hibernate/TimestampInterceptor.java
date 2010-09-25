@@ -50,7 +50,7 @@ public class TimestampInterceptor extends EmptyInterceptor {
         // state[1] = "2010-09-25 18:59:30:424 Asia/Tokyo";
         // types[1] = new StringType();
 
-        return true;
+        return false;
 
     }
 

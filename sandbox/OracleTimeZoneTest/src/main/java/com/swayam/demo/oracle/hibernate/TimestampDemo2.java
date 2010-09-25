@@ -24,14 +24,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLInsert;
+
 /**
  * 
  * @author paawak
  */
 @Entity
 @Table(name = "TIMESTAMP_DEMO_2")
-// @SQLInsert(sql =
-// "INSERT INTO TIMESTAMP_DEMO_2 (ID, NAME, TIME_WITH_ZONE) VALUES (?, ?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'))")
+@SQLInsert(sql = "insert into TIMESTAMP_DEMO_2 (name, TIME_WITH_ZONE, id) values (?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)")
 public class TimestampDemo2 implements Serializable {
 
     private static final long serialVersionUID = 4940963602672391841L;

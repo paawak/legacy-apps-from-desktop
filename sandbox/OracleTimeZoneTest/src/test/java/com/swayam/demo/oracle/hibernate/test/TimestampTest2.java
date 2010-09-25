@@ -30,7 +30,6 @@ import org.junit.Test;
 import com.swayam.demo.oracle.hibernate.HibernateUtil;
 import com.swayam.demo.oracle.hibernate.TimestampDemo;
 import com.swayam.demo.oracle.hibernate.TimestampDemo2;
-import com.swayam.demo.oracle.hibernate.TimestampInterceptor;
 
 /**
  * 
@@ -42,7 +41,7 @@ public class TimestampTest2 {
 
     @Before
     public void setUp() throws Exception {
-        session = HibernateUtil.getSession(new TimestampInterceptor());
+        session = HibernateUtil.getSession(/* new TimestampInterceptor() */);
     }
 
     @Test

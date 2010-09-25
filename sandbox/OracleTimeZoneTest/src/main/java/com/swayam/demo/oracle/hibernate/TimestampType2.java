@@ -15,75 +15,23 @@
 
 package com.swayam.demo.oracle.hibernate;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.usertype.UserType;
 
 /**
  * 
  * @author paawak
  */
-public class TimestampType2 implements UserType {
+public class TimestampType2 extends TimestampType {
 
     private static final Logger LOG = Logger.getLogger(TimestampType2.class);
-
-    @Override
-    public int[] sqlTypes() {
-        return new int[] { Types.TIMESTAMP };
-    }
-
-    @Override
-    public Class<?> returnedClass() {
-        return Calendar.class;
-    }
-
-    @Override
-    public boolean equals(Object x, Object y) throws HibernateException {
-
-        if (x == null || y == null) {
-            return false;
-        }
-
-        return x.equals(y);
-    }
-
-    @Override
-    public int hashCode(Object x) throws HibernateException {
-
-        if (x != null) {
-            return x.hashCode();
-        }
-
-        return 0;
-    }
-
-    @Override
-    public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
-            throws HibernateException, SQLException {
-
-        Calendar cal = new GregorianCalendar();
-        Timestamp timestamp = rs.getTimestamp(names[0], cal);
-
-        if (timestamp != null) {
-            cal.setTime(timestamp);
-        } else {
-            cal = null;
-        }
-
-        return cal;
-    }
 
     @Override
     public void nullSafeSet(PreparedStatement st, Object value, int index)
@@ -107,68 +55,6 @@ public class TimestampType2 implements UserType {
 
             st.setString(index, dateTime);
 
-        }
-
-    }
-
-    @Override
-    public Object deepCopy(Object value) throws HibernateException {
-
-        Calendar clone = null;
-
-        if (value != null) {
-
-            doInstanceCheck(value);
-            Calendar cal = (Calendar) value;
-
-            // just copying the timezone and time
-            clone = new GregorianCalendar();
-            clone.setTimeInMillis(cal.getTimeInMillis());
-            TimeZone tz = cal.getTimeZone();
-            clone.setTimeZone(TimeZone.getTimeZone(tz.getID()));
-        }
-
-        return clone;
-    }
-
-    @Override
-    public boolean isMutable() {
-        return true;
-    }
-
-    @Override
-    public Serializable disassemble(Object value) throws HibernateException {
-
-        Calendar cal = null;
-
-        if (value != null) {
-
-            doInstanceCheck(value);
-            cal = (Calendar) deepCopy(value);
-
-        }
-
-        return cal;
-    }
-
-    @Override
-    public Object assemble(Serializable cached, Object owner)
-            throws HibernateException {
-        return disassemble(cached);
-    }
-
-    @Override
-    public Object replace(Object original, Object target, Object owner)
-            throws HibernateException {
-        return disassemble(original);
-    }
-
-    private void doInstanceCheck(Object value) {
-
-        if ((value != null) && !(value instanceof Calendar)) {
-            throw new UnsupportedOperationException(value.getClass()
-                    + " not supported, expecting type "
-                    + Calendar.class.getName());
         }
 
     }

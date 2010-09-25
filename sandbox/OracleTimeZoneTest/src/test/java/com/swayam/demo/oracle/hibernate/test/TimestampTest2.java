@@ -30,7 +30,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.swayam.demo.oracle.hibernate.HibernateUtil;
-import com.swayam.demo.oracle.hibernate.TimestampDemo;
 import com.swayam.demo.oracle.hibernate.TimestampDemo2;
 
 /**
@@ -73,11 +72,11 @@ public class TimestampTest2 {
     public void testSelect() {
 
         Query query = session.createQuery("FROM "
-                + TimestampDemo.class.getName());
+                + TimestampDemo2.class.getName());
 
-        List<TimestampDemo> list = query.list();
+        List<TimestampDemo2> list = query.list();
 
-        for (TimestampDemo demo : list) {
+        for (TimestampDemo2 demo : list) {
             Calendar cal = demo.getTimeWithZone();
             String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
             DateFormat df = new SimpleDateFormat(dateFormat);

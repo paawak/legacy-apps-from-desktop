@@ -151,7 +151,7 @@ public class TimestampType implements UserType {
         return disassemble(original);
     }
 
-    private void doInstanceCheck(Object value) {
+    protected void doInstanceCheck(Object value) {
 
         if ((value != null) && !(value instanceof Calendar)) {
             throw new UnsupportedOperationException(value.getClass()

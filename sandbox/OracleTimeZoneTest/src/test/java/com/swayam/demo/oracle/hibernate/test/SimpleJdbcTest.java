@@ -56,7 +56,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void insert1() throws SQLException {
+    public void insertFaulty() throws SQLException {
 
         PreparedStatement pStat = con
                 .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
@@ -66,7 +66,38 @@ public class SimpleJdbcTest {
         int nextVal = getNextVal();
 
         pStat.setInt(1, nextVal);
-        pStat.setString(2, "insert1");
+        pStat.setString(2, "insertFaulty");
+
+        String timeZoneId = "Asia/Tokyo";
+
+        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
+
+        Calendar now = new GregorianCalendar(tz);
+
+        Timestamp ts = new Timestamp(now.getTimeInMillis());
+
+        pStat.setTimestamp(3, ts);
+
+        pStat.setTimestamp(4, ts);
+
+        pStat.execute();
+
+        pStat.close();
+
+    }
+
+    @Test
+    public void insertWorks1() throws SQLException {
+
+        PreparedStatement pStat = con
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
+                        + " (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) "
+                        + " VALUES " + " (?, ?, ?, ?)");
+
+        int nextVal = getNextVal();
+
+        pStat.setInt(1, nextVal);
+        pStat.setString(2, "insertWorks1");
 
         String timeZoneId = "Asia/Tokyo";
 
@@ -87,7 +118,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void insert2() throws SQLException {
+    public void insertWorks2() throws SQLException {
 
         String timeZoneId = "Asia/Tokyo";
 
@@ -101,7 +132,7 @@ public class SimpleJdbcTest {
         String tzId = now.getTimeZone().getID();
         dateTime += " " + tzId;
 
-        System.out.println("dateTime before insert2=" + dateTime);
+        System.out.println("dateTime before insertWorks2=" + dateTime);
 
         PreparedStatement pStat = con
                 .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
@@ -112,7 +143,7 @@ public class SimpleJdbcTest {
         int nextVal = getNextVal();
 
         pStat.setInt(1, nextVal);
-        pStat.setString(2, "insert2");
+        pStat.setString(2, "insertWorks2");
 
         Timestamp ts = new Timestamp(now.getTimeInMillis());
 

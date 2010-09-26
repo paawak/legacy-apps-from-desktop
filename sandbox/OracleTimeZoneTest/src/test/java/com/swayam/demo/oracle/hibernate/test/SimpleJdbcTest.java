@@ -173,12 +173,15 @@ public class SimpleJdbcTest {
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
             Calendar cal = new GregorianCalendar();
             cal.setTime(timestamp);
+            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS z";
+            DateFormat df = new SimpleDateFormat(dateFormat);
+            String dateTime = df.format(cal.getTime());
+
             Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
                     new GregorianCalendar(TimeZone.getDefault()));
 
-            System.out.println(res.getString("NAME") + ": TIME=" + timestamp
-                    + "/" + cal.getTimeZone().getID() + ", TIME_LOCAL="
-                    + timestampLocal);
+            System.out.println(res.getString("NAME") + ": TIME=" + dateTime
+                    + ", TIME_LOCAL=" + timestampLocal);
 
         }
 

@@ -212,7 +212,7 @@ public class SimpleJdbcTest {
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
             Calendar cal = new GregorianCalendar();
             cal.setTime(timestamp);
-            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS z";
+            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS zzzz";
             DateFormat df = new SimpleDateFormat(dateFormat);
             String dateTime = df.format(cal.getTime());
 

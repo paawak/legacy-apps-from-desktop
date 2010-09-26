@@ -35,55 +35,36 @@ import org.hibernate.annotations.Type;
  */
 @Entity
 @Table(name = "TIMESTAMP_DEMO")
-public class TimestampDemo implements Serializable {
+public class TimestampDemo extends TimestampDemoTemplate implements
+        Serializable {
 
-    private static final long serialVersionUID = 4940963602672391841L;
-
-    private long id;
-
-    private String name;
-
-    private Calendar timeWithZone;
-
-    private Calendar timeWithZoneLocal;
+    private static final long serialVersionUID = -5902132666472097299L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Override
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Column
+    @Override
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Column(name = "TIME_WITH_ZONE")
     @Temporal(TemporalType.TIMESTAMP)
+    @Override
     public Calendar getTimeWithZone() {
         return timeWithZone;
     }
 
-    public void setTimeWithZone(Calendar timeWithZone) {
-        this.timeWithZone = timeWithZone;
-    }
-
     @Column(name = "TIME_WITH_ZONE_LOCAL")
     @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType")
+    @Override
     public Calendar getTimeWithZoneLocal() {
         return timeWithZoneLocal;
-    }
-
-    public void setTimeWithZoneLocal(Calendar timeWithZoneLocal) {
-        this.timeWithZoneLocal = timeWithZoneLocal;
     }
 
 }

@@ -32,46 +32,39 @@ import org.hibernate.annotations.Type;
  * 
  * @author paawak
  */
-@Entity
+@SQLInsert(sql = "insert into TIMESTAMP_DEMO (name, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL, id) values (?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?, ?)")
 @Table(name = "TIMESTAMP_DEMO")
-@SQLInsert(sql = "insert into TIMESTAMP_DEMO (name, TIME_WITH_ZONE, id) values (?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)")
-public class TimestampDemo2 implements Serializable {
+@Entity
+public class TimestampDemo2 extends TimestampDemoTemplate implements
+        Serializable {
 
     private static final long serialVersionUID = 4940963602672391841L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
-
-    @Column
-    private String name;
-
-    @Column(name = "TIME_WITH_ZONE")
-    @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType2")
-    private Calendar timeWithZone;
-
+    @Override
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    @Column
+    @Override
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Column(name = "TIME_WITH_ZONE")
+    @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType2")
+    @Override
     public Calendar getTimeWithZone() {
-        return timeWithZone;
+        return super.getTimeWithZone();
     }
 
-    public void setTimeWithZone(Calendar timeWithZone) {
-        this.timeWithZone = timeWithZone;
+    @Column(name = "TIME_WITH_ZONE_LOCAL")
+    @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType")
+    @Override
+    public Calendar getTimeWithZoneLocal() {
+        return timeWithZoneLocal;
     }
 
 }

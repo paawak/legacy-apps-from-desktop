@@ -52,6 +52,7 @@ public class TimestampTest2 {
         Calendar cal = getTimeWithZone();
 
         demo2.setTimeWithZone(cal);
+        demo2.setTimeWithZoneLocal(cal);
 
         Transaction trx = session.beginTransaction();
         session.save(demo2);
@@ -71,7 +72,8 @@ public class TimestampTest2 {
         for (TimestampDemo2 demo : list) {
 
             System.out.println(demo.getName() + ": " + demo.getId() + ", TIME="
-                    + getTimeWithZone(demo.getTimeWithZone()));
+                    + getTimeWithZone(demo.getTimeWithZone()) + ", TIME_LOCAL="
+                    + getTimeWithZone(demo.getTimeWithZoneLocal()));
         }
 
     }

@@ -128,6 +128,9 @@ public class DateUtil {
             TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
             cal = new GregorianCalendar(timeZone);
 
+            // setting the date and time-zone does not work, as Calendar adjusts
+            // for time zone, so the below circus
+
             cal.set(Calendar.YEAR, tempCal.get(Calendar.YEAR));
             cal.set(Calendar.MONTH, tempCal.get(Calendar.MONTH));
             cal.set(Calendar.DATE, tempCal.get(Calendar.DATE));

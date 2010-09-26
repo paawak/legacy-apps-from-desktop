@@ -15,6 +15,7 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
+import static com.swayam.demo.oracle.hibernate.util.DateUtil.getOracleFormattedTimeWithZone;
 import static com.swayam.demo.oracle.hibernate.util.DateUtil.getTimeWithZone;
 
 import java.sql.Connection;
@@ -24,8 +25,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -116,12 +115,7 @@ public class SimpleJdbcTest {
 
         Calendar timeWithZone = getTimeWithZone();
 
-        String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
-        DateFormat df = new SimpleDateFormat(dateFormat);
-        df.setTimeZone(timeWithZone.getTimeZone());
-        String dateTime = df.format(timeWithZone.getTime());
-        String tzId = timeWithZone.getTimeZone().getID();
-        dateTime += " " + tzId;
+        String dateTime = getOracleFormattedTimeWithZone(timeWithZone);
 
         System.out.println("dateTime before insert_3=" + dateTime);
 

@@ -63,7 +63,22 @@ public class DateUtil {
 
         String dateFormat = "HH:mm:ss:SSS zzzz";
         DateFormat df = new SimpleDateFormat(dateFormat);
+        // this is very important
+        df.setTimeZone(cal.getTimeZone());
         String dateTime = df.format(cal.getTime());
+
+        return dateTime;
+
+    }
+
+    public static String getOracleFormattedTimeWithZone(Calendar timeWithZone) {
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
+        DateFormat df = new SimpleDateFormat(dateFormat);
+        df.setTimeZone(timeWithZone.getTimeZone());
+        String dateTime = df.format(timeWithZone.getTime());
+        String tzId = timeWithZone.getTimeZone().getID();
+        dateTime += " " + tzId;
 
         return dateTime;
 

@@ -158,6 +158,45 @@ public class SimpleJdbcTest {
     }
 
     @Test
+    public void selectException() throws SQLException {
+
+        System.out
+                .println("**********************    EXCEPTION    *******************************");
+
+        Statement stat = con.createStatement();
+
+        ResultSet res = stat
+                .executeQuery("SELECT * FROM TIMESTAMP_DEMO  ORDER BY ID");
+
+        while (res.next()) {
+
+            Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(timestamp);
+            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS z";
+            DateFormat df = new SimpleDateFormat(dateFormat);
+            String dateTime = df.format(cal.getTime());
+
+            Timestamp timestampLocal = null;
+
+            try {
+                timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                break;
+            }
+
+            System.out.println(res.getString("NAME") + ": TIME=" + dateTime
+                    + ", TIME_LOCAL=" + timestampLocal);
+
+        }
+
+        stat.close();
+        res.close();
+
+    }
+
+    @Test
     public void select1() throws SQLException {
 
         System.out

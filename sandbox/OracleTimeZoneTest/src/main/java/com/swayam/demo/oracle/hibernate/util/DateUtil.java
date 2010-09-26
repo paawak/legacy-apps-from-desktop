@@ -121,11 +121,20 @@ public class DateUtil {
         try {
 
             Date date = df.parse(rawTimestamp);
+            Calendar tempCal = Calendar.getInstance();
+            tempCal.setTime(date);
+
             String timeZoneId = rawTimestamp.split("\\s")[2];
             TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
             cal = new GregorianCalendar(timeZone);
-            cal.setTime(date);
-            cal.setTimeZone(timeZone);
+
+            cal.set(Calendar.YEAR, tempCal.get(Calendar.YEAR));
+            cal.set(Calendar.MONTH, tempCal.get(Calendar.MONTH));
+            cal.set(Calendar.DATE, tempCal.get(Calendar.DATE));
+            cal.set(Calendar.HOUR_OF_DAY, tempCal.get(Calendar.HOUR_OF_DAY));
+            cal.set(Calendar.MINUTE, tempCal.get(Calendar.MINUTE));
+            cal.set(Calendar.SECOND, tempCal.get(Calendar.SECOND));
+            cal.set(Calendar.MILLISECOND, tempCal.get(Calendar.MILLISECOND));
 
         } catch (ParseException e) {
             LOG.error("Could not convert string `" + rawTimestamp

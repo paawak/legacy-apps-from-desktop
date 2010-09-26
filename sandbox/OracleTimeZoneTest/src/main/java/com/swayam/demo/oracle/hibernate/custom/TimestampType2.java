@@ -15,11 +15,11 @@
 
 package com.swayam.demo.oracle.hibernate.custom;
 
+import static com.swayam.demo.oracle.hibernate.util.DateUtil.getOracleFormattedTimeWithZone;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.log4j.Logger;
@@ -44,11 +44,7 @@ public class TimestampType2 extends TimestampType {
             doInstanceCheck(value);
             Calendar cal = (Calendar) value;
 
-            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
-            DateFormat df = new SimpleDateFormat(dateFormat);
-            String dateTime = df.format(cal.getTime());
-            String tzId = cal.getTimeZone().getID();
-            dateTime += " " + tzId;
+            String dateTime = getOracleFormattedTimeWithZone(cal);
 
             LOG.info("dateTime=" + dateTime);
             LOG.info("index=" + index);

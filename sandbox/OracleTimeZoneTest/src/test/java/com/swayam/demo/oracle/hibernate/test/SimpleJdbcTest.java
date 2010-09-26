@@ -212,14 +212,15 @@ public class SimpleJdbcTest {
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
             Calendar cal = new GregorianCalendar();
             cal.setTime(timestamp);
-            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS zzzz";
+            String dateFormat = "HH:mm:ss:SSS zzzz";
             DateFormat df = new SimpleDateFormat(dateFormat);
             String dateTime = df.format(cal.getTime());
 
             Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
                     new GregorianCalendar(TimeZone.getDefault()));
 
-            System.out.println(res.getString("NAME") + ": TIME=" + dateTime
+            System.out.println(res.getString("NAME") + ": "
+                    + res.getString("ID") + ", TIME=" + dateTime
                     + ", TIME_LOCAL=" + timestampLocal);
 
         }
@@ -237,18 +238,18 @@ public class SimpleJdbcTest {
 
         Statement stat = con.createStatement();
 
-        ResultSet res = stat
-                .executeQuery("SELECT ID, NAME, "
-                        + " TO_CHAR(TIME_WITH_ZONE, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), "
-                        + " TO_CHAR(TIME_WITH_ZONE_LOCAL, 'YYYY-MM-DD HH24:MI:SS:FF TZR') "
-                        + " FROM TIMESTAMP_DEMO  ORDER BY ID");
+        ResultSet res = stat.executeQuery("SELECT ID, NAME, "
+                + " TO_CHAR(TIME_WITH_ZONE, 'HH24:MI:SS:FF TZR'), "
+                + " TO_CHAR(TIME_WITH_ZONE_LOCAL, 'HH24:MI:SS:FF TZR') "
+                + " FROM TIMESTAMP_DEMO  ORDER BY ID");
 
         while (res.next()) {
 
             String timestamp = res.getString(3);
             String timestampLocal = res.getString(4);
 
-            System.out.println(res.getString("NAME") + ": TIME=" + timestamp
+            System.out.println(res.getString("NAME") + ": "
+                    + res.getString("ID") + ", TIME=" + timestamp
                     + ", TIME_LOCAL=" + timestampLocal);
 
         }

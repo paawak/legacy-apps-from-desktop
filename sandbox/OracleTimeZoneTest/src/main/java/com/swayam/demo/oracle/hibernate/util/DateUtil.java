@@ -17,16 +17,22 @@ package com.swayam.demo.oracle.hibernate.util;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+
+import org.apache.log4j.Logger;
 
 /**
  * 
  * @author paawak
  */
 public class DateUtil {
+
+    private static final Logger LOG = Logger.getLogger(DateUtil.class);
 
     private DateUtil() {
 
@@ -94,6 +100,39 @@ public class DateUtil {
         dateTime += " " + tzId;
 
         return dateTime;
+
+    }
+
+    /**
+     * Converts raw time-stamp with time-zone string from Oracle to Calendar
+     * containing the time-zone
+     * 
+     * @param rawTimestamp
+     *            in the format 2010-9-26 11.30.0.0 Australia/Adelaide
+     * @return
+     */
+    public static Calendar parseOracleTimestampWithZone(String rawTimestamp) {
+
+        Calendar cal = null;
+
+        String dateFormat = "yyyy-MM-dd HH.mm.ss.SSS";
+        SimpleDateFormat df = new SimpleDateFormat(dateFormat);
+
+        try {
+
+            Date date = df.parse(rawTimestamp);
+            String timeZoneId = rawTimestamp.split("\\s")[2];
+            TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
+            cal = new GregorianCalendar(timeZone);
+            cal.setTime(date);
+            cal.setTimeZone(timeZone);
+
+        } catch (ParseException e) {
+            LOG.error("Could not convert string `" + rawTimestamp
+                    + "` to Calendar", e);
+        }
+
+        return cal;
 
     }
 

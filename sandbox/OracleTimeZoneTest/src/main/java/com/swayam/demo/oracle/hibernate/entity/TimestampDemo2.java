@@ -26,7 +26,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLInsert;
-import org.hibernate.annotations.SQLUpdate;
 import org.hibernate.annotations.Type;
 
 /**
@@ -34,7 +33,10 @@ import org.hibernate.annotations.Type;
  * @author paawak
  */
 @SQLInsert(sql = "INSERT INTO TIMESTAMP_DEMO (NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL, ID) values (?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?, ?)")
-@SQLUpdate(sql = "SELECT NAME, TO_CHAR(TIME_WITH_ZONE, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), TIME_WITH_ZONE_LOCAL, ID FROM TIMESTAMP_DEMO ORDER BY ID")
+// @Loader(namedQuery = "customSelect")
+// @NamedNativeQuery(name = "customSelect", resultClass = TimestampDemo2.class,
+// query =
+// "SELECT NAME, TO_CHAR(TIME_WITH_ZONE, 'YYYY-MM-DD HH24:MI:SS:FF_TZR') AS TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL, ID FROM TIMESTAMP_DEMO WHERE ID=?")
 @Table(name = "TIMESTAMP_DEMO")
 @Entity
 public class TimestampDemo2 extends TimestampDemoTemplate implements

@@ -16,13 +16,13 @@
 package com.swayam.demo.oracle.hibernate.custom;
 
 import static com.swayam.demo.oracle.hibernate.util.DateUtil.getOracleFormattedTimeWithZone;
+import static com.swayam.demo.oracle.hibernate.util.DateUtil.parseOracleTimestampWithZone;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -42,9 +42,10 @@ public class TimestampType2 extends TimestampType {
         Calendar cal = null;
         String timestamp = rs.getString(names[0]);
 
+        LOG.info("raw timestamp=" + timestamp);
+
         if (timestamp != null) {
-            cal = new GregorianCalendar();
-            LOG.info("timestamp=" + timestamp);
+            cal = parseOracleTimestampWithZone(timestamp);
         }
 
         return cal;

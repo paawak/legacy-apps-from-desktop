@@ -13,7 +13,7 @@
  * issued to any third party.
  */
 
-package com.swayam.demo.oracle.hibernate;
+package com.swayam.demo.oracle.hibernate.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -51,7 +51,7 @@ public class TimestampDemo implements Serializable {
     private Calendar timeWithZone;
 
     @Column(name = "TIME_WITH_ZONE_LOCAL")
-    @Type(type = "com.swayam.demo.oracle.hibernate.TimestampType")
+    @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType")
     private Calendar timeWithZoneLocal;
 
     public long getId() {

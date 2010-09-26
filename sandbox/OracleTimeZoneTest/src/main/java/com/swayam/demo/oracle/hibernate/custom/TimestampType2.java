@@ -13,7 +13,7 @@
  * issued to any third party.
  */
 
-package com.swayam.demo.oracle.hibernate;
+package com.swayam.demo.oracle.hibernate.custom;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

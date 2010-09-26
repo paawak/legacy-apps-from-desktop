@@ -13,7 +13,7 @@
  * issued to any third party.
  */
 
-package com.swayam.demo.oracle.hibernate;
+package com.swayam.demo.oracle.hibernate.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Interceptor;

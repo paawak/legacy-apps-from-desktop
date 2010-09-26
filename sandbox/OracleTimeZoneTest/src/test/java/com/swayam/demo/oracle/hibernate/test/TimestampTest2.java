@@ -29,8 +29,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.swayam.demo.oracle.hibernate.HibernateUtil;
-import com.swayam.demo.oracle.hibernate.TimestampDemo2;
+import com.swayam.demo.oracle.hibernate.entity.TimestampDemo2;
+import com.swayam.demo.oracle.hibernate.util.HibernateUtil;
 
 /**
  * 

@@ -68,13 +68,9 @@ public class SimpleJdbcTest {
         pStat.setInt(1, nextVal);
         pStat.setString(2, "insertFaulty");
 
-        String timeZoneId = "Asia/Tokyo";
+        Calendar timeWithZone = getTimeWithZone();
 
-        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
-
-        Calendar now = new GregorianCalendar(tz);
-
-        Timestamp ts = new Timestamp(now.getTimeInMillis());
+        Timestamp ts = new Timestamp(timeWithZone.getTimeInMillis());
 
         pStat.setTimestamp(3, ts);
 
@@ -99,17 +95,13 @@ public class SimpleJdbcTest {
         pStat.setInt(1, nextVal);
         pStat.setString(2, "insertWorks1");
 
-        String timeZoneId = "Asia/Tokyo";
+        Calendar timeWithZone = getTimeWithZone();
 
-        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
+        Timestamp ts = new Timestamp(timeWithZone.getTimeInMillis());
 
-        Calendar now = new GregorianCalendar(tz);
+        pStat.setTimestamp(3, ts, timeWithZone);
 
-        Timestamp ts = new Timestamp(now.getTimeInMillis());
-
-        pStat.setTimestamp(3, ts, now);
-
-        pStat.setTimestamp(4, ts, now);
+        pStat.setTimestamp(4, ts, timeWithZone);
 
         pStat.execute();
 
@@ -120,16 +112,12 @@ public class SimpleJdbcTest {
     @Test
     public void insertWorks2() throws SQLException {
 
-        String timeZoneId = "Asia/Tokyo";
-
-        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
-
-        Calendar now = new GregorianCalendar(tz);
+        Calendar timeWithZone = getTimeWithZone();
 
         String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
         DateFormat df = new SimpleDateFormat(dateFormat);
-        String dateTime = df.format(now.getTime());
-        String tzId = now.getTimeZone().getID();
+        String dateTime = df.format(timeWithZone.getTime());
+        String tzId = timeWithZone.getTimeZone().getID();
         dateTime += " " + tzId;
 
         System.out.println("dateTime before insertWorks2=" + dateTime);
@@ -145,11 +133,11 @@ public class SimpleJdbcTest {
         pStat.setInt(1, nextVal);
         pStat.setString(2, "insertWorks2");
 
-        Timestamp ts = new Timestamp(now.getTimeInMillis());
+        Timestamp ts = new Timestamp(timeWithZone.getTimeInMillis());
 
         pStat.setString(3, dateTime);
 
-        pStat.setTimestamp(4, ts, now);
+        pStat.setTimestamp(4, ts, timeWithZone);
 
         pStat.execute();
 
@@ -276,6 +264,23 @@ public class SimpleJdbcTest {
         stat.close();
 
         return nextVal;
+
+    }
+
+    private Calendar getTimeWithZone() {
+
+        String timeZoneId = "Asia/Tokyo";
+
+        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
+
+        Calendar now = new GregorianCalendar(tz);
+
+        now.set(Calendar.HOUR, 11);
+        now.set(Calendar.MINUTE, 0);
+        now.set(Calendar.SECOND, 0);
+        now.set(Calendar.MILLISECOND, 0);
+
+        return now;
 
     }
 

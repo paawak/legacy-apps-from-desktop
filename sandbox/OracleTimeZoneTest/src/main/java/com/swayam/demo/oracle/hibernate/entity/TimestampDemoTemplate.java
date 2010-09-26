@@ -21,7 +21,7 @@ import java.util.Calendar;
  * 
  * @author paawak
  */
-public class TimestampDemoTemplate {
+class TimestampDemoTemplate {
 
     long id;
 

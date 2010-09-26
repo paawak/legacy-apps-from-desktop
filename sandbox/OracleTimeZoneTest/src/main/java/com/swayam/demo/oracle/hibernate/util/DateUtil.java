@@ -108,7 +108,7 @@ public class DateUtil {
      * containing the time-zone
      * 
      * @param rawTimestamp
-     *            in the format 2010-9-26 11.30.0.0 Australia/Adelaide
+     *            in the format <i>2010-9-26 11.30.0.0 Australia/Adelaide</i>
      * @return
      */
     public static Calendar parseOracleTimestampWithZone(String rawTimestamp) {

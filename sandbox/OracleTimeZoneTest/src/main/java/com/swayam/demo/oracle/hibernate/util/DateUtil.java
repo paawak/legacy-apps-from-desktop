@@ -63,8 +63,14 @@ public class DateUtil {
 
         String dateFormat = "HH:mm:ss:SSS zzzz";
         DateFormat df = new SimpleDateFormat(dateFormat);
+
         // this is very important
-        df.setTimeZone(cal.getTimeZone());
+        TimeZone timeZone = cal.getTimeZone();
+
+        if (timeZone != null) {
+            df.setTimeZone(timeZone);
+        }
+
         String dateTime = df.format(cal.getTime());
 
         return dateTime;
@@ -75,7 +81,14 @@ public class DateUtil {
 
         String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
         DateFormat df = new SimpleDateFormat(dateFormat);
-        df.setTimeZone(timeWithZone.getTimeZone());
+
+        // this is very important
+        TimeZone timeZone = timeWithZone.getTimeZone();
+
+        if (timeZone != null) {
+            df.setTimeZone(timeZone);
+        }
+
         String dateTime = df.format(timeWithZone.getTime());
         String tzId = timeWithZone.getTimeZone().getID();
         dateTime += " " + tzId;

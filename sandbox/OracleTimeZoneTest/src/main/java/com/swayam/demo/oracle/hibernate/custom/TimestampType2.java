@@ -18,9 +18,11 @@ package com.swayam.demo.oracle.hibernate.custom;
 import static com.swayam.demo.oracle.hibernate.util.DateUtil.getOracleFormattedTimeWithZone;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -32,6 +34,21 @@ import org.hibernate.HibernateException;
 public class TimestampType2 extends TimestampType {
 
     private static final Logger LOG = Logger.getLogger(TimestampType2.class);
+
+    @Override
+    public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+            throws HibernateException, SQLException {
+
+        Calendar cal = null;
+        String timestamp = rs.getString(names[0]);
+
+        if (timestamp != null) {
+            cal = new GregorianCalendar();
+            LOG.info("timestamp=" + timestamp);
+        }
+
+        return cal;
+    }
 
     @Override
     public void nullSafeSet(PreparedStatement st, Object value, int index)

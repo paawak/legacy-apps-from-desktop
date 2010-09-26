@@ -56,7 +56,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void insertFaulty() throws SQLException {
+    public void insert_1() throws SQLException {
 
         PreparedStatement pStat = con
                 .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
@@ -66,7 +66,7 @@ public class SimpleJdbcTest {
         int nextVal = getNextVal();
 
         pStat.setInt(1, nextVal);
-        pStat.setString(2, "insertFaulty");
+        pStat.setString(2, "insert_1");
 
         Calendar timeWithZone = getTimeWithZone();
 
@@ -83,7 +83,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void insertWorks1() throws SQLException {
+    public void insert_2() throws SQLException {
 
         PreparedStatement pStat = con
                 .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
@@ -93,7 +93,7 @@ public class SimpleJdbcTest {
         int nextVal = getNextVal();
 
         pStat.setInt(1, nextVal);
-        pStat.setString(2, "insertWorks1");
+        pStat.setString(2, "insert_2");
 
         Calendar timeWithZone = getTimeWithZone();
 
@@ -110,17 +110,18 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void insertWorks2() throws SQLException {
+    public void insert_3() throws SQLException {
 
         Calendar timeWithZone = getTimeWithZone();
 
         String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
         DateFormat df = new SimpleDateFormat(dateFormat);
+        df.setTimeZone(timeWithZone.getTimeZone());
         String dateTime = df.format(timeWithZone.getTime());
         String tzId = timeWithZone.getTimeZone().getID();
         dateTime += " " + tzId;
 
-        System.out.println("dateTime before insertWorks2=" + dateTime);
+        System.out.println("dateTime before insert_3=" + dateTime);
 
         PreparedStatement pStat = con
                 .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
@@ -131,7 +132,7 @@ public class SimpleJdbcTest {
         int nextVal = getNextVal();
 
         pStat.setInt(1, nextVal);
-        pStat.setString(2, "insertWorks2");
+        pStat.setString(2, "insert_3");
 
         Timestamp ts = new Timestamp(timeWithZone.getTimeInMillis());
 
@@ -269,18 +270,19 @@ public class SimpleJdbcTest {
 
     private Calendar getTimeWithZone() {
 
-        String timeZoneId = "Asia/Tokyo";
+        // CST - Central Standard Time(Australia/Adelaide): UTC/GMT +9:30 hours
+        String timeZoneId = "Australia/Adelaide";
 
-        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
+        TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
 
-        Calendar now = new GregorianCalendar(tz);
+        Calendar cal = Calendar.getInstance(timeZone);
 
-        now.set(Calendar.HOUR, 11);
-        now.set(Calendar.MINUTE, 0);
-        now.set(Calendar.SECOND, 0);
-        now.set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 11);
+        cal.set(Calendar.MINUTE, 30);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-        return now;
+        return cal;
 
     }
 

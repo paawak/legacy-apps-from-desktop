@@ -45,6 +45,10 @@ public class HibernateUtil {
 
     }
 
+    private HibernateUtil() {
+
+    }
+
     public static Session getSession() throws HibernateException {
 
         return sessionFactory.openSession();

@@ -15,12 +15,10 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import static com.swayam.demo.oracle.hibernate.util.DateUtil.getTimeWithZone;
+
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -49,17 +47,11 @@ public class TimestampTest2 {
     public void testInsert() {
 
         TimestampDemo2 demo2 = new TimestampDemo2();
-        // demo2.setId(13);
-        demo2.setName("B");
-        // "2010-09-25 18:59:30:424 Asia/Tokyo"
-        // TO_TIMESTAMP_TZ('2010-09-25 18:59:30:424 Asia/Tokyo', 'YYYY-MM-DD
-        // HH24:MI:SS:FF TZR')
+        demo2.setName("TimestampTest2");
 
-        String timeZoneId = "Asia/Tokyo";
-        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
-        Calendar now = new GregorianCalendar(tz);
+        Calendar cal = getTimeWithZone();
 
-        demo2.setTimeWithZone(now);
+        demo2.setTimeWithZone(cal);
 
         Transaction trx = session.beginTransaction();
         session.save(demo2);
@@ -77,12 +69,9 @@ public class TimestampTest2 {
         List<TimestampDemo2> list = query.list();
 
         for (TimestampDemo2 demo : list) {
-            Calendar cal = demo.getTimeWithZone();
-            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
-            DateFormat df = new SimpleDateFormat(dateFormat);
-            String dateTime = df.format(cal.getTime());
-            System.out.println("TZ=" + cal.getTimeZone().getDisplayName()
-                    + ", Time=" + dateTime);
+
+            System.out.println(demo.getName() + ": " + demo.getId() + ", TIME="
+                    + getTimeWithZone(demo.getTimeWithZone()));
         }
 
     }

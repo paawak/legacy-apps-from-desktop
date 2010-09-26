@@ -15,6 +15,8 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
+import static com.swayam.demo.oracle.hibernate.util.DateUtil.getTimeWithZone;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -256,36 +258,6 @@ public class SimpleJdbcTest {
         stat.close();
 
         return nextVal;
-
-    }
-
-    private Calendar getTimeWithZone() {
-
-        // CST - Central Standard Time(Australia/Adelaide): UTC/GMT +9:30 hours
-        String timeZoneId = "Australia/Adelaide";
-
-        TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
-
-        Calendar cal = Calendar.getInstance(timeZone);
-
-        cal.set(Calendar.HOUR_OF_DAY, 11);
-        cal.set(Calendar.MINUTE, 30);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-
-        return cal;
-
-    }
-
-    private String getTimeWithZone(Timestamp timestamp) {
-
-        Calendar cal = new GregorianCalendar();
-        cal.setTime(timestamp);
-        String dateFormat = "HH:mm:ss:SSS zzzz";
-        DateFormat df = new SimpleDateFormat(dateFormat);
-        String dateTime = df.format(cal.getTime());
-
-        return dateTime;
 
     }
 

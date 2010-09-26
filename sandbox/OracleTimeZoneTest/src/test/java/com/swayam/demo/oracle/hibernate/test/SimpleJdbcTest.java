@@ -147,7 +147,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void selectException() throws SQLException {
+    public void select_exception() throws SQLException {
 
         System.out
                 .println("**********************    EXCEPTION    *******************************");
@@ -160,11 +160,6 @@ public class SimpleJdbcTest {
         while (res.next()) {
 
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
-            Calendar cal = new GregorianCalendar();
-            cal.setTime(timestamp);
-            String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS z";
-            DateFormat df = new SimpleDateFormat(dateFormat);
-            String dateTime = df.format(cal.getTime());
 
             Timestamp timestampLocal = null;
 
@@ -175,8 +170,8 @@ public class SimpleJdbcTest {
                 break;
             }
 
-            System.out.println(res.getString("NAME") + ": TIME=" + dateTime
-                    + ", TIME_LOCAL=" + timestampLocal);
+            System.out.println("TIME=" + timestamp + ", TIME_LOCAL="
+                    + timestampLocal);
 
         }
 
@@ -186,7 +181,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void select1() throws SQLException {
+    public void select_1() throws SQLException {
 
         System.out
                 .println("**********************    JDBC    *******************************");
@@ -199,18 +194,14 @@ public class SimpleJdbcTest {
         while (res.next()) {
 
             Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
-            Calendar cal = new GregorianCalendar();
-            cal.setTime(timestamp);
-            String dateFormat = "HH:mm:ss:SSS zzzz";
-            DateFormat df = new SimpleDateFormat(dateFormat);
-            String dateTime = df.format(cal.getTime());
 
             Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
                     new GregorianCalendar(TimeZone.getDefault()));
 
             System.out.println(res.getString("NAME") + ": "
-                    + res.getString("ID") + ", TIME=" + dateTime
-                    + ", TIME_LOCAL=" + timestampLocal);
+                    + res.getString("ID") + ", TIME="
+                    + getTimeWithZone(timestamp) + ", TIME_LOCAL="
+                    + getTimeWithZone(timestampLocal));
 
         }
 
@@ -220,7 +211,7 @@ public class SimpleJdbcTest {
     }
 
     @Test
-    public void select2() throws SQLException {
+    public void select_2() throws SQLException {
 
         System.out
                 .println("**********************    ORACLE_FUNCTION    *******************************");
@@ -283,6 +274,18 @@ public class SimpleJdbcTest {
         cal.set(Calendar.MILLISECOND, 0);
 
         return cal;
+
+    }
+
+    private String getTimeWithZone(Timestamp timestamp) {
+
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(timestamp);
+        String dateFormat = "HH:mm:ss:SSS zzzz";
+        DateFormat df = new SimpleDateFormat(dateFormat);
+        String dateTime = df.format(cal.getTime());
+
+        return dateTime;
 
     }
 

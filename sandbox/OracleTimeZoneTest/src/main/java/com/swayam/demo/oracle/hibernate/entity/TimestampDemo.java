@@ -39,21 +39,16 @@ public class TimestampDemo implements Serializable {
 
     private static final long serialVersionUID = 4940963602672391841L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column
     private String name;
 
-    @Column(name = "TIME_WITH_ZONE")
-    @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeWithZone;
 
-    @Column(name = "TIME_WITH_ZONE_LOCAL")
-    @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType")
     private Calendar timeWithZoneLocal;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public long getId() {
         return id;
     }
@@ -62,6 +57,7 @@ public class TimestampDemo implements Serializable {
         this.id = id;
     }
 
+    @Column
     public String getName() {
         return name;
     }
@@ -70,6 +66,8 @@ public class TimestampDemo implements Serializable {
         this.name = name;
     }
 
+    @Column(name = "TIME_WITH_ZONE")
+    @Temporal(TemporalType.TIMESTAMP)
     public Calendar getTimeWithZone() {
         return timeWithZone;
     }
@@ -78,6 +76,8 @@ public class TimestampDemo implements Serializable {
         this.timeWithZone = timeWithZone;
     }
 
+    @Column(name = "TIME_WITH_ZONE_LOCAL")
+    @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType")
     public Calendar getTimeWithZoneLocal() {
         return timeWithZoneLocal;
     }

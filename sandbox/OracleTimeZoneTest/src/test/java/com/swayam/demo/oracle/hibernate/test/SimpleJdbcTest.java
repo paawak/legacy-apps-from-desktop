@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,8 +50,142 @@ public class SimpleJdbcTest {
 
     }
 
+    @After
+    public void cleanUp() throws SQLException {
+        con.close();
+    }
+
     @Test
-    public void insert() throws SQLException {
+    public void insert1() throws SQLException {
+
+        PreparedStatement pStat = con
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
+                        + " (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) "
+                        + " VALUES " + " (?, ?, ?, ?)");
+
+        int nextVal = getNextVal();
+
+        pStat.setInt(1, nextVal);
+        pStat.setString(2, "insert1");
+
+        String timeZoneId = "Asia/Tokyo";
+
+        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
+
+        Calendar now = new GregorianCalendar(tz);
+
+        Timestamp ts = new Timestamp(now.getTimeInMillis());
+
+        pStat.setTimestamp(3, ts, now);
+
+        pStat.setTimestamp(4, ts, now);
+
+        pStat.execute();
+
+        pStat.close();
+
+    }
+
+    @Test
+    public void insert2() throws SQLException {
+
+        String timeZoneId = "Asia/Tokyo";
+
+        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
+
+        Calendar now = new GregorianCalendar(tz);
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
+        DateFormat df = new SimpleDateFormat(dateFormat);
+        String dateTime = df.format(now.getTime());
+        String tzId = now.getTimeZone().getID();
+        dateTime += " " + tzId;
+
+        System.out.println("dateTime before insert2=" + dateTime);
+
+        PreparedStatement pStat = con
+                .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
+                        + " (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) "
+                        + " VALUES "
+                        + " (?, ?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)");
+
+        int nextVal = getNextVal();
+
+        pStat.setInt(1, nextVal);
+        pStat.setString(2, "insert2");
+
+        Timestamp ts = new Timestamp(now.getTimeInMillis());
+
+        pStat.setString(3, dateTime);
+
+        pStat.setTimestamp(4, ts, now);
+
+        pStat.execute();
+
+        pStat.close();
+
+    }
+
+    @Test
+    public void select1() throws SQLException {
+
+        System.out
+                .println("**********************    JDBC    *******************************");
+
+        Statement stat = con.createStatement();
+
+        ResultSet res = stat
+                .executeQuery("SELECT * FROM TIMESTAMP_DEMO  ORDER BY ID");
+
+        while (res.next()) {
+
+            Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(timestamp);
+            Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
+                    new GregorianCalendar(TimeZone.getDefault()));
+
+            System.out.println(res.getString("NAME") + ": TIME=" + timestamp
+                    + "/" + cal.getTimeZone().getID() + ", TIME_LOCAL="
+                    + timestampLocal);
+
+        }
+
+        stat.close();
+        res.close();
+
+    }
+
+    @Test
+    public void select2() throws SQLException {
+
+        System.out
+                .println("**********************    ORACLE_FUNCTION    *******************************");
+
+        Statement stat = con.createStatement();
+
+        ResultSet res = stat
+                .executeQuery("SELECT ID, NAME, "
+                        + " TO_CHAR(TIME_WITH_ZONE, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), "
+                        + " TO_CHAR(TIME_WITH_ZONE_LOCAL, 'YYYY-MM-DD HH24:MI:SS:FF TZR') "
+                        + " FROM TIMESTAMP_DEMO  ORDER BY ID");
+
+        while (res.next()) {
+
+            String timestamp = res.getString(3);
+            String timestampLocal = res.getString(4);
+
+            System.out.println(res.getString("NAME") + ": TIME=" + timestamp
+                    + ", TIME_LOCAL=" + timestampLocal);
+
+        }
+
+        stat.close();
+        res.close();
+
+    }
+
+    private int getNextVal() throws SQLException {
 
         Statement stat = con.createStatement();
 
@@ -66,80 +201,7 @@ public class SimpleJdbcTest {
         res.close();
         stat.close();
 
-        String timeZoneId = "Asia/Tokyo";
-        // String timeZoneId = "Africa/Algeria";
-        // String timeZoneId = "Asia/Kolkata";
-
-        TimeZone tz = TimeZone.getTimeZone(timeZoneId);
-
-        Calendar now = new GregorianCalendar(tz);
-
-        String dateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
-        DateFormat df = new SimpleDateFormat(dateFormat);
-        String dateTime = df.format(now.getTime());
-        String tzId = now.getTimeZone().getID();
-        dateTime += " " + tzId;
-
-        String dateStr = "TO_TIMESTAMP_TZ('" + dateTime
-                + "','YYYY-MM-DD HH24:MI:SS:FF TZR')";
-
-        System.err.println("dateStr=" + dateStr + "\ndateTime=" + dateTime);
-
-        // PreparedStatement pStat = con
-        // .prepareStatement("INSERT INTO TIMESTAMP_DEMO (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) VALUES (?, ?, TO_TIMESTAMP_TZ(?, ?), ?)");
-
-        PreparedStatement pStat = con
-                .prepareStatement("INSERT INTO TIMESTAMP_DEMO "
-                        + " (ID, NAME, TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL) "
-                        + " VALUES "
-                        + " (?, ?, TO_TIMESTAMP_TZ(?, 'YYYY-MM-DD HH24:MI:SS:FF TZR'), ?)");
-
-        pStat.setInt(1, nextVal);
-        pStat.setString(2, "A" + nextVal);
-
-        Timestamp ts = new Timestamp(now.getTimeInMillis());
-
-        pStat.setString(3, dateTime);
-
-        pStat.setTimestamp(4, ts, now);
-
-        pStat.execute();
-
-        pStat.close();
-
-    }
-
-    @Test
-    public void select() throws SQLException {
-
-        Statement stat = con.createStatement();
-
-        ResultSet res = stat
-                .executeQuery("SELECT * FROM TIMESTAMP_DEMO  ORDER BY ID");
-
-        // ResultSetMetaData rsmdt = res.getMetaData();
-        //
-        // System.out.println(rsmdt.getColumnTypeName(3) + ", "
-        // + rsmdt.getColumnTypeName(4));
-
-        while (res.next()) {
-
-            int id = res.getInt("ID");
-            String name = res.getString("NAME");
-            Timestamp timestamp = res.getTimestamp("TIME_WITH_ZONE");
-            Calendar cal = new GregorianCalendar();
-            cal.setTime(timestamp);
-            Timestamp timestampLocal = res.getTimestamp("TIME_WITH_ZONE_LOCAL",
-                    new GregorianCalendar(TimeZone.getDefault()));
-
-            System.out.println("ID=" + id + ", NAME=" + name + ", TIME="
-                    + timestamp + "/" + cal.getTimeZone().getID()
-                    + ", TIME_LOCAL=" + timestampLocal);
-
-        }
-
-        stat.close();
-        res.close();
+        return nextVal;
 
     }
 

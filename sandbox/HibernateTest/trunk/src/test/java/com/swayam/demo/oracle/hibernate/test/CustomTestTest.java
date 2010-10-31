@@ -16,7 +16,9 @@
 package com.swayam.demo.oracle.hibernate.test;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Before;
@@ -49,6 +51,21 @@ public class CustomTestTest {
         Transaction tr = session.beginTransaction();
         session.save(ct);
         tr.commit();
+
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void select() {
+
+        Query query = session.createQuery("from " + CustomTest.class.getName());
+
+        List<CustomTest> cts = query.list();
+
+        for (CustomTest ct : cts) {
+            System.out.println("id=" + ct.getId() + ", name=" + ct.getName()
+                    + ", time=" + ct.getTimeWithZone());
+        }
 
     }
 

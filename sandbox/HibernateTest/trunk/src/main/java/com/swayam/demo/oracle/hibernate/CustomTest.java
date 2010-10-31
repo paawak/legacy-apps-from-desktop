@@ -19,7 +19,10 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -33,6 +36,8 @@ import org.hibernate.annotations.Type;
 public class CustomTest {
 
     @Id
+    @SequenceGenerator(name = "seq", allocationSize = 1, initialValue = 1, sequenceName = "CUSTOM_TEST_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private long id;
 
     @Column

@@ -44,7 +44,6 @@ public class CustomTestTest {
     public void insert() {
 
         CustomTest ct = new CustomTest();
-        ct.setId(1);
         ct.setName("nonameo");
         ct.setTimeWithZone(new GregorianCalendar());
 

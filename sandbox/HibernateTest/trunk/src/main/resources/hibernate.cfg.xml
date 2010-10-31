@@ -29,7 +29,7 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 		
-		<mapping class="com.swayam.demo.oracle.hibernate.CustomTest"/>
+		<mapping class="com.swayam.demo.oracle.hibernate.CustomDemo"/>
 
 	</session-factory>
 </hibernate-configuration>

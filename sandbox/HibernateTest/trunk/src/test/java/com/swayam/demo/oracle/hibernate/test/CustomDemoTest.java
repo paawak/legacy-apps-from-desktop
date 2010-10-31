@@ -24,14 +24,14 @@ import org.hibernate.Transaction;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.swayam.demo.oracle.hibernate.CustomTest;
+import com.swayam.demo.oracle.hibernate.CustomDemo;
 import com.swayam.demo.oracle.hibernate.HibernateUtil;
 
 /**
  * 
  * @author paawak
  */
-public class CustomTestTest {
+public class CustomDemoTest {
 
     private Session session;
 
@@ -43,7 +43,7 @@ public class CustomTestTest {
     @Test
     public void insert() {
 
-        CustomTest ct = new CustomTest();
+        CustomDemo ct = new CustomDemo();
         ct.setName("nonameo");
         ct.setTimeWithZone(new GregorianCalendar());
 
@@ -57,11 +57,11 @@ public class CustomTestTest {
     @Test
     public void select() {
 
-        Query query = session.createQuery("from " + CustomTest.class.getName());
+        Query query = session.createQuery("from " + CustomDemo.class.getName());
 
-        List<CustomTest> cts = query.list();
+        List<CustomDemo> cts = query.list();
 
-        for (CustomTest ct : cts) {
+        for (CustomDemo ct : cts) {
             System.out.println("id=" + ct.getId() + ", name=" + ct.getName()
                     + ", time=" + ct.getTimeWithZone());
         }

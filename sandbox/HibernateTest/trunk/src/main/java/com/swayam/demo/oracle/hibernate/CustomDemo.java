@@ -32,11 +32,11 @@ import org.hibernate.annotations.Type;
  * @author paawak
  */
 @Entity
-@Table(name = "CUSTOM_TEST")
-public class CustomTest {
+@Table(name = "CUSTOM_DEMO")
+public class CustomDemo {
 
     @Id
-    @SequenceGenerator(name = "seq", allocationSize = 1, initialValue = 1, sequenceName = "CUSTOM_TEST_SEQ")
+    @SequenceGenerator(name = "seq", allocationSize = 1, initialValue = 1, sequenceName = "CUSTOM_DEMO_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private long id;
 

@@ -23,6 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLInsert;
@@ -45,7 +46,8 @@ public class TimestampDemo2 extends TimestampDemoTemplate implements
     private static final long serialVersionUID = 4940963602672391841L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "seq", sequenceName = "TIMESTAMP_DEMO_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     @Override
     public long getId() {
         return id;
@@ -59,9 +61,8 @@ public class TimestampDemo2 extends TimestampDemoTemplate implements
 
     @Column(name = "TIME_WITH_ZONE")
     @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType2")
-    @Override
     public Calendar getTimeWithZone() {
-        return super.getTimeWithZone();
+        return timeWithZone;
     }
 
     @Column(name = "TIME_WITH_ZONE_LOCAL")

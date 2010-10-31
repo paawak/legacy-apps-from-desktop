@@ -23,6 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,7 +42,8 @@ public class TimestampDemo extends TimestampDemoTemplate implements
     private static final long serialVersionUID = -5902132666472097299L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "seq", sequenceName = "TIMESTAMP_DEMO_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     @Override
     public long getId() {
         return id;

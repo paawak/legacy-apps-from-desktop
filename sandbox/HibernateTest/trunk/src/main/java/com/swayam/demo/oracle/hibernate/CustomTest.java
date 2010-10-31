@@ -17,16 +17,29 @@ package com.swayam.demo.oracle.hibernate;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
 /**
  * 
  * @author paawak
  */
+@Entity
+@Table(name = "CUSTOM_TEST")
 public class CustomTest {
 
+    @Id
     private long id;
 
+    @Column
     private String name;
 
+    @Column(name = "TIME_WITH_ZONE")
+    @Type(type = "com.swayam.demo.oracle.hibernate.TimeWithZone")
     private Calendar timeWithZone;
 
     public long getId() {

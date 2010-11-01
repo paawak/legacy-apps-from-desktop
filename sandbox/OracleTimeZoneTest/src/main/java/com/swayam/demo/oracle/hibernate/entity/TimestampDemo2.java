@@ -40,21 +40,26 @@ import org.hibernate.annotations.Type;
 // "SELECT NAME, TO_CHAR(TIME_WITH_ZONE, 'YYYY-MM-DD HH24:MI:SS:FF_TZR') AS TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL, ID FROM TIMESTAMP_DEMO WHERE ID=?")
 @Table(name = "TIMESTAMP_DEMO")
 @Entity
-public class TimestampDemo2 extends TimestampDemoTemplate implements
-        Serializable {
+public class TimestampDemo2 implements Serializable {
 
     private static final long serialVersionUID = 4940963602672391841L;
+
+    private long id;
+
+    private String name;
+
+    private Calendar timeWithZone;
+
+    private Calendar timeWithZoneLocal;
 
     @Id
     @SequenceGenerator(name = "seq", sequenceName = "TIMESTAMP_DEMO_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
-    @Override
     public long getId() {
         return id;
     }
 
     @Column
-    @Override
     public String getName() {
         return name;
     }
@@ -67,9 +72,24 @@ public class TimestampDemo2 extends TimestampDemoTemplate implements
 
     @Column(name = "TIME_WITH_ZONE_LOCAL")
     @Type(type = "com.swayam.demo.oracle.hibernate.custom.TimestampType")
-    @Override
     public Calendar getTimeWithZoneLocal() {
         return timeWithZoneLocal;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTimeWithZone(Calendar timeWithZone) {
+        this.timeWithZone = timeWithZone;
+    }
+
+    public void setTimeWithZoneLocal(Calendar timeWithZoneLocal) {
+        this.timeWithZoneLocal = timeWithZoneLocal;
     }
 
 }

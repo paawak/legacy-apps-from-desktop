@@ -40,7 +40,7 @@ import org.hibernate.annotations.Type;
 // "SELECT NAME, TO_CHAR(TIME_WITH_ZONE, 'YYYY-MM-DD HH24:MI:SS:FF_TZR') AS TIME_WITH_ZONE, TIME_WITH_ZONE_LOCAL, ID FROM TIMESTAMP_DEMO WHERE ID=?")
 @Table(name = "TIMESTAMP_DEMO")
 @Entity
-public class TimestampDemo2 implements Serializable {
+public class TimestampDemo2 implements Serializable, ITimestampDemo {
 
     private static final long serialVersionUID = 4940963602672391841L;
 

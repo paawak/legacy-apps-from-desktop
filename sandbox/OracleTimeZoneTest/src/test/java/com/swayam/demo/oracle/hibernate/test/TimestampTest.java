@@ -15,72 +15,16 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
-import static com.swayam.demo.oracle.hibernate.util.DateUtil.getTimeWithZone;
-
-import java.util.Calendar;
-import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.swayam.demo.oracle.hibernate.entity.TimestampDemo;
-import com.swayam.demo.oracle.hibernate.util.HibernateUtil;
 
 /**
  * 
  * @author paawak
  */
-public class TimestampTest {
+public class TimestampTest extends AbstractTimestampTest {
 
-    private Session session;
-
-    @Before
-    public void setUp() throws Exception {
-        session = HibernateUtil.getSession();
-    }
-
-    @Test
-    public void testInsert() {
-
-        Calendar cal = getTimeWithZone();
-
-        TimestampDemo demo = new TimestampDemo();
-        demo.setName("TimestampTest");
-        demo.setTimeWithZone(cal);
-        demo.setTimeWithZoneLocal(cal);
-
-        Transaction trx = session.beginTransaction();
-        session.save(demo);
-        trx.commit();
-
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    public void testSelect() {
-
-        Query query = session.createQuery("FROM "
-                + TimestampDemo.class.getName());
-
-        List<TimestampDemo> list = query.list();
-
-        for (TimestampDemo demo : list) {
-
-            System.out.println(demo.getName() + ": " + demo.getId() + ", TIME="
-                    + getTimeWithZone(demo.getTimeWithZone()) + ", TIME_LOCAL="
-                    + getTimeWithZone(demo.getTimeWithZoneLocal()));
-
-        }
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        session.close();
+    public TimestampTest() {
+        super(TimestampDemo.class);
     }
 
 }

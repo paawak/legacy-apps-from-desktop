@@ -36,7 +36,7 @@ import org.hibernate.annotations.Type;
  */
 @Entity
 @Table(name = "TIMESTAMP_DEMO")
-public class TimestampDemo implements Serializable {
+public class TimestampDemo implements Serializable, ITimestampDemo {
 
     private static final long serialVersionUID = -5902132666472097299L;
 

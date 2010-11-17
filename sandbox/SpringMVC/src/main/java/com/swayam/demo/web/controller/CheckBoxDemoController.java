@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -29,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.swayam.demo.web.formbean.CheckBoxDemoBean;
 import com.swayam.demo.web.formbean.Food;
+import com.swayam.demo.web.orm.dao.UnitTypeDao;
+import com.swayam.demo.web.orm.model.UnitType;
 
 /**
  * 
@@ -39,6 +43,10 @@ public class CheckBoxDemoController {
 
     private static final Logger LOG = Logger
             .getLogger(CheckBoxDemoController.class);
+
+    @Autowired
+    @Qualifier("unitTypeDao")
+    private UnitTypeDao unitTypeDao;
 
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest webRequest) {
@@ -70,6 +78,11 @@ public class CheckBoxDemoController {
         LOG.info("Selected Items = " + checkBoxDemoBean.getSelectedFoodItems());
 
         model.addObject("command", checkBoxDemoBean);
+
+        UnitType unitType = new UnitType();
+        unitType.setName("hi there");
+        unitType.setDescription("just checking, halka");
+        unitTypeDao.save(unitType);
 
         return model;
 

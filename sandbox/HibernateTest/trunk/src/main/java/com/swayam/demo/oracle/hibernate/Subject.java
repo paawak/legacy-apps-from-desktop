@@ -15,10 +15,56 @@
 
 package com.swayam.demo.oracle.hibernate;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
- *  
+ * 
  * @author paawak
  */
-public class Subject {
+@Entity
+public class Subject implements Serializable {
+
+    private static final long serialVersionUID = 5705981176568667418L;
+
+    @Id
+    @Column(name = "subject_id")
+    private Long subjectId;
+
+    @Column(name = "subject_name")
+    private String subjectName;
+
+    @ManyToOne
+    @JoinColumn(name = "semester_id_fk")
+    private Semester semester;
+
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
 
 }

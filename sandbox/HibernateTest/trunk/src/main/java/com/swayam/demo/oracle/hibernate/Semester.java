@@ -15,10 +15,53 @@
 
 package com.swayam.demo.oracle.hibernate;
 
+import java.io.Serializable;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 /**
- *  
+ * 
  * @author paawak
  */
-public class Semester {
+public class Semester implements Serializable {
+
+    private static final long serialVersionUID = -6067841723974478563L;
+
+    @Id
+    @Column(name = "semester_id")
+    private Long semesterId;
+
+    @Column(name = "semester_name")
+    private String semesterName;
+
+    @OneToMany(mappedBy = "semester_id")
+    private Set<Subject> subjects;
+
+    public Long getSemesterId() {
+        return semesterId;
+    }
+
+    public void setSemesterId(Long semesterId) {
+        this.semesterId = semesterId;
+    }
+
+    public String getSemesterName() {
+        return semesterName;
+    }
+
+    public void setSemesterName(String semesterName) {
+        this.semesterName = semesterName;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
 
 }

@@ -22,8 +22,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 /**
  * 
@@ -36,6 +39,8 @@ public class Semester implements Serializable {
 
     @Id
     @Column(name = "SEMESTER_ID")
+    @SequenceGenerator(name = "seq", allocationSize = 1, initialValue = 1, sequenceName = "SEQ_SEMESTER")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private Long semesterId;
 
     @Column(name = "SEMESTER_NAME")

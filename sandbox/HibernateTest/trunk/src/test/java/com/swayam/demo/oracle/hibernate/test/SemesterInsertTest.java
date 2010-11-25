@@ -50,7 +50,6 @@ public class SemesterInsertTest {
         for (int i = 1; i < 5; i++) {
 
             Subject subject = new Subject();
-            subject.setSubjectId(new Long(i));
             subject.setSubjectName("subject_" + i);
             subject.setSemester(semester);
 
@@ -58,7 +57,6 @@ public class SemesterInsertTest {
 
         }
 
-        semester.setSemesterId(1L);
         semester.setSemesterName("1st sem");
         semester.setSubjects(subjects);
 

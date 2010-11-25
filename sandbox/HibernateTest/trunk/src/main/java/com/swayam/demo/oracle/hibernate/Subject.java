@@ -44,7 +44,7 @@ public class Subject implements Serializable {
     @Column(name = "SUBJECT_NAME")
     private String subjectName;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "SEMESTER_ID_FK")
     private Semester semester;
 

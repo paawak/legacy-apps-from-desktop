@@ -29,7 +29,8 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 		
-		<mapping class="com.swayam.demo.oracle.hibernate.CustomDemo"/>
+		<mapping class="com.swayam.demo.oracle.hibernate.Semester"/>
+		<mapping class="com.swayam.demo.oracle.hibernate.Subject"/>
 
 	</session-factory>
 </hibernate-configuration>

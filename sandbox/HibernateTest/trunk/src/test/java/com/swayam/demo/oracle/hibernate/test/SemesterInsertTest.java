@@ -15,11 +15,17 @@
 
 package com.swayam.demo.oracle.hibernate.test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.swayam.demo.oracle.hibernate.HibernateUtil;
+import com.swayam.demo.oracle.hibernate.Semester;
+import com.swayam.demo.oracle.hibernate.Subject;
 
 /**
  * 
@@ -37,13 +43,26 @@ public class SemesterInsertTest {
     @Test
     public void insert() {
 
-        // CustomDemo ct = new CustomDemo();
-        // ct.setName("nonameo");
-        // ct.setTimeWithZone(new GregorianCalendar());
-        //
-        // Transaction tr = session.beginTransaction();
-        // session.save(ct);
-        // tr.commit();
+        Set<Subject> subjects = new HashSet<Subject>();
+
+        for (int i = 1; i < 5; i++) {
+
+            Subject subject = new Subject();
+            subject.setSubjectId(new Long(i));
+            subject.setSubjectName("subject_" + i);
+
+            subjects.add(subject);
+
+        }
+
+        Semester semester = new Semester();
+        semester.setSemesterId(1L);
+        semester.setSemesterName("1st sem");
+        semester.setSubjects(subjects);
+
+        Transaction tr = session.beginTransaction();
+        session.save(semester);
+        tr.commit();
 
     }
 

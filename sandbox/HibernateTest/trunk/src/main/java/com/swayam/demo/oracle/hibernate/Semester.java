@@ -31,13 +31,13 @@ public class Semester implements Serializable {
     private static final long serialVersionUID = -6067841723974478563L;
 
     @Id
-    @Column(name = "semester_id")
+    @Column(name = "SEMESTER_ID")
     private Long semesterId;
 
-    @Column(name = "semester_name")
+    @Column(name = "SEMESTER_NAME")
     private String semesterName;
 
-    @OneToMany(mappedBy = "semester_id")
+    @OneToMany(mappedBy = "SEMESTER_ID")
     private Set<Subject> subjects;
 
     public Long getSemesterId() {

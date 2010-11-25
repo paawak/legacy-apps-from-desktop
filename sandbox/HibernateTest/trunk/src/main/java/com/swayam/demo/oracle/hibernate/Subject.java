@@ -33,14 +33,14 @@ public class Subject implements Serializable {
     private static final long serialVersionUID = 5705981176568667418L;
 
     @Id
-    @Column(name = "subject_id")
+    @Column(name = "SUBJECT_ID")
     private Long subjectId;
 
-    @Column(name = "subject_name")
+    @Column(name = "SUBJECT_NAME")
     private String subjectName;
 
     @ManyToOne
-    @JoinColumn(name = "semester_id_fk")
+    @JoinColumn(name = "SEMESTER_ID_FK")
     private Semester semester;
 
     public Long getSubjectId() {

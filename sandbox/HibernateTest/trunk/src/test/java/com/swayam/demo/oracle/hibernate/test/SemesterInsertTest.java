@@ -45,17 +45,19 @@ public class SemesterInsertTest {
 
         Set<Subject> subjects = new HashSet<Subject>();
 
+        Semester semester = new Semester();
+
         for (int i = 1; i < 5; i++) {
 
             Subject subject = new Subject();
             subject.setSubjectId(new Long(i));
             subject.setSubjectName("subject_" + i);
+            subject.setSemester(semester);
 
             subjects.add(subject);
 
         }
 
-        Semester semester = new Semester();
         semester.setSemesterId(1L);
         semester.setSemesterName("1st sem");
         semester.setSubjects(subjects);

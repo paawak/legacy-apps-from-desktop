@@ -18,7 +18,10 @@ package com.swayam.demo.oracle.hibernate;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -26,6 +29,7 @@ import javax.persistence.OneToMany;
  * 
  * @author paawak
  */
+@Entity
 public class Semester implements Serializable {
 
     private static final long serialVersionUID = -6067841723974478563L;
@@ -37,7 +41,7 @@ public class Semester implements Serializable {
     @Column(name = "SEMESTER_NAME")
     private String semesterName;
 
-    @OneToMany(mappedBy = "SEMESTER_ID")
+    @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Subject> subjects;
 
     public Long getSemesterId() {

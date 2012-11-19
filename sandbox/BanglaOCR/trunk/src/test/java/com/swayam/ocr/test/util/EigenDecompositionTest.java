@@ -38,7 +38,7 @@ public class EigenDecompositionTest {
 
 		BufferedImage image = ImageIO
 				.read(FastFourierTransformTest.class
-						.getResourceAsStream("/com/swayam/ocr/test/res/bangla-single-ka.png"));
+						.getResourceAsStream("/com/swayam/ocr/test/res/bangla-single-ka-1.png"));
 
 		BinaryImage binaryImage = new BinaryImage(image,
 				BinaryImage.DEFAULT_COLOR_THRESHOLD, true);

@@ -36,7 +36,7 @@ public class HuMomentsCalculatorTest {
 	@Test
 	public void testKa() throws IOException {
 
-		printMoments(getBinaryImage("/com/swayam/ocr/test/res/bangla-single-ka.png"));
+		printMoments(getBinaryImage("/com/swayam/ocr/test/res/bangla-single-ka-1.png"));
 
 	}
 
@@ -57,7 +57,7 @@ public class HuMomentsCalculatorTest {
 	@Ignore
 	public void testRa() throws IOException {
 
-		printMoments(getBinaryImage("/com/swayam/ocr/test/res/bangla-single-ra.png"));
+		printMoments(getBinaryImage("/com/swayam/ocr/test/res/bangla-single-ra-1.png"));
 
 	}
 

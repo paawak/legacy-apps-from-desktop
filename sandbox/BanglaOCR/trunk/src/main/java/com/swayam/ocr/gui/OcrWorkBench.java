@@ -48,15 +48,10 @@ import org.apache.log4j.Logger;
 
 import com.swayam.ocr.core.WordAnalyser;
 import com.swayam.ocr.core.impl.BanglaLetterAnalyser;
-import com.swayam.ocr.core.impl.ImageSearcher;
 import com.swayam.ocr.core.impl.LeftToRightWordAnalyser;
-import com.swayam.ocr.core.matcher.GlyphStore;
-import com.swayam.ocr.core.matcher.HsqlGlyphStore;
 import com.swayam.ocr.core.util.BinaryImage;
-import com.swayam.ocr.core.util.Glyph;
 import com.swayam.ocr.core.util.ImageUtils;
 import com.swayam.ocr.core.util.Rectangle;
-import com.swayam.ocr.core.util.Script;
 
 /**
  * 
@@ -64,504 +59,498 @@ import com.swayam.ocr.core.util.Script;
  */
 public class OcrWorkBench extends JFrame {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static final Logger LOG = Logger.getLogger(OcrWorkBench.class);
+	private static final Logger LOG = Logger.getLogger(OcrWorkBench.class);
 
-    private static final boolean MARK_WORD_BOUNDS = false;
+	private static final boolean MARK_WORD_BOUNDS = true;
 
-    private static final boolean MARK_MATRAS = false;
+	private static final boolean MARK_MATRAS = true;
 
-    private GlassPanedImagePanel imagePanel;
+	private GlassPanedImagePanel imagePanel;
 
-    private final JLabel statusLabel;
+	private final JLabel statusLabel;
 
-    private BufferedImage currentImage;
+	private BufferedImage currentImage;
 
-    private BinaryImage binaryImage;
+	private BinaryImage binaryImage;
 
-    public OcrWorkBench() {
+	public OcrWorkBench() {
 
-        statusLabel = new JLabel();
+		statusLabel = new JLabel();
 
-        init();
+		init();
 
-    }
+	}
 
-    private void init() {
+	private void init() {
 
-        setTitle("Ocr Workbench");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Ocr Workbench");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        TextMarkerGlassPane glassPane = new TextMarkerGlassPane();
+		TextMarkerGlassPane glassPane = new TextMarkerGlassPane();
 
-        setGlassPane(glassPane);
+		setGlassPane(glassPane);
 
-        imagePanel = new GlassPanedImagePanel(glassPane);
+		imagePanel = new GlassPanedImagePanel(glassPane);
 
-        imagePanel.addMouseMotionListener(new MouseMotionListener() {
+		imagePanel.addMouseMotionListener(new MouseMotionListener() {
 
-            @Override
-            public void mouseMoved(MouseEvent e) {
+			@Override
+			public void mouseMoved(MouseEvent e) {
 
-                Point p = e.getPoint();
+				Point p = e.getPoint();
 
-                setStatusString(p.x + ", " + p.y);
+				setStatusString(p.x + ", " + p.y);
 
-            }
+			}
 
-            @Override
-            public void mouseDragged(MouseEvent e) {
+			@Override
+			public void mouseDragged(MouseEvent e) {
 
-            }
+			}
 
-        });
+		});
 
-        JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 
-        JMenu imageMenu = new JMenu("Image");
-        menuBar.add(imageMenu);
+		JMenu imageMenu = new JMenu("Image");
+		menuBar.add(imageMenu);
 
-        JMenuItem loadImageMenuItem = new JMenuItem("Load");
-        imageMenu.add(loadImageMenuItem);
+		JMenuItem loadImageMenuItem = new JMenuItem("Load");
+		imageMenu.add(loadImageMenuItem);
 
-        loadImageMenuItem.addActionListener(new ActionListener() {
+		loadImageMenuItem.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
 
-                JFileChooser fileChooser = new JFileChooser();
+				JFileChooser fileChooser = new JFileChooser();
 
-                int option = fileChooser.showOpenDialog(OcrWorkBench.this);
+				int option = fileChooser.showOpenDialog(OcrWorkBench.this);
 
-                if (option == JFileChooser.APPROVE_OPTION) {
+				if (option == JFileChooser.APPROVE_OPTION) {
 
-                    OcrWorkBench.this.setCursor(Cursor
-                            .getPredefinedCursor(Cursor.WAIT_CURSOR));
+					OcrWorkBench.this.setCursor(Cursor
+							.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                    try {
+					try {
 
-                        getGlassPane().setVisible(false);
+						getGlassPane().setVisible(false);
 
-                        currentImage = ImageIO.read(fileChooser
-                                .getSelectedFile());
-                        setImageInFrame(currentImage);
+						currentImage = ImageIO.read(fileChooser
+								.getSelectedFile());
+						setImageInFrame(currentImage);
 
-                        binaryImage = null;
+						binaryImage = null;
 
-                    } catch (IOException e) {
-                        LOG.error("could not load image", e);
-                    }
+					} catch (IOException e) {
+						LOG.error("could not load image", e);
+					}
 
-                    OcrWorkBench.this.setCursor(Cursor
-                            .getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					OcrWorkBench.this.setCursor(Cursor
+							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
-                }
+				}
 
-            }
+			}
 
-        });
+		});
 
-        JMenu ocrMenu = new JMenu("Ocr");
-        menuBar.add(ocrMenu);
-        JMenuItem markTextsMenuItem = new JMenuItem("Mark Texts");
-        ocrMenu.add(markTextsMenuItem);
+		JMenu ocrMenu = new JMenu("Ocr");
+		menuBar.add(ocrMenu);
+		JMenuItem detectIndividualGlyphsMenuItem = new JMenuItem(
+				"Detect Individual Gyphs");
+		ocrMenu.add(detectIndividualGlyphsMenuItem);
 
-        markTextsMenuItem.addActionListener(new ProcessImageActionListener(ProcessImageOption.OCR));
+		detectIndividualGlyphsMenuItem
+				.addActionListener(new ProcessImageActionListener(
+						ProcessImageOption.OCR));
 
-        JMenu trainingMenu = new JMenu("Training");
-        menuBar.add(trainingMenu);
-        
-        JMenuItem showBinaryImageMenuItem = new JMenuItem("Show Binary Image");
-        trainingMenu.add(showBinaryImageMenuItem);
-        showBinaryImageMenuItem.addActionListener(new ProcessImageActionListener(ProcessImageOption.BINARY_IMAGE_ONLY));
-        
-        JMenuItem edgeDetectionMenuItem = new JMenuItem("Edge Detection");
-        trainingMenu.add(edgeDetectionMenuItem);
-        edgeDetectionMenuItem.addActionListener(new ProcessImageActionListener(ProcessImageOption.EDGE_DETECTION));
-        
-        JMenuItem markCharacterMenuItem = new JMenuItem("Mark Character");
-        trainingMenu.add(markCharacterMenuItem);
-        markCharacterMenuItem.addActionListener(new ActionListener() {
+		JMenu trainingMenu = new JMenu("Training");
+		menuBar.add(trainingMenu);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+		JMenuItem showBinaryImageMenuItem = new JMenuItem("Show Binary Image");
+		trainingMenu.add(showBinaryImageMenuItem);
+		showBinaryImageMenuItem
+				.addActionListener(new ProcessImageActionListener(
+						ProcessImageOption.BINARY_IMAGE_ONLY));
 
-                if (currentImage == null || binaryImage == null) {
+		JMenuItem edgeDetectionMenuItem = new JMenuItem("Edge Detection");
+		trainingMenu.add(edgeDetectionMenuItem);
+		edgeDetectionMenuItem.addActionListener(new ProcessImageActionListener(
+				ProcessImageOption.EDGE_DETECTION));
 
-                    getGlassPane().setVisible(false);
+		JMenuItem markCharacterMenuItem = new JMenuItem("Mark Character");
+		trainingMenu.add(markCharacterMenuItem);
+		markCharacterMenuItem.addActionListener(new ActionListener() {
 
-                    JOptionPane
-                            .showMessageDialog(
-                                    OcrWorkBench.this,
-                                    "Please load an image and select OCR->Mark Texts from the menu",
-                                    "Binary image not found!",
-                                    JOptionPane.WARNING_MESSAGE);
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-                } else {
+				if (currentImage == null || binaryImage == null) {
 
-                    getGlassPane().setVisible(true);
+					getGlassPane().setVisible(false);
 
-                }
+					JOptionPane
+							.showMessageDialog(
+									OcrWorkBench.this,
+									"Please load an image and select OCR->Mark Texts from the menu",
+									"Binary image not found!",
+									JOptionPane.WARNING_MESSAGE);
 
-            }
+				} else {
 
-        });
+					getGlassPane().setVisible(true);
 
-        JMenuItem storeCharacterMenuItem = new JMenuItem("Store Character");
-        trainingMenu.add(storeCharacterMenuItem);
-        
-        storeCharacterMenuItem.addActionListener(new StoreCharacterActionListener());
+				}
 
-        JMenuItem showGlyphDbMenuItem = new JMenuItem("Show Glyph DB");
-        trainingMenu.add(showGlyphDbMenuItem);
+			}
 
-        showGlyphDbMenuItem.addActionListener(new ActionListener() {
+		});
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+		JMenuItem storeCharacterMenuItem = new JMenuItem("Store Character");
+		trainingMenu.add(storeCharacterMenuItem);
 
-                EventQueue.invokeLater(new Runnable() {
+		storeCharacterMenuItem
+				.addActionListener(new StoreCharacterActionListener());
 
-                    @Override
-                    public void run() {
+		JMenuItem showGlyphDbMenuItem = new JMenuItem("Show Glyph DB");
+		trainingMenu.add(showGlyphDbMenuItem);
 
-//                        JDialog dialog = new JDialog(OcrWorkBench.this, true);
-                    	JFrame frame = new JFrame();
-                        GuiUtils.centerWindow(frame, 500, 800);
-                        frame.getContentPane().add(new GlyphDatabaseViewer());
-                        frame.setVisible(true);
+		showGlyphDbMenuItem.addActionListener(new ActionListener() {
 
-                    }
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-                });
+				EventQueue.invokeLater(new Runnable() {
 
-            }
+					@Override
+					public void run() {
 
-        });
+						// JDialog dialog = new JDialog(OcrWorkBench.this,
+						// true);
+						JFrame frame = new JFrame();
+						GuiUtils.centerWindow(frame, 500, 800);
+						frame.getContentPane().add(new GlyphDatabaseViewer());
+						frame.setVisible(true);
 
-        setJMenuBar(menuBar);
+					}
 
-        getContentPane().setLayout(new BorderLayout());
+				});
 
-        JScrollPane centreScrPane = new JScrollPane();
-        getContentPane().add(centreScrPane, BorderLayout.CENTER);
+			}
 
-        centreScrPane.setViewportView(imagePanel);
+		});
 
-        JPanel statusPanel = new JPanel();
-        statusPanel.setLayout(new BorderLayout());
-        getContentPane().add(statusPanel, BorderLayout.SOUTH);
+		setJMenuBar(menuBar);
 
-        statusLabel.setText("   ");
+		getContentPane().setLayout(new BorderLayout());
 
-        statusPanel.add(statusLabel, BorderLayout.CENTER);
+		JScrollPane centreScrPane = new JScrollPane();
+		getContentPane().add(centreScrPane, BorderLayout.CENTER);
 
-        statusLabel.setForeground(Color.BLUE);
+		centreScrPane.setViewportView(imagePanel);
 
-        final JPopupMenu saveImagePopup = new JPopupMenu();
+		JPanel statusPanel = new JPanel();
+		statusPanel.setLayout(new BorderLayout());
+		getContentPane().add(statusPanel, BorderLayout.SOUTH);
 
-        JMenuItem saveImagePopupMenuItem = new JMenuItem("Save Image To Home Dir");
-        saveImagePopup.add(saveImagePopupMenuItem);
+		statusLabel.setText("   ");
 
-        saveImagePopupMenuItem.addActionListener(new ActionListener() {
+		statusPanel.add(statusLabel, BorderLayout.CENTER);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+		statusLabel.setForeground(Color.BLUE);
 
-                EventQueue.invokeLater(new Runnable() {
+		final JPopupMenu saveImagePopup = new JPopupMenu();
 
-                    @Override
-                    public void run() {
+		JMenuItem saveImagePopupMenuItem = new JMenuItem(
+				"Save Image To Home Dir");
+		saveImagePopup.add(saveImagePopupMenuItem);
 
-                        BufferedImage morphedImage = imagePanel.getImage();
+		saveImagePopupMenuItem.addActionListener(new ActionListener() {
 
-                        if (morphedImage == null) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-                            JOptionPane.showMessageDialog(OcrWorkBench.this,
-                                    "Please load an image", "No image loaded!",
-                                    JOptionPane.WARNING_MESSAGE);
+				EventQueue.invokeLater(new Runnable() {
 
-                        } else {
+					@Override
+					public void run() {
 
-                            String imagePath = System.getProperty("user.home")
-                                    + "/Image.png";
+						BufferedImage morphedImage = imagePanel.getImage();
 
-                            try {
-                                ImageIO.write(morphedImage, "png", new File(
-                                        imagePath));
-                                JOptionPane.showMessageDialog(
-                                        OcrWorkBench.this,
-                                        "Image saved successfully to "
-                                                + imagePath, "Success!",
-                                        JOptionPane.INFORMATION_MESSAGE);
-                            } catch (IOException e) {
-                                JOptionPane.showMessageDialog(
-                                        OcrWorkBench.this,
-                                        "Could not save image to " + imagePath,
-                                        "Error!", JOptionPane.ERROR_MESSAGE);
-                                LOG.error("could not save image to: "
-                                        + imagePath, e);
-                            }
+						if (morphedImage == null) {
 
-                        }
+							JOptionPane.showMessageDialog(OcrWorkBench.this,
+									"Please load an image", "No image loaded!",
+									JOptionPane.WARNING_MESSAGE);
 
-                    }
+						} else {
 
-                });
+							String imagePath = System.getProperty("user.home")
+									+ "/Image.png";
 
-            }
+							try {
+								ImageIO.write(morphedImage, "png", new File(
+										imagePath));
+								JOptionPane.showMessageDialog(
+										OcrWorkBench.this,
+										"Image saved successfully to "
+												+ imagePath, "Success!",
+										JOptionPane.INFORMATION_MESSAGE);
+							} catch (IOException e) {
+								JOptionPane.showMessageDialog(
+										OcrWorkBench.this,
+										"Could not save image to " + imagePath,
+										"Error!", JOptionPane.ERROR_MESSAGE);
+								LOG.error("could not save image to: "
+										+ imagePath, e);
+							}
 
-        });
-        
-        JMenuItem storeCharacterPopupMenuItem = new JMenuItem("Store Character");
-        saveImagePopup.add(storeCharacterPopupMenuItem);
-        storeCharacterPopupMenuItem.addActionListener(new StoreCharacterActionListener());
+						}
 
-        imagePanel.addMouseListener(new MouseAdapter() {
+					}
 
-            public void mouseReleased(MouseEvent e) {
-            	
-                if (e.isMetaDown()) {
-                    saveImagePopup.show(e.getComponent(), e.getX(), e.getY());
-                }
+				});
 
-            }
+			}
 
-        });
+		});
 
-        pack();
+		JMenuItem storeCharacterPopupMenuItem = new JMenuItem("Store Character");
+		saveImagePopup.add(storeCharacterPopupMenuItem);
+		storeCharacterPopupMenuItem
+				.addActionListener(new StoreCharacterActionListener());
 
-        int width = 800;
-        int height = 600;
+		imagePanel.addMouseListener(new MouseAdapter() {
 
-        GuiUtils.centerWindow(this, width, height);
+			public void mouseReleased(MouseEvent e) {
 
-    }
+				if (e.isMetaDown()) {
+					saveImagePopup.show(e.getComponent(), e.getX(), e.getY());
+				}
 
-    private void setImageInFrame(BufferedImage image) {
+			}
 
-        imagePanel.setImage(image);
+		});
 
-    }
+		pack();
 
-    private void setStatusString(String message) {
+		int width = 800;
+		int height = 600;
 
-        statusLabel.setText(message);
+		GuiUtils.centerWindow(this, width, height);
 
-    }
+	}
 
-    private BufferedImage textImageManipulation(ProcessImageOption option) {
-    	
-    	BufferedImage filteredImage;
-    	
-    	switch (option) {
+	private void setImageInFrame(BufferedImage image) {
+
+		imagePanel.setImage(image);
+
+	}
+
+	private void setStatusString(String message) {
+
+		statusLabel.setText(message);
+
+	}
+
+	private BufferedImage textImageManipulation(ProcessImageOption option) {
+
+		BufferedImage filteredImage;
+
+		switch (option) {
 		case EDGE_DETECTION:
-			
-			binaryImage = new BinaryImage(currentImage, BinaryImage.DEFAULT_COLOR_THRESHOLD, true);
+
+			binaryImage = new BinaryImage(currentImage,
+					BinaryImage.DEFAULT_COLOR_THRESHOLD, true);
 			binaryImage = ImageUtils.applyRobertsonEdgeDetection(binaryImage);
 			filteredImage = binaryImage.getImage();
-			
+
 			break;
 		default:
 		case BINARY_IMAGE_ONLY:
-					
-			binaryImage = new BinaryImage(currentImage, BinaryImage.DEFAULT_COLOR_THRESHOLD, true);
+
+			binaryImage = new BinaryImage(currentImage,
+					BinaryImage.DEFAULT_COLOR_THRESHOLD, true);
 			filteredImage = binaryImage.getImage();
-			
+
 			break;
-					
+
 		case OCR:
-			
-	        binaryImage = new BinaryImage(currentImage, BinaryImage.DEFAULT_COLOR_THRESHOLD, true);
 
-	        WordAnalyser wordAnalyser = new LeftToRightWordAnalyser(binaryImage);
-	        filteredImage = binaryImage.getImage();
+			binaryImage = new BinaryImage(currentImage,
+					BinaryImage.DEFAULT_COLOR_THRESHOLD, true);
 
-	        List<Rectangle> areasFound = wordAnalyser.getWordBoundaries();
+			WordAnalyser wordAnalyser = new LeftToRightWordAnalyser(binaryImage);
+			filteredImage = binaryImage.getImage();
 
-	        Graphics g = filteredImage.getGraphics();
+			List<Rectangle> wordAreas = wordAnalyser.getWordBoundaries();
 
-	        for (Rectangle area : areasFound) {
+			Graphics g = filteredImage.getGraphics();
 
-	            if (MARK_WORD_BOUNDS) {
-	                g.setColor(Color.GREEN);
-	                g.drawRect(area.getX(), area.getY(), area.getWidth(),
-	                        area.getHeight());
-	            }
+			for (Rectangle wordArea : wordAreas) {
 
-	            BinaryImage word = wordAnalyser.getWordMatrix(area);
-	 
-	            matchImage(word);
+				if (MARK_WORD_BOUNDS) {
+					g.setColor(Color.GREEN);
+					g.drawRect(wordArea.getX(), wordArea.getY(), wordArea.getWidth(),
+							wordArea.getHeight());
+				}
 
-	             if (MARK_MATRAS) {
-	            
-		             BanglaLetterAnalyser letterAnalyser = new BanglaLetterAnalyser(
-		             word);
-		            
-		             List<Rectangle> matras = letterAnalyser.getMatras();
-		            
-		             LOG.debug("matras:" + matras);
-		            
-		             for (Rectangle rect : matras) {
-		            
-			             int x = area.getX() + rect.x;
-			             int y = area.getY() + rect.y;
-			            
-			             g.setColor(Color.BLACK);
-			             g.fillRect(x, y, rect.width, rect.height);
-		            
-		             }
-	            
-	             }
-	        }
-			
+				BinaryImage word = wordAnalyser.getWordMatrix(wordArea);
+
+				if (MARK_MATRAS) {
+
+					BanglaLetterAnalyser letterAnalyser = new BanglaLetterAnalyser(
+							word);
+
+					List<Rectangle> matras = letterAnalyser.getMatras();
+
+					LOG.debug("matras:" + matras);
+
+					for (Rectangle rect : matras) {
+
+						int x = wordArea.getX() + rect.x;
+						int y = wordArea.getY() + rect.y;
+
+						g.setColor(Color.RED);
+						g.fillRect(x, y, rect.width, rect.height);
+
+					}
+
+				}
+			}
+
 			break;
-		
+
 		}
 
-        return filteredImage;
+		return filteredImage;
 
-    }
+	}
 
-    private void matchImage(BinaryImage wordImage) {
+	public static void main(String[] args) throws Exception {
 
-    	GlyphStore glyphDB = HsqlGlyphStore.INSTANCE;
+		EventQueue.invokeAndWait(new Runnable() {
 
-    	List<Glyph> glyphs = glyphDB.getGlyphs(Script.BANGLA);
+			@Override
+			public void run() {
 
-        for (Glyph glyph : glyphs) {
+				JFrame frame = new OcrWorkBench();
+				frame.setVisible(true);
 
-            BinaryImage charImage = glyph.getImage();
+			}
 
-            ImageSearcher search = new ImageSearcher();
+		});
 
-            search.search(charImage, wordImage);
+	}
 
-        }
+	private class StoreCharacterActionListener implements ActionListener {
 
-    }
+		@Override
+		public void actionPerformed(ActionEvent e) {
 
-    public static void main(String[] args) throws Exception {
+			EventQueue.invokeLater(new Runnable() {
 
-        EventQueue.invokeAndWait(new Runnable() {
-
-            @Override
-            public void run() {
-
-                JFrame frame = new OcrWorkBench();
-                frame.setVisible(true);
-
-            }
-
-        });
-
-    }
-    
-    private class StoreCharacterActionListener implements ActionListener {
-    	
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        	
-        	EventQueue.invokeLater(new Runnable() {
-				
 				@Override
 				public void run() {
 
-		            Rectangle trainingChar = imagePanel.getTrainingCharacter();
+					Rectangle trainingChar = imagePanel.getTrainingCharacter();
 
-		            if (binaryImage == null || trainingChar == null) {
+					if (binaryImage == null || trainingChar == null) {
 
-		                JOptionPane
-		                        .showMessageDialog(OcrWorkBench.this,
-		                                "Please mark a character first",
-		                                "No character marked!",
-		                                JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(OcrWorkBench.this,
+								"Please mark a character first",
+								"No character marked!",
+								JOptionPane.WARNING_MESSAGE);
 
-		            } else {
+					} else {
 
-		                if (currentImage.getWidth() < trainingChar.width
-		                        || currentImage.getHeight() < trainingChar.height
-		                        || currentImage.getWidth() < trainingChar.x
-		                        || currentImage.getHeight() < trainingChar.y) {
+						if (currentImage.getWidth() < trainingChar.width
+								|| currentImage.getHeight() < trainingChar.height
+								|| currentImage.getWidth() < trainingChar.x
+								|| currentImage.getHeight() < trainingChar.y) {
 
-		                    JOptionPane.showMessageDialog(OcrWorkBench.this,
-		                            "Marked image out of bounds", "Out of bounds!",
-		                            JOptionPane.ERROR_MESSAGE);
+							JOptionPane
+									.showMessageDialog(OcrWorkBench.this,
+											"Marked image out of bounds",
+											"Out of bounds!",
+											JOptionPane.ERROR_MESSAGE);
 
-		                } else {
+						} else {
 
-		                    JDialog dialog = new CharacterTrainingDialog(
-		                            binaryImage.getSubImage(trainingChar));
-		                    dialog.setVisible(true);
+							JDialog dialog = new CharacterTrainingDialog(
+									binaryImage.getSubImage(trainingChar));
+							dialog.setVisible(true);
 
-		                }
+						}
 
-		            }
-					
+					}
+
 				}
-				
+
 			});
 
-        }
-        
-    }
-    
-    private enum ProcessImageOption {
-		
-		BINARY_IMAGE_ONLY, EDGE_DETECTION, OCR;
-		
+		}
+
 	}
-    
-    private class ProcessImageActionListener implements ActionListener {
-    	
-    	private final ProcessImageOption option;
-    	
-    	ProcessImageActionListener(ProcessImageOption option) {
-    		this.option = option;
-    	}
-    	
-        @Override
-        public void actionPerformed(ActionEvent e) {
 
-            if (currentImage == null) {
+	private enum ProcessImageOption {
 
-                JOptionPane.showMessageDialog(OcrWorkBench.this,
-                        "Please load an image", "No image loaded!",
-                        JOptionPane.WARNING_MESSAGE);
+		BINARY_IMAGE_ONLY, EDGE_DETECTION, OCR;
 
-            } else {
+	}
 
-                setStatusString("Detecting text, please wait...");
+	private class ProcessImageActionListener implements ActionListener {
 
-                OcrWorkBench.this.setCursor(Cursor
-                        .getPredefinedCursor(Cursor.WAIT_CURSOR));
+		private final ProcessImageOption option;
 
-                EventQueue.invokeLater(new Runnable() {
+		ProcessImageActionListener(ProcessImageOption option) {
+			this.option = option;
+		}
 
-                    @Override
-                    public void run() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
 
-                        long startTime = System.currentTimeMillis();
+			if (currentImage == null) {
 
-                        setImageInFrame(textImageManipulation(option));
+				JOptionPane.showMessageDialog(OcrWorkBench.this,
+						"Please load an image", "No image loaded!",
+						JOptionPane.WARNING_MESSAGE);
 
-                        long endTime = System.currentTimeMillis();
+			} else {
 
-                        OcrWorkBench.this.setCursor(Cursor
-                                .getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				setStatusString("Detecting text, please wait...");
 
-                        setStatusString("The last operation took "
-                                + (endTime - startTime) + " ms");
+				OcrWorkBench.this.setCursor(Cursor
+						.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                    }
+				EventQueue.invokeLater(new Runnable() {
 
-                });
+					@Override
+					public void run() {
 
-            }
+						long startTime = System.currentTimeMillis();
 
-        }
-        
-    }
+						setImageInFrame(textImageManipulation(option));
+
+						long endTime = System.currentTimeMillis();
+
+						OcrWorkBench.this.setCursor(Cursor
+								.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+						setStatusString("The last operation took "
+								+ (endTime - startTime) + " ms");
+
+					}
+
+				});
+
+			}
+
+		}
+
+	}
 
 }

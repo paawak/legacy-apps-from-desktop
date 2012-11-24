@@ -47,7 +47,7 @@ import javax.swing.JScrollPane;
 import org.apache.log4j.Logger;
 
 import com.swayam.ocr.core.WordAnalyser;
-import com.swayam.ocr.core.impl.BanglaLetterAnalyser;
+import com.swayam.ocr.core.impl.BanglaGlyphAnalyser;
 import com.swayam.ocr.core.impl.LeftToRightWordAnalyser;
 import com.swayam.ocr.core.util.BinaryImage;
 import com.swayam.ocr.core.util.ImageUtils;
@@ -394,18 +394,18 @@ public class OcrWorkBench extends JFrame {
 
 				if (MARK_WORD_BOUNDS) {
 					g.setColor(Color.GREEN);
-					g.drawRect(wordArea.getX(), wordArea.getY(), wordArea.getWidth(),
-							wordArea.getHeight());
+					g.drawRect(wordArea.getX(), wordArea.getY(),
+							wordArea.getWidth(), wordArea.getHeight());
 				}
 
 				BinaryImage word = wordAnalyser.getWordMatrix(wordArea);
 
 				if (MARK_MATRAS) {
 
-					BanglaLetterAnalyser letterAnalyser = new BanglaLetterAnalyser(
+					BanglaGlyphAnalyser glyphAnalyser = new BanglaGlyphAnalyser(
 							word);
 
-					List<Rectangle> matras = letterAnalyser.getMatras();
+					List<Rectangle> matras = glyphAnalyser.getMatras();
 
 					LOG.debug("matras:" + matras);
 
@@ -414,9 +414,22 @@ public class OcrWorkBench extends JFrame {
 						int x = wordArea.getX() + rect.x;
 						int y = wordArea.getY() + rect.y;
 
-						g.setColor(Color.RED);
+						g.setColor(Color.YELLOW);
 						g.fillRect(x, y, rect.width, rect.height);
 
+					}
+
+					List<Rectangle> glyphBoundaries = glyphAnalyser
+							.getGlyphBoundaries();
+
+					for (Rectangle glyphBoundary : glyphBoundaries) {
+
+						int x = wordArea.getX() + glyphBoundary.x;
+						int y = wordArea.getY() + glyphBoundary.y;
+
+						g.setColor(Color.RED);
+						g.drawRect(x, y, glyphBoundary.getWidth(),
+								glyphBoundary.getHeight());
 					}
 
 				}

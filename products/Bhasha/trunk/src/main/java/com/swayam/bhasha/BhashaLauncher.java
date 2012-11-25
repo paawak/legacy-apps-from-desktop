@@ -44,7 +44,7 @@ public class BhashaLauncher {
     private static final Logger log = Logger.getLogger(BhashaLauncher.class);
 
     /**
-     *This method sets the main frame to the required height and width and
+     * This method sets the main frame to the required height and width and
      * centres it
      */
     public static void setScreen(JFrame frame) {
@@ -60,13 +60,12 @@ public class BhashaLauncher {
     static {
 
         try {
-            //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"
+            // UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"
             // );
-            //UIManager.setLookAndFeel("javax.swing.plaf.multi.MultiLookAndFeel"
+            // UIManager.setLookAndFeel("javax.swing.plaf.multi.MultiLookAndFeel"
             // );
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            // UIManager.setLookAndFeel(UIManager.
-            // getCrossPlatformLookAndFeelClassName());
+            // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             // UIManager.setLookAndFeel(
             // "com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             // UIManager.setLookAndFeel(

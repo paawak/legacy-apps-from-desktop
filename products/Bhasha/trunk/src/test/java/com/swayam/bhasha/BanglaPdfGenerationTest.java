@@ -22,6 +22,8 @@ package com.swayam.bhasha;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -35,7 +37,7 @@ import com.itextpdf.text.pdf.PdfWriter;
  * 
  * @author paawak
  */
-public class BanglaPdfGenerator {
+public class BanglaPdfGenerationTest {
 
     /**
      * The unicode of this is given below:
@@ -52,11 +54,10 @@ public class BanglaPdfGenerator {
         // step 1
         Document document = new Document();
         // step 2
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
+        PdfWriter.getInstance(document, new FileOutputStream(filename));
         // step 3
         document.open();
         // step 4
-        writer.getAcroForm().setNeedAppearances(false);
         Paragraph paragraph = new Paragraph();
         paragraph.add(new Phrase(BANGLA_TEXT, new Font(BaseFont.createFont("/usr/share/fonts/lohit-bengali/Lohit-Bengali.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
         document.add(paragraph);
@@ -64,14 +65,10 @@ public class BanglaPdfGenerator {
         document.close();
     }
 
-    /**
-     * @param args
-     * @throws DocumentException
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException, DocumentException {
+    @Test
+    public void testGenarate() throws IOException, DocumentException {
         String fileName = System.getProperty("user.home") + "/a.pdf";
-        new BanglaPdfGenerator().createPdf(fileName);
+        new BanglaPdfGenerationTest().createPdf(fileName);
     }
 
 }

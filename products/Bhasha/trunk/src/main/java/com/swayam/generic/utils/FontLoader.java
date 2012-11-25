@@ -27,6 +27,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import com.swayam.bhasha.utils.FontMapper;
+
 /**
  * Loads the available fonts and segregates it according to the language. It
  * then makes these available to interested parties. Only a unmodifiable copy is
@@ -61,18 +63,22 @@ public class FontLoader {
         Font[] fonts = g.getAllFonts();
 
         for (int i = 0; i < fonts.length; i++) {
-            String fontName = fonts[i].getFamily();
+            String fontFamily = fonts[i].getFamily();
+
+            if (FontMapper.INSTANCE.getFontFile(fontFamily) == null) {
+                continue;
+            }
 
             boolean displayBangla = fonts[i].canDisplay(0x985) && fonts[i].canDisplay(0x9fa);
 
             // hack for Mac
-            if (BANGLA_PATTERN.matcher(fontName).find()) {
+            if (BANGLA_PATTERN.matcher(fontFamily).find()) {
 
-                banglaFontsUnicode.add(fontName);
+                banglaFontsUnicode.add(fontFamily);
 
             } else if (displayBangla) {
 
-                banglaFontsGeneral.add(fontName);
+                banglaFontsGeneral.add(fontFamily);
 
             }
 
@@ -82,12 +88,12 @@ public class FontLoader {
 
             // populate English fonts
             if (displayEnglish) {
-                englishFonts.add(fontName);
+                englishFonts.add(fontFamily);
             }
 
             // populate Devnagari fonts
             if (displayHindi) {
-                hindiFonts.add(fontName);
+                hindiFonts.add(fontFamily);
             }
 
         }

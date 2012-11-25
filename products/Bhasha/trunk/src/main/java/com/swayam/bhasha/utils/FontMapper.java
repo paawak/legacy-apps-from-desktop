@@ -55,6 +55,14 @@ public class FontMapper {
 
     };
 
+    private final FileFilter directoryFilter = new FileFilter() {
+
+        public boolean accept(File pathname) {
+            return pathname.isDirectory();
+        }
+
+    };
+
     private final Map<String, String> fontToFileMap = new HashMap<String, String>();
 
     private FontMapper() {
@@ -88,19 +96,27 @@ public class FontMapper {
         File fontFolder = new File(folderName);
         File[] fontFiles = fontFolder.listFiles(ttfFontFilter);
 
-        if (fontFiles == null) {
-            return;
+        if (fontFiles != null) {
+            for (File fontFile : fontFiles) {
+                try {
+                    String fontName = Font.createFont(Font.TRUETYPE_FONT, fontFile).getFamily();
+                    fontToFileMap.put(fontName, fontFile.getAbsolutePath());
+                } catch (FontFormatException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        for (File fontFile : fontFiles) {
-            try {
-                String fontName = Font.createFont(Font.TRUETYPE_FONT, fontFile).getFamily();
-                fontToFileMap.put(fontName, fontFile.getAbsolutePath());
-            } catch (FontFormatException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+        File[] nestedFolders = fontFolder.listFiles(directoryFilter);
+
+        if (nestedFolders != null) {
+
+            for (File folder : nestedFolders) {
+                mapFontsForFolder(folder.getPath());
             }
+
         }
 
     }

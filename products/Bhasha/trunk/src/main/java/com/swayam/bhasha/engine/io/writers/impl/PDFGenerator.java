@@ -108,7 +108,7 @@ class PDFGenerator extends AbstractDocGenerator {
 
     }
 
-    private Paragraph getParagraph(Para para) throws DocumentException, IOException {
+    private Paragraph getParagraph(Para para) throws DocumentException, IOException, DocGenerationException {
 
         int align = para.getAlignment();
         int pdfAlign;
@@ -140,6 +140,11 @@ class PDFGenerator extends AbstractDocGenerator {
         for (ParaText paraText : paraTextList) {
 
             String fontFile = fontMapper.getFontFile(paraText.getFontFamily());
+
+            if (fontFile == null) {
+                throw new DocGenerationException("Could not find the actual font-file for the font " + paraText.getFontFamily()
+                        + ". Please update the \"props/Font.properties\" file");
+            }
 
             BaseFont baseFont = BaseFont.createFont(fontFile, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 

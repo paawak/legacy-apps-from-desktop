@@ -21,17 +21,17 @@ package com.swayam.bhasha;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.TextField;
 
 /**
- * Copied "as-is" from http://itextpdf.com/examples/iia.php?id=158
+ * Inspired from http://itextpdf.com/examples/iia.php?id=158
  * 
  * @author paawak
  */
@@ -57,15 +57,9 @@ public class BanglaPdfGenerator {
         document.open();
         // step 4
         writer.getAcroForm().setNeedAppearances(false);
-        TextField text = new TextField(writer, new Rectangle(36, 806, 559, 780), "description");
-        text.setOptions(TextField.MULTILINE);
-        BaseFont unicode = BaseFont.createFont("/usr/share/fonts/lohit-bengali/Lohit-Bengali.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        text.setExtensionFont(BaseFont.createFont());
-        ArrayList<BaseFont> list = new ArrayList<BaseFont>();
-        list.add(unicode);
-        text.setSubstitutionFonts(list);
-        text.setText(BANGLA_TEXT);
-        writer.addAnnotation(text.getTextField());
+        Paragraph paragraph = new Paragraph();
+        paragraph.add(new Phrase(BANGLA_TEXT, new Font(BaseFont.createFont("/usr/share/fonts/lohit-bengali/Lohit-Bengali.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
+        document.add(paragraph);
         // step 5
         document.close();
     }

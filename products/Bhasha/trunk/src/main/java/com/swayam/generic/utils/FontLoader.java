@@ -68,7 +68,7 @@ public class FontLoader {
             String fontFamily = fonts[i].getFamily();
 
             // do this as pdf will not be generated correctly
-            if (FontFactory.getFont(fontFamily) == null) {
+            if (!FontFactory.isRegistered(fontFamily)) {
                 continue;
             }
 

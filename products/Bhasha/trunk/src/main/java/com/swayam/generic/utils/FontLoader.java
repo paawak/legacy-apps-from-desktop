@@ -47,6 +47,7 @@ public class FontLoader {
 
     static {
 
+        // load available fonts into itext
         FontFactory.registerDirectories();
 
         String banglaRegex = "[\u0985-\u09fa]";

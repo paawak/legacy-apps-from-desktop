@@ -73,8 +73,8 @@ public class BanglaPdfGenerationTest {
     public void testGenarate() throws IOException, DocumentException {
         FontFactory.registerDirectories();
 
-        System.out.println("11111111111 PDFGenerator.getParagraph() " + FontFactory.getRegisteredFonts());
-        System.out.println("11111111111 PDFGenerator.getParagraph() " + FontFactory.getRegisteredFamilies());
+        System.out.println(FontFactory.getRegisteredFonts());
+        System.out.println(FontFactory.getRegisteredFamilies());
         String fileName = System.getProperty("user.home") + "/a.pdf";
         new BanglaPdfGenerationTest().createPdf(fileName);
     }

@@ -29,6 +29,7 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -39,7 +40,6 @@ import com.swayam.bhasha.engine.io.writers.DocGenerationException;
 import com.swayam.bhasha.model.html.HTMLDocModel;
 import com.swayam.bhasha.model.html.Para;
 import com.swayam.bhasha.model.html.ParaText;
-import com.swayam.bhasha.utils.FontMapper;
 
 /**
  * Writes Indic characters in a PDF.
@@ -50,6 +50,10 @@ import com.swayam.bhasha.utils.FontMapper;
 class PDFGenerator extends AbstractDocGenerator {
 
     private static final int MARGINS = 50;
+
+    static {
+        FontFactory.registerDirectories();
+    }
 
     public PDFGenerator() {
 
@@ -133,20 +137,10 @@ class PDFGenerator extends AbstractDocGenerator {
         }
 
         List<ParaText> paraTextList = para.getParaTextList();
-        FontMapper fontMapper = FontMapper.INSTANCE;
         Paragraph paragraph = new Paragraph();
         paragraph.setAlignment(pdfAlign);
 
         for (ParaText paraText : paraTextList) {
-
-            String fontFile = fontMapper.getFontFile(paraText.getFontFamily());
-
-            if (fontFile == null) {
-                throw new DocGenerationException("Could not find the actual font-file for the font " + paraText.getFontFamily()
-                        + ". Please update the \"props/Font.properties\" file");
-            }
-
-            BaseFont baseFont = BaseFont.createFont(fontFile, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
             int fontStyle = Font.NORMAL;
 
@@ -162,11 +156,12 @@ class PDFGenerator extends AbstractDocGenerator {
                 fontStyle |= Font.ITALIC;
             }
 
-            Font font = new Font(baseFont, paraText.getFontSize(), fontStyle, new BaseColor(paraText.getColor().getRGB()));
+            Font font = FontFactory.getFont(paraText.getFontFamily(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED, paraText.getFontSize(), fontStyle, new BaseColor(paraText.getColor()
+                    .getRGB()));
 
             // its very important to set the leading every time the font is set
             // otherwise, the chunks/phrases overlap.
-            paragraph.setLeading(font.getSize() * 1.5f);
+            // paragraph.setLeading(font.getSize() * 1.5f);
 
             paragraph.add(new Phrase(paraText.getText(), font));
         }
@@ -174,5 +169,4 @@ class PDFGenerator extends AbstractDocGenerator {
         return paragraph;
 
     }
-
 }

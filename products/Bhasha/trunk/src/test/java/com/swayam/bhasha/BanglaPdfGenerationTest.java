@@ -27,6 +27,7 @@ import org.junit.Test;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
@@ -50,6 +51,9 @@ public class BanglaPdfGenerationTest {
      */
     private static final String BANGLA_TEXT = "আমি কোন পথে ক্ষীরের ষন্ড পুতুল রুপো গঙ্গা ঋষি";
 
+    // private static final String BANGLA_TEXT =
+    // "\u0986\u09bf\u09ae \u0995\u09cb\u09a8 \u09aa\u09a5\u09c7";
+
     public void createPdf(String filename) throws DocumentException, IOException {
         // step 1
         Document document = new Document();
@@ -67,6 +71,10 @@ public class BanglaPdfGenerationTest {
 
     @Test
     public void testGenarate() throws IOException, DocumentException {
+        FontFactory.registerDirectories();
+
+        System.out.println("11111111111 PDFGenerator.getParagraph() " + FontFactory.getRegisteredFonts());
+        System.out.println("11111111111 PDFGenerator.getParagraph() " + FontFactory.getRegisteredFamilies());
         String fileName = System.getProperty("user.home") + "/a.pdf";
         new BanglaPdfGenerationTest().createPdf(fileName);
     }

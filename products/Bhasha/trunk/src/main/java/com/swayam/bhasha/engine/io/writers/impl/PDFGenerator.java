@@ -51,10 +51,6 @@ class PDFGenerator extends AbstractDocGenerator {
 
     private static final int MARGINS = 50;
 
-    static {
-        FontFactory.registerDirectories();
-    }
-
     public PDFGenerator() {
 
     }

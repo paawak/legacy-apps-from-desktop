@@ -27,7 +27,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
-import com.swayam.bhasha.utils.FontMapper;
+import com.itextpdf.text.FontFactory;
 
 /**
  * Loads the available fonts and segregates it according to the language. It
@@ -47,6 +47,8 @@ public class FontLoader {
 
     static {
 
+        FontFactory.registerDirectories();
+
         String banglaRegex = "[\u0985-\u09fa]";
         BANGLA_PATTERN = Pattern.compile(banglaRegex);
 
@@ -65,7 +67,8 @@ public class FontLoader {
         for (int i = 0; i < fonts.length; i++) {
             String fontFamily = fonts[i].getFamily();
 
-            if (FontMapper.INSTANCE.getFontFile(fontFamily) == null) {
+            // do this as pdf will not be generated correctly
+            if (FontFactory.getFont(fontFamily) == null) {
                 continue;
             }
 

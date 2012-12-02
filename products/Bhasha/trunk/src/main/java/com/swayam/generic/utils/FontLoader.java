@@ -43,15 +43,13 @@ public class FontLoader {
     private static final Set<String> HINDI_FONTS;
     private static final Set<String> ENGLISH_FONTS;
 
-    private static final Pattern BANGLA_PATTERN;
+    private FontLoader() {
+    }
 
     static {
 
         // load available fonts into itext
         FontFactory.registerDirectories();
-
-        String banglaRegex = "[\u0985-\u09fa]";
-        BANGLA_PATTERN = Pattern.compile(banglaRegex);
 
         // this comparator puts any string having unicode, at the top
         // this is a hack for Mac/Bangla as SolaimanLipi in Mac has Unicode
@@ -76,7 +74,8 @@ public class FontLoader {
             boolean displayBangla = fonts[i].canDisplay(0x985) && fonts[i].canDisplay(0x9fa);
 
             // hack for Mac
-            if (BANGLA_PATTERN.matcher(fontFamily).find()) {
+            Pattern banglaPattern = Pattern.compile("[\u0985-\u09fa]");
+            if (banglaPattern.matcher(fontFamily).find()) {
 
                 banglaFontsUnicode.add(fontFamily);
 

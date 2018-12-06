@@ -24,13 +24,12 @@ public class BanglaPdfGenerationTestForIText {
     /**
      * The unicode of this is given below:
      * 
-     * u0986u09aeu09bf u0995u09cbu09a8 u09aau09a5u09c7
-     * u0995u09cdu09b7u09c0u09b0u09c7u09b0 u09b7u09a8u09cdu09a1
-     * u09aau09c1u09a4u09c1u09b2 u09b0u09c1u09aau09cb u0997u0999u09cdu0997u09be
-     * u098bu09b7u09bf
+     * \u0986\u09ae\u09bf \u0995\u09cb\u09a8 \u09aa\u09a5\u09c7 \u0995\u09cd\u09b7\u09c0\u09b0\u09c7\u09b0
+     * \u09b7\u09a8\u09cd\u09a1 \u09aa\u09c1\u09a4\u09c1\u09b2 \u09b0\u09c1\u09aa\u09cb \u0997\u0999\u09cd\u0997\u09be
+     * \u098b\u09b7\u09bf
      * 
      */
-    private static final String BANGLA_TEXT = "আমি কোন পথে ক্ষীরের লক্ষ্মী ষন্ড পুতুল রুপো গঙ্গা ঋষি";
+    private static final String BANGLA_TEXT = "ব্যাস ব্যাশ আমি কোন পথে ক্ষীরের লক্ষ্মী ষন্ড পুতুল রুপো গঙ্গা ঋষি ভাগাড়ে ফেলে দেওয়া পশুর ছাল ছাড়িয়ে, পিস পিস করা মাংস চলে যাচ্ছে গাড়িতে চেপে। কলকাতার দিকে। ধরে ফেলার পর চমকে উঠেছিলেন বজবজের সুভাষ উদ্যান এলাকার লোকজন। এ-ও সম্ভব! তার পর জানা গেল, সেই মাংস খাস কলকাতার বাজারেই টাটকা কাটা মাংসের মধ্যে মিশে যায় ‘নিঃশব্দে’। দেখে-শুনে শিউরে উঠছে সবাই!";
 
     public void createPdf(String filename) throws DocumentException, IOException, URISyntaxException {
 	// step 1

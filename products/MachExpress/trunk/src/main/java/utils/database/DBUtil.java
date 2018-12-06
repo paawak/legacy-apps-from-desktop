@@ -92,11 +92,11 @@ public abstract class DBUtil extends javax.swing.JFrame {
     private Connection con;
 
     /**
-     *displays all error messages when this is set to true
+     * displays all error messages when this is set to true
      */
     private boolean displayErrors = false;
     /**
-     *holds the characters requiring escape character before them, in order to
+     * holds the characters requiring escape character before them, in order to
      * be saved in the database. for example, mysql doesnot store ', " and \
      * characters unless they are preceeded by the escape character \ i.e., \',
      * \", \\, etc.
@@ -104,19 +104,18 @@ public abstract class DBUtil extends javax.swing.JFrame {
     private String[] charsWithEscapeSeq = new String[1];
 
     /**
-     *holds the SQL-Statement to be executed: chiefly used for debugging
+     * holds the SQL-Statement to be executed: chiefly used for debugging
      */
     private String SQLStatement = "";
 
     /**
      * 
-     *Creates a new instance of DBUtil: public final DBUtil(String
+     * Creates a new instance of DBUtil: public final DBUtil(String
      * DatabaseName, String DatabaseUserName, String DatabasePassword, String
      * DatabaseTableName) this is the default constructor and connects to a
      * mysql database using mysql jdbc class 4 driver
      */
-    public DBUtil(String databaseDriver, String databaseUrl, String userName,
-            String password, String tableName, boolean displayErrors,
+    public DBUtil(String databaseDriver, String databaseUrl, String userName, String password, String tableName, boolean displayErrors,
             String[] charsWithEscapeSeq) {
         this.databaseDriver = databaseDriver;
         this.databaseUrl = databaseUrl;
@@ -129,7 +128,7 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to connect to the Database this method uses the native jdbc-odbc
+     * Method to connect to the Database this method uses the native jdbc-odbc
      * driver
      * 
      */
@@ -141,8 +140,7 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
             Class.forName(databaseDriver).newInstance();
 
-            fullUrl = databaseUrl + "?user=" + userName + "&password="
-                    + password;
+            fullUrl = databaseUrl + "?user=" + userName + "&password=" + password;
 
             con = DriverManager.getConnection(fullUrl);
 
@@ -156,27 +154,25 @@ public abstract class DBUtil extends javax.swing.JFrame {
                 StringBuffer error = new StringBuffer(e.toString());
                 if (error.length() < title.length())
                     error.append("\t\t");
-                JOptionPane.showMessageDialog(this, error.toString(), title,
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, error.toString(), title, JOptionPane.ERROR_MESSAGE);
             }
         }
 
     }
 
     /**
-     *Method to execute a given SQL-Statement: public final void
+     * Method to execute a given SQL-Statement: public final void
      * executeSQLStatement(String SQL-Statement)throws java.sql.SQLException
      * 
      */
-    public final void executeSQLStatement(String sql)
-            throws java.sql.SQLException {
+    public final void executeSQLStatement(String sql) throws java.sql.SQLException {
         accessDB();
         stat.execute(sql);
         con.close();
     }
 
     /**
-     *Method to get the no. of columns and the column-names of the table in the
+     * Method to get the no. of columns and the column-names of the table in the
      * database.
      */
     private final void fillColumnNames() {
@@ -194,21 +190,19 @@ public abstract class DBUtil extends javax.swing.JFrame {
             for (int i = 0; i < Columns; i++)
                 ColumnNames[i] = md.getColumnName(i + 1);
             con.close();
-        }// end try
+        } // end try
         catch (Exception e) {
-            String title = "Error: DBUtil.fillColumnNames() Table: "
-                    + tableName;
+            String title = "Error: DBUtil.fillColumnNames() Table: " + tableName;
             StringBuffer error = new StringBuffer(e.toString());
             if (error.length() < title.length())
                 error.append("\t\t");
-            JOptionPane.showMessageDialog(this, error.toString(), title,
-                    JOptionPane.ERROR_MESSAGE);
-        }// end catch
+            JOptionPane.showMessageDialog(this, error.toString(), title, JOptionPane.ERROR_MESSAGE);
+        } // end catch
 
     }
 
     /**
-     *Method to construct the SQL-Statement to INSERT data in a database table:
+     * Method to construct the SQL-Statement to INSERT data in a database table:
      * it returns the SQL-Statement as String. public final String
      * getInsertStatement(String[] ColumnNames, Object[] Values)
      * 
@@ -217,12 +211,9 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
         if (col_Names.length != val.length)
             JOptionPane.showMessageDialog(this,
-                    " Value-List not matching with the no. of Columns.No. of columns = "
-                            + col_Names.length
-                            + "\tNo. of values to be inserted = " + val.length
+                    " Value-List not matching with the no. of Columns.No. of columns = " + col_Names.length + "\tNo. of values to be inserted = " + val.length
                             + ": Make sure that they are equal.",
-                    "Error in DBUtil_01.getInsertStatement() using table "
-                            + tableName + ":", JOptionPane.ERROR_MESSAGE);
+                    "Error in DBUtil_01.getInsertStatement() using table " + tableName + ":", JOptionPane.ERROR_MESSAGE);
         else {
 
             String names = "", values = "";
@@ -233,11 +224,10 @@ public abstract class DBUtil extends javax.swing.JFrame {
                 if (i != val.length - 1) {
                     names += ",";
                     values += ",";
-                }// end if
-            }// end for
+                } // end if
+            } // end for
 
-            SQLStatement = "INSERT INTO  " + tableName + " (" + names
-                    + ") VALUES " + " (" + values + ") ";
+            SQLStatement = "INSERT INTO  " + tableName + " (" + names + ") VALUES " + " (" + values + ") ";
 
         }
 
@@ -245,43 +235,37 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to construct the SQL-Statement to UPDATE data in a database table:
+     * Method to construct the SQL-Statement to UPDATE data in a database table:
      * it returns the SQL-Statement as String. public final String
      * getUpdateStatement(String[] ColumnNames, Object[] Values, String
      * WhereCondition)
      * 
      */
-    public final String getUpdateStatement(String[] col_Names, Object[] val,
-            String whereClause) {
+    public final String getUpdateStatement(String[] col_Names, Object[] val, String whereClause) {
 
         if (col_Names.length != val.length)
             JOptionPane.showMessageDialog(this,
-                    " Value-List not matching with the no. of Columns.No. of columns = "
-                            + col_Names.length
-                            + "\tNo. of values to be inserted = " + val.length
+                    " Value-List not matching with the no. of Columns.No. of columns = " + col_Names.length + "\tNo. of values to be inserted = " + val.length
                             + ": Make sure that they are equal.",
-                    "Error in the modifyData method of LinkDB class using Database Table "
-                            + tableName + ":", JOptionPane.ERROR_MESSAGE);
+                    "Error in the modifyData method of LinkDB class using Database Table " + tableName + ":", JOptionPane.ERROR_MESSAGE);
         else {// main else
 
             String ssM = "";
             for (int i = 0; i < val.length; i++) {
-                ssM += col_Names[i] + "='"
-                        + prefixEscapeChars(val[i].toString()) + "'";
+                ssM += col_Names[i] + "='" + prefixEscapeChars(val[i].toString()) + "'";
                 if (i != val.length - 1)
                     ssM += ",";
-            }// end for
+            } // end for
 
-            SQLStatement = "UPDATE " + tableName + " SET  " + ssM + " "
-                    + whereClause;
-        }// end main else
+            SQLStatement = "UPDATE " + tableName + " SET  " + ssM + " " + whereClause;
+        } // end main else
 
         return SQLStatement;
 
     }
 
     /**
-     *Method to insert data into a database table. Returns true if INSERTion is
+     * Method to insert data into a database table. Returns true if INSERTion is
      * successful else returns false. public final String insertData(String[]
      * ColumnNames, Object[] Values)
      * 
@@ -299,15 +283,14 @@ public abstract class DBUtil extends javax.swing.JFrame {
             StringBuffer error = new StringBuffer(e.toString());
             if (error.length() < title.length())
                 error.append("\t\t");
-            JOptionPane.showMessageDialog(this, error.toString(), title,
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, error.toString(), title, JOptionPane.ERROR_MESSAGE);
 
         }
         return inserted;
     }
 
     /**
-     *inserts data in all columns of the database table except the autonumber
+     * inserts data in all columns of the database table except the autonumber
      * column, which is assumed to be the first column in the database table
      */
     public final boolean insertData_autoNum(Object[] val) {
@@ -318,15 +301,12 @@ public abstract class DBUtil extends javax.swing.JFrame {
         return insertData(cols, val);
     }
 
-    public final Vector queryOneColumn_Vec(String colName, boolean distinct,
-            String whereClause) throws Exception {
+    public final Vector queryOneColumn_Vec(String colName, boolean distinct, String whereClause) throws Exception {
 
         if (distinct)
-            SQLStatement = "SELECT DISTINCT " + colName + "  FROM " + tableName
-                    + " " + whereClause;
+            SQLStatement = "SELECT DISTINCT " + colName + "  FROM " + tableName + " " + whereClause;
         else
-            SQLStatement = "SELECT " + colName + "  FROM " + tableName + " "
-                    + whereClause;
+            SQLStatement = "SELECT " + colName + "  FROM " + tableName + " " + whereClause;
         accessDB();
         ResultSet res = stat.executeQuery(SQLStatement);
         Vector temp = new Vector();
@@ -337,13 +317,12 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY a single column from a database table: public final
+     * Method to QUERY a single column from a database table: public final
      * Object[] queryOneColumn(String ColumnNameToBeQueried, boolean
      * RowsDistinct, String WhereCondition)throws Exception
      * 
      */
-    public final Object[] queryOneColumn(String colName, boolean distinct,
-            String whereClause) throws Exception {
+    public final Object[] queryOneColumn(String colName, boolean distinct, String whereClause) throws Exception {
         Vector temp = queryOneColumn_Vec(colName, distinct, whereClause);
         int l = temp.size();
         Object[] result = new Object[l];
@@ -354,18 +333,16 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY all the columns from a database table: public final
+     * Method to QUERY all the columns from a database table: public final
      * Object[][] queryAllColumns(boolean RowsDistinct, String
      * WhereCondition)throws Exception
      * 
      */
-    public final Object[][] queryAllColumns(boolean distinct, String whereClause)
-            throws Exception {
+    public final Object[][] queryAllColumns(boolean distinct, String whereClause) throws Exception {
 
         accessDB();
         if (distinct)
-            SQLStatement = "SELECT DISTINCT *  FROM " + tableName + " "
-                    + whereClause;
+            SQLStatement = "SELECT DISTINCT *  FROM " + tableName + " " + whereClause;
         else
             SQLStatement = "SELECT *  FROM " + tableName + " " + whereClause;
 
@@ -395,13 +372,12 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY more than one columns from a database table: public final
+     * Method to QUERY more than one columns from a database table: public final
      * Object[][] queryMultipleColumns(String[] ColumnNames, boolean
      * RowsDistinct,String WhereCondition)throws Exception
      * 
      */
-    public final Object[][] queryMultipleColumns(String[] ColumnNames,
-            boolean distinct, String whereClause) throws Exception {
+    public final Object[][] queryMultipleColumns(String[] ColumnNames, boolean distinct, String whereClause) throws Exception {
 
         int Columns = ColumnNames.length;
 
@@ -410,18 +386,16 @@ public abstract class DBUtil extends javax.swing.JFrame {
             names += ColumnNames[i];
             if (i != ColumnNames.length - 1) {
                 names += ",";
-            }// end if
+            } // end if
 
-        }// end for
+        } // end for
 
         accessDB();
 
         if (distinct)
-            SQLStatement = "SELECT DISTINCT " + names + "  FROM " + tableName
-                    + " " + whereClause;
+            SQLStatement = "SELECT DISTINCT " + names + "  FROM " + tableName + " " + whereClause;
         else
-            SQLStatement = "SELECT " + names + "  FROM " + tableName + " "
-                    + whereClause;
+            SQLStatement = "SELECT " + names + "  FROM " + tableName + " " + whereClause;
 
         ResultSet res = stat.executeQuery(SQLStatement);
 
@@ -457,21 +431,19 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
     }
 
-    public final Vector queryMultipleElements_Vec(String[] ColumnNames,
-            String whereClause) throws Exception {
+    public final Vector queryMultipleElements_Vec(String[] ColumnNames, String whereClause) throws Exception {
         Vector vec = new Vector();
         String names = "";
         for (int i = 0; i < ColumnNames.length; i++) {
             names += ColumnNames[i];
             if (i != ColumnNames.length - 1) {
                 names += ",";
-            }// end if
+            } // end if
 
-        }// end for
+        } // end for
 
         accessDB();
-        SQLStatement = "SELECT " + names + "  FROM " + tableName + " "
-                + whereClause;
+        SQLStatement = "SELECT " + names + "  FROM " + tableName + " " + whereClause;
 
         ResultSet res = stat.executeQuery(SQLStatement);
 
@@ -486,14 +458,13 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY more than one columns from a database table, but which
+     * Method to QUERY more than one columns from a database table, but which
      * comes in a single row: public final Object[]
      * queryMultipleElements(String[] ColumnNames, String WhereCondition)throws
      * Exception
      * 
      */
-    public final Object[] queryMultipleElements(String[] ColumnNames,
-            String whereClause) throws Exception {
+    public final Object[] queryMultipleElements(String[] ColumnNames, String whereClause) throws Exception {
         Vector vec = queryMultipleElements_Vec(ColumnNames, whereClause);
         Object result[] = new Object[vec.size()];
         for (int i = 0; i < result.length; i++)
@@ -503,19 +474,17 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY one element from a database table: public final Object
+     * Method to QUERY one element from a database table: public final Object
      * queryOneElement(String ColumnName, String WhereCondition)throws Exception
      * 
      */
-    public final Object queryOneElement(String colName, String whereClause)
-            throws Exception {
+    public final Object queryOneElement(String colName, String whereClause) throws Exception {
 
         Object result = "";
 
         accessDB();
 
-        SQLStatement = "SELECT " + colName + "  FROM " + tableName + " "
-                + whereClause;
+        SQLStatement = "SELECT " + colName + "  FROM " + tableName + " " + whereClause;
 
         ResultSet res = stat.executeQuery(SQLStatement);
 
@@ -529,22 +498,19 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to QUERY the no. of rows in a database table: public final int
+     * Method to QUERY the no. of rows in a database table: public final int
      * queryRows(String WhereCondition,boolean RowsDistinct)throws Exception
      * 
      */
-    public final int queryRows(String whereClause, boolean distinct)
-            throws Exception {
+    public final int queryRows(String whereClause, boolean distinct) throws Exception {
 
         int rowTotal = 0;
 
         accessDB();
         if (distinct)
-            SQLStatement = " SELECT DISTINCT COUNT(*) FROM " + tableName + " "
-                    + whereClause;
+            SQLStatement = " SELECT DISTINCT COUNT(*) FROM " + tableName + " " + whereClause;
         else
-            SQLStatement = " SELECT COUNT(*) FROM " + tableName + " "
-                    + whereClause;
+            SQLStatement = " SELECT COUNT(*) FROM " + tableName + " " + whereClause;
         ResultSet res = stat.executeQuery(SQLStatement);
         if (res.next())
             rowTotal = Integer.parseInt(res.getString(1));
@@ -553,13 +519,12 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *Method to update data into a database table. Returns true if UPDATion is
+     * Method to update data into a database table. Returns true if UPDATion is
      * successful else returns false. public final String updateData(String[]
      * ColumnNames, Object[] Values, String WhereCondition)
      * 
      */
-    public final boolean updateData(String[] col_Names, Object[] val,
-            String whereClause) {
+    public final boolean updateData(String[] col_Names, Object[] val, String whereClause) {
 
         boolean updated = true;
         SQLStatement = getUpdateStatement(col_Names, val, whereClause);
@@ -572,8 +537,7 @@ public abstract class DBUtil extends javax.swing.JFrame {
             StringBuffer error = new StringBuffer(e.toString());
             if (error.length() < title.length())
                 error.append("\t\t");
-            JOptionPane.showMessageDialog(this, error.toString(), title,
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, error.toString(), title, JOptionPane.ERROR_MESSAGE);
 
         }
         return updated;
@@ -594,14 +558,14 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *returns the SQL Statement
+     * returns the SQL Statement
      */
     public final String getSQLStatement() {
         return SQLStatement;
     }
 
     /**
-     *prints the SQL statement to the console
+     * prints the SQL statement to the console
      */
     public final void printSQLStatement() {
         System.out.println(SQLStatement);
@@ -617,7 +581,7 @@ public abstract class DBUtil extends javax.swing.JFrame {
     }
 
     /**
-     *utility to check for the characters in charsWithEscapeSeq array in the
+     * utility to check for the characters in charsWithEscapeSeq array in the
      * input Object and replace them with the escape characters
      */
     private final Object prefixEscapeChars(String modify) {
@@ -628,26 +592,23 @@ public abstract class DBUtil extends javax.swing.JFrame {
             for (int i = 0; i < l; i++)
                 delimiters += charsWithEscapeSeq[i];
             try {
-                StringTokenizer st = new StringTokenizer(modify, delimiters,
-                        true);
+                StringTokenizer st = new StringTokenizer(modify, delimiters, true);
                 while (st.hasMoreTokens()) {
                     String temp = st.nextToken();
                     if (delimiters.indexOf(temp) != -1)
                         temp = "\\" + temp;
                     modifiedString += temp;
-                }// end while
+                } // end while
 
             } catch (Exception e) {
-                String title = "Error: DBUtil.prefixEscapeChar() Table: "
-                        + tableName;
+                String title = "Error: DBUtil.prefixEscapeChar() Table: " + tableName;
                 StringBuffer error = new StringBuffer(e.toString());
                 if (error.length() < title.length())
                     error.append("\t\t");
-                JOptionPane.showMessageDialog(this, error.toString(), title,
-                        JOptionPane.ERROR_MESSAGE);
-            }// end catch
+                JOptionPane.showMessageDialog(this, error.toString(), title, JOptionPane.ERROR_MESSAGE);
+            } // end catch
             return modifiedString;
-        }// end if
+        } // end if
         else
             return modify;
     }// end method

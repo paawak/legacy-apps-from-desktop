@@ -140,7 +140,7 @@ public abstract class DBUtil extends javax.swing.JFrame {
 
             Class.forName(databaseDriver).newInstance();
 
-            fullUrl = databaseUrl + "?user=" + userName + "&password=" + password;
+            fullUrl = databaseUrl + "?user=" + userName + "&password=" + password + "&useSSL=false";
 
             con = DriverManager.getConnection(fullUrl);
 

@@ -21,6 +21,7 @@
 
     <build>
         <plugins>
+<!--
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
@@ -98,6 +99,28 @@
                     </execution>
                 </executions>
             </plugin>
+-->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.3.5.v20151012</version>
+				<configuration>
+					<scanIntervalSeconds>90</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/${project.name}</contextPath>
+					</webApp>
+					<httpConnector>
+						<port>8090</port>
+					</httpConnector>
+				</configuration>
+			</plugin>
         </plugins>
         <resources>
             <resource>
@@ -341,7 +364,7 @@
         </dependency>
         
         <dependency>
-            <groupId>edu.oswego.util</groupId>
+            <groupId>oswego-concurrent</groupId>
             <artifactId>concurrent</artifactId>
             <version>${concurrent.version}</version>
         </dependency>
@@ -350,6 +373,7 @@
         
     </dependencies>
 
+<!--  
     <profiles>
         <profile>
             <id>integration-test</id>
@@ -368,7 +392,6 @@
                             <wait>${cargo.wait}</wait>
                             <container>
                                 <containerId>${cargo.container}</containerId>
-                                <!--home>${cargo.container.home}</home-->
                                 <zipUrlInstaller>
                                     <url>${cargo.container.url}</url>
                                     <installDir>${installDir}</installDir>
@@ -408,9 +431,9 @@
                                     <classpath refid="maven.test.classpath"/>
                                 </taskdef>
                                 <mkdir dir="target/webtest-data"/>
-                                <!-- Delete old results file if it exists -->
+                                 Delete old results file if it exists 
                                 <delete file="target/webtest-data/web-tests-result.xml"/>
-                                <!-- This is so the default will be used if no test case is specified -->
+                                 This is so the default will be used if no test case is specified 
                                 <property name="test" value="run-all-tests"/>
                                 <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
                                 <ant antfile="src/test/resources/web-tests.xml" target="${test}">
@@ -434,8 +457,8 @@
                                 <groupId>com.canoo.webtest</groupId>
                                 <artifactId>webtest</artifactId>
                                 <version>${webtest.version}</version>
-                                <!-- groovy-all doesn't have a pom in central repo -->
-                                <!-- exclude groovy to prevent trying to fetch pom -->
+                                groovy-all doesn't have a pom in central repo 
+                                 exclude groovy to prevent trying to fetch pom 
                                 <exclusions>
                                     <exclusion>
                                         <groupId>groovy</groupId>
@@ -449,12 +472,13 @@
             </build>
         </profile>
     </profiles>
+-->
     
     <properties>
         <blazeds.version>3.2.0.3978</blazeds.version>
         <spring.flex.version>1.0.0.RELEASE</spring.flex.version>
         <xalan.version>2.7.0</xalan.version>
-        <concurrent.version>1.3.3</concurrent.version>
+        <concurrent.version>1.3.4</concurrent.version>
     </properties>
     
 </project>

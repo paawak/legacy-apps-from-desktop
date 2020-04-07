@@ -21,6 +21,7 @@
     </description>
     
     <build>
+<!--
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -124,6 +125,7 @@
                 </dependencies>
             </plugin>
         </plugins>
+-->
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>

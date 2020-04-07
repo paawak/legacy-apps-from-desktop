@@ -101,23 +101,21 @@
         </plugins>
     </build>
 
+<!--
     <repositories>
         <repository>
             <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-            <id>appfuse</id>
-            <url>http://static.appfuse.org/repository</url>
+            <url>https://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>appfuse</id>
-            <url>http://static.appfuse.org/repository</url>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
         </pluginRepository>
     </pluginRepositories>
+-->
 
     <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <dependencies>

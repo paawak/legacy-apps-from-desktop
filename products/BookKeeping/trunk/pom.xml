@@ -202,7 +202,7 @@
         <jdbc.password>somerandom</jdbc.password>        
     
         <junit.version>4.4</junit.version>
-        <commons.beanutils.version>1.7.0</commons.beanutils.version>
+        <commons.beanutils.version>1.9.4</commons.beanutils.version>
         <commons.collections.version>3.2</commons.collections.version>
         <commons.dbcp.version>1.2.1</commons.dbcp.version>
         <commons.fileupload.version>1.2.1</commons.fileupload.version>
